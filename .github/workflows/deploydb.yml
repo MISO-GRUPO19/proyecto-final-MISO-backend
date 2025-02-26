@@ -29,9 +29,9 @@ jobs:
           if [ -z "$INSTANCE_EXISTS" ]; then
             gcloud sql instances create postgres \
               --database-version=POSTGRES_16 \
-              --tier=db-perf-optimized-N-2 \
+              --tier=db-f1-micro \ # Usando la capa gratuita
               --region=us-central1 \
-              --root-password=rootpassword123 \
+              --root-password=postgres \ # Contraseña "postgres"
               --assign-ip \
               --authorized-networks=0.0.0.0/0 # Permite conexiones desde cualquier IP (para pruebas)
           else
