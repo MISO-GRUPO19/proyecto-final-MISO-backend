@@ -31,9 +31,9 @@ jobs:
               --database-version=POSTGRES_16 \
               --tier=db-f1-micro \
               --region=us-central1 \
-              --root-password=postgres \ # Contraseña "postgres"
+              --root-password=postgres \
               --assign-ip \
-              --authorized-networks=0.0.0.0/0 # Permite conexiones desde cualquier IP (para pruebas)
+              --authorized-networks=0.0.0.0/0
           else
             echo "Instance 'postgres' already exists, skipping creation."
           fi
