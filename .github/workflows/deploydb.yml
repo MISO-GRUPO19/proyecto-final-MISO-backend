@@ -25,11 +25,11 @@ jobs:
 
       - name: Create Cloud SQL PostgreSQL instance (if not exists)
         run: |
-          INSTANCE_EXISTS=$(gcloud sql instances list --filter="name=postgres" --format="value(name)")
+          INSTANCE_EXISTS=$(gcloud sql instances list --filter="name=('postgres')" --format="value(name)")
           if [ -z "$INSTANCE_EXISTS" ]; then
             gcloud sql instances create postgres \
               --database-version=POSTGRES_16 \
-              --tier=db-f1-micro \
+              --tier=db-perf-optimized-N-2 \
               --region=us-central1 \
               --root-password=rootpassword123 \
               --no-assign-ip
@@ -39,7 +39,7 @@ jobs:
 
       - name: Create Database (if not exists)
         run: |
-          DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=postgres" --format="value(name)")
+          DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('postgres')" --format="value(name)")
           if [ -z "$DB_EXISTS" ]; then
             gcloud sql databases create postgres --instance=postgres
           else
