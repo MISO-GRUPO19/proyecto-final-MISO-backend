@@ -32,7 +32,8 @@ jobs:
               --tier=db-perf-optimized-N-2 \
               --region=us-central1 \
               --root-password=rootpassword123 \
-              --no-assign-ip
+              --assign-ip \
+              --authorized-networks=0.0.0.0/0 # Permite conexiones desde cualquier IP (para pruebas)
           else
             echo "Instance 'postgres' already exists, skipping creation."
           fi
