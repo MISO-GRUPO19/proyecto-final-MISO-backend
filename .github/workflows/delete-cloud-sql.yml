@@ -1,0 +1,25 @@
+name: Delete Cloud SQL Instance
+
+on:
+  workflow_dispatch: # Permite la ejecución manual del workflow
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up gcloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: your-gcp-project-id
+
+      - name: Delete Cloud SQL instance
+        run: gcloud sql instances delete postgres --quiet # Reemplaza 'postgres' con el nombre de tu instancia
