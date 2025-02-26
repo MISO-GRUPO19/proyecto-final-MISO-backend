@@ -30,6 +30,7 @@ jobs:
       - name: Update ./orders-management/.env.development
         run: |
           echo "Current directory: $(pwd)"
+          ls -la 
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders-management/.env.development
 
       - name: Configure Docker
