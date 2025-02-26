@@ -39,5 +39,5 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto:latest ./orders-management
-          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto:latest
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest ./orders-management
+          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest
