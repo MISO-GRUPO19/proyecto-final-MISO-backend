@@ -1,4 +1,4 @@
-name: Deploy Cloud SQL PostgreSQL (Free Tier)
+name: Deploy Cloud SQL PostgreSQL
 
 on:
   workflow_dispatch: # Permite la ejecución manual
