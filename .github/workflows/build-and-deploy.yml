@@ -31,12 +31,10 @@ jobs:
         run: |
           echo "Current directory: $(pwd)"
           ls -la 
-          perl -pi -e "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders-management/src/.env.development
+          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders-management/src/.env.development
 
       - name: Show updated .env.development
         run: |
-          ls -la
-          ls -la ./orders-management/src
           echo "Updated .env.development content:"
           cat ./orders-management/src/.env.development
 
