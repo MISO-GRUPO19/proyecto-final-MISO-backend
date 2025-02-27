@@ -31,7 +31,14 @@ jobs:
         run: |
           echo "Current directory: $(pwd)"
           ls -la 
-          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders-management/src/.env.development
+          perl -pi -e "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders-management/src/.env.development
+
+      - name: Show updated .env.development
+        run: |
+          ls -la
+          ls -la ./orders-management/src
+          echo "Updated .env.development content:"
+          cat ./orders-management/src/.env.development
 
       - name: Configure Docker
         run: |
@@ -41,10 +48,3 @@ jobs:
         run: |
           docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest ./orders-management
           docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest
-
-      - name: Show updated .env.development
-        run: |
-          ls -la
-          ls -la ./orders-management/src
-          echo "Updated .env.development content:"
-          cat ./orders-management/src/.env.development
