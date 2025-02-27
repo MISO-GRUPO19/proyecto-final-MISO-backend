@@ -40,9 +40,9 @@ jobs:
 
       - name: Create Database (if not exists)
         run: |
-          DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('postgres')" --format="value(name)")
+          DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('orders')" --format="value(name)")
           if [ -z "$DB_EXISTS" ]; then
-            gcloud sql databases create postgres --instance=postgres
+            gcloud sql databases create orders --instance=postgres
           else
-            echo "Database 'postgres' already exists, skipping creation."
+            echo "Database 'orders' already exists, skipping creation."
           fi
