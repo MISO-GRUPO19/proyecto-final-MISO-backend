@@ -15,7 +15,7 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: deploy-cloud-sql.yml
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Wait for Deploy DB Workflow
         run: sleep 390
@@ -24,7 +24,7 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: build-and-deploy.yml
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Wait for Build and Deploy Workflow
         run: sleep 100 # Espera 5 minutos para que el workflow de build-and-deploy termine
@@ -33,4 +33,4 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: deploy-cloud-run.yml
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
