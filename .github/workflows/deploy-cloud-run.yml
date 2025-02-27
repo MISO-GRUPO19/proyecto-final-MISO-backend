@@ -30,4 +30,5 @@ jobs:
             --allow-unauthenticated \
             --memory=512Mi \
             --cpu=1 \
-            --concurrency=80
+            --concurrency=80 \
+            --port=5001
