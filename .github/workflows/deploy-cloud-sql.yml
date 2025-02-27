@@ -1,9 +1,7 @@
 name: Deploy Cloud SQL PostgreSQL (Free Tier)
 
 on:
-  push:
-    branches:
-      - '**'
+  workflow_dispatch: # Permite la ejecución manual
 
 jobs:
   deploy:

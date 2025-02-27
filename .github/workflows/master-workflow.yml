@@ -1,0 +1,36 @@
+name: Master Workflow
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  trigger_workflows:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Deploy DB Workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: deploydb.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Wait for Deploy DB Workflow
+        run: sleep 390
+
+      - name: Trigger Build and Deploy Workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: build-and-deploy.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Wait for Build and Deploy Workflow
+        run: sleep 100 # Espera 5 minutos para que el workflow de build-and-deploy termine
+
+      - name: Trigger Deploy Cloud Run Workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: deploy-cloud-run.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
