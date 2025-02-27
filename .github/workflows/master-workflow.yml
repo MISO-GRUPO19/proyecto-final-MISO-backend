@@ -14,7 +14,7 @@ jobs:
       - name: Trigger Deploy DB Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: deploydb.yml
+          workflow: deploy-cloud-sql.yml
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Wait for Deploy DB Workflow
