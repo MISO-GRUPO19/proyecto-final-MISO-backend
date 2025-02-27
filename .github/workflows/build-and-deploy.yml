@@ -44,5 +44,7 @@ jobs:
 
       - name: Show updated .env.development
         run: |
+          ls -la
+          ls -la ./orders-management/src
           echo "Updated .env.development content:"
           cat ./orders-management/src/.env.development
