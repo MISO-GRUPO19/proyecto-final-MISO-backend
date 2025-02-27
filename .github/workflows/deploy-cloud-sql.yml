@@ -1,0 +1,46 @@
+name: Deploy Cloud SQL PostgreSQL (Free Tier)
+
+on:
+  workflow_dispatch: # Permite la ejecución manual
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up gcloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: your-gcp-project-id
+
+      - name: Create Cloud SQL PostgreSQL instance (if not exists)
+        run: |
+          INSTANCE_EXISTS=$(gcloud sql instances list --filter="name=('postgres')" --format="value(name)")
+          if [ -z "$INSTANCE_EXISTS" ]; then
+            gcloud sql instances create postgres \
+              --database-version=POSTGRES_16 \
+              --tier=db-perf-optimized-N-2 \
+              --region=us-central1 \
+              --root-password=postgres \
+              --assign-ip \
+              --authorized-networks=0.0.0.0/0
+          else
+            echo "Instance 'postgres' already exists, skipping creation."
+          fi
+
+      - name: Create Database (if not exists)
+        run: |
+          DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('orders')" --format="value(name)")
+          if [ -z "$DB_EXISTS" ]; then
+            gcloud sql databases create orders --instance=postgres
+          else
+            echo "Database 'orders' already exists, skipping creation."
+          fi
