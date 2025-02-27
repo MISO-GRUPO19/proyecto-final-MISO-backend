@@ -27,10 +27,14 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
 
       - name: Wait for Build and Deploy Workflow
-        run: sleep 100 # Espera 5 minutos para que el workflow de build-and-deploy termine
+        run: sleep 100
 
       - name: Trigger Deploy Cloud Run Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: deploy-cloud-run.yml
           token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Wait for Build and Deploy Workflow
+        run: sleep 50
+  
