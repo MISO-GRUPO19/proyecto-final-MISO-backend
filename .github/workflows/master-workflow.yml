@@ -18,7 +18,7 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
 
       - name: Wait for Deploy DB Workflow
-        run: sleep 390
+        run: sleep 600
 
       - name: Trigger Build and Deploy Workflow
         uses: benc-uk/workflow-dispatch@v1
