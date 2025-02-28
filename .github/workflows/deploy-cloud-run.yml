@@ -61,5 +61,5 @@ jobs:
             --cpu=1 \
             --concurrency=80 \
             --port=5001 \
-            --vpc-connector=products-vpc-connector \
+            --vpc-connector=orders-vpc-connector \
             --vpc-egress=private-ranges-only
