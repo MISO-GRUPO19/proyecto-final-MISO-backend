@@ -45,7 +45,12 @@ jobs:
 
           echo "IP privada: $PRIVATE_IP"
           echo "::set-output name=db_ip::$PRIVATE_IP"
-
+          
+      - name: Show updated .env.development files before
+        run: |
+          cat ./orders-management/src/.env.development
+          cat ./products-management/src/.env.development
+      
       - name: Update ./orders-management/src/.env.development
         run: |
           echo "Current directory: $(pwd)"
@@ -58,7 +63,11 @@ jobs:
           ls -la
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./products-management/src/.env.development
 
-            
+      - name: Show updated .env.development files after
+        run: |
+          cat ./orders-management/src/.env.development
+          cat ./products-management/src/.env.development
+
       - name: Configure Docker
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
