@@ -33,6 +33,7 @@ jobs:
               --assign-ip \
               --network=default \
               --authorized-networks=0.0.0.0/0 \
+              --edition=enterprise \
               --availability-type=zonal
           else
             echo "Instance 'postgres' already exists, skipping creation."
