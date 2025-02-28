@@ -21,10 +21,6 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Enable Serverless VPC Access API
-        run: |
-          gcloud services enable vpcaccess.googleapis.com
-
       - name: Create VPC Access Connector
         id: create_vpc_connector
         run: |
