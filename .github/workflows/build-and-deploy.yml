@@ -24,17 +24,21 @@ jobs:
       - name: Get Cloud SQL Instance Private IP
         id: get_ip
         run: |
-          # Espera a que la instancia esté lista (opcional)
-          sleep 60
-
-          # Obtén todas las IPs de la instancia
+          echo "Obteniendo las IPs de la instancia..."
           IP_ADDRESSES=$(gcloud sql instances describe postgres --format="value(ipAddresses)")
 
-          # Extrae la IP privada
-          PRIVATE_IP=$(echo "$IP_ADDRESSES" | grep -oP 'PRIVATE:\s*\K[0-9.]+')
+          if [ -z "$IP_ADDRESSES" ]; then
+            echo "Error: No se encontraron IPs para la instancia."
+            exit 1
+          fi
 
+          echo "Extrayendo la IP privada..."
+          PRIVATE_IP=$(echo "$IP_ADDRESSES" | grep -oP "'ipAddress': '\K[0-9.]+(?=', 'type': 'PRIVATE')")
+
+          # Verifica si se encontró una IP privada
           if [ -z "$PRIVATE_IP" ]; then
             echo "Error: No se pudo obtener la IP privada."
+            echo "IPs encontradas: $IP_ADDRESSES"
             exit 1
           fi
 
@@ -58,5 +62,4 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest ./orders-management
-          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders
