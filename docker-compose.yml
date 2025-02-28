@@ -22,6 +22,12 @@ services:
       context: ./orders-management
       dockerfile: Dockerfile
     image: orders_service:1.0
+    environment:
+      DB_HOST: database_orders
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: orders
     depends_on:
       database_orders:
         condition: service_healthy
@@ -30,7 +36,48 @@ services:
     ports:
       - "5001:5001"
     restart: always
+  
+  database_products:
+    image: postgres:alpine
+    container_name: database_products
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: products
+    ports:
+      - "5433:5432"
+    networks:
+      - products_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+  products_service:
+    container_name: products-management-services
+    build:
+      context: ./products-management
+      dockerfile: Dockerfile
+    image: products_service:1.0
+    environment:
+      DB_HOST: database_products
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: products
+    depends_on:
+      database_products:
+        condition: service_healthy
+    networks:
+      - products_network
+    ports:
+      - "5002:5002"
+    restart: always
+
 
 networks:
   orders_network:
+    driver: bridge
+  products_network:
     driver: bridge
