@@ -52,16 +52,23 @@ jobs:
           ls -la
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders-management/src/.env.development
 
-      - name: Show updated .env.development
+      - name: Update ./products-management/src/.env.development
         run: |
-          echo "Updated .env.development content:"
-          cat ./orders-management/src/.env.development
+          echo "Current directory: $(pwd)"
+          ls -la
+          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./products-management/src/.env.development
 
+            
       - name: Configure Docker
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
 
-      - name: Build and Push Docker Image
+      - name: Build and Push Docker Image Orders
         run: |
           docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest ./orders-management
           docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest
+
+      - name: Build and Push Docker Image Products
+        run: |
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest ./products-management
+          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest
