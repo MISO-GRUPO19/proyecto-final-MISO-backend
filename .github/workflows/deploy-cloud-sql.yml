@@ -27,7 +27,7 @@ jobs:
           if [ -z "$INSTANCE_EXISTS" ]; then
             gcloud sql instances create postgres \
               --database-version=POSTGRES_17 \
-              --tier=db-perf-optimized-n2-standard-2 \
+              --tier=db-perf-optimized-n2-standard-4 \
               --region=us-central1 \
               --root-password=postgres \
               --assign-ip \
