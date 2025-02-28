@@ -24,8 +24,22 @@ jobs:
       - name: Get Cloud SQL Instance Private IP
         id: get_ip
         run: |
-          IP=$(gcloud sql instances describe postgres --format="value(ipAddresses.ipAddress[type=PRIVATE])")
-          echo "::set-output name=db_ip::$IP"
+          # Espera a que la instancia esté lista (opcional)
+          sleep 60
+
+          # Obtén todas las IPs de la instancia
+          IP_ADDRESSES=$(gcloud sql instances describe postgres --format="value(ipAddresses)")
+
+          # Extrae la IP privada
+          PRIVATE_IP=$(echo "$IP_ADDRESSES" | grep -oP 'PRIVATE:\s*\K[0-9.]+')
+
+          if [ -z "$PRIVATE_IP" ]; then
+            echo "Error: No se pudo obtener la IP privada."
+            exit 1
+          fi
+
+          echo "IP privada: $PRIVATE_IP"
+          echo "::set-output name=db_ip::$PRIVATE_IP"
 
       - name: Update ./orders-management/src/.env.development
         run: |
