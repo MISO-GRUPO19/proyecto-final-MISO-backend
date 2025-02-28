@@ -21,6 +21,52 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
+      - name: Get Cloud SQL Instance Private IP
+        id: get_ip
+        run: |
+          # Espera a que la instancia esté lista (aumenta el tiempo si es necesario)
+          echo "Esperando a que la instancia esté lista..."
+          sleep 120
+
+          # Obtén todas las IPs de la instancia
+          echo "Obteniendo las IPs de la instancia..."
+          IP_ADDRESSES=$(gcloud sql instances describe postgres --format="value(ipAddresses)")
+
+          # Verifica si se obtuvieron IPs
+          if [ -z "$IP_ADDRESSES" ]; then
+            echo "Error: No se encontraron IPs para la instancia."
+            exit 1
+          fi
+
+          # Extrae la IP privada
+          echo "Extrayendo la IP privada..."
+          PRIVATE_IP=$(echo "$IP_ADDRESSES" | grep -oP "'ipAddress': '\K[0-9.]+(?=', 'type': 'PRIVATE')")
+
+          # Verifica si se encontró una IP privada
+          if [ -z "$PRIVATE_IP" ]; then
+            echo "Error: No se pudo obtener la IP privada."
+            echo "IPs encontradas: $IP_ADDRESSES"
+            exit 1
+          fi
+
+          echo "IP privada: $PRIVATE_IP"
+          echo "::set-output name=db_ip::$PRIVATE_IP"
+
+      - name: Update .env with Private IP
+        run: |
+          echo "Actualizando .env con la IP privada..."
+          echo "DB_HOST=${{ steps.get_ip.outputs.db_ip }}" > .env
+          echo "DB_PORT=5432" >> .env
+          echo "DB_USER=tu_usuario" >> .env
+          echo "DB_PASSWORD=tu_contraseña" >> .env
+          echo "DB_NAME=tu_base_de_datos" >> .env
+
+      - name: VCPC Connector
+        run: |
+          gcloud compute networks vpc-access connectors create orders-vpc-connector \
+            --region=us-central1 \
+            --network=default \
+            --range=10.8.0.0/28
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy orders-management-service \
@@ -31,4 +77,6 @@ jobs:
             --memory=512Mi \
             --cpu=1 \
             --concurrency=80 \
-            --port=5001
+            --port=5001 \
+            --vpc-connector=orders-vpc-connector \
+            --egress-settings=private-ranges-only
