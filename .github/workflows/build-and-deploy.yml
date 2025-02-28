@@ -21,16 +21,16 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Get Cloud SQL Instance IP
+      - name: Get Cloud SQL Instance Private IP
         id: get_ip
         run: |
-          IP=$(gcloud sql instances describe postgres --format="value(ipAddresses[0].ipAddress)")
+          IP=$(gcloud sql instances describe postgres --format="value(ipAddresses.ipAddress[type=PRIVATE])")
           echo "::set-output name=db_ip::$IP"
 
       - name: Update ./orders-management/src/.env.development
         run: |
           echo "Current directory: $(pwd)"
-          ls -la 
+          ls -la
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders-management/src/.env.development
 
       - name: Show updated .env.development

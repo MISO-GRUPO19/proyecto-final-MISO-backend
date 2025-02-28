@@ -26,17 +26,21 @@ jobs:
           INSTANCE_EXISTS=$(gcloud sql instances list --filter="name=('postgres')" --format="value(name)")
           if [ -z "$INSTANCE_EXISTS" ]; then
             gcloud sql instances create postgres \
-              --database-version=POSTGRES_16 \
-              --tier=db-perf-optimized-N-2 \
+              --database-version=POSTGRES_17 \
+              --tier=db-f1-micro \
               --region=us-central1 \
               --root-password=postgres \
               --assign-ip \
+              --network=default \
+              --allocated-ip-range=10.8.0.0/28 \
               --authorized-networks=0.0.0.0/0
+              --edition=enterprise \
+              --availability-type=zonal
           else
             echo "Instance 'postgres' already exists, skipping creation."
           fi
 
-      - name: Create Database (if not exists)
+      - name: Create Database (if not exists) Orders
         run: |
           DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('orders')" --format="value(name)")
           if [ -z "$DB_EXISTS" ]; then
@@ -44,3 +48,12 @@ jobs:
           else
             echo "Database 'orders' already exists, skipping creation."
           fi
+
+      - name: Create Database (if not exists) Products
+        run: |
+            DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('products')" --format="value(name)")
+            if [ -z "$DB_EXISTS" ]; then
+              gcloud sql databases create products --instance=postgres
+            else
+              echo "Database 'products' already exists, skipping creation."
+            fi
