@@ -49,6 +49,9 @@ jobs:
       - name: Show updated .env.development files before
         run: |
           cat ./orders-management/src/.env.development
+          ls -la ./products-management/
+          ls -la ./products-management/src/
+          
           cat ./products-management/src/.env.development
       
       - name: Update ./orders-management/src/.env.development
