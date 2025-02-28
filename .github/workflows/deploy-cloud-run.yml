@@ -47,4 +47,4 @@ jobs:
             --concurrency=80 \
             --port=5001 \
             --vpc-connector=orders-vpc-connector \
-            --egress-settings=private-ranges-only
+            --vpc-egress=private-ranges-only
