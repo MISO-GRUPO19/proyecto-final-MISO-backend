@@ -1,0 +1,11 @@
+flask
+flask-restful
+flask-cors
+sqlalchemy
+marshmallow-sqlalchemy
+marshmallow
+python-dotenv
+psycopg2-binary
+requests
+flask-sqlalchemy
+pytest
