@@ -27,18 +27,16 @@ jobs:
           if [ -z "$INSTANCE_EXISTS" ]; then
             gcloud sql instances create postgres \
               --database-version=POSTGRES_17 \
-              --tier=db-perf-optimized-N-2 \
+              --tier=db-perf-optimized-n2-standard-2 \
               --region=us-central1 \
               --root-password=postgres \
               --assign-ip \
               --network=default \
-              --authorized-networks=0.0.0.0/0
-              --edition=enterprise \
+              --authorized-networks=0.0.0.0/0 \
               --availability-type=zonal
           else
             echo "Instance 'postgres' already exists, skipping creation."
           fi
-
       - name: Create Database (if not exists) Orders
         run: |
           DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('orders')" --format="value(name)")
