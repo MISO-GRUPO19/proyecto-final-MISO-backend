@@ -24,6 +24,7 @@ jobs:
       - name: Get Cloud SQL Instance Private IP
         id: get_ip
         run: |
+
           echo "Obteniendo las IPs de la instancia..."
           IP_ADDRESSES=$(gcloud sql instances describe postgres --format="value(ipAddresses)")
 
@@ -62,4 +63,5 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest ./orders-management
+          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest
