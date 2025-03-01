@@ -68,7 +68,6 @@ jobs:
           else
             echo "El VPC Connector ya existe. Saltando creación."
           fi
-
       - name: Deploy to Cloud Run Orders
         run: |
           gcloud run deploy orders-management-service \
