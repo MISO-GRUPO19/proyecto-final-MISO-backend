@@ -1,4 +1,4 @@
-name: Build and Deploy Docker Image
+name: Build and Deploy Products Management
 
 on:
   workflow_dispatch: # Permite la ejecución manual
@@ -24,41 +24,21 @@ jobs:
       - name: Get Cloud SQL Instance Private IP
         id: get_ip
         run: |
-
           echo "Obteniendo las IPs de la instancia..."
           IP_ADDRESSES=$(gcloud sql instances describe postgres --format="value(ipAddresses)")
-
           if [ -z "$IP_ADDRESSES" ]; then
             echo "Error: No se encontraron IPs para la instancia."
             exit 1
           fi
-
           echo "Extrayendo la IP privada..."
           PRIVATE_IP=$(echo "$IP_ADDRESSES" | grep -oP "'ipAddress': '\K[0-9.]+(?=', 'type': 'PRIVATE')")
-
-          # Verifica si se encontró una IP privada
           if [ -z "$PRIVATE_IP" ]; then
             echo "Error: No se pudo obtener la IP privada."
             echo "IPs encontradas: $IP_ADDRESSES"
             exit 1
           fi
-
           echo "IP privada: $PRIVATE_IP"
           echo "::set-output name=db_ip::$PRIVATE_IP"
-          
-      - name: Show updated .env.development files before
-        run: |
-          cat ./orders-management/src/.env.development
-          ls -la ./products-management/
-          ls -la ./products-management/src/
-
-          cat ./products-management/src/.env.development
-      
-      - name: Update ./orders-management/src/.env.development
-        run: |
-          echo "Current directory: $(pwd)"
-          ls -la
-          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders-management/src/.env.development
 
       - name: Update ./products-management/src/.env.development
         run: |
@@ -66,21 +46,37 @@ jobs:
           ls -la
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./products-management/src/.env.development
 
-      - name: Show updated .env.development files after
-        run: |
-          cat ./orders-management/src/.env.development
-          cat ./products-management/src/.env.development
-
-      - name: Configure Docker
-        run: |
-          gcloud auth configure-docker us-central1-docker.pkg.dev
-
-      - name: Build and Push Docker Image Orders
-        run: |
-          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest ./orders-management
-          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest
-
       - name: Build and Push Docker Image Products
         run: |
           docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest ./products-management
           docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest
+
+          - name: Create VPC Access Connector
+          id: create_vpc_connector
+          run: |
+            # Verifica si el VPC Connector ya existe
+            if ! gcloud compute networks vpc-access connectors describe orders-vpc-connector --region=us-central1 > /dev/null 2>&1; then
+              echo "Creando VPC Connector..."
+              gcloud compute networks vpc-access connectors create orders-vpc-connector \
+                --region=us-central1 \
+                --network=default \
+                --range=10.8.0.0/28
+            else
+              echo "El VPC Connector ya existe. Saltando creación."
+            fi
+  
+      - name: Deploy to Cloud Run Products
+        run: |
+            gcloud run deploy products-management-service \
+                --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest \
+                --region=us-central1 \
+                --platform=managed \
+                --allow-unauthenticated \
+                --memory=512Mi \
+                --cpu=1 \
+                --concurrency=80 \
+                --port=5002 \
+                --vpc-connector=orders-vpc-connector \
+                --vpc-egress=private-ranges-only
+                --min-instances=1
+                --max-instances=3

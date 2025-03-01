@@ -20,21 +20,93 @@ jobs:
       - name: Wait for Deploy DB Workflow
         run: sleep 900
 
-      - name: Trigger Build and Deploy Workflow
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up gcloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Check for changes in orders-management
+        id: check_orders_management
+        run: |
+          git fetch
+          DIFF=$(git diff --name-only HEAD HEAD~1)
+          echo "$DIFF"
+          if echo "$DIFF" | grep -q "orders-management/"; then
+            echo "::set-output name=orders_management_changed::true"
+          else
+            echo "::set-output name=orders_management_changed::false"
+          fi
+
+      - name: Check for changes in products-management
+        id: check_products_management
+        run: |
+          git fetch
+          DIFF=$(git diff --name-only HEAD HEAD~1)
+          echo "$DIFF"
+          if echo "$DIFF" | grep -q "products-management/"; then
+            echo "::set-output name=products_management_changed::true"
+          else
+            echo "::set-output name=products_management_changed::false"
+          fi
+
+      - name: Check if orders-management image exists
+        id: check_orders_image
+        run: |
+          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image --filter="tags:latest" --format="value(name)")
+          if [ -z "$IMAGE_EXISTS" ]; then
+            echo "::set-output name=orders_image_exists::false"
+          else
+            echo "::set-output name=orders_image_exists::true"
+          fi
+
+      - name: Check if products-management image exists
+        id: check_products_image
+        run: |
+          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image --filter="tags:latest" --format="value(name)")
+          if [ -z "$IMAGE_EXISTS" ]; then
+            echo "::set-output name=products_image_exists::false"
+          else
+            echo "::set-output name=products_image_exists::true"
+          fi
+
+      - name: Check if orders-management service exists
+        id: check_orders_service
+        run: |
+          SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=orders-management-service" --format="value(metadata.name)")
+          if [ -z "$SERVICE_EXISTS" ]; then
+            echo "::set-output name=orders_service_exists::false"
+          else
+            echo "::set-output name=orders_service_exists::true"
+          fi
+
+      - name: Check if products-management service exists
+        id: check_products_service
+        run: |
+          SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=products-management-service" --format="value(metadata.name)")
+          if [ -z "$SERVICE_EXISTS" ]; then
+            echo "::set-output name=products_service_exists::false"
+          else
+            echo "::set-output name=products_service_exists::true"
+          fi
+
+      - name: Trigger Build and Deploy Workflow for Orders Management
+        if: steps.check_orders_management.outputs.orders_management_changed == 'true' || steps.check_orders_image.outputs.orders_image_exists == 'false' || steps.check_orders_service.outputs.orders_service_exists == 'false'
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: build-and-deploy.yml
+          workflow: build-and-deploy-orders.yml
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Wait for Build and Deploy Workflow
-        run: sleep 120
-
-      - name: Trigger Deploy Cloud Run Workflow
+      - name: Trigger Build and Deploy Workflow for Products Management
+        if: steps.check_products_management.outputs.products_management_changed == 'true' || steps.check_products_image.outputs.products_image_exists == 'false' || steps.check_products_service.outputs.products_service_exists == 'false'
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: deploy-cloud-run.yml
+          workflow: build-and-deploy-products.yml
           token: ${{ secrets.PAT_TOKEN }}
-
-      - name: Wait for Build and Deploy Workflow
-        run: sleep 50
-  
