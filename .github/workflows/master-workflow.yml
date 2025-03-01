@@ -22,6 +22,8 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch the entire commit history
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v2
@@ -40,9 +42,9 @@ jobs:
           DIFF=$(git diff --name-only HEAD HEAD~1)
           echo "$DIFF"
           if echo "$DIFF" | grep -q "orders-management/"; then
-            echo "::set-output name=orders_management_changed::true"
+            echo "orders_management_changed=true" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=orders_management_changed::false"
+            echo "orders_management_changed=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Check for changes in products-management
@@ -52,9 +54,9 @@ jobs:
           DIFF=$(git diff --name-only HEAD HEAD~1)
           echo "$DIFF"
           if echo "$DIFF" | grep -q "products-management/"; then
-            echo "::set-output name=products_management_changed::true"
+            echo "products_management_changed=true" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=products_management_changed::false"
+            echo "products_management_changed=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Check if orders-management image exists
@@ -62,9 +64,9 @@ jobs:
         run: |
           IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image --filter="tags:latest" --format="value(name)")
           if [ -z "$IMAGE_EXISTS" ]; then
-            echo "::set-output name=orders_image_exists::false"
+            echo "orders_image_exists=false" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=orders_image_exists::true"
+            echo "orders_image_exists=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Check if products-management image exists
@@ -72,9 +74,9 @@ jobs:
         run: |
           IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image --filter="tags:latest" --format="value(name)")
           if [ -z "$IMAGE_EXISTS" ]; then
-            echo "::set-output name=products_image_exists::false"
+            echo "products_image_exists=false" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=products_image_exists::true"
+            echo "products_image_exists=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Check if orders-management service exists
@@ -82,9 +84,9 @@ jobs:
         run: |
           SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=orders-management-service" --format="value(metadata.name)")
           if [ -z "$SERVICE_EXISTS" ]; then
-            echo "::set-output name=orders_service_exists::false"
+            echo "orders_service_exists=false" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=orders_service_exists::true"
+            echo "orders_service_exists=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Check if products-management service exists
@@ -92,9 +94,9 @@ jobs:
         run: |
           SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=products-management-service" --format="value(metadata.name)")
           if [ -z "$SERVICE_EXISTS" ]; then
-            echo "::set-output name=products_service_exists::false"
+            echo "products_service_exists=false" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=products_service_exists::true"
+            echo "products_service_exists=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Trigger Build and Deploy Workflow for Orders Management
