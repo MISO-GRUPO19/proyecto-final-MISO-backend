@@ -22,10 +22,18 @@ jobs:
         run: |
           gcloud sql instances delete postgres --quiet
 
-      - name: Delete Cloud Run Service
+      - name: Delete Cloud Run Service (Orders Management)
         run: |
           gcloud run services delete orders-management-service --region=us-central1 --platform=managed --quiet
 
-      - name: Delete Docker Image
+      - name: Delete Cloud Run Service (Products Management)
+        run: |
+          gcloud run services delete products-management-service --region=us-central1 --platform=managed --quiet
+
+      - name: Delete Docker Image (Orders Management)
         run: |
           gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest --quiet
+
+      - name: Delete Docker Image (Products Management)
+        run: |
+          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest --quiet
