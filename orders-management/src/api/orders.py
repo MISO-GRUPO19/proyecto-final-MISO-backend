@@ -1,5 +1,6 @@
 from flask import request, jsonify, Blueprint, Response
 from ..commands.create_orders import CreateOrders
+from ..queries.get_orders import GetOrders
 
 orders = Blueprint('orders', __name__)
 

@@ -51,9 +51,13 @@ jobs:
         id: check_orders_management
         run: |
           git fetch
-          DIFF=$(git diff --name-only HEAD HEAD~1)
+          if [ $(git rev-list --count HEAD) -gt 1 ]; then
+            DIFF=$(git diff --name-only HEAD HEAD~1)
+          else
+            DIFF=$(git diff --name-only HEAD)
+          fi
           echo "$DIFF"
-          if echo "$DIFF" | grep -q "orders-management/"; then
+          if echo "$DIFF" | grep -q "^orders-management/"; then
             echo "orders_management_changed=true" >> $GITHUB_OUTPUT
           else
             echo "orders_management_changed=false" >> $GITHUB_OUTPUT
@@ -63,9 +67,13 @@ jobs:
         id: check_products_management
         run: |
           git fetch
-          DIFF=$(git diff --name-only HEAD HEAD~1)
+          if [ $(git rev-list --count HEAD) -gt 1 ]; then
+            DIFF=$(git diff --name-only HEAD HEAD~1)
+          else
+            DIFF=$(git diff --name-only HEAD)
+          fi
           echo "$DIFF"
-          if echo "$DIFF" | grep -q "products-management/"; then
+          if echo "$DIFF" | grep -q "^products-management/"; then
             echo "products_management_changed=true" >> $GITHUB_OUTPUT
           else
             echo "products_management_changed=false" >> $GITHUB_OUTPUT
