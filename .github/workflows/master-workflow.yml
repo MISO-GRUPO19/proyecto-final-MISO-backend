@@ -11,19 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Deploy DB Workflow
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: deploy-cloud-sql.yml
-          token: ${{ secrets.PAT_TOKEN }}
-
-      - name: Wait for Deploy DB Workflow
-        run: sleep 900
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch the entire commit history
+          fetch-depth: 0  # Obtener todo el historial de commits
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v2
@@ -34,6 +25,27 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Check if Cloud SQL instance exists
+        id: check_cloudsql_instance
+        run: |
+          INSTANCE_EXISTS=$(gcloud sql instances list --filter="name=postgres" --format="value(name)")
+          if [ -z "$INSTANCE_EXISTS" ]; then
+            echo "cloudsql_instance_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "cloudsql_instance_exists=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Trigger Deploy DB Workflow (if instance does not exist)
+        if: steps.check_cloudsql_instance.outputs.cloudsql_instance_exists == 'false'
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: deploy-cloud-sql.yml
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Wait for Deploy DB Workflow (if instance does not exist)
+        if: steps.check_cloudsql_instance.outputs.cloudsql_instance_exists == 'false'
+        run: sleep 900
 
       - name: Check for changes in orders-management
         id: check_orders_management
