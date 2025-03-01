@@ -9,3 +9,4 @@ psycopg2-binary
 requests
 flask-sqlalchemy
 pytest
+uptrace
