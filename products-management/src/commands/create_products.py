@@ -13,7 +13,7 @@ class CreateProducts(BaseCommand):
         if (self.data['name'] == '' or self.data['description'] == '' or self.data['price'] == '' or self.data['category'] == '' or self.data['weight'] == '' or self.data['useful_life'] == '' or self.data['provider_id'] == ''):
             raise InvalidData
 
-        product = Products(name=self.name, description=self.description, price=self.price, category=self.category, weight=self.weight, useful_life=self.useful_life, provider_id=self.provider_id)
+        product = Products(name=self.data['name'], description=self.data['description'], price=self.data['price'], category=self.data['category'], weight=self.data['weight'], useful_life=self.data['useful_life'], provider_id=self.data['provider_id'])
         db_session.add(product)
 
         db_session.commit()
