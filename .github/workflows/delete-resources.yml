@@ -34,6 +34,18 @@ jobs:
         run: |
           gcloud run services delete authentications-management-service --region=us-central1 --platform=managed --quiet
 
+      - name: Delete Cloud Run Service (Manufacturers Management)
+        run: |
+          gcloud run services delete manufacturers-management-service --region=us-central1 --platform=managed --quiet
+
+      - name: Delete Cloud Run Service (Customers Management)
+        run: |
+          gcloud run services delete customers-management-service --region=us-central1 --platform=managed --quiet
+
+      - name: Delete Cloud Run Service (AI Services)
+        run: |
+          gcloud run services delete ai-services --region=us-central1 --platform=managed --quiet
+
       - name: Delete Docker Image (Orders Management)
         run: |
           gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest --quiet
@@ -45,6 +57,18 @@ jobs:
       - name: Delete Docker Image (Authentications Management)
         run: |
           gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications-management-image:latest --quiet
+      
+      - name: Delete Docker Image (Manufacturers Management)
+        run: |
+          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/manufacturers-management-image:latest --quiet
+      
+      - name: Delete Docker Image (Customers Management)
+        run: |
+          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers-management-image:latest --quiet
+      
+      - name: Delete Docker Image (AI Services)
+        run: |
+          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image:latest --quiet
           
       - name: Delete VPC Access Connector (Orders Management)
         run: |

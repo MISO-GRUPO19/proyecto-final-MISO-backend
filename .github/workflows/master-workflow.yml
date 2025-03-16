@@ -95,6 +95,54 @@ jobs:
             echo "authentications_management_changed=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Check for changes in manufacturers-management
+        id: check_manufacturers_management
+        run: |
+          git fetch
+          if [ $(git rev-list --count HEAD) -gt 1 ]; then
+            DIFF=$(git diff --name-only HEAD HEAD~1)
+          else
+            DIFF=$(git diff --name-only HEAD)
+          fi
+          echo "$DIFF"
+          if echo "$DIFF" | grep -q "^manufacturers-management/"; then
+            echo "manufacturers_management_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "manufacturers_management_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check for changes in customers-management
+        id: check_customers_management
+        run: |
+          git fetch
+          if [ $(git rev-list --count HEAD) -gt 1 ]; then
+            DIFF=$(git diff --name-only HEAD HEAD~1)
+          else
+            DIFF=$(git diff --name-only HEAD)
+          fi
+          echo "$DIFF"
+          if echo "$DIFF" | grep -q "^customers-management/"; then
+            echo "customers_management_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "customers_management_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check for changes in ai-services
+        id: check_ai_services
+        run: |
+          git fetch
+          if [ $(git rev-list --count HEAD) -gt 1 ]; then
+            DIFF=$(git diff --name-only HEAD HEAD~1)
+          else
+            DIFF=$(git diff --name-only HEAD)
+          fi
+          echo "$DIFF"
+          if echo "$DIFF" | grep -q "^ai-services/"; then
+            echo "ai_services_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "ai_services_changed=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Check if orders-management image exists
         id: check_orders_image
         run: |
@@ -125,6 +173,36 @@ jobs:
             echo "authentications_image_exists=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Check if manufacturers-management image exists
+        id: check_manufacturers_image
+        run: |
+          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/manufacturers-management-image --filter="tags:latest" --format="value(name)")
+          if [ -z "$IMAGE_EXISTS" ]; then
+            echo "manufacturers_image_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "manufacturers_image_exists=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if customers-management image exists
+        id: check_customers_image
+        run: |
+          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers-management-image --filter="tags:latest" --format="value(name)")
+          if [ -z "$IMAGE_EXISTS" ]; then
+            echo "customers_image_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "customers_image_exists=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Check if ai-services image exists
+        id: check_ai_services_image
+        run: |
+          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image --filter="tags:latest" --format="value(name)")
+          if [ -z "$IMAGE_EXISTS" ]; then
+            echo "ai_services_image_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "ai_services_image_exists=true" >> $GITHUB_OUTPUT
+          fi
+      
       - name: Check if orders-management service exists
         id: check_orders_service
         run: |
@@ -155,6 +233,36 @@ jobs:
             echo "authentications_service_exists=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Check if manufacturers-management service exists
+        id: check_manufacturers_service
+        run: |
+          SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=manufacturers-management-service" --format="value(metadata.name)")
+          if [ -z "$SERVICE_EXISTS" ]; then
+            echo "manufacturers_service_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "manufacturers_service_exists=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if customers-management service exists
+        id: check_customers_service
+        run: |
+          SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=customers-management-service" --format="value(metadata.name)")
+          if [ -z "$SERVICE_EXISTS" ]; then
+            echo "customers_service_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "customers_service_exists=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Check if ai-services service exists
+        id: check_ai_services_service
+        run: |
+          SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=ai-services-service" --format="value(metadata.name)")
+          if [ -z "$SERVICE_EXISTS" ]; then
+            echo "ai_services_service_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "ai_services_service_exists=true" >> $GITHUB_OUTPUT
+          fi
+
       - name: Trigger Build and Deploy Workflow for Orders Management
         if: steps.check_orders_management.outputs.orders_management_changed == 'true' || steps.check_orders_image.outputs.orders_image_exists == 'false' || steps.check_orders_service.outputs.orders_service_exists == 'false'
         uses: benc-uk/workflow-dispatch@v1
@@ -174,4 +282,25 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: build-and-deploy-users.yml
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Trigger Build and Deploy Workflow for Manufacturers Management
+        if: steps.check_manufacturers_management.outputs.manufacturers_management_changed == 'true' || steps.check_manufacturers_image.outputs.manufacturers_image_exists == 'false' || steps.check_manufacturers_service.outputs.manufacturers_service_exists == 'false'
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: build-and-deploy-manufacturers.yml
+          token: ${{ secrets.PAT_TOKEN }}
+      
+      - name: Trigger Build and Deploy Workflow for Customers Management
+        if: steps.check_customers_management.outputs.customers_management_changed == 'true' || steps.check_customers_image.outputs.customers_image_exists == 'false' || steps.check_customers_service.outputs.customers_service_exists == 'false'
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: build-and-deploy-customers.yml
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Trigger Build and Deploy Workflow for AI Services
+        if: steps.check_ai_services.outputs.ai_services_changed == 'true' || steps.check_ai_services_image.outputs.ai_services_image_exists == 'false' || steps.check_ai_services_service.outputs.ai_services_service_exists == 'false'
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: build-and-deploy-ai.yml
           token: ${{ secrets.PAT_TOKEN }}

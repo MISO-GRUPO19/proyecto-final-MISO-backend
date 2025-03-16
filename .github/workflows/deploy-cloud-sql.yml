@@ -65,7 +65,34 @@ jobs:
             else
               echo "Database 'users' already exists, skipping creation."
             fi
+
+      - name: Create Database (if not exists) Manufacturers
+        run: |
+            DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('manufacturers')" --format="value(name)")
+            if [ -z "$DB_EXISTS" ]; then
+              gcloud sql databases create manufacturers --instance=postgres
+            else
+              echo "Database 'manufacturers' already exists, skipping creation."
+            fi
             
+      - name: Create Database (if not exists) Customers
+        run: |
+            DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('customers')" --format="value(name)")
+            if [ -z "$DB_EXISTS" ]; then
+              gcloud sql databases create customers --instance=postgres
+            else
+              echo "Database 'customers' already exists, skipping creation."
+            fi
+
+      - name: Create Database (if not exists) AI
+        run: |
+            DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('ai')" --format="value(name)")
+            if [ -z "$DB_EXISTS" ]; then
+              gcloud sql databases create ai --instance=postgres
+            else
+              echo "Database 'ai' already exists, skipping creation."
+            fi
+
       - name: Create VPC Access Connector
         id: create_vpc_connector
         run: |

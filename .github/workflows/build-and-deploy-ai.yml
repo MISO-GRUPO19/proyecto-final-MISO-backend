@@ -1,0 +1,72 @@
+name: Build and Deploy Authentications Management
+
+on:
+  workflow_dispatch: # Permite la ejecución manual
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up gcloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Authenticate Docker with GCP
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Get Cloud SQL Instance Private IP
+        id: get_ip
+        run: |
+          echo "Obteniendo las IPs de la instancia..."
+          IP_ADDRESSES=$(gcloud sql instances describe postgres --format="value(ipAddresses)")
+          if [ -z "$IP_ADDRESSES" ]; then
+            echo "Error: No se encontraron IPs para la instancia."
+            exit 1
+          fi
+          echo "Extrayendo la IP privada..."
+          PRIVATE_IP=$(echo "$IP_ADDRESSES" | grep -oP "'ipAddress': '\K[0-9.]+(?=', 'type': 'PRIVATE')")
+          if [ -z "$PRIVATE_IP" ]; then
+            echo "Error: No se pudo obtener la IP privada."
+            echo "IPs encontradas: $IP_ADDRESSES"
+            exit 1
+          fi
+          echo "IP privada: $PRIVATE_IP"
+          echo "db_ip=$PRIVATE_IP" >> $GITHUB_OUTPUT
+
+      - name: Update ./ai-services/src/.env.development
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -la
+          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./ai-services/src/.env.development
+
+      - name: Build and Push Docker Image AI
+        run: |
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image:latest ./ai-services
+          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image:latest
+
+      - name: Deploy to Cloud Run AI
+        run: |
+          gcloud run deploy ai-services \
+            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image:latest \
+            --region=us-central1 \
+            --platform=managed \
+            --allow-unauthenticated \
+            --memory=512Mi \
+            --cpu=1 \
+            --concurrency=80 \
+            --port=5006 \
+            --vpc-connector=orders-vpc-connector \
+            --vpc-egress=private-ranges-only \
+            --min-instances=1 \
+            --max-instances=3
