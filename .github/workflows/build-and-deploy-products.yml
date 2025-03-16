@@ -55,20 +55,6 @@ jobs:
           docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest ./products-management
           docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest
 
-      - name: Create VPC Access Connector
-        id: create_vpc_connector
-        run: |
-          # Verifica si el VPC Connector ya existe
-          if ! gcloud compute networks vpc-access connectors describe orders-vpc-connector --region=us-central1 > /dev/null 2>&1; then
-            echo "Creando VPC Connector..."
-            gcloud compute networks vpc-access connectors create orders-vpc-connector \
-              --region=us-central1 \
-              --network=default \
-              --range=10.8.0.0/28
-          else
-            echo "El VPC Connector ya existe. Saltando creación."
-          fi
-
       - name: Deploy to Cloud Run Products
         run: |
           gcloud run deploy products-management-service \
