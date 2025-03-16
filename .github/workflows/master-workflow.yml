@@ -173,5 +173,5 @@ jobs:
         if: steps.check_authentications_management.outputs.authentications_management_changed == 'true' || steps.check_authentications_image.outputs.authentications_image_exists == 'false' || steps.check_authentications_service.outputs.authentications_service_exists == 'false'
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: build-and-deploy-authentications.yml
+          workflow: build-and-deploy-users.yml
           token: ${{ secrets.PAT_TOKEN }}
