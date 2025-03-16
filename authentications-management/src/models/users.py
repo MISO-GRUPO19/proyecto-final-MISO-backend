@@ -6,6 +6,7 @@ from .model  import  Model
 from .database import base
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
+import enum
 
 db = SQLAlchemy()
 
