@@ -46,6 +46,10 @@ jobs:
         run: |
           gcloud run services delete ai-services --region=us-central1 --platform=managed --quiet
 
+      - name: Delete Cloud Run Service (NGINX)
+        run: |
+          gcloud run services delete nginx-service --region=us-central1 --platform=managed --quiet
+
       - name: Delete Docker Image (Orders Management)
         run: |
           gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest --quiet
@@ -70,6 +74,10 @@ jobs:
         run: |
           gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image:latest --quiet
           
+      - name: Delete Docker Image (NGINX)
+        run: |
+          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/nginx-image:latest --quiet
+
       - name: Delete VPC Access Connector (Orders Management)
         run: |
           gcloud compute networks vpc-access connectors delete orders-vpc-connector --region=us-central1 --quiet
