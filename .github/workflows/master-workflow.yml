@@ -143,6 +143,21 @@ jobs:
             echo "ai_services_changed=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Check for changes in nginx.conf
+        id: check_nginx
+        run: |
+          git fetch
+          if [ $(git rev-list --count HEAD) -gt 1 ]; then
+            DIFF=$(git diff --name-only HEAD HEAD~1)
+          else
+            DIFF=$(git diff --name-only HEAD)
+          fi
+          echo "$DIFF"
+          if echo "$DIFF" | grep -q "^nginx.conf"; then
+            echo "nginx_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "nginx_changed=false" >> $GITHUB_OUTPUT
+
       - name: Check if orders-management image exists
         id: check_orders_image
         run: |
@@ -303,4 +318,11 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: build-and-deploy-ai.yml
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Trigger Build and Deploy Workflow for NGINX
+        if: steps.check_nginx.outputs.nginx_changed == 'true'
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: build-and-deploy-nginx.yml
           token: ${{ secrets.PAT_TOKEN }}

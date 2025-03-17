@@ -233,6 +233,22 @@ services:
       - "5006:5006"
     restart: always
 
+  nginx:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - orders_service
+      - products_service
+      - auth_service
+      - manufacturers_service
+      - customers_service
+      - ai_service
+    networks:
+      - services_network
+
 networks:
   orders_network:
     driver: bridge
