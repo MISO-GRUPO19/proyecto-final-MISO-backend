@@ -33,6 +33,7 @@ services:
         condition: service_healthy
     networks:
       - orders_network
+      - services_network
     ports:
       - "5001:5001"
     restart: always
@@ -71,13 +72,195 @@ services:
         condition: service_healthy
     networks:
       - products_network
+      - services_network
     ports:
       - "5002:5002"
     restart: always
 
+  database_auth:
+    image: postgres:alpine
+    container_name: database_auth
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: users
+    ports:
+      - "5434:5432"
+    networks:
+      - auth_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+  auth_service:
+    container_name: auth-management-services
+    build:
+      context: ./authentications-management
+      dockerfile: Dockerfile
+    image: auth_service:1.0
+    environment:
+      DB_HOST: database_auth
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: users
+    depends_on:
+      database_auth:
+        condition: service_healthy
+    networks:
+      - auth_network
+      - services_network
+    ports:
+      - "5003:5003"
+    restart: always
+
+  database_manufacturers:
+    image: postgres:alpine
+    container_name: database_manufacturers
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: manufacturers
+    ports:
+      - "5435:5432"
+    networks:
+      - manufacturers_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+  manufacturers_service:
+    container_name: manufacturers-management-services
+    build:
+      context: ./manufacturers-management
+      dockerfile: Dockerfile
+    image: manufacturers_service:1.0
+    environment:
+      DB_HOST: database_manufacturers
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: manufacturers
+    depends_on:
+      database_manufacturers:
+        condition: service_healthy
+    networks:
+      - manufacturers_network
+      - services_network
+    ports:
+      - "5004:5004"
+    restart: always
+
+  database_customers:
+    image: postgres:alpine
+    container_name: database_customers
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: customers
+    ports:
+      - "5436:5432"
+    networks:
+      - customers_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+  customers_service:
+    container_name: customers-management-services
+    build:
+      context: ./customers-management
+      dockerfile: Dockerfile
+    image: customers_service:1.0
+    environment:
+      DB_HOST: database_customers
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: customers
+    depends_on:
+      database_customers:
+        condition: service_healthy
+    networks:
+      - customers_network
+      - services_network
+    ports:
+      - "5005:5005"
+    restart: always
+
+  database_ai:
+    image: postgres:alpine
+    container_name: database_ai
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ai
+    ports:
+      - "5437:5432"
+    networks:
+      - ai_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+  ai_service:
+    container_name: ai-services
+    build:
+      context: ./ai-services
+      dockerfile: Dockerfile
+    image: ai_service:1.0
+    environment:
+      DB_HOST: database_ai
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: ai
+    depends_on:
+      database_customers:
+        condition: service_healthy
+    networks:
+      - ai_network
+      - services_network
+    ports:
+      - "5006:5006"
+    restart: always
+
+  nginx:
+    build:
+      context: ./
+      dockerfile: nginxlocal.Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - orders_service
+      - products_service
+      - auth_service
+      - manufacturers_service
+      - customers_service
+      - ai_service
+    networks:
+      - services_network
 
 networks:
   orders_network:
     driver: bridge
   products_network:
+    driver: bridge
+  auth_network:
+    driver: bridge
+  manufacturers_network:
+    driver: bridge
+  customers_network:
+    driver: bridge
+  ai_network:
+    driver: bridge
+  services_network:
     driver: bridge

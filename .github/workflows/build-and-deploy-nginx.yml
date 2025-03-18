@@ -1,0 +1,47 @@
+name: Build and Deploy NGINX
+
+on:
+  workflow_dispatch: # Permite la ejecución manual
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up gcloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Authenticate Docker with GCP
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Build and Push Docker Image NGINX
+        run: |
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/nginx-image:latest .
+          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/nginx-image:latest
+
+      - name: Deploy to Cloud Run NGINX
+        run: |
+          gcloud run deploy nginx-service \
+            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/nginx-image:latest \
+            --region=us-central1 \
+            --platform=managed \
+            --allow-unauthenticated \
+            --memory=512Mi \
+            --cpu=1 \
+            --concurrency=80 \
+            --port=8080 \
+            --vpc-connector=orders-vpc-connector \
+            --vpc-egress=private-ranges-only \
+            --min-instances=1 \
+            --max-instances=3

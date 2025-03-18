@@ -1,4 +1,4 @@
-name: Build and Deploy Orders Management
+name: Build and Deploy Manufacturers Management
 
 on:
   workflow_dispatch: # Permite la ejecución manual
@@ -44,28 +44,28 @@ jobs:
           echo "IP privada: $PRIVATE_IP"
           echo "db_ip=$PRIVATE_IP" >> $GITHUB_OUTPUT
 
-      - name: Update ./orders-management/src/.env.development
+      - name: Update ./manufacturers-management/src/.env.development
         run: |
           echo "Current directory: $(pwd)"
           ls -la
-          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders-management/src/.env.development
+          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./manufacturers-management/src/.env.development
 
-      - name: Build and Push Docker Image Orders
+      - name: Build and Push Docker Image manufacturers
         run: |
-          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest ./orders-management
-          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/manufacturers-management-image:latest ./manufacturers-management
+          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/manufacturers-management-image:latest
 
-      - name: Deploy to Cloud Run Orders
+      - name: Deploy to Cloud Run manufacturers
         run: |
-          gcloud run deploy orders-management-service \
-            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest \
+          gcloud run deploy manufacturers-management-service \
+            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/manufacturers-management-image:latest \
             --region=us-central1 \
             --platform=managed \
             --allow-unauthenticated \
             --memory=512Mi \
             --cpu=1 \
             --concurrency=80 \
-            --port=5001 \
+            --port=5004 \
             --vpc-connector=orders-vpc-connector \
             --vpc-egress=private-ranges-only \
             --min-instances=1 \
