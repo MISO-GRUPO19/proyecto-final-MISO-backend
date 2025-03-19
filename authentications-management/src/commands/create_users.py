@@ -16,10 +16,9 @@ class CreateUsers(BaseCommand):
         if (self.data['password'] != self.data['confirm_password']):
             raise PasswordMismatch
         
-        user = Users(email=self.data['email'], password=self.data['password'], role=self.data['role'])
+        user = Users(email=self.data['email'], role=self.data['role'])
+        user.set_password(self.data['password'])
         db_session.add(user)
-
         db_session.commit()
         db_session.close()
-
-        return {'message': 'User created successfully'}
+        return {'message': 'Usuario creado correctamente'}
