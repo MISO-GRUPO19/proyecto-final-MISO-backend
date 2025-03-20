@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
+from flask_jwt_extended import JWTManager
 from .api.users import users
 from .errors.errors import ApiError
 import os
@@ -18,6 +19,9 @@ APP_PORT = int(os.getenv("APP_PORT", default=5000))
 
 app = Flask(__name__)
 
+app.config["JWT_SECRET_KEY"] = "qwerty"
+jwt = JWTManager(app)
+
 app.config["DEBUG"] = True
 
 app.register_blueprint(users)
@@ -28,7 +32,7 @@ init_db()
 def handle_exception(error):
     response = {
       "mssg": error.description,
-      "version": os.environ["VERSION"]
+      # "version": os.environ["VERSION"]
     }
     return jsonify(response), error.code
 

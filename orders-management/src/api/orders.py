@@ -1,4 +1,5 @@
 from flask import request, jsonify, Blueprint, Response
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..commands.create_orders import CreateOrders
 from ..queries.get_orders import GetOrders
 
@@ -18,6 +19,7 @@ def create_sale():
     return jsonify(result), 201
 
 @orders.route('/orders', methods=['GET'])
+@jwt_required()
 def get_orders():
     token_beare = request.headers.get('Authorization')
     

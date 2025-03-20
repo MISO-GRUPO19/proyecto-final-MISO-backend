@@ -5,6 +5,14 @@ class ApiError(Exception):
 class InvalidData(ApiError):
     code = 400
     description = "Datos inválidos"
+
+class PasswordDoesNotHaveTheStructure(ApiError):
+    code = 400
+    description = "La contraseña no cumple con la estructura requerida"
+
+class EmailDoesNotValid(ApiError):
+    code = 400
+    description = "Correo electrónico inválido"
     
 class PasswordMismatch(ApiError):
     code = 400

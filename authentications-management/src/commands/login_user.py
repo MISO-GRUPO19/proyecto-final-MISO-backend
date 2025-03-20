@@ -24,6 +24,6 @@ class LoginUserCommand:
             'user': {
                 'id': user.id,
                 'email': user.email,
-                'role': user.role if hasattr(user, 'role') else 'user'
+                'role': user.role.value if hasattr(user, 'role') else 'user'
             }
         }

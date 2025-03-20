@@ -24,4 +24,20 @@ base = declarative_base()
 base.query = db_session.query_property()
 
 def init_db():
+    from .users import Users, Role
+
     base.metadata.create_all(bind=engine)
+
+    if not db_session.query(Users).filter_by(email='admin@ccp.com').first():
+        admin = Users(email='admin@ccp.com', password='Admin123-', role=Role.Administrador)
+        db_session.add(admin)
+    
+    if not db_session.query(Users).filter_by(email='vendedor@ccp.com').first():
+        vendedor = Users(email='vendedor@ccp.com', password='Vendedor123-', role=Role.Vendedor)
+        db_session.add(vendedor)
+    
+    if not db_session.query(Users).filter_by(email='cliente@ccp.com').first():
+        cliente = Users(email='cliente@ccp.com', password='Cliente123-', role=Role.Cliente)
+        db_session.add(cliente)
+    
+    db_session.commit()
