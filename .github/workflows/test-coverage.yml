@@ -26,7 +26,7 @@ jobs:
 
       - name: Run tests with coverage
         env:
-          PYTHONPATH: ${{ github.workspace }}/authentications_management/src
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           pytest --cov=authentications_management/src --cov-report=xml --cov-fail-under=80
 
