@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
 from .api.users import users
 from .errors.errors import ApiError

@@ -79,7 +79,7 @@ jobs:
             echo "products_management_changed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check for changes in authentications-management
+      - name: Check for changes in authentications_management
         id: check_authentications_management
         run: |
           git fetch
@@ -89,7 +89,7 @@ jobs:
             DIFF=$(git diff --name-only HEAD)
           fi
           echo "$DIFF"
-          if echo "$DIFF" | grep -q "^authentications-management/"; then
+          if echo "$DIFF" | grep -q "^authentications_management/"; then
             echo "authentications_management_changed=true" >> $GITHUB_OUTPUT
           else
             echo "authentications_management_changed=false" >> $GITHUB_OUTPUT
@@ -179,10 +179,10 @@ jobs:
             echo "products_image_exists=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check if authentications-management image exists
+      - name: Check if authentications_management image exists
         id: check_authentications_image
         run: |
-          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications-management-image --filter="tags:latest" --format="value(name)")
+          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications_management-image --filter="tags:latest" --format="value(name)")
           if [ -z "$IMAGE_EXISTS" ]; then
             echo "authentications_image_exists=false" >> $GITHUB_OUTPUT
           else
@@ -239,10 +239,10 @@ jobs:
             echo "products_service_exists=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check if authentications-management service exists
+      - name: Check if authentications_management service exists
         id: check_authentications_service
         run: |
-          SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=authentications-management-service" --format="value(metadata.name)")
+          SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=authentications_management-service" --format="value(metadata.name)")
           if [ -z "$SERVICE_EXISTS" ]; then
             echo "authentications_service_exists=false" >> $GITHUB_OUTPUT
           else

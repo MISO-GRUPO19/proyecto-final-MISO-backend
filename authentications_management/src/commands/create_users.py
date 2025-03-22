@@ -3,7 +3,6 @@ from .base_command import BaseCommand
 from ..errors.errors import InvalidData, PasswordMismatch, UserAlreadyExists, EmailDoesNotValid, PasswordDoesNotHaveTheStructure
 from ..models.users import Users
 from ..models.database import db_session
-from flask import jsonify
 
 class CreateUsers(BaseCommand):
     def __init__(self, data):

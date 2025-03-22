@@ -1,7 +1,7 @@
-from flask import request, jsonify, Blueprint, Response
+from flask import request, jsonify, Blueprint
 from ..commands.create_users import CreateUsers
 from ..commands.login_user import LoginUserCommand
-from ..errors.errors import InvalidData, UserNotFound, InvalidPassword
+from ..errors.errors import InvalidData
 
 users = Blueprint('users', __name__)
 

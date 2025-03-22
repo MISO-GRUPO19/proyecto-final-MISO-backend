@@ -1,7 +1,6 @@
 import datetime
-from marshmallow import Schema, fields
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, String, Integer, DateTime, CheckConstraint, Enum, Float
+from sqlalchemy import Column, String, DateTime, Enum
 from .model import Model
 from .database import base
 from sqlalchemy.dialects.postgresql import UUID

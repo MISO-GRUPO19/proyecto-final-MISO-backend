@@ -31,5 +31,5 @@ class Unauthorized(ApiError):
     description = "No autorizado"
     
 class InvalidPassword(ApiError):
-    code = 400 
+    code = 401 
     description = "Contraseña inválida"
