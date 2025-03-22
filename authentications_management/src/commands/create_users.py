@@ -3,6 +3,7 @@ from .base_command import BaseCommand
 from ..errors.errors import InvalidData, PasswordMismatch, UserAlreadyExists, EmailDoesNotValid, PasswordDoesNotHaveTheStructure
 from ..models.users import Users
 from ..models.database import db_session
+from ..services.customer_service import CustomerService
 
 class CreateUsers(BaseCommand):
     def __init__(self, data):
@@ -19,6 +20,12 @@ class CreateUsers(BaseCommand):
 
         if self.data['role'] not in ['Administrador', 'Vendedor', 'Cliente']:
             raise InvalidData
+
+        if self.data['role'] == 'Cliente' or self.data['role'] == 'Vendedor':
+            required_fields = ['name', 'country', 'address', 'telephone']
+            for field in required_fields:
+                if field not in self.data or not self.data[field]:
+                    raise InvalidData
 
         email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
         if not re.match(email_regex, self.data['email']):
@@ -40,9 +47,13 @@ class CreateUsers(BaseCommand):
             raise UserAlreadyExists
 
         try:
-            user = Users(email=self.data['email'], role=self.data['role'], password=self.data['password'])
-            db_session.add(user)
-            db_session.commit()
+            with db_session.begin():
+                user = Users(email=self.data['email'], role=self.data['role'], password=self.data['password'])
+                db_session.add(user)
+                
+                if self.data['role'] == 'Cliente':
+                    CustomerService.create_customer(self.data)
+            
             return {'message': 'Usuario creado exitosamente'}
         except Exception as e:
             db_session.rollback()
