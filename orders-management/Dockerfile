@@ -22,4 +22,4 @@ ENV PORT 5001
 ENV UPTRACE_DSN=https://t0Yfk4-x00bJJt5WlUqreg@api.uptrace.dev/5872
 
 # Comando para ejecutar la aplicación Flask
-CMD ["flask", "--app", "main.py", "run", "--host=0.0.0.0", "--port=5001"]
+CMD ["flask", "--app", "main.py", "--debug", "run", "--host=0.0.0.0", "--port=5001"]
