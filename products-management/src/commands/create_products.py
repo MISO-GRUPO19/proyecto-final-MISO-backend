@@ -1,6 +1,6 @@
 from .base_command import BaseCommand
 from ..errors.errors import InvalidData
-from ..models.products import Products
+from ..models.products import Products, Batch
 from ..models.database import db_session
 from flask import jsonify
 
@@ -10,13 +10,34 @@ class CreateProducts(BaseCommand):
     
     def execute(self):
         
-        if (self.data['name'] == '' or self.data['description'] == '' or self.data['price'] == '' or self.data['category'] == '' or self.data['weight'] == '' or self.data['useful_life'] == '' or self.data['provider_id'] == ''):
-            raise InvalidData
+        if (self.data['name'] == '' or self.data['description'] == '' or self.data['price'] == '' or self.data['category'] == '' or self.data['weight'] == '' or self.data['barcode'] == '' or self.data['provider_id'] == '' or self.data['batch'] == '' or self.data['best_before'] == '' or self.data['quantity'] == ''):
+            raise InvalidData('Invalid data')
 
-        product = Products(name=self.data['name'], description=self.data['description'], price=self.data['price'], category=self.data['category'], weight=self.data['weight'], useful_life=self.data['useful_life'], provider_id=self.data['provider_id'])
-        db_session.add(product)
+        try:
+            with db_session.begin():
+                product = Products(
+                    name=self.data['name'],
+                    description=self.data['description'],
+                    price=self.data['price'],
+                    category=self.data['category'],
+                    weight=self.data['weight'],
+                    barcode=self.data['barcode'],
+                    provider_id=self.data['provider_id']
+                )
+                db_session.add(product)
+                db_session.flush()
 
-        db_session.commit()
-        db_session.close()
-
-        return {'message': 'Product created successfully'}
+                batch = Batch(
+                    batch=self.data['batch'],
+                    best_before=self.data['best_before'],
+                    quantity=self.data['quantity'],
+                    product_id=product.id 
+                )
+                db_session.add(batch)
+            
+            return {'message': 'Producto creado exitosamente'}
+        except Exception as e:
+            db_session.rollback()
+            raise e
+        finally:
+            db_session.close()

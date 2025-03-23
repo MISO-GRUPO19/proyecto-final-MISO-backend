@@ -7,11 +7,11 @@ from dotenv import load_dotenv
 loaded = load_dotenv('.env.development')
 
 if os.environ.get("DATABASE_URL") is None:
-    userdb = os.environ["DB_USER"]
-    password = os.environ["DB_PASSWORD"]
-    host = os.environ["DB_HOST"]
-    dbname = os.environ["DB_NAME"]
-    port_db=os.environ["DB_PORT"]
+    userdb = "postgres"
+    password = "postgres"
+    host = "localhost"
+    dbname = "products"
+    port_db="5433"
     urldb = 'postgresql://' + userdb + ':' + password + '@' + host+ ':' +port_db + '/' + dbname
 else:
     urldb = os.environ.get("DATABASE_URL")
