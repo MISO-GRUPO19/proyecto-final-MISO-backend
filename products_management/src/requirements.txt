@@ -14,3 +14,5 @@ flask_jwt_extended
 flask_testing
 pytest-cov
 pytest-flask
+pandas
+openpyxl
