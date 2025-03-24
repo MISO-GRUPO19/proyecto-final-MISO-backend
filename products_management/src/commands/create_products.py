@@ -29,11 +29,11 @@ class CreateProducts(BaseCommand):
                 db_session.add(product)
                 db_session.flush()
 
-                best_before = datetime.fromisoformat(self.data['best_before'])  # Convertir a datetime
+                best_before = datetime.fromisoformat(self.data['best_before'])
                 
                 batch = Batch(
                     batch=self.data['batch'],
-                    best_before=self.data['best_before'],
+                    best_before=best_before,
                     quantity=self.data['quantity'],
                     product_id=product.id 
                 )
