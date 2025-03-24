@@ -11,7 +11,7 @@ class CreateProducts(BaseCommand):
     def execute(self):
         
         if (self.data['name'] == '' or self.data['description'] == '' or self.data['price'] == '' or self.data['category'] == '' or self.data['weight'] == '' or self.data['barcode'] == '' or self.data['provider_id'] == '' or self.data['batch'] == '' or self.data['best_before'] == '' or self.data['quantity'] == ''):
-            raise InvalidData('Invalid data')
+            raise InvalidData
 
         try:
             with db_session.begin():

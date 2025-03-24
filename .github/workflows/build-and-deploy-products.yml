@@ -44,21 +44,21 @@ jobs:
           echo "IP privada: $PRIVATE_IP"
           echo "db_ip=$PRIVATE_IP" >> $GITHUB_OUTPUT
 
-      - name: Update ./products-management/src/.env.development
+      - name: Update ./products_management/src/.env.development
         run: |
           echo "Current directory: $(pwd)"
           ls -la
-          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./products-management/src/.env.development
+          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./products_management/src/.env.development
 
       - name: Build and Push Docker Image Products
         run: |
-          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest ./products-management
-          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest ./products_management
+          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest
 
       - name: Deploy to Cloud Run Products
         run: |
-          gcloud run deploy products-management-service \
-            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest \
+          gcloud run deploy products_management-service \
+            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest \
             --region=us-central1 \
             --platform=managed \
             --allow-unauthenticated \

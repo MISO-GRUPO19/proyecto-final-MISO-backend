@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-WORKDIR /products-management
+WORKDIR /products_management
 
 COPY src/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -10,7 +10,7 @@ COPY . .
 ENV FLASK_APP=main.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-WORKDIR /products-management/src
+WORKDIR /products_management/src
 
 EXPOSE 5002
 
