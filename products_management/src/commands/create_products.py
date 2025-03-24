@@ -2,7 +2,6 @@ from .base_command import BaseCommand
 from ..errors.errors import InvalidData
 from ..models.products import Products, Batch
 from ..models.database import db_session
-from flask import jsonify
 import uuid
 from datetime import datetime
 
