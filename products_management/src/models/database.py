@@ -3,18 +3,23 @@ from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
 import os
 from dotenv import load_dotenv
 
-loaded = load_dotenv('.env.development')
 
-if os.environ.get("DATABASE_URL") is None:
-    userdb = "postgres"
-    password = "postgres"
-    host = "localhost"
-    dbname = "products"
-    port_db="5433"
-    urldb = 'postgresql://' + userdb + ':' + password + '@' + host+ ':' +port_db + '/' + dbname
+if os.path.exists('.env.test'):
+    load_dotenv('.env.test')
 else:
-    urldb = os.environ.get("DATABASE_URL")
-    
+    load_dotenv('.env.development')
+
+
+if os.getenv('FLASK_ENV') == 'testing':
+    urldb = 'sqlite:///:memory:'  
+else:
+    userdb = os.environ["DB_USER"]
+    password = os.environ["DB_PASSWORD"]
+    host = os.environ["DB_HOST"]
+    dbname = os.environ["DB_NAME"]
+    port_db = os.environ["DB_PORT"]
+    urldb = 'postgresql://' + userdb + ':' + password + '@' + host + ':' + port_db + '/' + dbname
+
 engine = create_engine(urldb)
 db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 
