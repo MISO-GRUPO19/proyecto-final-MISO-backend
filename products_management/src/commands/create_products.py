@@ -3,7 +3,7 @@ from ..errors.errors import InvalidData
 from ..models.products import Products, Batch
 from ..models.database import db_session
 from flask import jsonify
-
+import uuid
 class CreateProducts(BaseCommand):
     def __init__(self, data):
         self.data = data
@@ -22,7 +22,7 @@ class CreateProducts(BaseCommand):
                     category=self.data['category'],
                     weight=self.data['weight'],
                     barcode=self.data['barcode'],
-                    provider_id=self.data['provider_id']
+                    provider_id=uuid.UUID(self.data['provider_id'])
                 )
                 db_session.add(product)
                 db_session.flush()
