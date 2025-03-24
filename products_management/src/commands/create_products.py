@@ -4,6 +4,8 @@ from ..models.products import Products, Batch
 from ..models.database import db_session
 from flask import jsonify
 import uuid
+from datetime import datetime
+
 class CreateProducts(BaseCommand):
     def __init__(self, data):
         self.data = data
@@ -27,6 +29,8 @@ class CreateProducts(BaseCommand):
                 db_session.add(product)
                 db_session.flush()
 
+                best_before = datetime.fromisoformat(self.data['best_before'])  # Convertir a datetime
+                
                 batch = Batch(
                     batch=self.data['batch'],
                     best_before=self.data['best_before'],
