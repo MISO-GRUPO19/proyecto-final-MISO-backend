@@ -1,3 +1,4 @@
+from products_management.src.commands.base_command import BaseCommand
 from ..models.products import Category
 from ..models.database import db_session
 
