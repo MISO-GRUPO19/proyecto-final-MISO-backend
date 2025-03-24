@@ -1,6 +1,6 @@
 from flask import request, jsonify, Blueprint, Response
 
-from products_management.src.queries.get_orders import GetCategories
+from ..queries.get_categories import GetCategories
 from ..commands.create_products import CreateProducts
 from ..commands.create_massive_products import CreateMassiveProducts
 from flask_jwt_extended import jwt_required, get_jwt_identity

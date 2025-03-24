@@ -1,8 +1,8 @@
-from products_management.src.commands.base_command import BaseCommand
+from .base_queries import BaseQueries
 from ..models.products import Category
 from ..models.database import db_session
 
-class GetCategories(BaseCommand):
+class GetCategories(BaseQueries):
     def __init__(self, token):
         self.token = token
 

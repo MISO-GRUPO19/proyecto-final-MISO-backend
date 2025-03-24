@@ -66,6 +66,9 @@ class CreateMassiveProducts(BaseCommand):
                 return {"message": "Errores en la carga", "detalles": errors}
             
                 
+            products = []
+            batches = []
+
             for row in valid_products:
                 product = Products(
                     name=row['name'],
@@ -76,17 +79,23 @@ class CreateMassiveProducts(BaseCommand):
                     barcode=row['barcode'],
                     provider_id=uuid.UUID(row['provider_id'])
                 )
-                db_session.add(product)
-                db_session.flush()
-                
+                products.append(product)
+
+            db_session.add_all(products)
+            db_session.flush()
+
+            for product, row in zip(products, valid_products):
                 batch = Batch(
                     batch=row['batch'],
                     best_before=row['best_before'],
                     quantity=row['quantity'],
                     product_id=product.id
                 )
-                db_session.add(batch)
-                db_session.commit()
+                batches.append(batch)
+
+            db_session.add_all(batches)
+            db_session.commit()
+
                 
             return {'message': f'{len(valid_products)} productos cargados correctamente'}
         
