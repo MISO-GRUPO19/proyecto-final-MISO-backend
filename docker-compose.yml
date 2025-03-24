@@ -248,6 +248,46 @@ services:
       - ai_service
     networks:
       - services_network
+  
+  database_sellers:
+    image: postgres:alpine
+    container_name: database_sellers
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sellers
+    ports:
+      - "5438:5432"
+    networks:
+      - sellers_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+  sellers_service:
+    container_name: sellers_service
+    build:
+      context: ./sellers-management
+      dockerfile: Dockerfile
+    image: sellers_service:1.0
+    environment:
+      DB_HOST: database_sellers
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: ai
+    depends_on:
+      database_sellers:
+        condition: service_healthy
+    networks:
+      - sellers_network
+      - services_network
+    ports:
+      - "5007:5007"
+    restart: always
+
 
 networks:
   orders_network:
@@ -261,6 +301,8 @@ networks:
   customers_network:
     driver: bridge
   ai_network:
+    driver: bridge
+  sellers_network:
     driver: bridge
   services_network:
     driver: bridge

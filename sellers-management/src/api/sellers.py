@@ -1,6 +1,6 @@
 from flask import request, jsonify, Blueprint, Response
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from commands.create_sellers import CreateSellers
+#from flask_jwt_extended import jwt_required, get_jwt_identity
+from ..commands.create_sellers import CreateSellers
 
 sellers = Blueprint('sellers', __name__)
 
