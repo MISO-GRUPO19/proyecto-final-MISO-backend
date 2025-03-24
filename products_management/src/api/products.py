@@ -1,4 +1,6 @@
 from flask import request, jsonify, Blueprint, Response
+
+from products_management.src.queries.get_orders import GetCategories
 from ..commands.create_products import CreateProducts
 from ..commands.create_massive_products import CreateMassiveProducts
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -20,6 +22,11 @@ def upload_products():
     result = CreateMassiveProducts(file).execute()
     return jsonify(result), 201
 
+@products.route('/categories', methods=['GET'])
+@jwt_required()
+def get_categories():
+    result = GetCategories(get_jwt_identity()).execute()
+    return jsonify(result), 200
 
 @products.route('/products/ping', methods=['GET'])
 def ping():

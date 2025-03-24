@@ -65,32 +65,27 @@ class CreateMassiveProducts(BaseCommand):
             if errors:
                 return {"message": "Errores en la carga", "detalles": errors}
             
-            with db_session.begin():
-                products = []
-                batches = []
                 
-                for row in valid_products:
-                    product = Products(
-                        name=row['name'],
-                        description=row['description'],
-                        price=row['price'],
-                        category=row['category'],
-                        weight=row['weight'],
-                        barcode=row['barcode'],
-                        provider_id=uuid.UUID(row['provider_id'])
-                    )
-                    db_session.add(product)
-                    db_session.flush()
-                    
-                    batch = Batch(
-                        batch=row['batch'],
-                        best_before=row['best_before'],
-                        quantity=row['quantity'],
-                        product_id=product.id
-                    )
-                    batches.append(batch)
+            for row in valid_products:
+                product = Products(
+                    name=row['name'],
+                    description=row['description'],
+                    price=row['price'],
+                    category=row['category'],
+                    weight=row['weight'],
+                    barcode=row['barcode'],
+                    provider_id=uuid.UUID(row['provider_id'])
+                )
+                db_session.add(product)
+                db_session.flush()
                 
-                db_session.add_all(batches)
+                batch = Batch(
+                    batch=row['batch'],
+                    best_before=row['best_before'],
+                    quantity=row['quantity'],
+                    product_id=product.id
+                )
+                db_session.add(batch)
                 db_session.commit()
                 
             return {'message': f'{len(valid_products)} productos cargados correctamente'}
