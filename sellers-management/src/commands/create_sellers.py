@@ -12,9 +12,15 @@ class CreateSellers(BaseCommand):
         if (self.data['name'] == '' or self.data['country'] == '' or self.data['address'] == '' or self.data['telephone'] == '' or self.data['email'] == '' ):
             raise InvalidData
         
-        seller = Sellers(name=self.data['name'], country=self.data['country'], address=self.data['address'], telephone=self.data['telephone'], email=self.data['email'])
+        seller = Sellers(
+            name=self.data['name'], 
+            country=self.data['country'], 
+            address=self.data['address'], 
+            telephone=self.data['telephone'], 
+            email=self.data['email']
+        )
         db_session.add(seller)
         db_session.commit()
-        db_session.close()
+        
 
         return {'message': f'Seller {seller.name} has been created successfully'}

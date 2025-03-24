@@ -233,22 +233,6 @@ services:
       - "5006:5006"
     restart: always
 
-  nginx:
-    build:
-      context: ./
-      dockerfile: nginxlocal.Dockerfile
-    ports:
-      - "8080:8080"
-    depends_on:
-      - orders_service
-      - products_service
-      - auth_service
-      - manufacturers_service
-      - customers_service
-      - ai_service
-    networks:
-      - services_network
-  
   database_sellers:
     image: postgres:alpine
     container_name: database_sellers
@@ -277,7 +261,7 @@ services:
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASSWORD: postgres
-      DB_NAME: ai
+      DB_NAME: sellers
     depends_on:
       database_sellers:
         condition: service_healthy
@@ -287,6 +271,24 @@ services:
     ports:
       - "5007:5007"
     restart: always
+  nginx:
+    build:
+      context: ./
+      dockerfile: nginxlocal.Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - orders_service
+      - products_service
+      - auth_service
+      - manufacturers_service
+      - customers_service
+      - ai_service
+      - sellers_service
+    networks:
+      - services_network
+  
+  
 
 
 networks:
