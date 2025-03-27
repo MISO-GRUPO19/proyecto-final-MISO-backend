@@ -60,7 +60,6 @@ jobs:
             --platform=linux/amd64 \
             --push \
             ./products_management
-          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest
 
       - name: Deploy to Cloud Run Products
         run: |
