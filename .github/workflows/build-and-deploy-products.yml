@@ -53,6 +53,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
   
+      - name: Verificar estructura de archivos
+        run: |
+          ls -la
+          ls -la ./products_management
+
       - name: Build and Push Docker Image Products
         run: |
           docker buildx build --build-arg GOOGLE_CREDENTIALS_BASE64=${{ secrets.GOOGLE_CREDENTIALS_BASE64 }} \
