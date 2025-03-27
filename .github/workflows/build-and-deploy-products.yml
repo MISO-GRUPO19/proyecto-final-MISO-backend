@@ -50,12 +50,15 @@ jobs:
           ls -la
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./products_management/src/.env.development
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+  
       - name: Build and Push Docker Image Products
         run: |
-          export DOCKER_CLI_EXPERIMENTAL=disabled
-          export DOCKER_BUILDKIT=0
-          docker build --build-arg GOOGLE_CREDENTIALS_BASE64=${{ secrets.GOOGLE_CREDENTIALS_BASE64 }} \
-            -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest \
+          docker buildx build --build-arg GOOGLE_CREDENTIALS_BASE64=${{ secrets.GOOGLE_CREDENTIALS_BASE64 }} \
+            --tag us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest \
+            --platform=linux/amd64 \
+            --push \
             ./products_management
           docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest
 
