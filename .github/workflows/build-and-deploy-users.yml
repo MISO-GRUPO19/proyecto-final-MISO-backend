@@ -48,11 +48,11 @@ jobs:
         run: |
           echo "Current directory: $(pwd)"
           ls -la
-          vi ./authentications_management/src/.env.development
+          cat ./authentications_management/src/.env.development
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./authentications_management/src/.env.development
 
-          vi ./authentications_management/src/.env.development
-          
+          cat ./authentications_management/src/.env.development
+
       - name: Build and Push Docker Image Authentications
         run: |
           docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications_management-image:latest ./authentications_management
