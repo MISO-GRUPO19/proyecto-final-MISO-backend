@@ -16,3 +16,6 @@ pytest-cov
 pytest-flask
 pandas
 openpyxl
+google-cloud-pubsub
+unittest2
+urllib3==1.26.15

@@ -1,7 +1,9 @@
+import logging
 from .base_command import BaseCommand
 from ..errors.errors import NotFile, InvalidFileFormat, ValidationError, ERROR_MESSAGES
 from ..models.products import Products, Batch, Category, Provider
 from ..models.database import db_session
+from ..pubsub.publisher import publish_message
 import uuid
 import pandas as pd
 
@@ -50,8 +52,9 @@ class CreateMassiveProducts(BaseCommand):
                 valid_products.append(row)
         
         return valid_products, errors
-    
+        
     def execute(self):
+        print('Ejecutando comando para carga masiva de productos')
         if self.file.filename == '':
             raise NotFile
         
@@ -60,43 +63,26 @@ class CreateMassiveProducts(BaseCommand):
             if not set(df.columns).issuperset(self.REQUIRED_COLUMNS):
                 raise InvalidFileFormat(ERROR_MESSAGES["invalid_file_format"])
             
+            print(f'Procesando archivo {self.file.filename}')
             valid_products, errors = self.validate_data(df)
             
+            print(f'Errores: {errors}')
             if errors:
                 return {"message": "Errores en la carga", "detalles": errors}
             
-                
-            products = []
-            batches = []
-
-            for row in valid_products:
-                product = Products(
-                    name=row['name'],
-                    description=row['description'],
-                    price=row['price'],
-                    category=row['category'],
-                    weight=row['weight'],
-                    barcode=row['barcode'],
-                    provider_id=uuid.UUID(row['provider_id'])
-                )
-                products.append(product)
-
-            db_session.add_all(products)
-            db_session.flush()
-
-            for product, row in zip(products, valid_products):
-                batch = Batch(
-                    batch=row['batch'],
-                    best_before=row['best_before'],
-                    quantity=row['quantity'],
-                    product_id=product.id
-                )
-                batches.append(batch)
-
-            db_session.add_all(batches)
-            db_session.commit()
-
-                
+            # Convertir cada fila a un diccionario para que sea serializable
+            valid_products_dicts = [row.to_dict() for row in valid_products]
+            
+            # Convertir Timestamps a cadenas de texto
+            for product in valid_products_dicts:
+                if isinstance(product['best_before'], pd.Timestamp):
+                    product['best_before'] = product['best_before'].strftime('%Y-%m-%d')
+            
+            # Publicar mensaje en Pub/Sub
+            print(f'Cargando {len(valid_products)} productos')
+            
+            publish_message('products', {'valid_products': valid_products_dicts})
+            
             return {'message': f'{len(valid_products)} productos cargados correctamente'}
         
         except Exception as e:

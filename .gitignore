@@ -145,3 +145,7 @@ deploy_docker_automation.sh
 .DS_Store
 .idea/
 .idea
+
+# Credenciales
+credentials_base64.txt
+proyecto-final-451719-1806c6f593e4.json
