@@ -59,7 +59,8 @@ jobs:
           ls -la ./products_management
 
       - name: Debug GOOGLE_CREDENTIALS_BASE64
-        run: echo "GOOGLE_CREDENTIALS_BASE64 length: ${#GOOGLE_CREDENTIALS_BASE64}"
+        run: |
+          echo "GOOGLE_CREDENTIALS_BASE64 length: ${#GOOGLE_CREDENTIALS_BASE64}"
      
       - name: Build and Push Docker Image Products
         run: |
