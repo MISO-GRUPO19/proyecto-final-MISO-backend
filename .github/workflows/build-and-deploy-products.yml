@@ -53,6 +53,7 @@ jobs:
       - name: Build and Push Docker Image Products
         run: |
           export DOCKER_CLI_EXPERIMENTAL=disabled
+          export DOCKER_BUILDKIT=0
           docker build --build-arg GOOGLE_CREDENTIALS_BASE64=${{ secrets.GOOGLE_CREDENTIALS_BASE64 }} \
             -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest \
             ./products_management
