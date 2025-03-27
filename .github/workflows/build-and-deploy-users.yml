@@ -57,7 +57,7 @@ jobs:
 
       - name: Deploy to Cloud Run authentications
         run: |
-          gcloud run deploy authentications_management-service \
+          gcloud run deploy authentications-management-service \
             --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications_management-image:latest \
             --region=us-central1 \
             --platform=managed \

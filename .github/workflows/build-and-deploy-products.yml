@@ -59,7 +59,7 @@ jobs:
 
       - name: Deploy to Cloud Run Products
         run: |
-          gcloud run deploy products_management-service \
+          gcloud run deploy products-management-service \
             --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest \
             --region=us-central1 \
             --platform=managed \
