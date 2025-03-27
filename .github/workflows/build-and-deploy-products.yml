@@ -52,9 +52,7 @@ jobs:
 
       - name: Build and Push Docker Image Products
         run: |
-          docker build \
-                      --build-arg GOOGLE_CREDENTIALS_BASE64=${{ secrets.GOOGLE_CREDENTIALS_BASE64 }} \
-                      -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest ./products_management
+          docker build --build-arg GOOGLE_CREDENTIALS_BASE64=${{ secrets.GOOGLE_CREDENTIALS_BASE64 }} -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest ./products_management
           docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest
 
       - name: Deploy to Cloud Run Products
