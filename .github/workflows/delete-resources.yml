@@ -28,11 +28,11 @@ jobs:
 
       - name: Delete Cloud Run Service (Products Management)
         run: |
-          gcloud run services delete products-management-service --region=us-central1 --platform=managed --quiet
+          gcloud run services delete products_management-service --region=us-central1 --platform=managed --quiet
 
       - name: Delete Cloud Run Service (Authentications Management)
         run: |
-          gcloud run services delete authentications-management-service --region=us-central1 --platform=managed --quiet
+          gcloud run services delete authentications_management-service --region=us-central1 --platform=managed --quiet
 
       - name: Delete Cloud Run Service (Manufacturers Management)
         run: |
@@ -56,11 +56,11 @@ jobs:
 
       - name: Delete Docker Image (Products Management)
         run: |
-          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image:latest --quiet
+          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest --quiet
 
       - name: Delete Docker Image (Authentications Management)
         run: |
-          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications-management-image:latest --quiet
+          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications_management-image:latest --quiet
       
       - name: Delete Docker Image (Manufacturers Management)
         run: |

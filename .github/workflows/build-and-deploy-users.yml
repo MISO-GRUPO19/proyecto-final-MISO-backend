@@ -44,21 +44,21 @@ jobs:
           echo "IP privada: $PRIVATE_IP"
           echo "db_ip=$PRIVATE_IP" >> $GITHUB_OUTPUT
 
-      - name: Update ./authentications-management/src/.env.development
+      - name: Update ./authentications_management/src/.env.development
         run: |
           echo "Current directory: $(pwd)"
           ls -la
-          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./authentications-management/src/.env.development
+          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./authentications_management/src/.env.development
 
       - name: Build and Push Docker Image Authentications
         run: |
-          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications-management-image:latest ./authentications-management
-          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications-management-image:latest
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications_management-image:latest ./authentications_management
+          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications_management-image:latest
 
       - name: Deploy to Cloud Run authentications
         run: |
-          gcloud run deploy authentications-management-service \
-            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications-management-image:latest \
+          gcloud run deploy authentications_management-service \
+            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications_management-image:latest \
             --region=us-central1 \
             --platform=managed \
             --allow-unauthenticated \

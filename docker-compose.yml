@@ -56,9 +56,9 @@ services:
       retries: 5
 
   products_service:
-    container_name: products-management-services
+    container_name: products_management-services
     build:
-      context: ./products-management
+      context: ./products_management
       dockerfile: Dockerfile
     image: products_service:1.0
     environment:
@@ -97,7 +97,7 @@ services:
   auth_service:
     container_name: auth-management-services
     build:
-      context: ./authentications-management
+      context: ./authentications_management
       dockerfile: Dockerfile
     image: auth_service:1.0
     environment:
