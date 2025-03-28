@@ -15,7 +15,11 @@ COPY . .
 # Configurar las credenciales de Google Cloud
 ARG GOOGLE_CREDENTIALS_BASE64
 ENV GOOGLE_APPLICATION_CREDENTIALS=/products_management/src/pubsub/proyecto-final-451719-1806c6f593e4.json
-RUN echo $GOOGLE_CREDENTIALS_BASE64 | base64 -d > $GOOGLE_APPLICATION_CREDENTIALS
+
+RUN if [ ! -z "$GOOGLE_CREDENTIALS_BASE64" ]; then \
+    echo $GOOGLE_CREDENTIALS_BASE64 | base64 -d > $GOOGLE_APPLICATION_CREDENTIALS; \
+    else echo "GOOGLE_CREDENTIALS_BASE64 no está definido, omitiendo credenciales."; \
+    fi
 
 ENV FLASK_APP=main.py
 ENV FLASK_RUN_HOST=0.0.0.0
