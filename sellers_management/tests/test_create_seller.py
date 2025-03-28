@@ -3,10 +3,10 @@ from flask import Flask
 from flask_jwt_extended import JWTManager, create_access_token
 from sellers_management.src.api.sellers import sellers
 from sellers_management.src.models.database import db_session
-from sellers_management.src.commands.create_sellers import CreateProducts
+from sellers_management.src.commands.create_sellers import CreateSellers
 from sellers_management.src.errors.errors import InvalidData
 
-class TestCreateProducts(unittest.TestCase):
+class TestCreateSellers(unittest.TestCase):
 
     def setUp(self):
         self.app = Flask(__name__)
@@ -57,6 +57,6 @@ class TestCreateProducts(unittest.TestCase):
         
     def test_ping(self):
         with self.client:
-            response = self.client.get('/products/ping')
+            response = self.client.get('/sellers/ping')
             self.assertEqual(response.status_code, 200)
             self.assertIn('pong', response.json['message'])
