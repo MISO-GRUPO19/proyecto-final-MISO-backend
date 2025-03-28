@@ -9,7 +9,7 @@ import uptrace
 # Inicializar Uptrace
 uptrace.configure_opentelemetry(
     dsn="https://t0Yfk4-x00bJJt5WlUqreg@api.uptrace.dev/5872",
-    service_name="products-management",
+    service_name="products_management",
     service_version="1.0.0",
 )
 
@@ -25,7 +25,7 @@ init_db()
 def handle_exception(error):
     response = {
       "mssg": error.description,
-      "version": os.environ["VERSION"]
+      #"version": os.environ["VERSION"]
     }
     return jsonify(response), error.code
 

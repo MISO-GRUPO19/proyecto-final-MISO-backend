@@ -4,4 +4,4 @@ class ApiError(Exception):
 
 class InvalidData(ApiError):
     code = 400
-    description = "Invalid data"
+    description = "Datos inválidos"
