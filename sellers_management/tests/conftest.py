@@ -6,7 +6,7 @@ import sys
 
 
 # Añadir el directorio src al sys.path para permitir importaciones absolutas
-#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
 def pytest_configure(config):
     env_file = find_dotenv('.env.test')
@@ -22,8 +22,8 @@ def pytest_configure(config):
 
 @pytest.fixture(scope='module')
 def test_client():
-    from ..src.main import app, init_db 
-    from ..src.models.database import db_session, base
+    from sellers_management.src.main import app, init_db 
+    from sellers_management.src.models.database import db_session, base
 
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -37,7 +37,7 @@ def test_client():
 
 @pytest.fixture(autouse=True)
 def cleanup(test_client):
-    from ..src.models.database import db_session, base
+    from sellers_management.src.models.database import db_session, base
     with test_client.application.app_context():
         yield
         db_session.remove()

@@ -1,10 +1,10 @@
 import unittest
 from flask import Flask
 from flask_jwt_extended import JWTManager, create_access_token
-from ..src.api.sellers import sellers
-from ..src.models.database import db_session
-from ..src.commands.create_sellers import CreateProducts
-from ..src.errors.errors import InvalidData
+from sellers_management.src.api.sellers import sellers
+from sellers_management.src.models.database import db_session
+from sellers_management.src.commands.create_sellers import CreateProducts
+from sellers_management.src.errors.errors import InvalidData
 
 class TestCreateProducts(unittest.TestCase):
 

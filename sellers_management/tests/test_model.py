@@ -1,4 +1,4 @@
-from ..src.models.model import Model
+from sellers_management.src.models.model import Model
 
 def test_base_model():
     model = Model()
