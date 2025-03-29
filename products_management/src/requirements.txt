@@ -19,3 +19,4 @@ openpyxl
 google-cloud-pubsub
 unittest2
 urllib3==1.26.15
+flask-cors

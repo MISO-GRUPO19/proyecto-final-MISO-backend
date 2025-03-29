@@ -6,6 +6,7 @@ from .errors.errors import ApiError
 import os
 from .models.database import init_db
 import uptrace
+from flask_cors import CORS
 
 # Inicializar Uptrace
 uptrace.configure_opentelemetry(
@@ -18,6 +19,7 @@ load_dotenv('./.env.development')
 APP_PORT = int(os.getenv("APP_PORT", default=5000))
 
 app = Flask(__name__)
+CORS(app)
 
 app.config["JWT_SECRET_KEY"] = "qwerty"  # Debe ser la misma clave secreta usada en el servicio de autenticación
 jwt = JWTManager(app)
