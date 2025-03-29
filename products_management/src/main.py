@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
+from flask_jwt_extended import JWTManager
 from .api.products import products
 from .errors.errors import ApiError
 import os
@@ -17,6 +18,10 @@ load_dotenv('./.env.development')
 APP_PORT = int(os.getenv("APP_PORT", default=5000))
 
 app = Flask(__name__)
+
+app.config["JWT_SECRET_KEY"] = "qwerty"  # Debe ser la misma clave secreta usada en el servicio de autenticación
+jwt = JWTManager(app)
+
 app.register_blueprint(products)
 
 init_db()

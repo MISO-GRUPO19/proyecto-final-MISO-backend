@@ -1,27 +1,76 @@
 from .base_command import BaseCommand
-from ..errors.errors import InvalidData
+from ..errors.errors import InvalidData, ERROR_MESSAGES
 from ..models.products import Products, Batch
 from ..models.database import db_session
 import uuid
+import re
 from datetime import datetime
 
 class CreateProducts(BaseCommand):
+    ALLOWED_CATEGORIES = ["Electronics", "Clothing", "Food"]
     def __init__(self, data):
         self.data = data
-    
-    def execute(self):
-        
-        if (self.data['name'] == '' or self.data['description'] == '' or self.data['price'] == '' or self.data['category'] == '' or self.data['weight'] == '' or self.data['barcode'] == '' or self.data['provider_id'] == '' or self.data['batch'] == '' or self.data['best_before'] == '' or self.data['quantity'] == ''):
-            raise InvalidData
 
+    def validate(self):
+        errors = []
+
+        name = self.data.get("name", "").strip()
+        if not (3 <= len(name) <= 100) or not re.match(r'^[\w\s\-.]+$', name):
+            errors.append(ERROR_MESSAGES["invalid_name"])
+
+        category = self.data.get("category", "")
+        if category not in self.ALLOWED_CATEGORIES:
+            errors.append(ERROR_MESSAGES["invalid_category"])
+
+        provider_id = self.data.get("provider_id", "")
+        try:
+            uuid.UUID(provider_id)
+        except ValueError:
+            errors.append(ERROR_MESSAGES["invalid_provider"])
+
+        weight = self.data.get("weight")
+        if isinstance(weight, str):  
+            weight = weight.replace(",", ".")
+        try:
+            weight = float(weight)
+            if weight <= 0:
+                errors.append(ERROR_MESSAGES["invalid_weight_less_than_zero"])
+        except ValueError:
+            errors.append(ERROR_MESSAGES["invalid_weight"])
+
+        price = self.data.get("price")
+        if isinstance(price, str):
+            price = price.replace(",", ".")
+        try:
+            price = float(price)
+        except ValueError:
+            errors.append(ERROR_MESSAGES["invalid_price"])
+
+        description = self.data.get("description", "").strip()
+        if not (3 <= len(description) <= 100) or not re.match(r'^[\w\s\-.]+$', description):
+            errors.append(ERROR_MESSAGES["invalid_description"])
+
+        best_before = self.data.get("best_before", "")
+        try:
+            best_before_date = datetime.fromisoformat(best_before)
+            if best_before_date < datetime.now():
+                errors.append(ERROR_MESSAGES["invalid_best_before"])
+        except ValueError:
+            errors.append(ERROR_MESSAGES["invalid_date_format"])
+
+        if errors:
+            raise InvalidData(errors)
+
+    def execute(self):
+        self.validate()
         try:
             with db_session.begin():
                 product = Products(
                     name=self.data['name'],
                     description=self.data['description'],
-                    price=self.data['price'],
+                    price=float(self.data['price']),
                     category=self.data['category'],
-                    weight=self.data['weight'],
+                    weight=float(self.data['weight']),
                     barcode=self.data['barcode'],
                     provider_id=uuid.UUID(self.data['provider_id'])
                 )
@@ -33,7 +82,7 @@ class CreateProducts(BaseCommand):
                 batch = Batch(
                     batch=self.data['batch'],
                     best_before=best_before,
-                    quantity=self.data['quantity'],
+                    quantity=int(self.data['quantity']),
                     product_id=product.id 
                 )
                 db_session.add(batch)
@@ -41,6 +90,6 @@ class CreateProducts(BaseCommand):
             return {'message': 'Producto creado exitosamente'}
         except Exception as e:
             db_session.rollback()
-            raise e
+            return {'error': 'Ocurrió un error al guardar el producto. Inténtelo de nuevo.'}
         finally:
             db_session.close()
