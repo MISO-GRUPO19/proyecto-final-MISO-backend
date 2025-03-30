@@ -1,4 +1,4 @@
-name: Deploy Cloud SQL PostgreSQL (Optimizado)
+name: Deploy Cloud SQL PostgreSQL
 
 on:
   workflow_dispatch:
@@ -6,8 +6,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -16,15 +15,11 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
-          token_format: 'access_token'
-          access_token_lifetime: '3600s'
 
-      - name: Setup gcloud with caching
+      - name: Set up gcloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: your-gcp-project-id
-          install_components: 'beta'
-          cache_components: true
 
       - name: Create Cloud SQL Instance and VPC in Parallel
         run: |
