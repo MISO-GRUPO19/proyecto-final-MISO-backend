@@ -39,7 +39,7 @@ class Sellers(Model, base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     identification = Column(String, nullable=False)
     name = Column(String, nullable=False)
-    country = Column(Enum(CountryEnum), nullable=False)
+    country = Column(Enum(CountryEnum), nullable=False, native_enum=False)
     address = Column(String, nullable=False)
     telephone = Column(String, nullable=False)
     email = Column(String, nullable=False)
