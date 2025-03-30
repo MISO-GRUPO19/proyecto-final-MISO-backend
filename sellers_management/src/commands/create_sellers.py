@@ -39,6 +39,7 @@ class CreateSellers(BaseCommand):
             raise InvalidData
 
         seller = Sellers(
+            identification=self.data['identification'],
             name=self.data['name'], 
             country=self.data['country'], 
             address=self.data['address'], 
