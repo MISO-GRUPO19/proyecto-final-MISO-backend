@@ -43,33 +43,9 @@ jobs:
           workflow: deploy-cloud-sql.yml
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Esperar a que el workflow de la base de datos finalice
-        run: |
-          WORKFLOW_NAME="deploy-cloud-sql.yml"
-          RUN_ID=""
-          echo "Buscando el último workflow ejecutado..."
-          
-          while [ -z "$RUN_ID" ]; do
-            RUN_ID=$(gh run list --workflow="$WORKFLOW_NAME" --branch=feature/experimento3 --json databaseId,status -q '.[0].databaseId')
-            sleep 5
-          done
-          
-          echo "Workflow encontrado: $RUN_ID"
-          
-          STATUS=""
-          while [ "$STATUS" != "completed" ]; do
-            STATUS=$(gh run view $RUN_ID --json status -q '.status')
-            echo "Estado actual: $STATUS"
-            if [ "$STATUS" != "completed" ]; then
-              sleep 10
-            fi
-          done
-          
-          echo "El workflow ha finalizado."
-        env:
-          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
-        
-        
+      - name: Wait for Deploy DB Workflow (if instance does not exist)
+        if: steps.check_cloudsql_instance.outputs.cloudsql_instance_exists == 'false'
+        run: sleep 720
 
       - name: Check for changes in orders-management
         id: check_orders_management
