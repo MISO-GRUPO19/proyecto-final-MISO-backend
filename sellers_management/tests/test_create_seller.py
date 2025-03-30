@@ -25,16 +25,17 @@ class TestCreateSellers(unittest.TestCase):
         with self.app.app_context():
             db_session.remove()
 
-    '''
+    
     def get_jwt_token(self):
         with self.app.app_context():
             access_token = create_access_token(identity='test_user')
             return access_token
-
-   '''
     
     def test_create_seller(self):
-        #Pendiente enviar token
+        token = self.get_jwt_token()
+        headers = {
+            'Authorization': f'Bearer {token}'
+        }
         with self.client:
             response = self.client.post('/sellers', json={
                 "identification": "1223467",
@@ -43,7 +44,7 @@ class TestCreateSellers(unittest.TestCase):
                 "address": "Calle 1 # 1 -1",
                 "telephone": "574949494",
                 "email": "test@test.com"
-            })
+            }, headers=headers)
             self.assertEqual(response.status_code, 201)
     
     def test_create_seller_invalid_data(self):

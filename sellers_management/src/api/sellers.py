@@ -1,10 +1,11 @@
 from flask import request, jsonify, Blueprint, Response
-#from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..commands.create_sellers import CreateSellers
 from ..errors.errors import InvalidData
 sellers = Blueprint('sellers', __name__)
 
 @sellers.route('/sellers', methods=['POST'])
+@jwt_required()
 def create_seller():
     data = request.get_json()
     try:
