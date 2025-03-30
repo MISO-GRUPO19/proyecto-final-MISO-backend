@@ -12,9 +12,9 @@ class CreateUsers(BaseCommand):
         required_fields = ['email', 'password', 'confirm_password', 'role']
         
         role_mapping = {
-            '1': 'Administrador',
-            '2': 'Vendedor',
-            '3': 'Cliente'
+            1: 'Administrador',
+            2: 'Vendedor',
+            3: 'Cliente'
         }
         
         if self.data['role'] in role_mapping:

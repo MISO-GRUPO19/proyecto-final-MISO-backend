@@ -11,9 +11,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 db = SQLAlchemy()
 
 class Role(enum.Enum):
-    Administrador = '1'
-    Vendedor = '2'
-    Cliente = '3'
+    Administrador = 1
+    Vendedor = 2
+    Cliente = 3
 
 class Users(Model, base):
     __tablename__ = 'users'
