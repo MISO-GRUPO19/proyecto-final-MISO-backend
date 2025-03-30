@@ -1,5 +1,5 @@
 import unittest
-from flask import Flask
+from flask import Flask, Response
 from flask_jwt_extended import JWTManager, create_access_token
 from sellers_management.src.api.sellers import sellers
 from sellers_management.src.models.database import db_session
@@ -48,6 +48,7 @@ class TestCreateSellers(unittest.TestCase):
             self.assertEqual(response.status_code, 201)
     
     def test_create_seller_invalid_data(self):
+        '''
         with self.client:
             response = self.client.post('/sellers', json={
                 "identification": "1223467",
@@ -57,7 +58,19 @@ class TestCreateSellers(unittest.TestCase):
                 "telephone": "574949494",
                 "email": "test@test.com"
             })
-            self.assertEqual(response.status_code, 400)
+            self.assertEqual(response.status_code, 400)'
+        '''
+        data = {
+                "identification": "1223467",
+                "name": "?¡$%&/",
+                "country": "Colombia",
+                "address": "Calle 1 # 1 -1",
+                "telephone": "574949494",
+                "email": "test@test.com"
+            }
+        response: Response = CreateSellers(data).execute()
+        self.assertEqual(response.status_code == 400)
+
         
     def test_ping(self):
         with self.client:
