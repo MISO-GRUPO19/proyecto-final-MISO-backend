@@ -65,11 +65,11 @@ class CreateSellers(BaseCommand):
         return True
     def check_country(self, country: str):
         return country in ALLOWED_COUNTRIES
-    def check_address(address: str):
+    def check_address(self, address: str):
         if len(address) < 10 or len(address) > 200:
             return False
         return True
-    def check_telephone(self, telephone: str) -> bool:
+    def check_telephone(self, telephone: str):
         if len(telephone) < 7 or len(telephone) > 15:
             return False
         if not re.match(r'^\d+$', telephone):
