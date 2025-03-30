@@ -43,9 +43,37 @@ jobs:
           workflow: deploy-cloud-sql.yml
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Wait for Deploy DB Workflow (if instance does not exist)
+      - name: Wait for Deploy DB Workflow to Finish
         if: steps.check_cloudsql_instance.outputs.cloudsql_instance_exists == 'false'
-        run: sleep 1140
+        run: |
+          echo "Esperando a que el workflow de la base de datos finalice..."
+          WORKFLOW_ID=$(gh run list --workflow="deploy-cloud-sql.yml" --json database --jq '.[0].database' --repo $GITHUB_REPOSITORY)
+          
+          if [ -z "$WORKFLOW_ID" ]; then
+            echo "No se encontró ningún workflow en ejecución para deploy-cloud-sql.yml."
+            exit 1
+          fi
+          
+          while true; do
+            STATUS=$(gh run view "$WORKFLOW_ID" --json status --jq '.status' --repo $GITHUB_REPOSITORY)
+            
+            if [ "$STATUS" == "completed" ]; then
+              CONCLUSION=$(gh run view "$WORKFLOW_ID" --json conclusion --jq '.conclusion' --repo $GITHUB_REPOSITORY)
+              if [ "$CONCLUSION" == "success" ]; then
+                echo "El workflow de la base de datos terminó exitosamente."
+                exit 0
+              else
+                echo "El workflow de la base de datos falló con estado: $CONCLUSION."
+                exit 1
+              fi
+            fi
+            
+            echo "Aún en ejecución... esperando 50 segundos."
+            sleep 50
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
 
       - name: Check for changes in orders-management
         id: check_orders_management

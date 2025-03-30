@@ -1,12 +1,13 @@
-name: Deploy Cloud SQL PostgreSQL
+name: Deploy Cloud SQL PostgreSQL (Optimizado)
 
 on:
-  workflow_dispatch: # Permite la ejecución manual
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 20
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -15,16 +16,30 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
+          token_format: 'access_token'
+          access_token_lifetime: '3600s'
 
-      - name: Set up gcloud SDK
+      - name: Setup gcloud with caching
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: your-gcp-project-id
+          install_components: 'beta'
+          cache_components: true
 
-      - name: Create Cloud SQL PostgreSQL instance (if not exists)
+      - name: Create Cloud SQL Instance and VPC in Parallel
         run: |
-          INSTANCE_EXISTS=$(gcloud sql instances list --filter="name=postgres" --format="value(name)")
+          set -e  # Habilitar fallo inmediato si hay errores
+
+          # Verificar si los recursos ya existen
+          INSTANCE_EXISTS=$(gcloud sql instances list --filter="name=postgres" --format="value(name)") &
+          VPC_EXISTS=$(gcloud compute networks vpc-access connectors list --region=us-central1 --filter="name=orders-vpc-connector" --format="value(name)") &
+          wait
+
+          # Crear Cloud SQL y VPC en paralelo
+          ERRORS=()  # Array para almacenar errores
+
           if [ -z "$INSTANCE_EXISTS" ]; then
+            echo "Creating Cloud SQL instance..."
             gcloud sql instances create postgres \
               --database-version=POSTGRES_16 \
               --tier=db-f1-micro \
@@ -35,74 +50,63 @@ jobs:
               --network=default \
               --authorized-networks=0.0.0.0/0 \
               --edition=enterprise \
-              --availability-type=zonal
+              --availability-type=zonal &
+            SQL_PID=$!
           else
-            echo "Instance 'postgres' already exists, skipping creation."
-          fi
-      - name: Create Database (if not exists) Orders
-        run: |
-          DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('orders')" --format="value(name)")
-          if [ -z "$DB_EXISTS" ]; then
-            gcloud sql databases create orders --instance=postgres
-          else
-            echo "Database 'orders' already exists, skipping creation."
+            echo "Cloud SQL instance already exists."
           fi
 
-      - name: Create Database (if not exists) Products
-        run: |
-            DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('products')" --format="value(name)")
-            if [ -z "$DB_EXISTS" ]; then
-              gcloud sql databases create products --instance=postgres
-            else
-              echo "Database 'products' already exists, skipping creation."
-            fi
-
-      - name: Create Database (if not exists) Users
-        run: |
-            DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('users')" --format="value(name)")
-            if [ -z "$DB_EXISTS" ]; then
-              gcloud sql databases create users --instance=postgres
-            else
-              echo "Database 'users' already exists, skipping creation."
-            fi
-
-      - name: Create Database (if not exists) Manufacturers
-        run: |
-            DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('manufacturers')" --format="value(name)")
-            if [ -z "$DB_EXISTS" ]; then
-              gcloud sql databases create manufacturers --instance=postgres
-            else
-              echo "Database 'manufacturers' already exists, skipping creation."
-            fi
-            
-      - name: Create Database (if not exists) Customers
-        run: |
-            DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('customers')" --format="value(name)")
-            if [ -z "$DB_EXISTS" ]; then
-              gcloud sql databases create customers --instance=postgres
-            else
-              echo "Database 'customers' already exists, skipping creation."
-            fi
-
-      - name: Create Database (if not exists) AI
-        run: |
-            DB_EXISTS=$(gcloud sql databases list --instance=postgres --filter="name=('ai')" --format="value(name)")
-            if [ -z "$DB_EXISTS" ]; then
-              gcloud sql databases create ai --instance=postgres
-            else
-              echo "Database 'ai' already exists, skipping creation."
-            fi
-
-      - name: Create VPC Access Connector
-        id: create_vpc_connector
-        run: |
-          # Verifica si el VPC Connector ya existe
-          if ! gcloud compute networks vpc-access connectors describe orders-vpc-connector --region=us-central1 > /dev/null 2>&1; then
-            echo "Creando VPC Connector..."
+          if [ -z "$VPC_EXISTS" ]; then
+            echo "Creating VPC Connector..."
             gcloud compute networks vpc-access connectors create orders-vpc-connector \
               --region=us-central1 \
               --network=default \
-              --range=10.8.0.0/28
+              --range=10.8.0.0/28 &
+            VPC_PID=$!
           else
-            echo "El VPC Connector ya existe. Saltando creación."
+            echo "VPC Connector already exists."
+          fi
+
+          # Esperar finalización y capturar errores
+          wait $SQL_PID || ERRORS+=("Cloud SQL instance creation failed")
+          wait $VPC_PID || ERRORS+=("VPC Connector creation failed")
+
+          # Mostrar errores si hubo
+          if [ ${#ERRORS[@]} -ne 0 ]; then
+            printf "%s\n" "${ERRORS[@]}"
+            exit 1
+          fi
+
+          # Confirmar que la instancia Cloud SQL está lista antes de continuar
+          echo "Waiting for Cloud SQL instance to be ready..."
+          gcloud sql instances describe postgres --format="value(state)" | grep -q "RUNNABLE"
+
+      - name: Create Databases in Parallel
+        run: |
+          set -e  # Habilitar fallo inmediato si hay errores
+
+          EXISTING_DBS=$(gcloud sql databases list --instance=postgres --format="value(name)")
+          DATABASES=("orders" "products" "users" "manufacturers" "customers" "ai")
+
+          ERRORS=()  # Array para almacenar errores
+
+          for DB in "${DATABASES[@]}"; do
+            if echo "$EXISTING_DBS" | grep -qw "$DB"; then
+              echo "Database '$DB' exists, skipping."
+            else
+              echo "Creating database '$DB'..."
+              gcloud sql databases create "$DB" --instance=postgres --async &
+              PIDS+=($!)
+            fi
+          done
+
+          # Esperar finalización y capturar errores
+          for PID in "${PIDS[@]}"; do
+            wait $PID || ERRORS+=("Database creation failed")
+          done
+
+          # Mostrar errores si hubo
+          if [ ${#ERRORS[@]} -ne 0 ]; then
+            printf "%s\n" "${ERRORS[@]}"
+            exit 1
           fi
