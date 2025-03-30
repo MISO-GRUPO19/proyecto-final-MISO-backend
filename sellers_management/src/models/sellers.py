@@ -8,7 +8,7 @@ import uuid
 
 db = SQLAlchemy()
 
-class CountryEnum(Model, base):
+class CountryEnum(Enum):
     ARGENTINA = "Argentina"
     BOLIVIA = "Bolivia"
     BRAZIL = "Brazil"
