@@ -1,6 +1,6 @@
 from .base_command import BaseCommand
 from ..errors.errors import InvalidData
-from ..models.sellers import Sellers, CountryEnum
+from ..models.sellers import Sellers
 from ..models.database import db_session
 from flask import jsonify
 import re
