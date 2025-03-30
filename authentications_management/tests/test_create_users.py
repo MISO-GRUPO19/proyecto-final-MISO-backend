@@ -22,7 +22,7 @@ class TestCreateUsers(TestCase):
                 'email': 'test@example.com',
                 'password': 'Test1234!',
                 'confirm_password': 'Test1234!',
-                'role': 'Administrador'
+                'role': '1'
             })
             self.assertEqual(response.status_code, 201)
             self.assertIn('Usuario creado exitosamente', response.json['message'])
