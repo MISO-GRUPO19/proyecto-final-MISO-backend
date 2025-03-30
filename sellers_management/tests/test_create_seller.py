@@ -38,7 +38,7 @@ class TestCreateSellers(unittest.TestCase):
         with self.client:
             response = self.client.post('/sellers', json={
                 "identification": "1223467",
-                "name": "Seller 1",
+                "name": "Seller Pepito",
                 "country": "Colombia",
                 "address": "Calle 1 # 1 -1",
                 "telephone": "574949494",
