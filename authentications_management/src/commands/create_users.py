@@ -10,6 +10,16 @@ class CreateUsers(BaseCommand):
 
     def execute(self):
         required_fields = ['email', 'password', 'confirm_password', 'role']
+        
+        role_mapping = {
+            1: 'Administrador',
+            2: 'Vendedor',
+            3: 'Cliente'
+        }
+        
+        if self.data['role'] in role_mapping:
+            self.data['role'] = role_mapping[self.data['role']]
+
         for field in required_fields:
             if field not in self.data or not self.data[field]:
                 raise InvalidData
