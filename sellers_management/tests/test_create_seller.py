@@ -30,30 +30,22 @@ class TestCreateSellers(unittest.TestCase):
         with self.app.app_context():
             access_token = create_access_token(identity='test_user')
             return access_token
-    
-    def test_create_product(self):
-        token = self.get_jwt_token()
-        headers = {
-            'Authorization': f'Bearer {token}'
-        }
-        with self.client:
-            response = self.client.post('/products', json={
-                'name': 'Product Name',
-                'description': 'Product Description',
-                'price': 19.99,
-                'category': 'Electronics',
-                'weight': 1.5,
-                'barcode': '1234567890123',
-                'provider_id': '123e4567-e89b-12d3-a456-426614174000',
-                'batch': 'Batch001',
-                'best_before': '2025-12-31T23:59:59',
-                'quantity': 100
-            }, headers=headers)
-            print(response.json)
-            self.assertEqual(response.status_code, 201)
-            self.assertIn('Producto creado exitosamente', response.json['message'])
 
    '''
+    
+    def test_create_seller(self):
+        #Pendiente enviar token
+        with self.client:
+            response = self.client.post('/sellers', json={
+                "identification": "1223467",
+                "name": "Product Name",
+                "country": "Colombia",
+                "address": "Calle 1 # 1 -1",
+                "telephone": "574949494",
+                "email": "test@test.com"
+            })
+            print(response.json)
+            self.assertEqual(response.status_code, 201)
         
     def test_ping(self):
         with self.client:
