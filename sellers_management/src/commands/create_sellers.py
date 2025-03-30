@@ -1,5 +1,5 @@
 from .base_command import BaseCommand
-from ..errors.errors import InvalidData, ERROR_MESSAGES
+from ..errors.errors import *
 from ..models.sellers import Sellers
 from ..models.database import db_session
 from flask import jsonify
@@ -20,23 +20,23 @@ class CreateSellers(BaseCommand):
             raise InvalidData
         
         if self.check_identification(self.data['identification']) == False:
-            raise InvalidData
+            raise InvalidIdentification
         
         if self.check_name(self.data['name']) == False:
-            raise InvalidData
+            raise InvalidName
 
         if not self.check_country(self.data['country']):
-            raise InvalidData
+            raise InvalidCountry
         
         if not self.check_address(self.data['address']):
-            raise InvalidData
+            raise InvalidAddress
         
         if not self.check_telephone(self.data['telephone']):
-            raise InvalidData
+            raise InvalidTelephone
 
 
         if not self.check_email(self.data['email']):
-            raise InvalidData
+            raise InvalidEmail
 
         seller = Sellers(
             identification=self.data['identification'],
