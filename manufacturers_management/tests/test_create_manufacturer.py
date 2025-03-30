@@ -53,7 +53,7 @@ class TestCreateManufacturers(unittest.TestCase):
                 "contact": "Pepito Perez",
                 "telephone": "574949494",
                 "email": "test@test.com"
-        },
+        }
         with self.assertRaises(InvalidData):  
             CreateManufacturers(data).execute()
     
@@ -64,7 +64,7 @@ class TestCreateManufacturers(unittest.TestCase):
                 "contact": "Pepito Perez",
                 "telephone": "574949494",
                 "email": "test@test.com"
-        },
+        }
         with self.assertRaises(InvalidName):  
             CreateManufacturers(data).execute()
     
@@ -75,7 +75,7 @@ class TestCreateManufacturers(unittest.TestCase):
                 "contact": "Pepito Perez",
                 "telephone": "574949494",
                 "email": "test@test.com"
-        },
+        }
         with self.assertRaises(InvalidCountry):  
             CreateManufacturers(data).execute()
     
@@ -86,7 +86,7 @@ class TestCreateManufacturers(unittest.TestCase):
                 "contact": "?¡?&%&%",
                 "telephone": "574949494",
                 "email": "test@test.com"
-        },
+        }
         with self.assertRaises(InvalidContact):  
             CreateManufacturers(data).execute()
     
@@ -97,7 +97,7 @@ class TestCreateManufacturers(unittest.TestCase):
                 "contact": "Pepito Perez",
                 "telephone": "hola",
                 "email": "test@test.com"
-        },
+        }
         with self.assertRaises(InvalidTelephone):  
             CreateManufacturers(data).execute()
     
@@ -108,7 +108,7 @@ class TestCreateManufacturers(unittest.TestCase):
                 "contact": "Pepito Perez",
                 "telephone": "574949494",
                 "email": "testtest.com"
-        },
+        }
         with self.assertRaises(InvalidEmail):  
             CreateManufacturers(data).execute()
     
