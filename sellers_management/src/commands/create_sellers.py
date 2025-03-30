@@ -19,10 +19,10 @@ class CreateSellers(BaseCommand):
         if (self.data['name'] == '' or self.data['country'] == '' or self.data['identification'] == '' or self.data['address'] == '' or self.data['telephone'] == '' or self.data['email'] == '' ):
             raise InvalidData
         
-        if self.check_identification(self['identification']) == False:
+        if self.check_identification(self.data['identification']) == False:
             raise InvalidData
         
-        if self.check_name(self['name']) == False:
+        if self.check_name(self.data['name']) == False:
             raise InvalidData
 
         if not self.check_country(self.data['country']):
