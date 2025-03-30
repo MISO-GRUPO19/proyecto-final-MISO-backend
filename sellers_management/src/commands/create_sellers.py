@@ -1,5 +1,5 @@
 from .base_command import BaseCommand
-from ..errors.errors import InvalidData
+from ..errors.errors import InvalidData, ERROR_MESSAGES
 from ..models.sellers import Sellers
 from ..models.database import db_session
 from flask import jsonify
