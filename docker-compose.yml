@@ -253,7 +253,7 @@ services:
   sellers_service:
     container_name: sellers_service
     build:
-      context: ./sellers-management
+      context: ./sellers_management
       dockerfile: Dockerfile
     image: sellers_service:1.0
     environment:
