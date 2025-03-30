@@ -5,6 +5,12 @@ from ..models.database import db_session
 from flask import jsonify
 import re
 
+ALLOWED_COUNTRIES = [
+    "Argentina", "Bolivia", "Brazil", "Canada", "Chile", "Colombia", "Costa Rica",
+    "Cuba", "Dominican Republic", "Ecuador", "El Salvador", "Guatemala", "Haiti",
+    "Honduras", "Jamaica", "Mexico", "Nicaragua", "Panama", "Paraguay", "Peru",
+    "United States", "Uruguay", "Venezuela"
+]
 class CreateSellers(BaseCommand):
     def __init__(self, data):
         self.data = data
@@ -58,11 +64,7 @@ class CreateSellers(BaseCommand):
             return False
         return True
     def check_country(country: str):
-        try:
-            CountryEnum[country.upper().replace(" ", "_")]
-            return True
-        except KeyError:
-            return False
+        return country in ALLOWED_COUNTRIES
     def check_address(address: str):
         if len(address) < 10 or len(address) > 200:
             return False
