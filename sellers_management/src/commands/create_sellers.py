@@ -51,19 +51,19 @@ class CreateSellers(BaseCommand):
 
         return {'message': 'Seller has been created successfully'}
     
-    def check_identification(identification: str):
+    def check_identification(self, identification: str):
         if len(identification) < 6 or len(identification) > 20:
             return False
         if not re.match(r'^[a-zA-Z0-9]+$', identification):
             return False
         return True
-    def check_name(name: str):
+    def check_name(self, name: str):
         if len(name) < 3 or len(name) > 100:
             return False
         if not re.match(r'^[a-zA-Z\s]+$', name):
             return False
         return True
-    def check_country(country: str):
+    def check_country(self, country: str):
         return country in ALLOWED_COUNTRIES
     def check_address(address: str):
         if len(address) < 10 or len(address) > 200:
@@ -75,7 +75,7 @@ class CreateSellers(BaseCommand):
         if not re.match(r'^\d+$', telephone):
             return False
         return True
-    def check_email(email:str):
+    def check_email(self, email:str):
         if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
             return False
         return True
