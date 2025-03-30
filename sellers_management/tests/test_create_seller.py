@@ -68,8 +68,8 @@ class TestCreateSellers(unittest.TestCase):
                 "telephone": "574949494",
                 "email": "test@test.com"
             }
-        response: Response = CreateSellers(data).execute()
-        self.assertEqual(response.status_code == 400)
+        with self.assertRaises(InvalidData):  
+            CreateSellers(data).execute()
 
         
     def test_ping(self):
