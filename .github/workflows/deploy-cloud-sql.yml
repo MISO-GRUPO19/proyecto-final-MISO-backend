@@ -80,28 +80,23 @@ jobs:
         run: |
           set -e  # Habilitar fallo inmediato si hay errores
 
-          EXISTING_DBS=$(gcloud sql databases list --instance=postgres --format="value(name)")
+          PROJECT_ID="proyecto-final-451719"
+          INSTANCE_NAME="postgres"
           DATABASES=("orders" "products" "users" "manufacturers" "customers" "ai")
 
-          ERRORS=()  # Array para almacenar errores
-
           for DB in "${DATABASES[@]}"; do
-            if echo "$EXISTING_DBS" | grep -qw "$DB"; then
-              echo "Database '$DB' exists, skipping."
-            else
-              echo "Creating database '$DB'..."
-              gcloud sql databases create "$DB" --instance=postgres --async &
-              PIDS+=($!)
-            fi
-          done
+            echo "Creando base de datos '$DB'..."
+            
+            while true; do
+              STATUS=$(gcloud sql operations list --instance="$INSTANCE_NAME" --project="$PROJECT_ID" --filter="status!=DONE" --format="value(name)")
 
-          # Esperar finalización y capturar errores
-          for PID in "${PIDS[@]}"; do
-            wait $PID || ERRORS+=("Database creation failed")
+              if [ -z "$STATUS" ]; then
+                gcloud sql databases create "$DB" --instance="$INSTANCE_NAME" --project="$PROJECT_ID"
+                echo "Base de datos '$DB' creada."
+                break
+              else
+                echo "Otra operación está en curso, esperando..."
+                sleep 10  # Esperar antes de volver a intentar
+              fi
+            done
           done
-
-          # Mostrar errores si hubo
-          if [ ${#ERRORS[@]} -ne 0 ]; then
-            printf "%s\n" "${ERRORS[@]}"
-            exit 1
-          fi
