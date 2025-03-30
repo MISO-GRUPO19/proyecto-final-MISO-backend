@@ -1,4 +1,4 @@
-name: Delete Resources (Optimized & Fault-Tolerant)
+name: Delete Resources
 
 on:
   workflow_dispatch:
