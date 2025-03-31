@@ -1,14 +1,14 @@
 import logging
 from .base_command import BaseCommand
-from ..errors.errors import NotFile, InvalidFileFormat, ValidationError, ERROR_MESSAGES
-from ..models.products import Products, Batch, Category, Provider
+from ..errors.errors import NotFile, InvalidFileFormat, ERROR_MESSAGES
+from ..models.products import Category, Provider
 from ..models.database import db_session
 from ..pubsub.publisher import publish_message
 import uuid
 import pandas as pd
 
 class CreateMassiveProducts(BaseCommand):
-    REQUIRED_COLUMNS = {'name', 'description', 'price', 'category', 'weight', 'barcode', 'provider_id', 'batch', 'best_before', 'quantity'}
+    REQUIRED_COLUMNS = {'name', 'description', 'price', 'category', 'weight', 'barcode', 'provider', 'batch', 'best_before', 'quantity'}
     
     def __init__(self, file):
         self.file = file
@@ -39,12 +39,12 @@ class CreateMassiveProducts(BaseCommand):
             
             # Validar proveedor
             try:
-                provider_id = uuid.UUID(row['provider_id'])
-                provider = db_session.query(Provider).filter_by(id=provider_id).first()
+                provider = row['provider']
+                provider = db_session.query(Provider).filter_by(name=provider).first()
                 if not provider:
                     error_messages.append(ERROR_MESSAGES["invalid_provider"])
             except ValueError:
-                error_messages.append(ERROR_MESSAGES["invalid_provider_id"])
+                error_messages.append(ERROR_MESSAGES["invalid_provider"])
             
             if error_messages:
                 errors.append({"fila": index + 1, "errores": error_messages})

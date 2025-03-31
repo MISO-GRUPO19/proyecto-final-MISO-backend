@@ -19,12 +19,11 @@ class TestCreateMassiveProducts(unittest.TestCase):
 
         simulated_db = {
             "categories": {"Electronic": MagicMock(spec=Category)},
-            "providers": {}
+            "providers": {
+                "Provider1": MagicMock(spec=Provider),  # Agregar proveedores válidos
+                "Provider2": MagicMock(spec=Provider)
+            }        
         }
-
-        valid_provider = MagicMock(spec=Provider)
-        valid_provider.id = str(uuid.uuid4())
-        simulated_db["providers"][valid_provider.id] = valid_provider
 
         mock_df = pd.DataFrame({
             'name': ['Valid', 'Valid Product'],
@@ -33,7 +32,7 @@ class TestCreateMassiveProducts(unittest.TestCase):
             'category': ['Electronic', 'Electronic'],
             'weight': [1.0, 2.0],
             'barcode': ['1234567890123', '1234567890124'],
-            'provider_id': [valid_provider.id, valid_provider.id],
+            'provider': ['Provider1', 'Provider2'],
             'batch': ['Batch001', 'Batch002'],
             'best_before': [pd.Timestamp('2025-12-31'), pd.Timestamp('2025-10-31')],
             'quantity': [100, 200]
@@ -44,7 +43,7 @@ class TestCreateMassiveProducts(unittest.TestCase):
             if model == Category:
                 return MagicMock(filter_by=lambda name: MagicMock(first=lambda: simulated_db["categories"].get(name, None)))
             if model == Provider:
-                return MagicMock(filter_by=lambda id: MagicMock(first=lambda: simulated_db["providers"].get(str(id), None)))
+                return MagicMock(filter_by=lambda **kwargs: MagicMock(first=lambda: simulated_db["providers"].get(kwargs.get("name"), None)))
             return MagicMock()
 
         mock_db_session.query.side_effect = query_side_effect
@@ -76,7 +75,7 @@ class TestCreateMassiveProducts(unittest.TestCase):
             'category': ['InvalidCategory', 'InvalidCategory'],
             'weight': [1.0, 2.0],
             'barcode': ['1234567890123', '1234567890124'],
-            'provider_id': ['invalid-uuid', 'invalid-uuid'],
+            'provider': ['invalid-uuid', 'invalid-uuid'],
             'batch': ['Batch001', 'Batch002'],
             'best_before': [pd.Timestamp('2025-12-31'), pd.Timestamp('2025-10-31')],
             'quantity': [100, 200]
