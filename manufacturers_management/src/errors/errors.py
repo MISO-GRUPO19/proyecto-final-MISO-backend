@@ -32,5 +32,5 @@ class InvalidEmail(ApiError):
     
 class NotExistingManufacturer(ApiError):
     code = 404
-    description = "Proveedor no encontrado"
+    description = "Manufacturer not found"
     
