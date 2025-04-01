@@ -1,7 +1,7 @@
 name: Delete Resources
 
 on:
-  workflow_dispatch: # Permite la ejecución manual
+  workflow_dispatch:
 
 jobs:
   delete:
@@ -18,66 +18,57 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Delete Cloud SQL Instance
+      - name: Delete Cloud Run Services in Parallel
         run: |
-          gcloud sql instances delete postgres --quiet
+          SERVICES=(
+            "orders-management-service"
+            "products-management-service"
+            "authentications-management-service"
+            "manufacturers-management-service"
+            "customers-management-service"
+            "ai-services"
+            "nginx-service"
+          )
 
-      - name: Delete Cloud Run Service (Orders Management)
-        run: |
-          gcloud run services delete orders-management-service --region=us-central1 --platform=managed --quiet
+          for SERVICE in "${SERVICES[@]}"; do
+            echo "Deleting Cloud Run service: $SERVICE"
+            if ! gcloud run services delete "$SERVICE" --region=us-central1 --platform=managed --quiet; then
+              echo "::error:: Failed to delete $SERVICE"
+            fi &
+          done
 
-      - name: Delete Cloud Run Service (Products Management)
-        run: |
-          gcloud run services delete products-management-service --region=us-central1 --platform=managed --quiet
+          wait
 
-      - name: Delete Cloud Run Service (Authentications Management)
+      - name: Delete Docker Images in Parallel
         run: |
-          gcloud run services delete authentications-management-service --region=us-central1 --platform=managed --quiet
+          IMAGES=(
+            "orders-management-image"
+            "products_management-image"
+            "authentications_management-image"
+            "manufacturers_management-image"
+            "customers-management-image"
+            "ai-services-image"
+            "nginx-image"
+          )
 
-      - name: Delete Cloud Run Service (Manufacturers Management)
-        run: |
-          gcloud run services delete manufacturers-management-service --region=us-central1 --platform=managed --quiet
+          for IMAGE in "${IMAGES[@]}"; do
+            echo "Deleting Docker image: $IMAGE"
+            if ! gcloud artifacts docker images delete "us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/$IMAGE:latest" --quiet; then
+              echo "::error:: Failed to delete $IMAGE"
+            fi &
+          done
 
-      - name: Delete Cloud Run Service (Customers Management)
-        run: |
-          gcloud run services delete customers-management-service --region=us-central1 --platform=managed --quiet
+          wait
 
-      - name: Delete Cloud Run Service (AI Services)
+      - name: Delete Cloud SQL Instance and VPC in Parallel
         run: |
-          gcloud run services delete ai-services --region=us-central1 --platform=managed --quiet
+          echo "Deleting Cloud SQL instance..."
+          gcloud sql instances delete postgres --quiet --async || echo "::error:: Failed to delete Cloud SQL" &
+          SQL_PID=$!
 
-      - name: Delete Cloud Run Service (NGINX)
-        run: |
-          gcloud run services delete nginx-service --region=us-central1 --platform=managed --quiet
+          echo "Deleting VPC Access Connector..."
+          gcloud compute networks vpc-access connectors delete orders-vpc-connector --region=us-central1 --quiet --async || echo "::error:: Failed to delete VPC Connector" &
+          VPC_PID=$!
 
-      - name: Delete Docker Image (Orders Management)
-        run: |
-          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest --quiet
-
-      - name: Delete Docker Image (Products Management)
-        run: |
-          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image:latest --quiet
-
-      - name: Delete Docker Image (Authentications Management)
-        run: |
-          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/authentications_management-image:latest --quiet
-      
-      - name: Delete Docker Image (Manufacturers Management)
-        run: |
-          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/manufacturers-management-image:latest --quiet
-      
-      - name: Delete Docker Image (Customers Management)
-        run: |
-          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers-management-image:latest --quiet
-      
-      - name: Delete Docker Image (AI Services)
-        run: |
-          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image:latest --quiet
-          
-      - name: Delete Docker Image (NGINX)
-        run: |
-          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/nginx-image:latest --quiet
-
-      - name: Delete VPC Access Connector (Orders Management)
-        run: |
-          gcloud compute networks vpc-access connectors delete orders-vpc-connector --region=us-central1 --quiet
+          wait $SQL_PID
+          wait $VPC_PID
