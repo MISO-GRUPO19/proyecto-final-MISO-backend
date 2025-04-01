@@ -1,4 +1,7 @@
 import logging
+
+from dotenv import load_dotenv
+import requests
 from .base_command import BaseCommand
 from ..errors.errors import NotFile, InvalidFileFormat, ERROR_MESSAGES
 from ..models.products import Category, Provider
@@ -6,6 +9,13 @@ from ..models.database import db_session
 from ..pubsub.publisher import publish_message
 import uuid
 import pandas as pd
+import os
+
+load_dotenv()
+
+load_dotenv('./.env.development')
+
+MANUFACTURERS = os.getenv("MANUFACTURERS")
 
 class CreateMassiveProducts(BaseCommand):
     REQUIRED_COLUMNS = {'name', 'description', 'price', 'category', 'weight', 'barcode', 'provider', 'batch', 'best_before', 'quantity'}
@@ -40,8 +50,9 @@ class CreateMassiveProducts(BaseCommand):
             # Validar proveedor
             try:
                 provider = row['provider']
-                provider = db_session.query(Provider).filter_by(name=provider).first()
-                if not provider:
+                                
+                response = requests.get(f'{MANUFACTURERS}/manufacturers/{provider}')
+                if response.status_code != 200:
                     error_messages.append(ERROR_MESSAGES["invalid_provider"])
             except ValueError:
                 error_messages.append(ERROR_MESSAGES["invalid_provider"])
