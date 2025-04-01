@@ -19,3 +19,20 @@ class GetManufacturer:
                 "telephone": manufacturer.telephone,
                 "email": manufacturer.email
             }), 200
+            
+class GetManufacturerById:
+    def __init__(self, manufacturer_id: int):
+        self.manufacturer_id = manufacturer_id
+    
+    def execute(self):
+        with db_session() as session:
+            manufacturer = session.query(Manufacturers).filter(Manufacturers.id == self.manufacturer_id).first()
+            if not manufacturer:
+                raise NotExistingManufacturer
+            return jsonify({
+                "name": manufacturer.name,
+                "country": manufacturer.country,
+                "contact": manufacturer.contact,
+                "telephone": manufacturer.telephone,
+                "email": manufacturer.email
+            }), 200

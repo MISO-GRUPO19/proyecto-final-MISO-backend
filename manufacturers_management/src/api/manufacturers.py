@@ -1,6 +1,6 @@
 from flask import request, jsonify, Blueprint, Response
 
-from ..queries.get_manufacturers import GetManufacturer
+from ..queries.get_manufacturers import GetManufacturer, GetManufacturerById
 from ..commands.create_manufacturers import CreateManufacturers
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..errors.errors import *
@@ -27,9 +27,19 @@ def create_manufacturers():
     except InvalidEmail as e:
         return jsonify({"error": e.description}), 400
 
-@manufacturers.route('/manufacturers/<string:manufacturer_name>', methods=['GET'])
+@manufacturers.route('/manufacturers/<uuid:manufacturer_id>', methods=['GET'])
 @jwt_required()
-def get_manufacturer(manufacturer_name):
+def get_manufacturer_by_id(manufacturer_id):
+    result = GetManufacturerById(manufacturer_id).execute()
+    return result
+
+@manufacturers.route('/manufacturers', methods=['GET'])
+@jwt_required()
+def search_manufacturer():
+    manufacturer_name = request.args.get('name')
+    if not manufacturer_name:
+        return jsonify({"error": "Manufacturer name is required"}), 400
+
     result = GetManufacturer(manufacturer_name).execute()
     return result
 
