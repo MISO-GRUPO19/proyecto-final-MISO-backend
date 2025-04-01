@@ -1,6 +1,6 @@
 from flask import request, jsonify, Blueprint, Response
 
-from ..queries.get_manufacturers import GetManufacturer, GetManufacturerById
+from ..queries.get_manufacturers import GetManufacturer, GetManufacturerById, GetAllManufacturers
 from ..commands.create_manufacturers import CreateManufacturers
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..errors.errors import *
@@ -35,13 +35,16 @@ def get_manufacturer_by_id(manufacturer_id):
 
 @manufacturers.route('/manufacturers', methods=['GET'])
 @jwt_required()
-def search_manufacturer():
+def get_manufacturers():
     manufacturer_name = request.args.get('name')
-    if not manufacturer_name:
-        return jsonify({"error": "Manufacturer name is required"}), 400
-
-    result = GetManufacturer(manufacturer_name).execute()
+    
+    if manufacturer_name:
+        result = GetManufacturer(manufacturer_name).execute()
+    else:
+        result = GetAllManufacturers().execute()
+    
     return result
+
 
 @manufacturers.route('/manufacturers/ping', methods=['GET'])
 def ping():

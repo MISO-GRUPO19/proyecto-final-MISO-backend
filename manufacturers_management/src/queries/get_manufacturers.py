@@ -36,3 +36,21 @@ class GetManufacturerById:
                 "telephone": manufacturer.telephone,
                 "email": manufacturer.email
             }), 200
+            
+class GetAllManufacturers:
+    def __init__(self):
+        pass
+    def execute(self):
+        with db_session() as session:
+            manufacturers = session.query(Manufacturers).all()
+            result = []
+            for manufacturer in manufacturers:
+                result.append({
+                    "id": manufacturer.id,
+                    "name": manufacturer.name,
+                    "country": manufacturer.country,
+                    "contact": manufacturer.contact,
+                    "telephone": manufacturer.telephone,
+                    "email": manufacturer.email
+                })
+            return jsonify(result), 200
