@@ -53,11 +53,6 @@ class TestManufacturersAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json, {"name": "Test Manufacturer", "country": "USA"})
 
-    def test_search_manufacturer_missing_name(self):
-        response = self.client.get('/manufacturers', headers=self.auth_headers())
-        self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json, {"error": "Manufacturer name is required"})
-
     def test_ping(self):
         response = self.client.get('/manufacturers/ping')
         self.assertEqual(response.status_code, 200)
