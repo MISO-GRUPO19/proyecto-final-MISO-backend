@@ -29,3 +29,8 @@ class InvalidTelephone(ApiError):
 class InvalidEmail(ApiError):
     code = 400
     description = "Invalid email, it should have email structure."
+    
+class NotExistingManufacturer(ApiError):
+    code = 404
+    description = "Manufacturer not found"
+    
