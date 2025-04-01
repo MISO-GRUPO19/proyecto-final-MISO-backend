@@ -13,15 +13,16 @@ import os
 
 load_dotenv()
 
-load_dotenv('./.env.development')
+load_dotenv('../.env.development')
 
-MANUFACTURERS = os.getenv("MANUFACTURERS")
+MANUFACTURERS = os.getenv("MANUFACTURERS", "http://localhost:8080")
 
 class CreateMassiveProducts(BaseCommand):
     REQUIRED_COLUMNS = {'name', 'description', 'price', 'category', 'weight', 'barcode', 'provider', 'batch', 'best_before', 'quantity'}
     
-    def __init__(self, file):
+    def __init__(self, file, auth_token):
         self.file = file
+        self.auth_token = auth_token
     
     def validate_data(self, df):
         errors = []
@@ -50,10 +51,13 @@ class CreateMassiveProducts(BaseCommand):
             # Validar proveedor
             try:
                 provider = row['provider']
-                                
-                response = requests.get(f'{MANUFACTURERS}/manufacturers/{provider}')
+                headers = {
+                    "Authorization": f"Bearer {self.auth_token}"
+                }
+                response = requests.get(f'{MANUFACTURERS}?name={provider}', headers=headers)                
+                
                 if response.status_code != 200:
-                    error_messages.append(ERROR_MESSAGES["invalid_provider"])
+                    error_messages.append(f"El proveedor '{self.auth_token}' no es válido. Respuesta del servicio: {response.json()}")
             except ValueError:
                 error_messages.append(ERROR_MESSAGES["invalid_provider"])
             
