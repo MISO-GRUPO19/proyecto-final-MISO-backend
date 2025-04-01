@@ -15,7 +15,7 @@ load_dotenv()
 
 load_dotenv('../.env.development')
 
-MANUFACTURERS = os.getenv("MANUFACTURERS", "http://localhost:8080")
+MANUFACTURERS = os.getenv("MANUFACTURERS")
 
 class CreateMassiveProducts(BaseCommand):
     REQUIRED_COLUMNS = {'name', 'description', 'price', 'category', 'weight', 'barcode', 'provider', 'batch', 'best_before', 'quantity'}
@@ -54,10 +54,10 @@ class CreateMassiveProducts(BaseCommand):
                 headers = {
                     "Authorization": f"Bearer {self.auth_token}"
                 }
-                response = requests.get(f'{MANUFACTURERS}?name={provider}', headers=headers)                
+                response = requests.get(f'{MANUFACTURERS}/manufacturers?name={provider}', headers=headers)                
                 
                 if response.status_code != 200:
-                    error_messages.append(f"El proveedor '{self.auth_token}' no es válido. Respuesta del servicio: {response.json()}")
+                    error_messages.append(ERROR_MESSAGES["invalid_provider"])
             except ValueError:
                 error_messages.append(ERROR_MESSAGES["invalid_provider"])
             
