@@ -11,7 +11,8 @@ class TestCreateMassiveProducts(unittest.TestCase):
     @patch('products_management.src.pubsub.publisher.publish_message')  # Mockear la función que lo usa
     @patch('products_management.src.commands.create_massive_products.db_session')
     @patch('pandas.read_excel')
-    def test_execute_success(self, mock_read_excel, mock_db_session, mock_publish_message, mock_publisher_client):
+    @patch('products_management.src.commands.create_massive_products.requests.get')  # Mockear las solicitudes HTTP
+    def test_execute_success(self, mock_requests_get, mock_read_excel, mock_db_session, mock_publish_message, mock_publisher_client):
         mock_publish_message.return_value = None  # Evita que se haga la llamada real
 
         mock_file = MagicMock()
@@ -22,7 +23,7 @@ class TestCreateMassiveProducts(unittest.TestCase):
             "providers": {
                 "Provider1": MagicMock(spec=Provider),  # Agregar proveedores válidos
                 "Provider2": MagicMock(spec=Provider)
-            }        
+            }
         }
 
         mock_df = pd.DataFrame({
@@ -55,16 +56,21 @@ class TestCreateMassiveProducts(unittest.TestCase):
         mock_db_session.add.side_effect = add_side_effect
         mock_db_session.commit.side_effect = lambda: None
 
-        command = CreateMassiveProducts(mock_file)
+        # Simular respuesta HTTP para validar proveedores
+        mock_requests_get.return_value.status_code = 200
+        mock_requests_get.return_value.json.return_value = {"valid": True}
+
+        auth_token = "mocked-auth-token"  # Token simulado
+        command = CreateMassiveProducts(mock_file, auth_token)  # Incluye el token
         result = command.execute()
 
-
-        assert result == {'message': '2 productos cargados correctamente'}
-
+        self.assertEqual(result['message'], '2 productos cargados correctamente')
+        
     @patch('products_management.src.pubsub.publisher.publish_message')
     @patch('products_management.src.commands.create_massive_products.db_session')
     @patch('pandas.read_excel')
-    def test_execute_with_invalid_data(self, mock_read_excel, mock_db_session, mock_publish_message):
+    @patch('products_management.src.commands.create_massive_products.requests.get')  # Mockear las solicitudes HTTP
+    def test_execute_with_invalid_data(self, mock_requests_get, mock_read_excel, mock_db_session, mock_publish_message):
         mock_file = MagicMock()
         mock_file.filename = 'test.xlsx'
 
@@ -84,7 +90,12 @@ class TestCreateMassiveProducts(unittest.TestCase):
 
         mock_db_session.query.return_value.filter_by.return_value.first.return_value = None
 
-        command = CreateMassiveProducts(mock_file)
+        # Simular respuesta HTTP para validar proveedores
+        mock_requests_get.return_value.status_code = 404  # Proveedor no encontrado
+        mock_requests_get.return_value.json.return_value = {"error": "Provider not found"}
+
+        auth_token = "mocked-auth-token"  # Token simulado
+        command = CreateMassiveProducts(mock_file, auth_token)  # Incluye el token
         result = command.execute()
 
         self.assertIn('errores en la carga', result['message'].lower())
