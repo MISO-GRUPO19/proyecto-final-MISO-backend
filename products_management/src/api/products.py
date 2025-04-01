@@ -19,7 +19,8 @@ def create_product():
 @jwt_required()
 def upload_products():
     file = request.files['file']
-    result = CreateMassiveProducts(file).execute()
+    auth_token = request.headers.get("Authorization", "").replace("Bearer ", "")
+    result = CreateMassiveProducts(file, auth_token).execute()
     return jsonify(result), 201
 
 @products.route('/categories', methods=['GET'])

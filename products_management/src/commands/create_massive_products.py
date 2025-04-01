@@ -1,17 +1,28 @@
 import logging
+
+from dotenv import load_dotenv
+import requests
 from .base_command import BaseCommand
-from ..errors.errors import NotFile, InvalidFileFormat, ValidationError, ERROR_MESSAGES
-from ..models.products import Products, Batch, Category, Provider
+from ..errors.errors import NotFile, InvalidFileFormat, ERROR_MESSAGES
+from ..models.products import Category, Provider
 from ..models.database import db_session
 from ..pubsub.publisher import publish_message
 import uuid
 import pandas as pd
+import os
+
+load_dotenv()
+
+load_dotenv('../.env.development')
+
+MANUFACTURERS = os.getenv("MANUFACTURERS")
 
 class CreateMassiveProducts(BaseCommand):
-    REQUIRED_COLUMNS = {'name', 'description', 'price', 'category', 'weight', 'barcode', 'provider_id', 'batch', 'best_before', 'quantity'}
+    REQUIRED_COLUMNS = {'name', 'description', 'price', 'category', 'weight', 'barcode', 'provider', 'batch', 'best_before', 'quantity'}
     
-    def __init__(self, file):
+    def __init__(self, file, auth_token):
         self.file = file
+        self.auth_token = auth_token
     
     def validate_data(self, df):
         errors = []
@@ -39,12 +50,16 @@ class CreateMassiveProducts(BaseCommand):
             
             # Validar proveedor
             try:
-                provider_id = uuid.UUID(row['provider_id'])
-                provider = db_session.query(Provider).filter_by(id=provider_id).first()
-                if not provider:
+                provider = row['provider']
+                headers = {
+                    "Authorization": f"Bearer {self.auth_token}"
+                }
+                response = requests.get(f'{MANUFACTURERS}/manufacturers?name={provider}', headers=headers)                
+                
+                if response.status_code != 200:
                     error_messages.append(ERROR_MESSAGES["invalid_provider"])
             except ValueError:
-                error_messages.append(ERROR_MESSAGES["invalid_provider_id"])
+                error_messages.append(ERROR_MESSAGES["invalid_provider"])
             
             if error_messages:
                 errors.append({"fila": index + 1, "errores": error_messages})
