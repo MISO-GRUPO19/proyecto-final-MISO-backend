@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch, MagicMock
 from flask import Flask
 from flask_jwt_extended import JWTManager, create_access_token
 from products_management.src.api.products import products
@@ -29,18 +30,23 @@ class TestCreateProducts(unittest.TestCase):
         with self.app.app_context():
             access_token = create_access_token(identity='test_user')
             return access_token
-
-    def test_create_product(self):
+    @patch('requests.get') 
+    def test_create_product(self, mock_requests_get):
         token = self.get_jwt_token()
         headers = {
             'Authorization': f'Bearer {token}'
         }
         with self.client:
+            
+            # Simular respuesta HTTP para validar proveedores
+            mock_requests_get.return_value.status_code = 200
+            mock_requests_get.return_value.json.return_value = {"valid": True}
+            
             response = self.client.post('/products', json={
                 'name': 'Product Name',
                 'description': 'Product Description',
                 'price': 19.99,
-                'category': 'Electronics',
+                'category': 'Condimentos y Especias',
                 'weight': 1.5,
                 'barcode': '1234567890123',
                 'provider_id': '123e4567-e89b-12d3-a456-426614174000',
@@ -57,7 +63,7 @@ class TestCreateProducts(unittest.TestCase):
             "name": "@@",  # Nombre inválido
             "description": "Producto válido",
             "price": "20.99",
-            "category": "Electronics",
+            "category": "Condimentos y Especias",
             "weight": "1,5",
             "weight_unit": "kg",
             "barcode": "1234567890123",
@@ -66,8 +72,10 @@ class TestCreateProducts(unittest.TestCase):
             "best_before": "2026-12-31T23:59:59",
             "quantity": "100"
         }
-        command = CreateProducts(data)
         
+        auth_token = self.get_jwt_token()  # Obtener el token JWT
+        command = CreateProducts(data, auth_token)  # Pasar el token al constructor
+                
         with self.assertRaises(InvalidData) as e:
             command.execute()
         
@@ -87,8 +95,10 @@ class TestCreateProducts(unittest.TestCase):
                 "best_before": "2025-12-31T23:59:59",
                 "quantity": "50"
             }
-            command = CreateProducts(data)
-            
+        
+            auth_token = self.get_jwt_token()  # Obtener el token JWT
+            command = CreateProducts(data, auth_token)  # Pasar el token al constructor
+                    
             with self.assertRaises(InvalidData) as e:
                 command.execute()
             
@@ -99,7 +109,7 @@ class TestCreateProducts(unittest.TestCase):
             "name": "Valid Product",
             "description": "Valid description",
             "price": "abc",  # Precio inválido
-            "category": "Electronics",
+            "category": "Condimentos y Especias",
             "weight": "2.5",
             "barcode": "1234567890123",
             "provider_id": "123e4567-e89b-12d3-a456-426614174000",
@@ -107,8 +117,10 @@ class TestCreateProducts(unittest.TestCase):
             "best_before": "2025-12-31T23:59:59",
             "quantity": "50"
         }
-        command = CreateProducts(data)
-        
+    
+        auth_token = self.get_jwt_token()  # Obtener el token JWT
+        command = CreateProducts(data, auth_token)  # Pasar el token al constructor
+                
         with self.assertRaises(InvalidData) as e:
             command.execute()
         
@@ -119,7 +131,7 @@ class TestCreateProducts(unittest.TestCase):
             "name": "Valid Product",
             "description": "Valid description",
             "price": "19.99",
-            "category": "Electronics",
+            "category": "Condimentos y Especias",
             "weight": "1.5",
             "barcode": "1234567890123",
             "provider_id": "123e4567-e89b-12d3-a456-426614174000",
@@ -127,8 +139,10 @@ class TestCreateProducts(unittest.TestCase):
             "best_before": "2000-01-01T00:00:00",  # Fecha expirada
             "quantity": "100"
         }
-        command = CreateProducts(data)
-        
+    
+        auth_token = self.get_jwt_token()  # Obtener el token JWT
+        command = CreateProducts(data, auth_token)  # Pasar el token al constructor
+                
         with self.assertRaises(InvalidData) as e:
             command.execute()
         
@@ -139,7 +153,7 @@ class TestCreateProducts(unittest.TestCase):
             "name": "Valid Product",
             "description": "Valid description",
             "price": "19.99",
-            "category": "Electronics",
+            "category": "Condimentos y Especias",
             "weight": "1.5",
             "barcode": "1234567890123",
             "provider_id": "invalid_uuid",  # UUID inválido
@@ -147,19 +161,22 @@ class TestCreateProducts(unittest.TestCase):
             "best_before": "2025-12-31T23:59:59",
             "quantity": "100"
         }
-        command = CreateProducts(data)
         
+        auth_token = self.get_jwt_token()  # Obtener el token JWT
+        command = CreateProducts(data, auth_token)  # Pasar el token al constructor
+                
         with self.assertRaises(InvalidData) as e:
             command.execute()
         
         self.assertIn("Proveedor inválido", str(e.exception))
     
-    def test_create_product_db_failure(self):
+    @patch('requests.get') 
+    def test_create_product_db_failure(self, mock_requests_get):
         data = {
             "name": "Valid Product",
             "description": "Valid description",
             "price": "19.99",
-            "category": "Electronics",
+            "category": "Condimentos y Especias",
             "weight": "1.5",
             "barcode": "1234567890123",
             "provider_id": "123e4567-e89b-12d3-a456-426614174000",
@@ -167,8 +184,12 @@ class TestCreateProducts(unittest.TestCase):
             "best_before": "2025-12-31T23:59:59",
             "quantity": "100"
         }
-        
-        command = CreateProducts(data)
+        # Simular respuesta HTTP para validar proveedores
+        mock_requests_get.return_value.status_code = 200
+        mock_requests_get.return_value.json.return_value = {"valid": True}
+            
+        auth_token = self.get_jwt_token()  # Obtener el token JWT
+        command = CreateProducts(data, auth_token)  # Pasar el token al constructor
         
         with unittest.mock.patch("products_management.src.models.database.db_session.flush", side_effect=Exception("DB Error")):
             response = command.execute()
@@ -188,8 +209,10 @@ class TestCreateProducts(unittest.TestCase):
             "best_before": "2025-12-31T23:59:59",
             "quantity": "100"
         }
-        command = CreateProducts(data)
         
+        auth_token = self.get_jwt_token()  # Obtener el token JWT
+        command = CreateProducts(data, auth_token)  # Pasar el token al constructor
+            
         with self.assertRaises(InvalidData) as e:
             command.execute()
         

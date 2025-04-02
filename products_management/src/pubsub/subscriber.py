@@ -2,7 +2,7 @@ from google.cloud import pubsub_v1
 import json
 import uuid
 import os
-from models.products import Products, Batch, Provider
+from models.products import Products, Batch
 from models.database import db_session
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'pubsub/proyecto-final-451719-1806c6f593e4.json'
@@ -16,9 +16,7 @@ def callback(message):
         batches = []
 
         for row in valid_products:
-            
-            provider = db_session.query(Provider).filter_by(name=row['provider']).first()
-            
+                        
             product = Products(
                 name=row['name'],
                 description=row['description'],
@@ -26,7 +24,7 @@ def callback(message):
                 category=row['category'],
                 weight=row['weight'],
                 barcode=row['barcode'],
-                provider_id=provider.id
+                provider_id=row['provider_id']
             )
             products.append(product)
 

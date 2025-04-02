@@ -16,6 +16,7 @@ class TestGetManufacturer(unittest.TestCase):
         mock_manufacturer.contact = "John Doe"
         mock_manufacturer.telephone = "123456789"
         mock_manufacturer.email = "test@example.com"
+        mock_manufacturer.id = "valid_uuid"
         mock_session.query.return_value.filter.return_value.first.return_value = mock_manufacturer
 
         query = GetManufacturer("Test Manufacturer")
@@ -27,7 +28,8 @@ class TestGetManufacturer(unittest.TestCase):
             "country": "USA",
             "contact": "John Doe",
             "telephone": "123456789",
-            "email": "test@example.com"
+            "email": "test@example.com",
+            "id": "valid_uuid"
         })
 
     @patch('manufacturers_management.src.queries.get_manufacturers.db_session')

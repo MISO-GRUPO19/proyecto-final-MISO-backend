@@ -1,9 +1,7 @@
 from unittest.mock import patch, MagicMock
 import pandas as pd
-import uuid
 from datetime import datetime
 from products_management.src.commands.create_massive_products import CreateMassiveProducts
-from products_management.src.models.products import Category, Provider
 import unittest
 
 class TestCreateMassiveProducts(unittest.TestCase):
@@ -18,19 +16,11 @@ class TestCreateMassiveProducts(unittest.TestCase):
         mock_file = MagicMock()
         mock_file.filename = 'test.xlsx'
 
-        simulated_db = {
-            "categories": {"Electronic": MagicMock(spec=Category)},
-            "providers": {
-                "Provider1": MagicMock(spec=Provider),  # Agregar proveedores válidos
-                "Provider2": MagicMock(spec=Provider)
-            }
-        }
-
         mock_df = pd.DataFrame({
             'name': ['Valid', 'Valid Product'],
             'description': ['Description1', 'Description2'],
             'price': [19.0, 20.0],
-            'category': ['Electronic', 'Electronic'],
+            'category': ['Lácteos y Huevos', 'Condimentos y Especias'],
             'weight': [1.0, 2.0],
             'barcode': ['1234567890123', '1234567890124'],
             'provider': ['Provider1', 'Provider2'],
@@ -40,25 +30,9 @@ class TestCreateMassiveProducts(unittest.TestCase):
         })
         mock_read_excel.return_value = mock_df
 
-        def query_side_effect(model):
-            if model == Category:
-                return MagicMock(filter_by=lambda name: MagicMock(first=lambda: simulated_db["categories"].get(name, None)))
-            if model == Provider:
-                return MagicMock(filter_by=lambda **kwargs: MagicMock(first=lambda: simulated_db["providers"].get(kwargs.get("name"), None)))
-            return MagicMock()
-
-        mock_db_session.query.side_effect = query_side_effect
-
-        def add_side_effect(instance):
-            if isinstance(instance, Provider):
-                simulated_db["providers"][instance.id] = instance
-
-        mock_db_session.add.side_effect = add_side_effect
-        mock_db_session.commit.side_effect = lambda: None
-
         # Simular respuesta HTTP para validar proveedores
         mock_requests_get.return_value.status_code = 200
-        mock_requests_get.return_value.json.return_value = {"valid": True}
+        mock_requests_get.return_value.json.return_value = {"id": "valid-uuid"}
 
         auth_token = "mocked-auth-token"  # Token simulado
         command = CreateMassiveProducts(mock_file, auth_token)  # Incluye el token
@@ -78,7 +52,7 @@ class TestCreateMassiveProducts(unittest.TestCase):
             'name': ['', ''],
             'description': ['Description1', 'Description2'],
             'price': ['Invalid', 'Invalid'],
-            'category': ['InvalidCategory', 'InvalidCategory'],
+            'category': ['Condimentos y Especias', 'Condimentos y Especias'],
             'weight': [1.0, 2.0],
             'barcode': ['1234567890123', '1234567890124'],
             'provider': ['invalid-uuid', 'invalid-uuid'],

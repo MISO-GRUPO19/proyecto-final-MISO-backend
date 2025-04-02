@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+import requests
 from .base_command import BaseCommand
 from ..errors.errors import InvalidData, ERROR_MESSAGES
 from ..models.products import Products, Batch
@@ -5,11 +7,19 @@ from ..models.database import db_session
 import uuid
 import re
 from datetime import datetime
+import os
+
+load_dotenv()
+
+load_dotenv('../.env.development')
+
+MANUFACTURERS = os.getenv("MANUFACTURERS")
 
 class CreateProducts(BaseCommand):
-    ALLOWED_CATEGORIES = ["Electronics", "Clothing", "Food"]
-    def __init__(self, data):
+    ALLOWED_CATEGORIES = ["Frutas y Verduras", "Carnes y Pescados", "Lácteos y Huevos", "Panadería y Repostería", "Despensa", "Bebidas", "Snacks y Dulces", "Condimentos y Especias", "Productos de Limpieza", "Productos para Bebés"]
+    def __init__(self, data, auth_token):
         self.data = data
+        self.auth_token = auth_token
 
     def validate(self):
         errors = []
@@ -27,6 +37,14 @@ class CreateProducts(BaseCommand):
             uuid.UUID(provider_id)
         except ValueError:
             errors.append(ERROR_MESSAGES["invalid_provider"])
+        else:
+            try:
+                headers = {"Authorization": f"Bearer {self.auth_token}"}
+                response = requests.get(f'{MANUFACTURERS}/manufacturers/{provider_id}', headers=headers)
+                if response.status_code != 200:
+                    errors.append(ERROR_MESSAGES["invalid_provider"])
+            except ValueError:
+              errors.append(ERROR_MESSAGES["invalid_provider"])
 
         weight = self.data.get("weight")
         if isinstance(weight, str):  

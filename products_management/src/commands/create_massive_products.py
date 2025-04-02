@@ -4,10 +4,8 @@ from dotenv import load_dotenv
 import requests
 from .base_command import BaseCommand
 from ..errors.errors import NotFile, InvalidFileFormat, ERROR_MESSAGES
-from ..models.products import Category, Provider
 from ..models.database import db_session
 from ..pubsub.publisher import publish_message
-import uuid
 import pandas as pd
 import os
 
@@ -19,7 +17,7 @@ MANUFACTURERS = os.getenv("MANUFACTURERS")
 
 class CreateMassiveProducts(BaseCommand):
     REQUIRED_COLUMNS = {'name', 'description', 'price', 'category', 'weight', 'barcode', 'provider', 'batch', 'best_before', 'quantity'}
-    
+    ALLOWED_CATEGORIES = ["Frutas y Verduras", "Carnes y Pescados", "Lácteos y Huevos", "Panadería y Repostería", "Despensa", "Bebidas", "Snacks y Dulces", "Condimentos y Especias", "Productos de Limpieza", "Productos para Bebés"]
     def __init__(self, file, auth_token):
         self.file = file
         self.auth_token = auth_token
@@ -44,9 +42,8 @@ class CreateMassiveProducts(BaseCommand):
                 error_messages.append(ERROR_MESSAGES["invalid_weight_price_quantity"])
             
             # Validar categoría
-            category = db_session.query(Category).filter_by(name=row['category']).first()
-            if not category:
-                error_messages.append(ERROR_MESSAGES["invalid_category"])
+            if row['category'] not in self.ALLOWED_CATEGORIES:
+                errors.append(ERROR_MESSAGES["invalid_category"])
             
             # Validar proveedor
             try:
@@ -58,6 +55,12 @@ class CreateMassiveProducts(BaseCommand):
                 
                 if response.status_code != 200:
                     error_messages.append(ERROR_MESSAGES["invalid_provider"])
+                else:
+                    provider_data = response.json()
+                    if 'id' in provider_data:
+                        row['provider_id'] = provider_data['id']
+                    else:
+                        error_messages.append(ERROR_MESSAGES["invalid_provider"])
             except ValueError:
                 error_messages.append(ERROR_MESSAGES["invalid_provider"])
             

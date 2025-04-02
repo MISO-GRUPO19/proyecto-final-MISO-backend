@@ -2,9 +2,10 @@ class ApiError(Exception):
     code = 422
     description = "Default message"
 
-class InvalidData(ApiError):
-    code = 400
-    description = "Datos inválidos"
+class InvalidData(Exception):
+    def __init__(self, errors):
+        self.errors = errors
+        super().__init__(", ".join(errors))
     
 class NotFile(ApiError):
     code = 400
