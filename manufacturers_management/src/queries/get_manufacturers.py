@@ -17,7 +17,8 @@ class GetManufacturer:
                 "country": manufacturer.country,
                 "contact": manufacturer.contact,
                 "telephone": manufacturer.telephone,
-                "email": manufacturer.email
+                "email": manufacturer.email,
+                "id": manufacturer.id
             }), 200
             
 class GetManufacturerById:

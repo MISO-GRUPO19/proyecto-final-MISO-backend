@@ -47,28 +47,3 @@ class Batch(Model, base):
         self.quantity = quantity
         self.product_id = product_id
         
-class Category(Model, base):
-    __tablename__ = 'categories'
-
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    name = Column(String, nullable=False)
-
-    def __init__(self, name):
-        self.name = name
-        
-class Provider(Model, base):
-    __tablename__ = 'providers'
-
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    name = Column(String, nullable=False)
-    country = Column(String, nullable=False)
-    contact = Column(String, nullable=False)
-    telephone = Column(String, nullable=False)
-    email = Column(String, nullable = False)
-
-    def __init__(self, name, country, contact, telephone, email):
-        self.name = name
-        self.country = country
-        self.contact = contact
-        self.telephone = telephone
-        self.email = email
