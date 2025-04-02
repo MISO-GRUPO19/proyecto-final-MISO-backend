@@ -49,8 +49,7 @@ jobs:
           echo "Current directory: $(pwd)"
           ls -la
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./products_management/src/.env.development
-          sed -i "s/NGINX=http://nginx:8080/NGINX=https://nginx-service-230506421700.us-central1.run.app/g" ./products_management/src/.env.development
-
+          sed -i "s|NGINX=http://nginx:8080|NGINX=https://nginx-service-230506421700.us-central1.run.app|g" ./products_management/src/.env.development
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
   
