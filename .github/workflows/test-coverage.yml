@@ -28,7 +28,7 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          pytest authentications_management/tests --cov=authentications_management/src --cov-report=xml --cov-fail-under=80
+          pytest authentications_management/tests --cov=authentications_management/src --cov-report=xml:authentications_management/coverage.xml --cov-fail-under=80
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
