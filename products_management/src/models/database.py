@@ -1,7 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
 import os
+from dotenv import load_dotenv
 
+load_dotenv('.env.development')
 
 if os.getenv('FLASK_ENV') == 'testing':
     urldb = 'sqlite:///:memory:'  

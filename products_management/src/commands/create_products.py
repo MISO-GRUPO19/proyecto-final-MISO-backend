@@ -13,7 +13,7 @@ load_dotenv()
 
 load_dotenv('../.env.development')
 
-MANUFACTURERS = os.getenv("MANUFACTURERS")
+NGINX = os.getenv("NGINX")
 
 class CreateProducts(BaseCommand):
     ALLOWED_CATEGORIES = ["Frutas y Verduras", "Carnes y Pescados", "Lácteos y Huevos", "Panadería y Repostería", "Despensa", "Bebidas", "Snacks y Dulces", "Condimentos y Especias", "Productos de Limpieza", "Productos para Bebés"]
@@ -40,7 +40,7 @@ class CreateProducts(BaseCommand):
         else:
             try:
                 headers = {"Authorization": f"Bearer {self.auth_token}"}
-                response = requests.get(f'{MANUFACTURERS}/manufacturers/{provider_id}', headers=headers)
+                response = requests.get(f'{NGINX}/manufacturers/{provider_id}', headers=headers)
                 if response.status_code != 200:
                     errors.append(ERROR_MESSAGES["invalid_provider"])
             except ValueError:
