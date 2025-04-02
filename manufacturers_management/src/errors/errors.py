@@ -33,4 +33,8 @@ class InvalidEmail(ApiError):
 class NotExistingManufacturer(ApiError):
     code = 404
     description = "Manufacturer not found"
+
+class ExistingManufacturer(ApiError):
+    code = 409
+    description = "Manufacturer already exists in the system"
     

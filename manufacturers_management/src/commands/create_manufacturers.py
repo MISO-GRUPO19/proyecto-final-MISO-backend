@@ -53,8 +53,11 @@ class CreateManufacturers(BaseCommand):
     def check_name(self, name: str):
         if len(name) < 3 or len(name) > 100:
             return False
-        if not re.match(r'^[a-zA-Z0-9\s\-.]+$', name):
+        if not re.match(r'^[\w\s\-.áéíóúÁÉÍÓÚñÑ]+$', name, re.UNICODE):
             return False
+        existing_manufacturer = db_session.query(Manufacturers).filter_by(name=name).first()
+        if existing_manufacturer:
+            raise ExistingManufacturer
         return True
 
     def check_country(self, country: str):
@@ -63,7 +66,7 @@ class CreateManufacturers(BaseCommand):
     def check_contact(self, contact: str):
         if len(contact) < 3 or len(contact) > 100:
             return False
-        if not re.match(r'^[a-zA-Z\s\-.]+$', contact):
+        if not re.match(r'^[\w\s\-.áéíóúÁÉÍÓÚñÑ]+$', contact, re.UNICODE):
             return False
         return True
 
