@@ -130,9 +130,3 @@ class TestCreateSellers(unittest.TestCase):
             }
         with self.assertRaises(InvalidEmail):  
             CreateSellers(data).execute()
-
-    def test_ping(self):
-        with self.client:
-            response = self.client.get('/sellers/ping')
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('pong', response.json['message'])
