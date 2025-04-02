@@ -22,6 +22,7 @@ def pytest_configure(config):
 def test_client():
     from authentications_management.src.main import app, init_db
     from authentications_management.src.models.database import db_session, base
+    from authentications_management.src.models.sellers import Sellers
 
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -36,6 +37,7 @@ def test_client():
 @pytest.fixture(autouse=True)
 def cleanup(test_client):
     from authentications_management.src.models.database import db_session, base
+    from authentications_management.src.models.sellers import Sellers
     with test_client.application.app_context():
         yield
         db_session.remove()
