@@ -1,6 +1,7 @@
 import pytest
 from authentications_management.src.main import app
 from authentications_management.src.models.database import db_session, base
+from unittest.mock import patch
 
 @pytest.fixture
 def test_client():
@@ -12,7 +13,10 @@ def test_client():
         with app.app_context():
             base.metadata.drop_all(bind=db_session.bind)
 
-def test_create_user(test_client):
+@patch('authentications_management.src.pubsub.publisher.pubsub_v1.PublisherClient')
+def test_create_user(mock_publisher, test_client):
+    mock_publisher.return_value.publish.return_value = None  # Simula la publicación
+
     response = test_client.post('/users', json={
         'email': 'test@example.com',
         'password': 'Test1234!',
