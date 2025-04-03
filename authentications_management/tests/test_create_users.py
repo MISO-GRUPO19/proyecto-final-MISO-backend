@@ -2,6 +2,7 @@ import pytest
 from authentications_management.src.main import app
 from authentications_management.src.models.database import db_session, base
 from unittest.mock import patch
+from unittest.mock import MagicMock
 
 @pytest.fixture
 def test_client():
@@ -15,8 +16,10 @@ def test_client():
 
 @patch('authentications_management.src.pubsub.publisher.pubsub_v1.PublisherClient')
 def test_create_user(mock_publisher, test_client):
-    mock_publisher.return_value.publish.return_value = None  # Simula la publicación
-
+    mock_future = MagicMock()
+    mock_future.result.return_value = "mocked-message-id"
+    mock_publisher.return_value.publish.return_value = mock_future
+    
     response = test_client.post('/users', json={
         'email': 'test@example.com',
         'password': 'Test1234!',
