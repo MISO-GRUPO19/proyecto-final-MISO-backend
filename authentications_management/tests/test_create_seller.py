@@ -1,10 +1,10 @@
 import unittest
 from flask import Flask, Response
 from flask_jwt_extended import JWTManager, create_access_token
-from sellers_management.src.api.sellers import sellers
-from sellers_management.src.models.database import db_session
-from sellers_management.src.commands.create_sellers import CreateSellers
-from sellers_management.src.errors.errors import *
+from authentications_management.src.api.users import users
+from authentications_management.src.models.database import db_session
+from authentications_management.src.commands.create_sellers import CreateSellers
+from authentications_management.src.errors.errors import *
 
 class TestCreateSellers(unittest.TestCase):
 
@@ -14,7 +14,7 @@ class TestCreateSellers(unittest.TestCase):
         self.app.config['TESTING'] = True
 
         jwt = JWTManager(self.app)
-        self.app.register_blueprint(sellers)
+        self.app.register_blueprint(users)
 
         self.client = self.app.test_client()
 
@@ -37,7 +37,7 @@ class TestCreateSellers(unittest.TestCase):
             'Authorization': f'Bearer {token}'
         }
         with self.client:
-            response = self.client.post('/sellers', json={
+            response = self.client.post('/users/sellers', json={
                 "identification": "1223467",
                 "name": "Seller Pepito",
                 "country": "Colombia",
@@ -130,9 +130,3 @@ class TestCreateSellers(unittest.TestCase):
             }
         with self.assertRaises(InvalidEmail):  
             CreateSellers(data).execute()
-
-    def test_ping(self):
-        with self.client:
-            response = self.client.get('/sellers/ping')
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('pong', response.json['message'])

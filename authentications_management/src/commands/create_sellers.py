@@ -2,8 +2,10 @@ from .base_command import BaseCommand
 from ..errors.errors import *
 from ..models.sellers import Sellers
 from ..models.database import db_session
+from .create_users import CreateUsers
 from flask import jsonify
 import re
+
 
 ALLOWED_COUNTRIES = [
     "Argentina", "Bolivia", "Brazil", "Canada", "Chile", "Colombia", "Costa Rica",
@@ -46,22 +48,36 @@ class CreateSellers(BaseCommand):
             telephone=self.data['telephone'], 
             email=self.data['email']
         )
-        db_session.add(seller)
-        db_session.commit()
-        
 
-        return {'message': 'Seller has been created successfully'}
+        identification = self.data['identification']
+
+        password: str = f'{identification}@Pass'
+        data = {
+            "email": self.data['email'],
+            "password": password,
+            "confirm_password": password,
+            "role": "Vendedor"
+        }
+
+        user_seller = CreateUsers(data).execute()
+        if user_seller['message'] == 'Usuario creado exitosamente':
+            db_session.add(seller)
+            db_session.commit()
+            return {'message': 'Seller has been created successfully'}
     
     def check_identification(self, identification: str):
         if len(identification) < 6 or len(identification) > 20:
             return False
+        existing_seller = db_session.query(Sellers).filter_by(identification=identification).first()
+        if existing_seller:
+            raise ExistingSeller
         if not re.match(r'^[a-zA-Z0-9]+$', identification):
             return False
         return True
     def check_name(self, name: str):
         if len(name) < 3 or len(name) > 100:
             return False
-        if not re.match(r'^[a-zA-Z\s]+$', name):
+        if not re.match(r'^[\w\s\-.áéíóúÁÉÍÓÚñÑ]+$', name, re.UNICODE):
             return False
         return True
     def check_country(self, country: str):
