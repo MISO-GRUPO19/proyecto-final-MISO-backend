@@ -5,6 +5,8 @@ from authentications_management.src.api.users import users
 from authentications_management.src.models.database import db_session
 from authentications_management.src.commands.create_sellers import CreateSellers
 from authentications_management.src.errors.errors import *
+from unittest.mock import patch
+from unittest.mock import MagicMock
 
 class TestCreateSellers(unittest.TestCase):
 
@@ -30,8 +32,12 @@ class TestCreateSellers(unittest.TestCase):
         with self.app.app_context():
             access_token = create_access_token(identity='test_user')
             return access_token
-    
-    def test_create_seller(self):
+        
+    @patch('authentications_management.src.pubsub.publisher.pubsub_v1.PublisherClient')
+    def test_create_seller(self, mock_publisher):
+        mock_future = MagicMock()
+        mock_future.result.return_value = "mocked-message-id"
+        mock_publisher.return_value.publish.return_value = mock_future
         token = self.get_jwt_token()
         headers = {
             'Authorization': f'Bearer {token}'
