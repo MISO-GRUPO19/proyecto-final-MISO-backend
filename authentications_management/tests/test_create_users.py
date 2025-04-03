@@ -27,7 +27,7 @@ def test_create_user(mock_publisher, test_client):
         'role': 1
     })
     assert response.status_code == 201
-    assert 'Usuario creado exitosamente' in response.json['message']
+    assert 'Usuario enviado a la cola exitosamente' in response.json['message']
 
 def test_create_user_invalid_email(test_client):
     response = test_client.post('/users', json={
