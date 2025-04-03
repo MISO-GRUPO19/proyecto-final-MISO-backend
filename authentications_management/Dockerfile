@@ -19,4 +19,9 @@ ENV PORT 5003
 # Variables de entorno para Uptrace
 ENV UPTRACE_DSN=https://t0Yfk4-x00bJJt5WlUqreg@api.uptrace.dev/5872
 
-CMD ["flask", "--app", "main.py", "--debug", "run", "--host=0.0.0.0", "--port=5003"]
+
+# Script de inicio para ejecutar ambos procesos
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]

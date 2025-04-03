@@ -60,7 +60,7 @@ class CreateSellers(BaseCommand):
         }
 
         user_seller = CreateUsers(data).execute()
-        if user_seller['message'] == 'Usuario creado exitosamente':
+        if user_seller['message'] == 'Usuario enviado a la cola exitosamente':
             db_session.add(seller)
             db_session.commit()
             return {'message': 'Seller has been created successfully'}
