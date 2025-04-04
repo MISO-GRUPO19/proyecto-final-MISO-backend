@@ -86,7 +86,7 @@ class CreateMassiveProducts(BaseCommand):
             
             print(f'Errores: {errors}')
             if errors:
-                return {"message": "Errores en la carga", "detalles": errors}
+                return {"message": "Errores en la carga", "detalles": errors}, 400
             
             # Convertir cada fila a un diccionario para que sea serializable
             valid_products_dicts = [row.to_dict() for row in valid_products]
@@ -101,7 +101,7 @@ class CreateMassiveProducts(BaseCommand):
             
             publish_message('products', {'valid_products': valid_products_dicts})
             
-            return {'message': f'{len(valid_products)} productos cargados correctamente'}
+            return {'message': f'{len(valid_products)} productos cargados correctamente'}, 201
         
         except Exception as e:
             db_session.rollback()

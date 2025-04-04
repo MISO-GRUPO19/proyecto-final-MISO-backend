@@ -25,7 +25,8 @@ def upload_products():
     file = request.files['file']
     auth_token = request.headers.get("Authorization", "").replace("Bearer ", "")
     result = CreateMassiveProducts(file, auth_token).execute()
-    return jsonify(result), 201
+    
+    return jsonify(result[0]), result[1]
 
 @products.route('/products/ping', methods=['GET'])
 def ping():
