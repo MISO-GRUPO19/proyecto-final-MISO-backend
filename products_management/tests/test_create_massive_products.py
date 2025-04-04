@@ -38,7 +38,7 @@ class TestCreateMassiveProducts(unittest.TestCase):
         command = CreateMassiveProducts(mock_file, auth_token)  # Incluye el token
         result = command.execute()
 
-        self.assertEqual(result[0], '2 productos cargados correctamente')
+        self.assertEqual(result[0]['message'], '2 productos cargados correctamente')
         
     @patch('products_management.src.pubsub.publisher.publish_message')
     @patch('products_management.src.commands.create_massive_products.db_session')
@@ -72,6 +72,6 @@ class TestCreateMassiveProducts(unittest.TestCase):
         command = CreateMassiveProducts(mock_file, auth_token)  # Incluye el token
         result = command.execute()
 
-        self.assertIn('errores en la carga', result[0].lower())
+        self.assertIn('errores en la carga', result[0]['message'].lower())
         self.assertEqual(len(result[0]), len(mock_df))
         mock_publish_message.assert_not_called()
