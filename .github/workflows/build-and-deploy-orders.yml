@@ -21,6 +21,10 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
+      - name: Authenticate Docker with GCP
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+
       - name: Get Cloud SQL Instance Private IP
         id: get_ip
         run: |
@@ -38,7 +42,7 @@ jobs:
             exit 1
           fi
           echo "IP privada: $PRIVATE_IP"
-          echo "::set-output name=db_ip::$PRIVATE_IP"
+          echo "db_ip=$PRIVATE_IP" >> $GITHUB_OUTPUT
 
       - name: Update ./orders-management/src/.env.development
         run: |
@@ -51,20 +55,6 @@ jobs:
           docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest ./orders-management
           docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest
 
-      - name: Create VPC Access Connector
-        id: create_vpc_connector
-        run: |
-          # Verifica si el VPC Connector ya existe
-          if ! gcloud compute networks vpc-access connectors describe orders-vpc-connector --region=us-central1 > /dev/null 2>&1; then
-            echo "Creando VPC Connector..."
-            gcloud compute networks vpc-access connectors create orders-vpc-connector \
-              --region=us-central1 \
-              --network=default \
-              --range=10.8.0.0/28
-          else
-            echo "El VPC Connector ya existe. Saltando creación."
-          fi
-  
       - name: Deploy to Cloud Run Orders
         run: |
           gcloud run deploy orders-management-service \
@@ -77,6 +67,6 @@ jobs:
             --concurrency=80 \
             --port=5001 \
             --vpc-connector=orders-vpc-connector \
-            --vpc-egress=private-ranges-only
-            --min-instances=1
+            --vpc-egress=private-ranges-only \
+            --min-instances=1 \
             --max-instances=3
