@@ -1,7 +1,7 @@
 name: Delete Resources
 
 on:
-  workflow_dispatch: # Permite la ejecución manual
+  workflow_dispatch:
 
 jobs:
   delete:
@@ -18,14 +18,57 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Delete Cloud SQL Instance
+      - name: Delete Cloud Run Services in Parallel
         run: |
-          gcloud sql instances delete postgres --quiet
+          SERVICES=(
+            "orders-management-service"
+            "products-management-service"
+            "authentications-management-service"
+            "manufacturers-management-service"
+            "customers-management-service"
+            "ai-services"
+            "nginx-service"
+          )
 
-      - name: Delete Cloud Run Service
-        run: |
-          gcloud run services delete orders-management-service --region=us-central1 --platform=managed --quiet
+          for SERVICE in "${SERVICES[@]}"; do
+            echo "Deleting Cloud Run service: $SERVICE"
+            if ! gcloud run services delete "$SERVICE" --region=us-central1 --platform=managed --quiet; then
+              echo "::error:: Failed to delete $SERVICE"
+            fi &
+          done
 
-      - name: Delete Docker Image
+          wait
+
+      - name: Delete Docker Images in Parallel
         run: |
-          gcloud artifacts docker images delete us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest --quiet
+          IMAGES=(
+            "orders-management-image"
+            "products_management-image"
+            "authentications_management-image"
+            "manufacturers_management-image"
+            "customers-management-image"
+            "ai-services-image"
+            "nginx-image"
+          )
+
+          for IMAGE in "${IMAGES[@]}"; do
+            echo "Deleting Docker image: $IMAGE"
+            if ! gcloud artifacts docker images delete "us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/$IMAGE:latest" --quiet; then
+              echo "::error:: Failed to delete $IMAGE"
+            fi &
+          done
+
+          wait
+
+      - name: Delete Cloud SQL Instance and VPC in Parallel
+        run: |
+          echo "Deleting Cloud SQL instance..."
+          gcloud sql instances delete postgres --quiet --async || echo "::error:: Failed to delete Cloud SQL" &
+          SQL_PID=$!
+
+          echo "Deleting VPC Access Connector..."
+          gcloud compute networks vpc-access connectors delete orders-vpc-connector --region=us-central1 --quiet --async || echo "::error:: Failed to delete VPC Connector" &
+          VPC_PID=$!
+
+          wait $SQL_PID
+          wait $VPC_PID
