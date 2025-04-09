@@ -18,15 +18,24 @@ def create_users():
     result = CreateUsers(data).execute()
     return jsonify(result), 201
 
-@users.route('/customers', methods=['POST'])
+@users.route('/users/customers', methods=['POST'])
 def create_customers():
     data = request.get_json()
 
     if not data or 'name' not in data or 'country' not in data or 'address' not in data or 'telephone' not in data or 'email' not in data:
-        raise InvalidData()
+        return jsonify({'error': 'Invalid data provided'}), 400
 
-    result = CreateCustomer(data).execute()
-    return jsonify(result), 201
+    try:
+        result = CreateCustomer(data).execute()
+        return jsonify(result), 201
+    except InvalidData as e:
+        return jsonify({'error': e.description}), 400
+    except EmailDoesNotValid as e:
+        return jsonify({'error': e.description}), 400
+    except UserAlreadyExists as e:
+        return jsonify({'error': e.description}), 409
+    except Exception as e:
+        return jsonify({'error': 'An unexpected error occurred', 'details': str(e)}), 500
 
 @users.route('/users/login', methods=['POST'])
 def login():

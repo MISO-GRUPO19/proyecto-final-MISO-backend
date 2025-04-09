@@ -32,12 +32,6 @@ class CreateUsers(BaseCommand):
         if self.data['role'] not in ['Administrador', 'Vendedor', 'Cliente']:
             raise InvalidData
 
-        if self.data['role'] == 'Cliente' or self.data['role'] == 'Vendedor':
-            required_fields = ['name', 'country', 'address', 'telephone']
-            for field in required_fields:
-                if field not in self.data or not self.data[field]:
-                    raise InvalidData
-
         email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
         if not re.match(email_regex, self.data['email']):
             raise EmailDoesNotValid

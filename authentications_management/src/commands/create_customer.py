@@ -23,9 +23,10 @@ class CreateCustomer(BaseCommand):
 
         try:
             customer = Customers(name=self.data['name'], country=self.data['country'], address=self.data['address'], telephone=self.data['telephone'], email=self.data['email'])
+            
             db_session.add(customer)
             db_session.commit()
-            return {'message': 'Cliente creado exitosamente'}
+            return {'message': 'Customer created successfully', 'customer_id': customer.id}
         except Exception as e:
             db_session.rollback()
             raise e
