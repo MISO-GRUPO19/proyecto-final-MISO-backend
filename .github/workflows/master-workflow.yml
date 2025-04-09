@@ -45,7 +45,7 @@ jobs:
 
       - name: Wait for Deploy DB Workflow (if instance does not exist)
         if: steps.check_cloudsql_instance.outputs.cloudsql_instance_exists == 'false'
-        run: sleep 1140
+        run: sleep 360
 
       - name: Check for changes in orders-management
         id: check_orders_management
@@ -63,7 +63,7 @@ jobs:
             echo "orders_management_changed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check for changes in products-management
+      - name: Check for changes in products_management
         id: check_products_management
         run: |
           git fetch
@@ -73,7 +73,7 @@ jobs:
             DIFF=$(git diff --name-only HEAD)
           fi
           echo "$DIFF"
-          if echo "$DIFF" | grep -q "^products-management/"; then
+          if echo "$DIFF" | grep -q "^products_management/"; then
             echo "products_management_changed=true" >> $GITHUB_OUTPUT
           else
             echo "products_management_changed=false" >> $GITHUB_OUTPUT
@@ -169,10 +169,10 @@ jobs:
             echo "orders_image_exists=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check if products-management image exists
+      - name: Check if products_management image exists
         id: check_products_image
         run: |
-          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products-management-image --filter="tags:latest" --format="value(name)")
+          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/products_management-image --filter="tags:latest" --format="value(name)")
           if [ -z "$IMAGE_EXISTS" ]; then
             echo "products_image_exists=false" >> $GITHUB_OUTPUT
           else
@@ -229,10 +229,10 @@ jobs:
             echo "orders_service_exists=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check if products-management service exists
+      - name: Check if products_management service exists
         id: check_products_service
         run: |
-          SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=products-management-service" --format="value(metadata.name)")
+          SERVICE_EXISTS=$(gcloud run services list --filter="metadata.name=products_management-service" --format="value(metadata.name)")
           if [ -z "$SERVICE_EXISTS" ]; then
             echo "products_service_exists=false" >> $GITHUB_OUTPUT
           else

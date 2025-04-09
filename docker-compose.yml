@@ -56,9 +56,9 @@ services:
       retries: 5
 
   products_service:
-    container_name: products-management-services
+    container_name: products_management-services
     build:
-      context: ./products-management
+      context: ./products_management
       dockerfile: Dockerfile
     image: products_service:1.0
     environment:
@@ -67,6 +67,7 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_NAME: products
+      GOOGLE_APPLICATION_CREDENTIALS: ./pubsub/proyecto-final-451719-1806c6f593e4.json
     depends_on:
       database_products:
         condition: service_healthy
@@ -134,9 +135,9 @@ services:
       retries: 5
 
   manufacturers_service:
-    container_name: manufacturers-management-services
+    container_name: manufacturers_management-services
     build:
-      context: ./manufacturers-management
+      context: ./manufacturers_management
       dockerfile: Dockerfile
     image: manufacturers_service:1.0
     environment:
@@ -233,6 +234,7 @@ services:
       - "5006:5006"
     restart: always
 
+  
   nginx:
     build:
       context: ./
@@ -248,6 +250,7 @@ services:
       - ai_service
     networks:
       - services_network
+
 
 networks:
   orders_network:

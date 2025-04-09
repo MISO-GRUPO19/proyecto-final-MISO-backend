@@ -3,7 +3,8 @@ from .base_command import BaseCommand
 from ..errors.errors import InvalidData, PasswordMismatch, UserAlreadyExists, EmailDoesNotValid, PasswordDoesNotHaveTheStructure
 from ..models.users import Users
 from ..models.database import db_session
-from ..services.customer_service import CustomerService
+from google.cloud import pubsub_v1
+from ..pubsub.publisher import publish_message
 
 class CreateUsers(BaseCommand):
     def __init__(self, data):
@@ -11,6 +12,16 @@ class CreateUsers(BaseCommand):
 
     def execute(self):
         required_fields = ['email', 'password', 'confirm_password', 'role']
+        
+        role_mapping = {
+            1: 'Administrador',
+            2: 'Vendedor',
+            3: 'Cliente'
+        }
+        
+        if self.data['role'] in role_mapping:
+            self.data['role'] = role_mapping[self.data['role']]
+
         for field in required_fields:
             if field not in self.data or not self.data[field]:
                 raise InvalidData
@@ -46,17 +57,10 @@ class CreateUsers(BaseCommand):
         if Users.query.filter_by(email=self.data['email']).first():
             raise UserAlreadyExists
 
-        try:
-            with db_session.begin():
-                user = Users(email=self.data['email'], role=self.data['role'], password=self.data['password'])
-                db_session.add(user)
-                
-                if self.data['role'] == 'Cliente':
-                    CustomerService.create_customer(self.data)
-            
-            return {'message': 'Usuario creado exitosamente'}
-        except Exception as e:
-            db_session.rollback()
-            raise e
-        finally:
-            db_session.close()
+        publish_message('users', {
+            'email': self.data['email'],
+            'role': self.data['role'],
+            'password': self.data['password']
+        })
+
+        return {'message': 'Usuario enviado a la cola exitosamente'}

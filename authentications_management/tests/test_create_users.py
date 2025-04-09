@@ -1,68 +1,65 @@
 import pytest
-from flask_testing import TestCase
-from authentications_management.src.main import app, init_db
+from authentications_management.src.main import app
 from authentications_management.src.models.database import db_session, base
-from authentications_management.tests.conftest import test_client
+from unittest.mock import patch
+from unittest.mock import MagicMock
 
-class TestCreateUsers(TestCase):
-    def create_app(self):
-        app.config.from_object('authentications_management.tests.conftest')
-        return app
+@pytest.fixture
+def test_client():
+    app.config.from_object('authentications_management.tests.conftest')
+    with app.test_client() as client:
+        with app.app_context():
+            base.metadata.create_all(bind=db_session.bind)
+        yield client
+        with app.app_context():
+            base.metadata.drop_all(bind=db_session.bind)
 
-    def setUp(self):
-        base.metadata.create_all(bind=db_session.bind)
+@patch('authentications_management.src.pubsub.publisher.pubsub_v1.PublisherClient')
+def test_create_user(mock_publisher, test_client):
+    mock_future = MagicMock()
+    mock_future.result.return_value = "mocked-message-id"
+    mock_publisher.return_value.publish.return_value = mock_future
+    
+    response = test_client.post('/users', json={
+        'email': 'test@example.com',
+        'password': 'Test1234!',
+        'confirm_password': 'Test1234!',
+        'role': 1
+    })
+    assert response.status_code == 201
+    assert 'Usuario enviado a la cola exitosamente' in response.json['message']
 
-    def tearDown(self):
-        db_session.remove()
-        base.metadata.drop_all(bind=db_session.bind)
+def test_create_user_invalid_email(test_client):
+    response = test_client.post('/users', json={
+        'email': 'invalid-email',
+        'password': 'Test1234!',
+        'confirm_password': 'Test1234!',
+        'role': 'CLIENTE'
+    })
+    assert response.status_code == 400
+    assert 'Datos inválidos' in response.json['mssg']
 
-    def test_create_user(self):
-        with self.client:
-            response = self.client.post('/users', json={
-                'email': 'test@example.com',
-                'password': 'Test1234!',
-                'confirm_password': 'Test1234!',
-                'role': 'Administrador'
-            })
-            self.assertEqual(response.status_code, 201)
-            self.assertIn('Usuario creado exitosamente', response.json['message'])
+def test_create_user_password_mismatch(test_client):
+    response = test_client.post('/users', json={
+        'email': 'test@example.com',
+        'password': 'Test1234!',
+        'confirm_password': 'Test12345!',
+        'role': 'CLIENTE'
+    })
+    assert response.status_code == 400
+    assert 'Confirmación de contraseña no coincide' in response.json['mssg']
 
-    def test_create_user_invalid_email(self):
-        with self.client:
-            response = self.client.post('/users', json={
-                'email': 'invalid-email',
-                'password': 'Test1234!',
-                'confirm_password': 'Test1234!',
-                'role': 'CLIENTE'
-            })
-            self.assertEqual(response.status_code, 400)
-            self.assertIn('Datos inválidos', response.json['mssg'])
+def test_create_user_invalid_role(test_client):
+    response = test_client.post('/users', json={
+        'email': 'test@example.com',
+        'password': 'Test1234!',
+        'confirm_password': 'Test1234!',
+        'role': 'INVALID_ROLE'
+    })
+    assert response.status_code == 400
+    assert 'Datos inválidos' in response.json['mssg']
 
-    def test_create_user_password_mismatch(self):
-        with self.client:
-            response = self.client.post('/users', json={
-                'email': 'test@example.com',
-                'password': 'Test1234!',
-                'confirm_password': 'Test12345!',
-                'role': 'CLIENTE'
-            })
-            print(response.json)
-            self.assertEqual(response.status_code, 400)
-            self.assertIn('Confirmación de contraseña no coincide', response.json['mssg'])
-
-    def test_create_user_invalid_role(self):
-        with self.client:
-            response = self.client.post('/users', json={
-                'email': 'test@example.com',
-                'password': 'Test1234!',
-                'confirm_password': 'Test1234!',
-                'role': 'INVALID_ROLE'
-            })
-            self.assertEqual(response.status_code, 400)
-            self.assertIn('Datos inválidos', response.json['mssg'])
-            
-    def test_ping(self):
-        with self.client:
-            response = self.client.get('/users/ping')
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('pong', response.json['message'])
+def test_ping(test_client):
+    response = test_client.get('/users/ping')
+    assert response.status_code == 200
+    assert 'pong' in response.json['message']
