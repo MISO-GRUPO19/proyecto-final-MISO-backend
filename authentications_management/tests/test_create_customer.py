@@ -15,6 +15,21 @@ def valid_data():
     }
 
 @patch('authentications_management.src.commands.create_customer.Customers')
+def test_create_customer_invalid_data(mock_customers, valid_data):
+    valid_data['email'] = ''  # Correo inválido
+    command = CreateCustomer(valid_data)
+    with pytest.raises(InvalidData):
+        command.execute()
+
+@patch('authentications_management.src.commands.create_customer.Customers')
+def test_create_customer_db_error(mock_customers, valid_data):
+    mock_customers.query.filter_by.return_value.first.return_value = None
+    mock_customers.side_effect = Exception("DB Error")
+    command = CreateCustomer(valid_data)
+    with pytest.raises(Exception):
+        command.execute()
+
+@patch('authentications_management.src.commands.create_customer.Customers')
 @patch('authentications_management.src.commands.create_customer.db_session')
 def test_create_customer_success(mock_db_session, mock_customers, valid_data):
     mock_customers.query.filter_by.return_value.first.return_value = None
