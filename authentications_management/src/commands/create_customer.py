@@ -9,7 +9,7 @@ class CreateCustomer(BaseCommand):
         self.data = data
 
     def execute(self):
-        required_fields = ['firstName', 'lastName' 'country', 'address', 'phoneNumber', 'email']
+        required_fields = ['firstName', 'lastName', 'country', 'address', 'phoneNumber', 'email']
         for field in required_fields:
             if field not in self.data or not self.data[field]:
                 raise InvalidData
