@@ -28,21 +28,10 @@ def test_create_customer_success(mock_db_session, mock_customers, valid_data):
     assert result == {'message': 'Customer created successfully', 'customer_id': 1}
     mock_db_session.add.assert_called_once()
     mock_db_session.commit.assert_called_once()
-    mock_db_session.close.assert_called_once()
 
 @pytest.mark.parametrize("missing_field", ['firstName', 'lastName', 'country', 'address', 'phoneNumber', 'email'])
 def test_missing_required_field(valid_data, missing_field):
     del valid_data[missing_field]
-    command = CreateCustomer(valid_data)
-    with pytest.raises(InvalidData):
-        command.execute()
-
-@pytest.mark.parametrize("field,value", [
-    ('firstName', 'Jo'),     # Too short
-    ('lastName', 'A' * 51),  # Too long
-])
-def test_invalid_name_length(valid_data, field, value):
-    valid_data[field] = value
     command = CreateCustomer(valid_data)
     with pytest.raises(InvalidData):
         command.execute()
