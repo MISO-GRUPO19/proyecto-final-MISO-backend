@@ -45,7 +45,7 @@ jobs:
 
       - name: Wait for Deploy DB Workflow (if instance does not exist)
         if: steps.check_cloudsql_instance.outputs.cloudsql_instance_exists == 'false'
-        run: sleep 840
+        run: sleep 360
 
       - name: Check for changes in orders-management
         id: check_orders_management
