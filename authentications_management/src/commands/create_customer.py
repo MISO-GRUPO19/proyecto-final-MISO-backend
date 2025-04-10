@@ -22,7 +22,7 @@ class CreateCustomer(BaseCommand):
         if not re.match(address_regex, self.data['address']):
             raise InvalidData
         
-        phone_regex = r'^\+[1-9][0-9]{6,13}$'
+        phone_regex = r'^\+?[1-9][0-9]{6,13}$'
         if not re.match(phone_regex, self.data['phoneNumber']):
             raise InvalidData
         
