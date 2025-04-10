@@ -14,8 +14,8 @@ def valid_data():
         'email': 'john.doe@example.com'
     }
 
-@patch('app.commands.create_customer.Customers')
-@patch('app.commands.create_customer.db_session')
+@patch('authentications_management.src.commands.create_customer.Customers')
+@patch('authentications_management.src.commands.create_customer.db_session')
 def test_create_customer_success(mock_db_session, mock_customers, valid_data):
     mock_customers.query.filter_by.return_value.first.return_value = None
     mock_customer_instance = MagicMock()
@@ -65,7 +65,7 @@ def test_invalid_email(valid_data):
     with pytest.raises(EmailDoesNotValid):
         command.execute()
 
-@patch('app.commands.create_customer.Customers')
+@patch('authentications_management.src.commands.create_customer.Customers')
 def test_user_already_exists(mock_customers, valid_data):
     mock_customers.query.filter_by.return_value.first.return_value = True
     command = CreateCustomer(valid_data)
