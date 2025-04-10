@@ -62,3 +62,15 @@ class InvalidEmail(ApiError):
 class ExistingSeller(ApiError):
     code = 409
     description = "A seller with the same identification already exists in the system"
+
+class InvalidTelephoneCustomer(ApiError):
+    code = 400
+    description = "Invalid telephone, it should have at least 8 digits and 15 maximum. Digits only."
+    
+class InvalidAddressCustomer(ApiError):
+    code = 400
+    description = "Invalid address, it should have at least 5 characteres and maximum 150."
+
+class InvalidNameCustomer(ApiError):
+    code = 400
+    description = "Invalid name value, It should have at least 3 characters and maximum 50, letters and spaces only."

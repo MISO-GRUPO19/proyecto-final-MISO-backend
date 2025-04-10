@@ -1,6 +1,6 @@
 import re
 from .base_command import BaseCommand
-from ..errors.errors import InvalidData, UserAlreadyExists, EmailDoesNotValid
+from ..errors.errors import InvalidAddressCustomer, InvalidData, InvalidNameCustomer, InvalidTelephoneCustomer, UserAlreadyExists, EmailDoesNotValid
 from ..models.customers import Customers
 from ..models.database import db_session
 
@@ -16,15 +16,15 @@ class CreateCustomer(BaseCommand):
 
         for field in ['firstName', 'lastName']:
             if not (3 <= len(self.data[field]) <= 50):
-                raise InvalidData
+                raise InvalidNameCustomer
 
         address_regex = r'^[a-zA-Z0-9\s#\-/.,]{5,150}$'
         if not re.match(address_regex, self.data['address']):
-            raise InvalidData
+            raise InvalidAddressCustomer
         
         phone_regex = r'^\+?[1-9][0-9]{6,13}$'
         if not re.match(phone_regex, self.data['phoneNumber']):
-            raise InvalidData
+            raise InvalidTelephoneCustomer
         
         email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
         if not re.match(email_regex, self.data['email']):
