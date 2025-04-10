@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import patch, MagicMock
 from authentications_management.src.commands.create_customer import CreateCustomer
-from authentications_management.src.errors.errors import InvalidData, UserAlreadyExists, EmailDoesNotValid
+from authentications_management.src.errors.errors import InvalidAddressCustomer, InvalidData, InvalidTelephoneCustomer, UserAlreadyExists, EmailDoesNotValid
 
 @pytest.fixture
 def valid_data():
@@ -54,13 +54,13 @@ def test_missing_required_field(valid_data, missing_field):
 def test_invalid_address(valid_data):
     valid_data['address'] = '@@!!'
     command = CreateCustomer(valid_data)
-    with pytest.raises(InvalidData):
+    with pytest.raises(InvalidAddressCustomer):
         command.execute()
 
 def test_invalid_phone(valid_data):
     valid_data['phoneNumber'] = '123456'
     command = CreateCustomer(valid_data)
-    with pytest.raises(InvalidData):
+    with pytest.raises(InvalidTelephoneCustomer):
         command.execute()
 
 def test_invalid_email(valid_data):
