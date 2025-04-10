@@ -1,13 +1,17 @@
 import pytest
-from unittest.mock import patch, MagicMock
+from flask_jwt_extended import create_access_token
+from unittest.mock import patch
 from authentications_management.src.main import app
 from authentications_management.src.models.database import db_session
+
 
 @pytest.fixture
 def client():
     app.config['TESTING'] = True
+    app.config['JWT_SECRET_KEY'] = 'qwerty'
     with app.test_client() as client:
         yield client
+
 
 @patch('authentications_management.src.commands.create_users.CreateUsers.execute')
 def test_create_users_success(mock_create_users, client):
@@ -20,6 +24,7 @@ def test_create_users_success(mock_create_users, client):
     })
     assert response.status_code == 201
     assert response.json['message'] == 'Usuario enviado a la cola exitosamente'
+
 
 @patch('authentications_management.src.commands.create_customer.CreateCustomer.execute')
 def test_create_customers_success(mock_create_customer, client):
@@ -35,25 +40,30 @@ def test_create_customers_success(mock_create_customer, client):
     assert response.status_code == 201
     assert response.json['message'] == 'Customer created successfully'
 
+
 @patch('authentications_management.src.commands.create_sellers.CreateSellers.execute')
 def test_create_sellers_success(mock_create_sellers, client):
     mock_create_sellers.return_value = {'message': 'Seller has been created successfully'}
-    
+
+    # Crear un token JWT válido
+    access_token = create_access_token(identity="test-user-id")
+
     headers = {
-        'Authorization': 'Bearer fake-valid-token'
+        'Authorization': f'Bearer {access_token}'
     }
-    
+
     response = client.post('/users/sellers', json={
         'identification': '123456',
         'name': 'Seller Name',
         'country': 'USA',
         'address': '123 Main St',
-        'telephone': '+12345678901',
+        'telephone': '1234567890',  # Solo dígitos, para pasar la validación del código
         'email': 'seller@example.com'
     }, headers=headers)
-    
+
     assert response.status_code == 201
     assert response.json['message'] == 'Seller has been created successfully'
+
 
 def test_ping(client):
     response = client.get('/users/ping')
