@@ -35,6 +35,12 @@ def create_customers():
         return jsonify({'error': e.description}), 400
     except UserAlreadyExists as e:
         return jsonify({'error': e.description}), 409
+    except InvalidNameCustomer as e:
+        return jsonify({'error': e.description}), 400
+    except InvalidAddressCustomer as e:
+        return jsonify({'error': e.description}), 400
+    except InvalidTelephoneCustomer as e:
+        return jsonify({'error': e.description}), 400
     except Exception as e:
         return jsonify({'error': 'An unexpected error occurred', 'details': str(e)}), 500
 
