@@ -22,7 +22,7 @@ def create_users():
 def create_customers():
     data = request.get_json()
 
-    if not data or 'name' not in data or 'country' not in data or 'address' not in data or 'telephone' not in data or 'email' not in data:
+    if not data or 'firstName' not in data or 'lastName' not in data or 'country' not in data or 'address' not in data or 'phoneNumber' not in data or 'email' not in data:
         return jsonify({'error': 'Invalid data provided'}), 400
 
     try:

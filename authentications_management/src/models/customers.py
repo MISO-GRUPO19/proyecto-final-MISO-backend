@@ -12,19 +12,21 @@ class Customers(Model, base):
     __tablename__ = 'customers'
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    name = Column(String, nullable=False)
-    country = Column(String, nullable=False)
+    firstName = Column(String, nullable=False)
+    lastName = Column(String, nullable=False)
+    phoneNumber = Column(String, nullable=False)
     address = Column(String, nullable=False)
-    telephone = Column(String, nullable=False)
+    country = Column(String, nullable=False)
     email = Column(String, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
     
-    def __init__(self, name, country, address, telephone, email):
-        self.name = name
-        self.country = country
+    def __init__(self, firstName, lastName, phoneNumber, address, country, email):
+        self.firstName = firstName
+        self.lastName = lastName
+        self.phoneNumber = phoneNumber
         self.address = address
-        self.telephone = telephone
+        self.country = country
         self.email = email
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
+        self.created_at = datetime.datetime.utcnow()
+        self.updated_at = datetime.datetime.utcnow()
