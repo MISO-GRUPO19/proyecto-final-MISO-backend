@@ -38,6 +38,11 @@ def test_create_customers_success(mock_create_customer, client):
 @patch('authentications_management.src.commands.create_sellers.CreateSellers.execute')
 def test_create_sellers_success(mock_create_sellers, client):
     mock_create_sellers.return_value = {'message': 'Seller has been created successfully'}
+    
+    headers = {
+        'Authorization': 'Bearer fake-valid-token'
+    }
+    
     response = client.post('/users/sellers', json={
         'identification': '123456',
         'name': 'Seller Name',
@@ -45,7 +50,8 @@ def test_create_sellers_success(mock_create_sellers, client):
         'address': '123 Main St',
         'telephone': '+12345678901',
         'email': 'seller@example.com'
-    })
+    }, headers=headers)
+    
     assert response.status_code == 201
     assert response.json['message'] == 'Seller has been created successfully'
 
