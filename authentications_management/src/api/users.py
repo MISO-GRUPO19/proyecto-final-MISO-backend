@@ -19,7 +19,6 @@ def create_users():
     return jsonify(result), 201
 
 @users.route('/users/customers', methods=['POST'])
-@jwt_required()
 def create_customers():
     data = request.get_json()
 
