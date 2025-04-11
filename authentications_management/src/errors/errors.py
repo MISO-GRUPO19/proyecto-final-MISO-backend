@@ -65,12 +65,12 @@ class ExistingSeller(ApiError):
 
 class InvalidTelephoneCustomer(ApiError):
     code = 400
-    description = "Invalid telephone, it should have at least 8 digits and 15 maximum. Digits only."
+    description = "InvalidTelephoneCustomer"
     
 class InvalidAddressCustomer(ApiError):
     code = 400
-    description = "Invalid address, it should have at least 5 characteres and maximum 150."
+    description = "InvalidAddressCustomer"
 
 class InvalidNameCustomer(ApiError):
     code = 400
-    description = "Invalid name value, It should have at least 3 characters and maximum 50, letters and spaces only."
+    description = "InvalidNameValueCustomer"
