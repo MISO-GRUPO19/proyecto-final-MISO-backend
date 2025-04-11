@@ -47,3 +47,13 @@ class Batch(Model, base):
         self.quantity = quantity
         self.product_id = product_id
         
+class ProductOrder(Model, base):
+    __tablename__ = 'product_orders'
+
+    product_id = Column(UUID(as_uuid=True), ForeignKey('products.id'), nullable=False)
+    order_id = Column(UUID(as_uuid=True), nullable=False)
+    quantity = Column(Integer, nullable=False)
+    
+    def __init__(self, product_id, order_id):
+        self.product_id = product_id
+        self.order_id = order_id
