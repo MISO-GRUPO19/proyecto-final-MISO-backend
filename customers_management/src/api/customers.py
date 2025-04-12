@@ -1,7 +1,8 @@
 from flask import request, jsonify, Blueprint, Response
-
+from flask_jwt_extended import jwt_required
 from ..queries.get_customers import GetCustomers
 from ..commands.sync_customers import SyncCustomer
+
 customers = Blueprint('customers', __name__)
 
 @customers.route('/customers/ping', methods=['GET'])
@@ -21,6 +22,7 @@ def sync_customer():
         return jsonify({'error': str(e)}), 500
     
 @customers.route('/customers', methods=['GET'])
+@jwt_required()
 def get_customers():
     try:
         response, status_code = GetCustomers().execute()
