@@ -249,7 +249,35 @@ class TestCreateProducts(unittest.TestCase):
 
             self.assertGreater(len(warehouses), 0)
 
-        
+    @patch('requests.get')
+    def test_create_product_warehouse(self, mock_requests_get):
+        token = self.get_jwt_token()
+        headers = {
+            'Authorization': f'Bearer {token}'
+        }
+        with self.client:
+            
+            # Simular respuesta HTTP para validar proveedores
+            mock_requests_get.return_value.status_code = 200
+            mock_requests_get.return_value.json.return_value = {"valid": True}
+            
+            response = self.client.post('/products', json={
+                'name': 'Product Name',
+                'description': 'Product Description',
+                'price': 19.99,
+                'category': 'Condimentos y Especias',
+                'weight': 1.5,
+                'barcode': '1234567890123',
+                'provider_id': '123e4567-e89b-12d3-a456-426614174000',
+                'batch': 'Batch001',
+                'best_before': '2025-12-31T23:59:59',
+                'quantity': 100
+            }, headers=headers)
+            print(response.json)  
+        with self.app.app_context():
+            from products_management.src.models.products import ProductWarehouse
+            products_warehouses = db_session.query(ProductWarehouse).all()
+            self.assertGreater(len(products_warehouses), 0)
 
     def test_ping(self):
         with self.client:
