@@ -218,6 +218,7 @@ class TestCreateProducts(unittest.TestCase):
         
         self.assertIn("El peso debe ser mayor que cero.", str(e.exception))
     
+    @patch('requests.get')
     def test_create_warehouses(self, mock_requests_get):
         token = self.get_jwt_token()
         headers = {
