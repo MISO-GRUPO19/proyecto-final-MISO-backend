@@ -218,7 +218,7 @@ class TestCreateProducts(unittest.TestCase):
         
         self.assertIn("El peso debe ser mayor que cero.", str(e.exception))
     
-    def test_create_warehouses(self, mock_requests_get):
+    def test_create_warehouses(self):
         data = {
         "name": "Product Name",
         "description": "Product Description",
