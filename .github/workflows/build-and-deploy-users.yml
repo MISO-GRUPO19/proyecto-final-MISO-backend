@@ -50,6 +50,7 @@ jobs:
           ls -la
           cat ./authentications_management/src/.env.development
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./authentications_management/src/.env.development
+          sed -i "s|NGINX=http://nginx:8080|NGINX=https://nginx-service-230506421700.us-central1.run.app|g" ./products_management/src/.env.development
 
           cat ./authentications_management/src/.env.development
 

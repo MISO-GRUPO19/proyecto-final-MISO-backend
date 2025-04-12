@@ -10,3 +10,9 @@ requests
 flask-sqlalchemy
 pytest
 uptrace
+faker
+flask_jwt_extended
+flask_testing
+pytest-cov
+pytest-flask
+flask-cors

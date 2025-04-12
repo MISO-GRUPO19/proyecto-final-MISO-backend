@@ -1,5 +1,6 @@
 from flask_jwt_extended import create_access_token, create_refresh_token
 from ..models.users import Users
+from ..models.customers import Customers
 from ..errors.errors import UserNotFound, InvalidPassword
 
 class LoginUserCommand:
@@ -17,13 +18,30 @@ class LoginUserCommand:
 
         access_token = create_access_token(identity=user.id)
         refresh_token = create_refresh_token(identity=user.id)
-
-        return {
-            'access_token': access_token,
-            'refresh_token': refresh_token,
-            'user': {
-                'id': user.id,
-                'email': user.email,
-                'role': user.role.value if hasattr(user, 'role') else 'user'
+        
+        if user.role.value == 3:
+            isCustomer = False
+            customer = Customers.query.filter_by(email=self.email).first()
+            if customer:
+                isCustomer = True
+            return {
+                'access_token': access_token,
+                'refresh_token': refresh_token,
+                'user': {
+                    'id': user.id,
+                    'email': user.email,
+                    'role': user.role.value if hasattr(user, 'role') else 'customer'
+                },
+                'isCustomer': isCustomer
             }
-        }
+
+        else:
+            return {
+                'access_token': access_token,
+                'refresh_token': refresh_token,
+                'user': {
+                    'id': user.id,
+                    'email': user.email,
+                    'role': user.role.value if hasattr(user, 'role') else 'user'
+                }
+            }

@@ -174,9 +174,9 @@ services:
       retries: 5
 
   customers_service:
-    container_name: customers-management-services
+    container_name: customers_management-services
     build:
-      context: ./customers-management
+      context: ./customers_management
       dockerfile: Dockerfile
     image: customers_service:1.0
     environment:

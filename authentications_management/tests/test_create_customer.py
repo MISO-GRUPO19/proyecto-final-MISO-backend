@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch, MagicMock
 from authentications_management.src.commands.create_customer import CreateCustomer
 from authentications_management.src.errors.errors import InvalidAddressCustomer, InvalidData, InvalidTelephoneCustomer, UserAlreadyExists, EmailDoesNotValid
-
+import os
 @pytest.fixture
 def valid_data():
     return {
@@ -29,13 +29,23 @@ def test_create_customer_db_error(mock_customers, valid_data):
     with pytest.raises(Exception):
         command.execute()
 
-@patch('authentications_management.src.commands.create_customer.Customers')
+@patch('authentications_management.src.commands.create_customer.requests.post')
 @patch('authentications_management.src.commands.create_customer.db_session')
-def test_create_customer_success(mock_db_session, mock_customers, valid_data):
+@patch('authentications_management.src.commands.create_customer.Customers')
+@patch.dict(os.environ, {"NGINX": "http://mocked-nginx"})
+def test_create_customer_success(mock_customers, mock_db_session, mock_post, valid_data):
     mock_customers.query.filter_by.return_value.first.return_value = None
     mock_customer_instance = MagicMock()
     mock_customer_instance.id = 1
+    mock_customer_instance.firstName = valid_data['firstName']
+    mock_customer_instance.lastName = valid_data['lastName']
+    mock_customer_instance.phoneNumber = valid_data['phoneNumber']
+    mock_customer_instance.address = valid_data['address']
+    mock_customer_instance.country = valid_data['country']
+    mock_customer_instance.email = valid_data['email']
     mock_customers.return_value = mock_customer_instance
+
+    mock_post.return_value.status_code = 200
 
     command = CreateCustomer(valid_data)
     result = command.execute()
@@ -43,6 +53,8 @@ def test_create_customer_success(mock_db_session, mock_customers, valid_data):
     assert result == {'message': 'Customer created successfully', 'customer_id': 1}
     mock_db_session.add.assert_called_once()
     mock_db_session.commit.assert_called_once()
+    mock_post.assert_called_once()
+
 
 @pytest.mark.parametrize("missing_field", ['firstName', 'lastName', 'country', 'address', 'phoneNumber', 'email'])
 def test_missing_required_field(valid_data, missing_field):
