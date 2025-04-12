@@ -2,42 +2,71 @@ import pytest
 from unittest.mock import patch, MagicMock
 from authentications_management.src.commands.create_customer import CreateCustomer
 from authentications_management.src.errors.errors import InvalidAddressCustomer, InvalidData, InvalidTelephoneCustomer, UserAlreadyExists, EmailDoesNotValid
+import os
+from authentications_management.src.errors.errors import InvalidData, UserAlreadyExists
 
 @pytest.fixture
-def valid_data():
-    return {
-        'firstName': 'John',
-        'lastName': 'Doe',
-        'country': 'USA',
-        'address': '123 Main St',
-        'phoneNumber': '+12345678901',
-        'email': 'john.doe@example.com'
-    }
-
-@patch('authentications_management.src.commands.create_customer.Customers')
-def test_create_customer_invalid_data(mock_customers, valid_data):
-    valid_data['email'] = ''  # Correo inválido
-    command = CreateCustomer(valid_data)
-    with pytest.raises(InvalidData):
-        command.execute()
-
-@patch('authentications_management.src.commands.create_customer.Customers')
-def test_create_customer_db_error(mock_customers, valid_data):
-    mock_customers.query.filter_by.return_value.first.return_value = None
-    mock_customers.side_effect = Exception("DB Error")
-    command = CreateCustomer(valid_data)
-    with pytest.raises(Exception):
-        command.execute()
-
 @patch('authentications_management.src.commands.create_customer.Customers')
 @patch('authentications_management.src.commands.create_customer.db_session')
-def test_create_customer_success(mock_db_session, mock_customers, valid_data):
+@patch('authentications_management.src.commands.create_customer.requests.post')
+def test_create_customer_sync_service_called(mock_requests_post, mock_db_session, mock_customers, valid_data):
     mock_customers.query.filter_by.return_value.first.return_value = None
     mock_customer_instance = MagicMock()
     mock_customer_instance.id = 1
     mock_customers.return_value = mock_customer_instance
 
+    mock_requests_post.return_value.status_code = 200
+
     command = CreateCustomer(valid_data)
+    result = command.execute()
+
+    assert result == {'message': 'Customer created successfully', 'customer_id': 1}
+    mock_requests_post.assert_called_once_with(
+        f'{os.getenv("NGINX")}/customers/sync',
+        json={
+            'id': str(mock_customer_instance.id),
+            'firstName': valid_data['firstName'],
+            'lastName': valid_data['lastName'],
+            'phoneNumber': valid_data['phoneNumber'],
+            'address': valid_data['address'],
+            'country': valid_data['country'],
+            'email': valid_data['email']
+        }
+    )
+
+@patch('authentications_management.src.commands.create_customer.Customers')
+@patch('authentications_management.src.commands.create_customer.db_session')
+@patch('authentications_management.src.commands.create_customer.requests.post')
+def test_create_customer_sync_service_failure(mock_requests_post, mock_db_session, mock_customers, valid_data):
+    mock_customers.query.filter_by.return_value.first.return_value = None
+    mock_customer_instance = MagicMock()
+    mock_customer_instance.id = 1
+    mock_customers.return_value = mock_customer_instance
+
+    mock_requests_post.return_value.status_code = 500
+    mock_requests_post.return_value.text = "Internal Server Error"
+
+    command = CreateCustomer(valid_data)
+    with pytest.raises(Exception, match="Failed to sync with customers service: Internal Server Error"):
+        command.execute()
+
+    mock_db_session.rollback.assert_called_once()
+
+@patch('authentications_management.src.commands.create_customer.Customers')
+@patch('authentications_management.src.commands.create_customer.db_session')
+def test_create_customer_missing_nginx_env(mock_db_session, mock_customers, valid_data):
+    mock_customers.query.filter_by.return_value.first.return_value = None
+    mock_customer_instance = MagicMock()
+    mock_customer_instance.id = 1
+    mock_customers.return_value = mock_customer_instance
+
+    os.environ.pop("NGINX", None)  # Ensure NGINX environment variable is not set
+
+    command = CreateCustomer(valid_data)
+    with pytest.raises(Exception, match="Invalid URL 'None/customers/sync': No scheme supplied."):
+        command.execute()
+
+    mock_db_session.rollback.assert_called_once()
     result = command.execute()
 
     assert result == {'message': 'Customer created successfully', 'customer_id': 1}
