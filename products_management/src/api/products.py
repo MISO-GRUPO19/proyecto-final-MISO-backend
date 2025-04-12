@@ -1,8 +1,8 @@
-from flask import request, jsonify, Blueprint, Response
+from flask import request, jsonify, Blueprint
 
 from ..commands.create_products import CreateProducts
 from ..commands.create_massive_products import CreateMassiveProducts
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 from ..queries.get_products import GetProducts
 from ..errors.errors import InvalidData
 products = Blueprint('products', __name__)

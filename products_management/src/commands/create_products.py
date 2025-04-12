@@ -2,7 +2,8 @@ from dotenv import load_dotenv
 import requests
 from .base_command import BaseCommand
 from ..errors.errors import InvalidData, ERROR_MESSAGES
-from ..models.products import Products, Batch
+from ..models.products import Products
+from ..models.batches import Batches
 from ..models.database import db_session
 import uuid
 import re
@@ -97,7 +98,7 @@ class CreateProducts(BaseCommand):
 
                 best_before = datetime.fromisoformat(self.data['best_before'])
                 
-                batch = Batch(
+                batch = Batches(
                     batch=self.data['batch'],
                     best_before=best_before,
                     quantity=int(self.data['quantity']),

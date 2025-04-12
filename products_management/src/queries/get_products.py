@@ -1,7 +1,7 @@
-from ..models.products import Products, Batch, ProductOrder
+from ..models.products import Products
+from ..models.batches import Batches
 from ..models.database import db_session
 from sqlalchemy import func
-from sqlalchemy.sql import label
 
 class GetProducts:
     def __init__(self, token):
@@ -9,28 +9,15 @@ class GetProducts:
 
     def execute(self):
         try:
-            subq_ordenados = (
-                db_session.query(
-                    ProductOrder.product_id,
-                    func.coalesce(func.sum(ProductOrder.quantity), 0).label('cantidad_ordenada')
-                )
-                .group_by(ProductOrder.product_id)
-                .subquery()
-            )
-
             productos = (
                 db_session.query(
-                    func.min(Products.name).label('name'),
-                    Products.barcode.label('barcode'),
-                    (
-                        func.coalesce(func.sum(Batch.quantity), 0) -
-                        func.coalesce(func.sum(subq_ordenados.c.cantidad_ordenada), 0)
-                    ).label('stock'),
-                    func.min(Products.price).label('price')
+                    Products.name,
+                    Products.barcode,
+                    func.coalesce(func.sum(Batches.quantityAvailable), 0).label('stock'),
+                    Products.price
                 )
-                .outerjoin(Batch, Products.id == Batch.product_id)
-                .outerjoin(subq_ordenados, Products.id == subq_ordenados.c.product_id)
-                .group_by(Products.barcode)
+                .outerjoin(Batches, Products.id == Batches.product_id)
+                .group_by(Products.name, Products.barcode, Products.price)
                 .all()
             )
 
@@ -39,8 +26,8 @@ class GetProducts:
                 products_list.append({
                     'name': p.name,
                     'barcode': p.barcode,
-                    'stock': p.stock,
-                    'price': p.price
+                    'stock': int(p.stock),
+                    'price': float(p.price)
                 })
 
             return products_list
