@@ -10,3 +10,4 @@ requests
 flask-sqlalchemy
 pytest
 uptrace
+faker

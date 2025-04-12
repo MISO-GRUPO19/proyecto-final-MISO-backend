@@ -1,4 +1,6 @@
 from flask import request, jsonify, Blueprint, Response
+
+from ..queries.get_customers import GetCustomers
 from ..commands.sync_customers import SyncCustomer
 customers = Blueprint('customers', __name__)
 
@@ -18,4 +20,10 @@ def sync_customer():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
-    
+@customers.route('/customers', methods=['GET'])
+def get_customers():
+    try:
+        response, status_code = GetCustomers().execute()
+        return response, status_code
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

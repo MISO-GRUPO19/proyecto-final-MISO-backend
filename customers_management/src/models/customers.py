@@ -4,6 +4,7 @@ from sqlalchemy import Column, String, DateTime
 from .model import Model
 from .database import base
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 import uuid
 
 db = SQLAlchemy()
@@ -20,6 +21,8 @@ class Customers(Model, base):
     email = Column(String, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
+    
+    stores = relationship('Stores', back_populates='customer', lazy='joined')
     
     def __init__(self, id=None, firstName=None, lastName=None, phoneNumber=None, address=None, country=None, email=None, created_at=None, updated_at=None):
         self.id = id or uuid.uuid4()
