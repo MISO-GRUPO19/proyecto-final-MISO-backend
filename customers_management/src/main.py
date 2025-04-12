@@ -5,6 +5,8 @@ from .errors.errors import ApiError
 import os
 from .models.database import init_db
 import uptrace
+from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 # Inicializar Uptrace
 uptrace.configure_opentelemetry(
@@ -12,11 +14,19 @@ uptrace.configure_opentelemetry(
     service_name="customers-management",
     service_version="1.0.0",
 )
-
+ 
 load_dotenv('./.env.development')
 APP_PORT = int(os.getenv("APP_PORT", default=5000))
 
+
 app = Flask(__name__)
+CORS(app)
+
+app.config["JWT_SECRET_KEY"] = "qwerty"
+jwt = JWTManager(app)
+
+app.config["DEBUG"] = True
+
 app.register_blueprint(customers)
 
 init_db()
