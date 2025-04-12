@@ -17,7 +17,7 @@ def create_product():
     except InvalidData as e:
         return jsonify({"error": "Datos inválidos", "detalles": e.errors}), 400
     except Exception as e:
-        return jsonify({"error": "Ocurrió un error inesperado"}), 500
+        return jsonify({"error": f"{e}Ocurrió un error inesperado"}), 500
 
 @products.route('/products/upload_products', methods=['POST'])
 @jwt_required()
