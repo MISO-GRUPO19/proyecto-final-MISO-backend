@@ -33,7 +33,7 @@ def test_create_customer_db_error(mock_customers, valid_data):
 @patch('authentications_management.src.commands.create_customer.db_session')
 @patch('authentications_management.src.commands.create_customer.Customers')
 @patch.dict(os.environ, {"NGINX": "http://mocked-nginx"})
-def test_create_customer_success(mock_post, mock_db_session, mock_customers, valid_data):
+def test_create_customer_success(mock_customers, mock_db_session, mock_post, valid_data):
     mock_customers.query.filter_by.return_value.first.return_value = None
     mock_customer_instance = MagicMock()
     mock_customer_instance.id = 1
