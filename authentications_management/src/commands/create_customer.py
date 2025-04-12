@@ -1,9 +1,17 @@
+from dotenv import load_dotenv
 import re
+import requests
 from .base_command import BaseCommand
 from ..errors.errors import InvalidAddressCustomer, InvalidData, InvalidNameCustomer, InvalidTelephoneCustomer, UserAlreadyExists, EmailDoesNotValid
 from ..models.customers import Customers
 from ..models.database import db_session
+import os
 
+load_dotenv()
+
+load_dotenv('../.env.development')
+
+NGINX = os.getenv("NGINX")
 class CreateCustomer(BaseCommand):
     def __init__(self, data):
         self.data = data
@@ -34,13 +42,39 @@ class CreateCustomer(BaseCommand):
             raise UserAlreadyExists
 
         try:
-            customer = Customers(firstName=self.data['firstName'],lastName=self.data['lastName'], country=self.data['country'], address=self.data['address'], phoneNumber=self.data['phoneNumber'], email=self.data['email'])
+            customer = Customers(
+                firstName=self.data['firstName'],
+                lastName=self.data['lastName'],
+                country=self.data['country'],
+                address=self.data['address'],
+                phoneNumber=self.data['phoneNumber'],
+                email=self.data['email']
+            )
             
             db_session.add(customer)
             db_session.commit()
+
+            # Llamar al microservicio de clientes para sincronizar
+            self.sync_with_customers_service(customer)
+
             return {'message': 'Customer created successfully', 'customer_id': customer.id}
         except Exception as e:
             db_session.rollback()
             raise e
         finally:
             db_session.close()
+
+    def sync_with_customers_service(self, customer):
+        url = f'{NGINX}/customers/sync'
+        payload = {
+            'id': str(customer.id),
+            'firstName': customer.firstName,
+            'lastName': customer.lastName,
+            'phoneNumber': customer.phoneNumber,
+            'address': customer.address,
+            'country': customer.country,
+            'email': customer.email
+        }
+        response = requests.post(url, json=payload)
+        if response.status_code != 200:
+            raise Exception(f"Failed to sync with customers service: {response.text}")
