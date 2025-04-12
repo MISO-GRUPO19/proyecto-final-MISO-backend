@@ -46,7 +46,7 @@ jobs:
             "products_management-image"
             "authentications_management-image"
             "manufacturers_management-image"
-            "customers-management-image"
+            "customers_management-image"
             "ai-services-image"
             "nginx-image"
           )
