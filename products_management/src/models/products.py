@@ -4,8 +4,11 @@ from .model import Model
 from .database import base
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
+from typing import List
+from marshmallow import Schema, fields
+from flask_sqlalchemy import SQLAlchemy
 
-
+db = SQLAlchemy()
 class ProductWarehouse(Model, base):
     __tablename__ = 'product_warehouse'
 
@@ -13,6 +16,7 @@ class ProductWarehouse(Model, base):
     warehouse_id = Column(UUID(as_uuid=True), ForeignKey('warehouses.id'), primary_key=True)
     product_barcode = Column(String, nullable=False)
     warehouse_name = Column(String, nullable=False)
+    warehouse_address = Column(String, nullable=False)
     quantity = Column(Integer, nullable=False, default=0)
     shelf = Column(String, nullable=False)  
     aisle = Column(String, nullable=False)  
@@ -21,11 +25,12 @@ class ProductWarehouse(Model, base):
     
     product = relationship('Products', backref='product_warehouse_relationships')
     warehouse = relationship('Warehouses', backref='product_warehouse_relationships')
-    def __init__(self, product_id, warehouse_id, product_barcode, warehouse_name, quantity, shelf, aisle, level):
+    def __init__(self, product_id, warehouse_id, product_barcode, warehouse_name, warehouse_address,quantity, shelf, aisle, level):
         self.product_id = product_id
         self.warehouse_id = warehouse_id
         self.product_barcode = product_barcode
         self.warehouse_name = warehouse_name
+        self.warehouse_address = warehouse_address
         self.quantity = quantity
         self.shelf = shelf
         self.aisle = aisle

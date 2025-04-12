@@ -1,6 +1,7 @@
 from flask import request, jsonify, Blueprint, Response
 
 from ..commands.create_products import CreateProducts
+from ..commands.get_product_by_id import GetById
 from ..commands.create_massive_products import CreateMassiveProducts
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..errors.errors import InvalidData
@@ -27,6 +28,12 @@ def upload_products():
     result = CreateMassiveProducts(file, auth_token).execute()
     
     return jsonify(result[0]), result[1]
+
+@products.route('/products/<identification>/warehouses', methods=['GET'])
+@jwt_required()
+def get_product(identification):
+    auth_token = request.headers.get("Authorization", "").replace("Bearer ", "")
+    return GetById(identificator=identification, token=auth_token).execute()
 
 @products.route('/products/ping', methods=['GET'])
 def ping():

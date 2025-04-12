@@ -57,6 +57,7 @@ class CreateProducts(BaseCommand):
             warehouse.id,
             product.barcode,
             warehouse.name,
+            warehouse.address,
             self.data['quantity'],
             self.SHELF_VALUES[random_int],
             self.AISLE_VALUES[random_int],
