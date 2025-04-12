@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch, MagicMock
 from authentications_management.src.commands.create_customer import CreateCustomer
 from authentications_management.src.errors.errors import InvalidAddressCustomer, InvalidData, InvalidTelephoneCustomer, UserAlreadyExists, EmailDoesNotValid
-
+import os
 @pytest.fixture
 def valid_data():
     return {
