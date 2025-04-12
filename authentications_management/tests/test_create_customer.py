@@ -29,12 +29,10 @@ def test_create_customer_db_error(mock_customers, valid_data):
     with pytest.raises(Exception):
         command.execute()
 
-@patch('authentications_management.src.commands.create_customer.Customers')
-@patch('authentications_management.src.commands.create_customer.db_session')
-@patch('authentications_management.src.commands.create_customer.Customers')
-@patch('authentications_management.src.commands.create_customer.db_session')
-@patch.dict(os.environ, {"NGINX": "http://mocked-nginx"})
 @patch('authentications_management.src.commands.create_customer.requests.post')
+@patch('authentications_management.src.commands.create_customer.db_session')
+@patch('authentications_management.src.commands.create_customer.Customers')
+@patch.dict(os.environ, {"NGINX": "http://mocked-nginx"})
 def test_create_customer_success(mock_post, mock_db_session, mock_customers, valid_data):
     mock_customers.query.filter_by.return_value.first.return_value = None
     mock_customer_instance = MagicMock()
