@@ -217,7 +217,32 @@ class TestCreateProducts(unittest.TestCase):
             command.execute()
         
         self.assertIn("El peso debe ser mayor que cero.", str(e.exception))
+    
+    def test_create_warehouses(self, mock_requests_get):
+        data = {
+        "name": "Product Name",
+        "description": "Product Description",
+        "price": 19.99,
+        "category": "Condimentos y Especias",
+        "weight": 1.5,
+        "barcode": "1234567890123",
+        "provider_id": "123e4567-e89b-12d3-a456-426614174000",
+        "batch": "Batch001",
+        "best_before": "2025-12-31T23:59:59",
+        "quantity": 100
+        }
+    
+        auth_token = self.get_jwt_token()  
+        command = CreateProducts(data, auth_token)  
+        command.execute()  
+        with self.app.app_context():
+            from products_management.src.models.products import Warehouses
+            warehouses = db_session.query(Warehouses).all()  
+
+            self.assertGreater(len(warehouses), 0)
+
         
+
     def test_ping(self):
         with self.client:
             response = self.client.get('/products/ping')
