@@ -60,7 +60,7 @@ def test_create_product_invalid_data(mock_create_products, client):
 
 @patch("products_management.src.api.products.CreateProducts")
 def test_create_product_unexpected_error(mock_create_products, client):
-    mock_create_products.return_value.execute.side_effect = Exception("Algo falló")
+    mock_create_products.return_value.execute.side_effect = Exception('')
     
     token = create_access_token(identity="user-id")
     headers = {'Authorization': f'Bearer {token}'}
