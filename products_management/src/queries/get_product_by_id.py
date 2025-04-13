@@ -2,6 +2,7 @@ from flask import jsonify
 from commands.base_command import BaseCommand
 from errors.errors import *
 from models.products import Products, ProductWarehouse, Warehouses, db
+from models.batches import Batches
 from dotenv import load_dotenv 
 import os
 import requests

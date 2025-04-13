@@ -4,7 +4,7 @@ from flask import Flask
 from flask_jwt_extended import JWTManager, create_access_token
 from products_management.src.api.products import products
 from products_management.src.models.database import db_session
-from products_management.src.commands.get_product_by_id import GetById
+from products_management.src.queries.get_product_by_id import GetById
 from products_management.src.errors.errors import InvalidData, NotFound
 
 class TestGetProductById(unittest.TestCase):

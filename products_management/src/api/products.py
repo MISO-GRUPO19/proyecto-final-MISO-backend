@@ -1,7 +1,7 @@
 from flask import request, jsonify, Blueprint
 
 from ..commands.create_products import CreateProducts
-from ..commands.get_product_by_id import GetById
+from ..queries.get_product_by_id import GetById
 from ..commands.create_massive_products import CreateMassiveProducts
 from flask_jwt_extended import jwt_required
 from ..queries.get_products import GetProducts
