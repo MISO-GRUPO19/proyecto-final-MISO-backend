@@ -1,4 +1,5 @@
-from sqlalchemy import Column, String, Integer, DateTime, Float, ForeignKey, Table
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Float, String, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 from .model import Model
 from .database import base
@@ -48,7 +49,7 @@ class Products(Model, base):
     weight = Column(Float, nullable=False)
     barcode = Column(String, nullable=False)
     provider_id = Column(UUID(as_uuid=True), nullable=False)
-    batch = relationship('Batch', backref='product', lazy=True)
+    batch = relationship('Batches', backref='product', lazy=True)
 
     
     warehouses = relationship('Warehouses', secondary='product_warehouse', back_populates='products')
@@ -62,20 +63,7 @@ class Products(Model, base):
         self.barcode = barcode
         self.provider_id = provider_id
 
-class Batch(Model, base):
-    __tablename__ = 'batches'
- 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    batch = Column(String, nullable=False)
-    best_before = Column(DateTime, nullable=False)
-    quantity = Column(Integer, nullable=False)
-    product_id = Column(UUID(as_uuid=True), ForeignKey('products.id'), nullable=False)
-    
-    def __init__(self, batch, best_before, quantity, product_id):
-        self.batch = batch
-        self.best_before = best_before
-        self.quantity = quantity
-        self.product_id = product_id
+
 class Warehouses(Model, base):
     __tablename__ = 'warehouses'
 

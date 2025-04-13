@@ -121,7 +121,7 @@ jobs:
             DIFF=$(git diff --name-only HEAD)
           fi
           echo "$DIFF"
-          if echo "$DIFF" | grep -q "^customers-management/"; then
+          if echo "$DIFF" | grep -q "^customers_management/"; then
             echo "customers_management_changed=true" >> $GITHUB_OUTPUT
           else
             echo "customers_management_changed=false" >> $GITHUB_OUTPUT
@@ -202,7 +202,7 @@ jobs:
       - name: Check if customers-management image exists
         id: check_customers_image
         run: |
-          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers-management-image --filter="tags:latest" --format="value(name)")
+          IMAGE_EXISTS=$(gcloud artifacts docker images list us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers_management-image --filter="tags:latest" --format="value(name)")
           if [ -z "$IMAGE_EXISTS" ]; then
             echo "customers_image_exists=false" >> $GITHUB_OUTPUT
           else
