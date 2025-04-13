@@ -10,7 +10,7 @@ from types import SimpleNamespace
 
 class TestGetProductById(unittest.TestCase):
 
-    @patch('products_management.src.queries.get_products_by_id.db_session')
+    @patch('products_management.src.queries.get_product_by_id.db_session')
     def test_execute_returns_correct_product_warehouse(self, mock_db_session):
         mock_db_session.query().outerjoin().group_by().all.return_value = [
             SimpleNamespace(
