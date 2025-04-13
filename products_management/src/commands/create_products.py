@@ -29,7 +29,7 @@ class CreateProducts(BaseCommand):
     ]
     SHELF_VALUES = ["A", "B", "C", "D", "E"]
     AISLE_VALUES = ["1", "2", "3", "4", "5"]
-    LEVEL_VALUES = [1, 2, 3, 4, 5]
+    LEVEL_VALUES = [1, 2, 3]
     ALLOWED_CATEGORIES = ["Frutas y Verduras", "Carnes y Pescados", "Lácteos y Huevos", "Panadería y Repostería", "Despensa", "Bebidas", "Snacks y Dulces", "Condimentos y Especias", "Productos de Limpieza", "Productos para Bebés"]
     def __init__(self, data, auth_token):
         self.data = data

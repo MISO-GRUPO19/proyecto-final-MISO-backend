@@ -52,8 +52,12 @@ class Products(Model, base):
     batch = relationship('Batches', backref='product', lazy=True)
 
     
-    warehouses = relationship('Warehouses', secondary='product_warehouse', back_populates='products')
-
+    warehouses = relationship(
+        'Warehouses',
+        secondary='product_warehouse',
+        back_populates='products',
+        overlaps="product"
+    )
     def __init__(self, name, description, price, category, weight, barcode, provider_id):
         self.name = name
         self.description = description
@@ -72,8 +76,12 @@ class Warehouses(Model, base):
     address = Column(String, nullable=False)
 
     
-    products = relationship('Products', secondary='product_warehouse', back_populates='warehouses')
-
+    products = relationship(
+        'Products',
+        secondary='product_warehouse',
+        back_populates='warehouses',
+        overlaps="product"
+    )
     def __init__(self, name, address):
         self.name = name
         self.address = address
