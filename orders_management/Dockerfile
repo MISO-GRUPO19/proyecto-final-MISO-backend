@@ -1,9 +1,9 @@
 # Usar una imagen base de Python
 FROM python:3.11-slim
 
-WORKDIR /orders-management
+WORKDIR /orders_management
 
-COPY requirements.txt requirements.txt
+COPY src/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
@@ -11,7 +11,7 @@ COPY . .
 ENV FLASK_APP=main.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-WORKDIR /orders-management/src
+WORKDIR /orders_management/src
 
 EXPOSE 5001
 

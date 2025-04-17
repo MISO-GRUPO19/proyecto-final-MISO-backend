@@ -22,6 +22,14 @@ class NotFound(ApiError):
     code = 404
     description = "No se encontró el producto"
 
+class ProductNotFound(ApiError):
+    code = 404
+    description = "ProductNotFound"
+    
+class ProductInsufficientStock(ApiError):
+    code = 422
+    description = "ProductInsufficientStock"
+
 # Mensajes de error específicos
 ERROR_MESSAGES = {
     "invalid_name": "El nombre debe tener entre 3 y 100 caracteres y solo puede contener letras, números, '-', '.' y espacios.",

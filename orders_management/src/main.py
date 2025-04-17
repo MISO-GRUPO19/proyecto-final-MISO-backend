@@ -30,7 +30,7 @@ init_db()
 def handle_exception(error):
     response = {
       "mssg": error.description,
-      "version": os.environ["VERSION"]
+      #"version": os.environ["VERSION"]
     }
     return jsonify(response), error.code
 

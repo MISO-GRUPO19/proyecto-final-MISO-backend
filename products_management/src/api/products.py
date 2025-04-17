@@ -1,5 +1,7 @@
 from flask import request, jsonify, Blueprint
 
+from ..queries.get_product_validate import GetProductValidate
+
 from ..commands.create_products import CreateProducts
 from ..queries.get_product_by_id import GetById
 from ..commands.create_massive_products import CreateMassiveProducts
@@ -42,6 +44,13 @@ def get_products():
     result = GetProducts(auth_token).execute()
     return jsonify(result), 200
 
+@products.route('/products/<barcode>', methods=['GET'])
+@jwt_required()
+def get_product_by_barcode(barcode):
+    auth_token = request.headers.get("Authorization", "").replace("Bearer ", "")
+    quantity = request.args.get('quantity')
+    
+    return GetProductValidate(barcode=barcode, quantity=quantity, token=auth_token).execute()
 
 @products.route('/products/ping', methods=['GET'])
 def ping():
