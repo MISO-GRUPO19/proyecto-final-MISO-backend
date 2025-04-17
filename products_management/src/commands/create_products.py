@@ -51,9 +51,8 @@ class CreateProducts(BaseCommand):
                 self.warehouses.append(warehouse)
             return self.warehouses
     
-    def create_product_warehouse(self, product : Products):
-        random_int = random.randint(0, len(self.warehouses) - 1)
-        warehouse: Warehouses = self.warehouses[random_int]
+    def create_product_warehouse(self, product: Products):
+        warehouse = random.choice(self.warehouses)
         product_warehouse = ProductWarehouse(
             product.id,
             warehouse.id,
@@ -61,9 +60,9 @@ class CreateProducts(BaseCommand):
             warehouse.name,
             warehouse.address,
             self.data['quantity'],
-            self.SHELF_VALUES[random_int],
-            self.AISLE_VALUES[random_int],
-            self.LEVEL_VALUES[random_int]
+            random.choice(self.SHELF_VALUES),
+            random.choice(self.AISLE_VALUES),
+            random.choice(self.LEVEL_VALUES)
         )
         db_session.add(product_warehouse)
         db_session.commit()
