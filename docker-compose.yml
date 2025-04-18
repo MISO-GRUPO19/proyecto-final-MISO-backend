@@ -19,7 +19,7 @@ services:
   orders_service:
     container_name: orders-management-services
     build:
-      context: ./orders-management
+      context: ./orders_management
       dockerfile: Dockerfile
     image: orders_service:1.0
     environment:

@@ -5,6 +5,7 @@ from ..commands.create_customer import CreateCustomer
 from flask_jwt_extended import jwt_required
 from ..commands.create_sellers import CreateSellers
 from ..errors.errors import *
+from ..queries.get_seller_by_id import GetSellersById
 
 users = Blueprint('users', __name__)
 
@@ -78,6 +79,17 @@ def create_seller():
         return jsonify({"error": e.description}), 400
     except InvalidEmail as e:
         return jsonify({"error": e.description}), 400
+
+@users.route('/users/sellers/<seller_id>', methods=['GET'])
+@jwt_required()
+def get_seller(seller_id):
+    try:
+        result = GetSellersById(seller_id).execute()
+        return jsonify(result), 200
+    except SellerNotFound as e:
+        return jsonify({"error": e.description}), 404
+    except Exception as e:
+        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
 
 @users.route('/users/ping', methods=['GET'])
 def ping():

@@ -25,6 +25,8 @@ base.query = db_session.query_property()
 
 def init_db():
     from .users import Users, Role
+    from .customers import Customers
+    from .sellers import Sellers
 
     base.metadata.create_all(bind=engine)
 
@@ -34,10 +36,31 @@ def init_db():
     
     if not db_session.query(Users).filter_by(email='vendedor@ccp.com').first():
         vendedor = Users(email='vendedor@ccp.com', password='Vendedor123-', role=Role.Vendedor)
+        seller = Sellers(
+            identification='123456789',
+            country='Colombia',
+            address='Calle 123 #45-67',
+            telephone='3001234567',
+            name='Juan Pérez',
+            email='vendedor@ccp.com')
+        db_session.add(seller)
         db_session.add(vendedor)
+        
+        
     
     if not db_session.query(Users).filter_by(email='cliente@ccp.com').first():
         cliente = Users(email='cliente@ccp.com', password='Cliente123-', role=Role.Cliente)
+        customer = Customers(
+            country='Colombia',
+            address='Calle Falsa 123',
+            phoneNumber='3007654321',
+            firstName='Ana',
+            lastName='Gómez',
+            email='cliente@ccp.com')
+ 
+        db_session.add(customer)
         db_session.add(cliente)
+        
+        
 
     db_session.commit()
