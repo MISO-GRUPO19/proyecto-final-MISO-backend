@@ -1,10 +1,13 @@
 from .base_command import BaseCommand
 from ..errors.errors import *
-from ..models.sellers import Sellers
+from ..models.sellers import Sellers, GoalProduct, Goals
 from ..models.database import db_session
 from .create_users import CreateUsers
 from flask import jsonify
 import re
+import random
+from datetime import datetime
+import uuid
 
 
 ALLOWED_COUNTRIES = [
@@ -17,6 +20,32 @@ class CreateSellers(BaseCommand):
     def __init__(self, data):
         self.data = data
 
+    ''' HU11 Reporte de ventas vendedores '''
+    def create_fake_goal(self, seller: Sellers):
+        date = datetime(2025,random.randint(1,12),1)
+        goal = Goals(
+            seller_id=seller.id,
+            date=date
+        )
+        db_session.add(goal)
+        db_session.commit()
+        return goal
+
+    def create_fake_goal_products(self, goal_created: Goals):
+        quantity = random.randint(20, 100)
+        sales = round(quantity * round(random.uniform(10.0, 100.0),2))
+        goal_product = GoalProduct(
+            product_id=uuid.uuid4(),
+            quantity=quantity,
+            goal_id=goal_created.id,
+            date=goal_created.date,
+            sales=sales
+        )
+        db_session.add(goal_product)
+        db_session.commit()
+
+
+    ''' FIN HU11 REPORTE DE VENTAS VENDEDORES'''
     def execute(self):
         if (self.data['name'] == '' or self.data['country'] == '' or self.data['identification'] == '' or self.data['address'] == '' or self.data['telephone'] == '' or self.data['email'] == '' ):
             raise InvalidData
@@ -63,6 +92,11 @@ class CreateSellers(BaseCommand):
         if user_seller['message'] == 'Usuario enviado a la cola exitosamente':
             db_session.add(seller)
             db_session.commit()
+            '''INICIO MODIFICACIÓN REPORTE DE VENTAS VENDEDORES'''
+            goal = self.create_fake_goal(seller)
+            for i in range(random.randint(2, 5)):
+                self.create_fake_goal_products(goal)
+
             return {'message': 'Seller has been created successfully'}
     
     def check_identification(self, identification: str):
