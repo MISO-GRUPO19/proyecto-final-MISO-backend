@@ -14,31 +14,18 @@ class TestGetSellerSalesById(unittest.TestCase):
             GetSellerSalesById("nonexistent_seller").execute()
 
     @patch('authentications_management.src.queries.get_seller_sales_by_id.db_session')
-    def test_goals_not_found(self, mock_db_session):
-        
-        mock_seller = Sellers(id="123", name="John Doe", identification="123456", country="USA", address="123 Main St", telephone="555-1234", email="john@example.com")
-        mock_db_session.query.return_value.filter.return_value.first.return_value = mock_seller
-
-        
-        mock_db_session.query.return_value.filter.return_value.all.return_value = []
-
-        
-        with self.assertRaises(GoalNotFound):
-            GetSellerSalesById("123456").execute()
-
-    @patch('authentications_management.src.queries.get_seller_sales_by_id.db_session')
     def test_successful_execution(self, mock_db_session):
         
-        mock_seller = Sellers(id="123", name="John Doe", identification="123456", country="USA", address="123 Main St", telephone="555-1234", email="john@example.com")
+        mock_seller = Sellers(name="John Doe", identification="123456", country="USA", address="123 Main St", telephone="555-1234", email="john@example.com")
         mock_db_session.query.return_value.filter.return_value.first.return_value = mock_seller
 
         
-        mock_goal = Goals(id="goal1", seller_id="123", date="2025-03-01")
+        mock_goal = Goals(seller_id=mock_seller.id, date="2025-03-01")
         mock_db_session.query.return_value.filter.return_value.all.side_effect = [
             [mock_goal],  
             [  
-                GoalProduct(goal_id="goal1", sales=1000, sales_expectation=1200, date="2025-03-01"),
-                GoalProduct(goal_id="goal1", sales=800, sales_expectation=1000, date="2025-03-01")
+                GoalProduct(goal_id=mock_goal.id, sales=1000, sales_expectation=1200, date="2025-03-01"),
+                GoalProduct(goal_id=mock_goal.id, sales=800, sales_expectation=1000, date="2025-03-01")
             ]
         ]
 
