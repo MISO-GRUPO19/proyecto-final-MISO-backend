@@ -78,3 +78,7 @@ class InvalidNameCustomer(ApiError):
 class SellerNotFound(ApiError):
     code = 404
     description = "SellerNotFound"
+
+class GoalNotFound(ApiError):
+    code = 404
+    description = "Goal not found"
