@@ -22,24 +22,33 @@ class CreateSellers(BaseCommand):
 
     ''' HU11 Reporte de ventas vendedores '''
     def create_fake_goal(self, seller: Sellers):
-        date = datetime(2025,random.randint(1,12),1)
-        goal = Goals(
-            seller_id=seller.id,
-            date=date
-        )
-        db_session.add(goal)
-        db_session.commit()
-        return goal
+        check_date = False
+        while not check_date:
+            date = datetime(2025,random.randint(1,4),1)
+            existing_goal = db_session.query(Goals).filter(Goals.date == date).first()
+            if not existing_goal:
+                goal = Goals(
+                    seller_id=seller.id,
+                    date=date
+                )
+                db_session.add(goal)
+                db_session.commit()
+                check_date = True
+                return goal
+            
+                
 
     def create_fake_goal_products(self, goal_created: Goals):
         quantity = random.randint(20, 100)
-        sales = round(quantity * round(random.uniform(10.0, 100.0),2))
+        sales = round(quantity * round(random.uniform(10.0, 100.0),2)) #Cantidad de producto * precio de venta
+        sales_expectation = round(quantity * round(random.uniform(10.0, 100.0),2)) #Cantidad de producto * precio de venta
         goal_product = GoalProduct(
             product_id=uuid.uuid4(),
             quantity=quantity,
             goal_id=goal_created.id,
             date=goal_created.date,
-            sales=sales
+            sales=sales,
+            sales_expectation=sales_expectation
         )
         db_session.add(goal_product)
         db_session.commit()
@@ -93,8 +102,8 @@ class CreateSellers(BaseCommand):
             db_session.add(seller)
             db_session.commit()
             '''INICIO MODIFICACIÓN REPORTE DE VENTAS VENDEDORES'''
-            goal = self.create_fake_goal(seller)
-            for i in range(random.randint(2, 5)):
+            for i in range(random.randint(2, 3)):
+                goal = self.create_fake_goal(seller)
                 self.create_fake_goal_products(goal)
 
             return {'message': 'Seller has been created successfully'}
