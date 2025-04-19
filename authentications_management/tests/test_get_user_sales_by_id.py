@@ -32,9 +32,9 @@ class TestGetSellerSalesById(unittest.TestCase):
         ]
 
         
-        result = GetSellerSalesById("123456").execute()
+        result, status_code = GetSellerSalesById("123456").execute()
 
-        
+        self.assertEqual(status_code, 200)
         self.assertEqual(result["name"], "John Doe")
         self.assertEqual(result["country"], "USA")
         self.assertEqual(result["total_sales"], 1800)
