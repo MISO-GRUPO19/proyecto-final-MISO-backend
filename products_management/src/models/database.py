@@ -15,7 +15,16 @@ else:
     port_db = os.environ["DB_PORT"]
     urldb = 'postgresql://' + userdb + ':' + password + '@' + host + ':' + port_db + '/' + dbname
 
-engine = create_engine(urldb)
+engine = create_engine(
+    urldb,
+    pool_size=25,
+    max_overflow=10,
+    pool_timeout=10,
+    pool_recycle=180,
+    pool_pre_ping=True,
+    echo=False
+)
+
 db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 
 base = declarative_base()
