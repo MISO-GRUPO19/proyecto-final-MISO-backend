@@ -44,21 +44,22 @@ jobs:
           echo "IP privada: $PRIVATE_IP"
           echo "db_ip=$PRIVATE_IP" >> $GITHUB_OUTPUT
 
-      - name: Update ./orders-management/src/.env.development
+      - name: Update ./orders_management/src/.env.development
         run: |
           echo "Current directory: $(pwd)"
           ls -la
-          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders-management/src/.env.development
+          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders_management/src/.env.development
+          sed -i "s|NGINX=http://nginx:8080|NGINX=https://nginx-service-230506421700.us-central1.run.app|g" ./orders_management/src/.env.development
 
       - name: Build and Push Docker Image Orders
         run: |
-          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest ./orders-management
-          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders_management-image:latest ./orders_management
+          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders_management-image:latest
 
       - name: Deploy to Cloud Run Orders
         run: |
           gcloud run deploy orders-management-service \
-            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders-management-image:latest \
+            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/orders_management-image:latest \
             --region=us-central1 \
             --platform=managed \
             --allow-unauthenticated \

@@ -11,3 +11,4 @@ flask-sqlalchemy
 pytest
 uptrace
 flask_jwt_extended
+faker

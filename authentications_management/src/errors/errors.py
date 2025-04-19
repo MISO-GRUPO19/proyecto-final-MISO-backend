@@ -74,3 +74,7 @@ class InvalidAddressCustomer(ApiError):
 class InvalidNameCustomer(ApiError):
     code = 400
     description = "InvalidNameValueCustomer"
+
+class SellerNotFound(ApiError):
+    code = 404
+    description = "SellerNotFound"
