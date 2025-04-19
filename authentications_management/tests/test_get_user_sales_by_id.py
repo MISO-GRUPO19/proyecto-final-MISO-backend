@@ -3,7 +3,8 @@ from unittest.mock import patch, MagicMock
 from authentications_management.src.queries.get_seller_sales_by_id import GetSellerSalesById
 from authentications_management.src.models.sellers import Sellers, Goals, GoalProduct
 from authentications_management.src.errors.errors import SellerNotFound, GoalNotFound
-
+import uuid
+import random
 class TestGetSellerSalesById(unittest.TestCase):
 
     @patch('authentications_management.src.queries.get_seller_sales_by_id.db_session')
@@ -24,8 +25,8 @@ class TestGetSellerSalesById(unittest.TestCase):
         mock_db_session.query.return_value.filter.return_value.all.side_effect = [
             [mock_goal],  
             [  
-                GoalProduct(goal_id=mock_goal.id, sales=1000, sales_expectation=1200, date="2025-03-01"),
-                GoalProduct(goal_id=mock_goal.id, sales=800, sales_expectation=1000, date="2025-03-01")
+                GoalProduct(goal_id=mock_goal.id, sales=1000, sales_expectation=1200, date="2025-03-01", product_id=uuid.uuid4, quantity=random.randint(1,100)),
+                GoalProduct(goal_id=mock_goal.id, sales=800, sales_expectation=1000, date="2025-03-01", product_id=uuid.uuid4, quantity=random.randint(1,100))
             ]
         ]
 
