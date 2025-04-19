@@ -5,6 +5,7 @@ from authentications_management.src.models.sellers import Sellers, Goals, GoalPr
 from authentications_management.src.errors.errors import SellerNotFound, GoalNotFound
 import uuid
 import random
+from datetime import datetime
 class TestGetSellerSalesById(unittest.TestCase):
 
     @patch('authentications_management.src.queries.get_seller_sales_by_id.db_session')
@@ -21,12 +22,12 @@ class TestGetSellerSalesById(unittest.TestCase):
         mock_db_session.query.return_value.filter.return_value.first.return_value = mock_seller
 
         
-        mock_goal = Goals(seller_id=mock_seller.id, date="2025-03-01")
+        mock_goal = Goals(seller_id=mock_seller.id, date=datetime(2025,random.randint(1,4),1))
         mock_db_session.query.return_value.filter.return_value.all.side_effect = [
             [mock_goal],  
             [  
-                GoalProduct(goal_id=mock_goal.id, sales=1000, sales_expectation=1200, date="2025-03-01", product_id=uuid.uuid4, quantity=random.randint(1,100)),
-                GoalProduct(goal_id=mock_goal.id, sales=800, sales_expectation=1000, date="2025-03-01", product_id=uuid.uuid4, quantity=random.randint(1,100))
+                GoalProduct(goal_id=mock_goal.id, sales=1000, sales_expectation=1200, date=mock_goal.date, product_id=uuid.uuid4, quantity=random.randint(1,100)),
+                GoalProduct(goal_id=mock_goal.id, sales=800, sales_expectation=1000, date=mock_goal.date, product_id=uuid.uuid4, quantity=random.randint(1,100))
             ]
         ]
 
