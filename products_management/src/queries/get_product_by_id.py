@@ -120,7 +120,7 @@ class GetById(BaseCommand):
                 return jsonify(response_data), 200
                 
         except NotFound:
-            return jsonify({"error": "Product not found"}), 404
+            return jsonify({"error": "El producto no existe"}), 404
         except Exception as e:
             logging.error(f"Error interno: {str(e)}")
             return jsonify({"error": "Internal server error"}), 500
