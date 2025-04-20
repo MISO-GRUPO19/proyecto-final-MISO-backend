@@ -22,22 +22,16 @@ class CreateSellers(BaseCommand):
 
     ''' HU11 Reporte de ventas vendedores '''
     def create_fake_goal(self, seller: Sellers):
-        check_date = False
-        while not check_date:
-            date = datetime(2025,random.randint(1,4),1)
-            existing_goal = db_session.query(Goals).filter(Goals.date == date).first()
-            if not existing_goal:
-                goal = Goals(
-                    seller_id=seller.id,
-                    date=date
-                )
-                db_session.add(goal)
-                db_session.commit()
-                check_date = True
-                return goal
-            
-                
-
+        
+        date = datetime(random.randint(2010,2025),random.randint(1,4),1)
+        goal = Goals(
+            seller_id=seller.id,
+            date=date
+        )
+        db_session.add(goal)
+        db_session.commit()    
+        return goal
+    
     def create_fake_goal_products(self, goal_created: Goals):
         quantity = random.randint(20, 100)
         sales = round(quantity * round(random.uniform(10.0, 100.0),2)) #Cantidad de producto * precio de venta
