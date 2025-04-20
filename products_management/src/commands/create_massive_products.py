@@ -13,7 +13,7 @@ load_dotenv()
 
 load_dotenv('../.env.development')
 
-NGINX = os.getenv("NGINX")
+MANUFACTURERS = os.getenv("MANUFACTURERS")
 
 class CreateMassiveProducts(BaseCommand):
     REQUIRED_COLUMNS = {'name', 'description', 'price', 'category', 'weight', 'barcode', 'provider', 'batch', 'best_before', 'quantity'}
@@ -51,7 +51,7 @@ class CreateMassiveProducts(BaseCommand):
                 headers = {
                     "Authorization": f"Bearer {self.auth_token}"
                 }
-                response = requests.get(f'{NGINX}/manufacturers?name={provider}', headers=headers)                
+                response = requests.get(f'{MANUFACTURERS}/manufacturers?name={provider}', headers=headers)                
                 
                 if response.status_code != 200:
                     error_messages.append(ERROR_MESSAGES["invalid_provider"])

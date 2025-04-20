@@ -14,9 +14,11 @@ class FakeState:
 @pytest.fixture
 def mock_order():
     order = MagicMock()
+    client_id = uuid4()
     order.id = uuid4()
     order.code = "ORCLABC12345"
-    order.client_id = uuid4()
+    order.client_id = client_id  # UUID
+    order.client_id_str = str(client_id)  # Para usar en el test
     order.seller_id = uuid4()
     order.date_order = datetime(2024, 4, 1, 10, 0)
     order.provider_id = uuid4()
@@ -40,38 +42,36 @@ def mock_order():
     return order
 
 @patch("orders_management.src.queries.get_order_by_client.db_session")
-@patch("orders_management.src.queries.get_order_by_client.requests.get")
-def test_execute_success(mock_requests_get, mock_db_session, mock_order):
+@patch.object(GetOrderByClient, "_get_product_info")
+@patch.object(GetOrderByClient, "_get_seller_info")
+def test_execute_success(mock_get_seller_info, mock_get_product_info, mock_db_session, mock_order):
     # 1. Simular retorno de la base de datos
-    mock_db_session.query.return_value.filter.return_value.all.return_value = [mock_order]
+    mock_db_session.query.return_value.filter.return_value.options.return_value.all.return_value = [mock_order]
 
-    # 2. Simular respuestas de servicios externos (productos y vendedores)
-    mock_requests_get.side_effect = [
-        MagicMock(status_code=200, json=lambda: {
-            "product_info": {
-                "product_name": "Producto Prueba"
-            }
-        }),
-        MagicMock(status_code=200, json=lambda: {
-            "name": "Ana Gómez",
-            "identification": "999888777",
-            "country": "CO",
-            "address": "Calle Falsa 123",
-            "telephone": "3001234567",
-            "email": "ana@example.com"
-        })
-    ]
+    # 2. Simular info de producto
+    mock_get_product_info.return_value = {"product_name": "Producto Prueba"}
+
+    # 3. Simular info de vendedor
+    mock_get_seller_info.return_value = {
+        "name": "Ana Gómez",
+        "identification": "999888777",
+        "country": "CO",
+        "address": "Calle Falsa 123",
+        "telephone": "3001234567",
+        "email": "ana@example.com"
+    }
 
     token = "mock-token"
-    query = GetOrderByClient(token, str(mock_order.client_id))
+    query = GetOrderByClient(token, mock_order.client_id_str)
     result = query.execute()
 
     assert isinstance(result, list)
     assert len(result) == 1
-    assert result[0]["client_id"] == str(mock_order.client_id)
+    assert result[0]["client_id"] == mock_order.client_id_str
     assert result[0]["products"][0]["name"] == "Producto Prueba"
     assert result[0]["seller_info"]["name"] == "Ana Gómez"
     assert result[0]["state"] == "PENDIENTE"
+
 
 @patch("orders_management.src.queries.get_order_by_client.db_session")
 def test_execute_error(mock_db_session):
@@ -79,11 +79,12 @@ def test_execute_error(mock_db_session):
     mock_db_session.query.side_effect = Exception("DB Falla")
 
     token = "mock-token"
-    client_id = uuid4()
+    client_id = str(uuid4())
 
-    query = GetOrderByClient(token, str(client_id))
+    query = GetOrderByClient(token, client_id)
     result = query.execute()
 
-    assert isinstance(result, dict)
-    assert "error" in result
-    assert result["error"] == "DB Falla"
+    assert isinstance(result, list)
+    assert len(result) == 1
+    assert "error" in result[0]
+    assert result[0]["error"] == "Failed to retrieve orders"

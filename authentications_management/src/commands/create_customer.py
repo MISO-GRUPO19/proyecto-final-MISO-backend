@@ -11,7 +11,7 @@ load_dotenv()
 
 load_dotenv('../.env.development')
 
-NGINX = os.getenv("NGINX")
+CUSTOMERS = os.getenv("CUSTOMERS")
 class CreateCustomer(BaseCommand):
     def __init__(self, data):
         self.data = data
@@ -65,7 +65,7 @@ class CreateCustomer(BaseCommand):
             db_session.close()
 
     def sync_with_customers_service(self, customer):
-        url = f'{NGINX}/customers/sync'
+        url = f'{CUSTOMERS}/customers/sync'
         payload = {
             'id': str(customer.id),
             'firstName': customer.firstName,
