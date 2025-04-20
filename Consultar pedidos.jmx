@@ -20,26 +20,16 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
-          <stringProp name="HTTPSampler.domain">127.0.0.1</stringProp>
-          <stringProp name="HTTPSampler.port">8080</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.path">/orders/fc259fbd-2b17-4d60-ac30-f89a3151a4dc</stringProp>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request">
+          <stringProp name="HTTPSampler.domain">nginx-service-230506421700.us-central1.run.app</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/orders/65c2537c-fb0e-4c77-b61b-576ba47e40a2</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&#xd;
-&#xd;
-}&#xd;
-</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree/>
@@ -84,7 +74,11 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">Authorization</stringProp>
-              <stringProp name="Header.value">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTE4NDU0MSwianRpIjoiZjliYzNjYzEtNTAxMi00ZDcwLWE1YjEtNDAwNGQ2OTAyNzBiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImE0MmE3MDA0LTNlNDQtNDU4NS04Y2NhLTY3YTdlZWQ3ZmIxOSIsIm5iZiI6MTc0NTE4NDU0MSwiY3NyZiI6IjdmZTZhNDFlLWFkNmUtNGMwNy04NDM0LWM4Mjc3MzAyNTcyNiIsImV4cCI6MTc0NTE4NTQ0MX0.Ba98EuQjjcuxALVoXB-OexrVkrT6nEjxOp1phsaZx9g</stringProp>
+              <stringProp name="Header.value">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTE4ODQ0NCwianRpIjoiMzQ4NGZhMzAtMGMxMy00OWI0LTgwZDAtNmI2NjBlMTA1NzM2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImNlN2NkYzA1LTBhOGUtNDVjMS1hYmQzLTI3YWU2ZDRiZGM0ZiIsIm5iZiI6MTc0NTE4ODQ0NCwiY3NyZiI6IjE2MmRiYzEyLTlkNTQtNGM4MC1hZWZmLTRiZTAyYzk0MzRjMyIsImV4cCI6MTc0NTE4OTM0NH0.cABBLBP8mAQwMpeG_mnRYQWkrrG0hz0W8qzBJGqe_CQ</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
