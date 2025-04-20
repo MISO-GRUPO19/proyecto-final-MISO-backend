@@ -22,7 +22,7 @@ class TestGetSellerSalesById(unittest.TestCase):
         mock_db_session.query.return_value.filter.return_value.first.return_value = mock_seller
 
         
-        mock_goal = Goals(seller_id=mock_seller.id, date=datetime(2025,random.randint(1,4),1))
+        mock_goal = Goals(seller_id=mock_seller.id, date=datetime(2025,3,1))
         mock_db_session.query.return_value.filter.return_value.all.side_effect = [
             [mock_goal],  
             [  
