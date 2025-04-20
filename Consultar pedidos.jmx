@@ -5,10 +5,12 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
-        <intProp name="ThreadGroup.num_threads">200</intProp>
+        <intProp name="ThreadGroup.num_threads">400</intProp>
         <intProp name="ThreadGroup.ramp_time">60</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -18,7 +20,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
           <stringProp name="HTTPSampler.domain">127.0.0.1</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -82,7 +84,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">Authorization</stringProp>
-              <stringProp name="Header.value">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTEwMDU2MSwianRpIjoiY2JlNjlmMzgtYWY5OS00ZmM4LWE0NTktZmI3Y2NhNTdjYWI1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImE0MmE3MDA0LTNlNDQtNDU4NS04Y2NhLTY3YTdlZWQ3ZmIxOSIsIm5iZiI6MTc0NTEwMDU2MSwiY3NyZiI6IjM1Mzk2OGY1LWY2YWItNGRhZC1hNzM1LWQ4MzRhMDJmZWY3YyIsImV4cCI6MTc0NTEwMTQ2MX0.3C1Kr8CIRU72zoPdCPABQLYd6d0KL_AdKWTu5jrzCCk</stringProp>
+              <stringProp name="Header.value">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTE4NDU0MSwianRpIjoiZjliYzNjYzEtNTAxMi00ZDcwLWE1YjEtNDAwNGQ2OTAyNzBiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImE0MmE3MDA0LTNlNDQtNDU4NS04Y2NhLTY3YTdlZWQ3ZmIxOSIsIm5iZiI6MTc0NTE4NDU0MSwiY3NyZiI6IjdmZTZhNDFlLWFkNmUtNGMwNy04NDM0LWM4Mjc3MzAyNTcyNiIsImV4cCI6MTc0NTE4NTQ0MX0.Ba98EuQjjcuxALVoXB-OexrVkrT6nEjxOp1phsaZx9g</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>

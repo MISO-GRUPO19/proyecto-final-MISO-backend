@@ -14,7 +14,7 @@ load_dotenv()
 
 load_dotenv('../.env.development')
 
-NGINX = os.getenv("NGINX")
+PRODUCTS = os.getenv("PRODUCTS")
 
 
 class CreateOrders(BaseCommand):
@@ -32,7 +32,7 @@ class CreateOrders(BaseCommand):
     def validateProducts(self):
         for p in self.products:
             headers = {"Authorization": f"Bearer {self.token}"}
-            response: Response = requests.get(f'{NGINX}/products/{p["barcode"]}?quantity={p["quantity"]}', headers=headers)
+            response: Response = requests.get(f'{PRODUCTS}/products/{p["barcode"]}?quantity={p["quantity"]}', headers=headers)
             
             if response.status_code != 200:
                 raise InvalidData            

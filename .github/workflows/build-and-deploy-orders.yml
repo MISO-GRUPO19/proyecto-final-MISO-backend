@@ -50,6 +50,10 @@ jobs:
           ls -la
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./orders_management/src/.env.development
           sed -i "s|NGINX=http://nginx:8080|NGINX=https://nginx-service-230506421700.us-central1.run.app|g" ./orders_management/src/.env.development
+          sed -i "s|CUSTOMERS=http://customers_service:5005/|CUSTOMERS=https://customers-management-service-ez3ou7gfza-uc.a.run.app|g" ./orders_management/src/.env.development
+          sed -i "s|PRODUCTS=http://products_service:5002/|PRODUCTS=https://products-management-service-ez3ou7gfza-uc.a.run.app|g" ./orders_management/src/.env.development
+          sed -i "s|AUTHENTICATIONS=http://auth_service:5003/|AUTHENTICATIONS=https://authentications-management-service-ez3ou7gfza-uc.a.run.app|g" ./orders_management/src/.env.development
+          sed -i "s|MANUFACTURERS=http://manufacturers_service:5004/|MANUFACTURERS=https://manufacturers-management-service-ez3ou7gfza-uc.a.run.app|g" ./orders_management/src/.env.development
 
       - name: Build and Push Docker Image Orders
         run: |

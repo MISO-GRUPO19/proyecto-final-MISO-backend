@@ -17,7 +17,7 @@ import logging
 load_dotenv('../.env.development')
 logging.basicConfig(level=logging.DEBUG)
 
-NGINX = os.getenv("NGINX")
+MANUFACTURERS = os.getenv("MANUFACTURERS")
 
 
 class GetById(BaseCommand):
@@ -53,7 +53,7 @@ class GetById(BaseCommand):
         headers = {"Authorization": f"Bearer {self.token}"}
         try:
             response: Response = requests.get(
-                f'{NGINX}/manufacturers/{provider_id}', 
+                f'{MANUFACTURERS}/manufacturers/{provider_id}', 
                 headers=headers,
                 timeout=5
             )

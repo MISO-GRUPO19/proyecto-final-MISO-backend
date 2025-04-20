@@ -12,7 +12,8 @@ from sqlalchemy.orm import joinedload
 load_dotenv()
 load_dotenv('../.env.development')
 
-NGINX = os.getenv("NGINX")
+PRODUCTS = os.getenv("PRODUCTS")
+AUTHENTICATIONS = os.getenv("AUTHENTICATIONS")
 
 class GetOrderByClient:
     def __init__(self, token: str, client_id: str):
@@ -37,7 +38,7 @@ class GetOrderByClient:
     def _get_product_info(self, barcode: str) -> Optional[Dict[str, Any]]:
         """Obtiene información de producto con cache"""
         try:
-            response = self.session.get(f'{NGINX}/products/{barcode}/warehouses', timeout=5)
+            response = self.session.get(f'{PRODUCTS}/products/{barcode}/warehouses', timeout=5)
             response.raise_for_status()
             return response.json().get('product_info')
         except requests.exceptions.RequestException:
@@ -47,7 +48,7 @@ class GetOrderByClient:
     def _get_seller_info(self, seller_id: str) -> Optional[Dict[str, Any]]:
         """Obtiene información de vendedor con cache"""
         try:
-            response = self.session.get(f'{NGINX}/users/sellers/{seller_id}', timeout=5)
+            response = self.session.get(f'{AUTHENTICATIONS}/users/sellers/{seller_id}', timeout=5)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException:

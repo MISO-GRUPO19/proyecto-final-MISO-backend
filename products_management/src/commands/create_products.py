@@ -16,7 +16,7 @@ load_dotenv()
 
 load_dotenv('../.env.development')
 
-NGINX = os.getenv("NGINX")
+MANUFACTURERS = os.getenv("MANUFACTURERS")
 
 class CreateProducts(BaseCommand):
     WAREHOUSE_NAMES = ["Bodega A1", "Bodega A2", "Bodega A3", "Bodega A4", "Bodega A5"]
@@ -86,7 +86,7 @@ class CreateProducts(BaseCommand):
         else:
             try:
                 headers = {"Authorization": f"Bearer {self.auth_token}"}
-                response = requests.get(f'{NGINX}/manufacturers/{provider_id}', headers=headers)
+                response = requests.get(f'{MANUFACTURERS}/manufacturers/{provider_id}', headers=headers)
                 if response.status_code != 200:
                     errors.append(ERROR_MESSAGES["invalid_provider"])
             except ValueError:
