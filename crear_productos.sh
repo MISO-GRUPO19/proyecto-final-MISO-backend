@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ENDPOINT="http://127.0.0.1:8080/products"
-TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTI4MTQzMiwianRpIjoiNTVhOGM2NTUtMTQwMi00NzMyLWIxMTItMjExODZhNzNiYWE4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImEzZjQ4YWE3LWY2OGUtNDkyMy04ZTQ3LTBkNDJlN2QwMjNlYiIsIm5iZiI6MTc0NTI4MTQzMiwiY3NyZiI6IjVjN2RmMzYzLTNlMzAtNGRiNS1iZDUzLTIzNzMxZjY2MTVjMCIsImV4cCI6MTc0NTI4MjMzMn0.e98ZUh62gnjhe2Gq1SVXejZ2EVoRgQAWsfo-BfsrGO8"
+ENDPOINT="https://nginx-service-230506421700.us-central1.run.app/products"
+TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTM0NjUzMSwianRpIjoiMzQ5ZGY0Y2UtYjY5OC00OGQ4LWI4OWQtNWU3ZDUzOTkxNDViIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ijg4MWNlMDE5LTBiMTYtNDI3YS04ZjY4LTcwZjRhYTY1Y2M3YiIsIm5iZiI6MTc0NTM0NjUzMSwiY3NyZiI6ImZlZjY4N2Y5LTc3OTAtNGY5OC04OWRhLTk5MDkzYTUyODNiNiIsImV4cCI6MTc0NTM0NzQzMX0.51RGrnBICrN__EZxiWdMVm2pKBm8KY-obIL7GyoeRH0"
 
 HEADERS=(-H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json")
 
@@ -13,7 +13,7 @@ declare -a BODIES=(
   "category": "Snacks y Dulces",
   "weight": 0.15,
   "barcode": "7702011111111",
-  "provider_id": "c9953c9a-846e-4542-8a87-bd38ee478177",
+  "provider_id": "c84d3bc9-e88b-4ea2-872f-07391af7bdea",
   "batch": "Batch001",
   "best_before": "2025-12-31T23:59:59",
   "quantity": 100
@@ -25,7 +25,7 @@ declare -a BODIES=(
   "category": "Snacks y Dulces",
   "weight": 0.03,
   "barcode": "7702011222222",
-  "provider_id": "c9953c9a-846e-4542-8a87-bd38ee478177",
+  "provider_id": "c84d3bc9-e88b-4ea2-872f-07391af7bdea",
   "batch": "Batch002",
   "best_before": "2025-11-30T23:59:59",
   "quantity": 200
@@ -37,7 +37,7 @@ declare -a BODIES=(
   "category": "Snacks y Dulces",
   "weight": 0.05,
   "barcode": "7702011333333",
-  "provider_id": "c9953c9a-846e-4542-8a87-bd38ee478177",
+  "provider_id": "c84d3bc9-e88b-4ea2-872f-07391af7bdea",
   "batch": "Batch003",
   "best_before": "2026-01-15T23:59:59",
   "quantity": 150
@@ -49,7 +49,7 @@ declare -a BODIES=(
   "category": "Panadería y Repostería",
   "weight": 0.2,
   "barcode": "7702011444444",
-  "provider_id": "c9953c9a-846e-4542-8a87-bd38ee478177",
+  "provider_id": "c84d3bc9-e88b-4ea2-872f-07391af7bdea",
   "batch": "Batch004",
   "best_before": "2025-10-10T23:59:59",
   "quantity": 80
@@ -61,7 +61,7 @@ declare -a BODIES=(
   "category": "Snacks y Dulces",
   "weight": 0.02,
   "barcode": "7702011555555",
-  "provider_id": "c9953c9a-846e-4542-8a87-bd38ee478177",
+  "provider_id": "c84d3bc9-e88b-4ea2-872f-07391af7bdea",
   "batch": "Batch005",
   "best_before": "2025-09-01T23:59:59",
   "quantity": 300
@@ -73,7 +73,7 @@ declare -a BODIES=(
   "category": "Lácteos y Huevos",
   "weight": 0.1,
   "barcode": "7702011666666",
-  "provider_id": "c9953c9a-846e-4542-8a87-bd38ee478177",
+  "provider_id": "c84d3bc9-e88b-4ea2-872f-07391af7bdea",
   "batch": "Batch006",
   "best_before": "2025-12-01T23:59:59",
   "quantity": 250
@@ -85,7 +85,7 @@ declare -a BODIES=(
   "category": "Snacks y Dulces",
   "weight": 0.08,
   "barcode": "7702011777777",
-  "provider_id": "c9953c9a-846e-4542-8a87-bd38ee478177",
+  "provider_id": "c84d3bc9-e88b-4ea2-872f-07391af7bdea",
   "batch": "Batch007",
   "best_before": "2025-08-20T23:59:59",
   "quantity": 120
@@ -97,7 +97,7 @@ declare -a BODIES=(
   "category": "Snacks y Dulces",
   "weight": 0.03,
   "barcode": "7702011888888",
-  "provider_id": "c9953c9a-846e-4542-8a87-bd38ee478177",
+  "provider_id": "c84d3bc9-e88b-4ea2-872f-07391af7bdea",
   "batch": "Batch008",
   "best_before": "2026-01-01T23:59:59",
   "quantity": 180
@@ -109,7 +109,7 @@ declare -a BODIES=(
   "category": "Snacks y Dulces",
   "weight": 0.02,
   "barcode": "7702011999999",
-  "provider_id": "c9953c9a-846e-4542-8a87-bd38ee478177",
+  "provider_id": "c84d3bc9-e88b-4ea2-872f-07391af7bdea",
   "batch": "Batch009",
   "best_before": "2025-07-15T23:59:59",
   "quantity": 220
@@ -121,7 +121,7 @@ declare -a BODIES=(
   "category": "Panadería y Repostería",
   "weight": 0.07,
   "barcode": "7702012000001",
-  "provider_id": "c9953c9a-846e-4542-8a87-bd38ee478177",
+  "provider_id": "c84d3bc9-e88b-4ea2-872f-07391af7bdea",
   "batch": "Batch010",
   "best_before": "2025-09-10T23:59:59",
   "quantity": 140
