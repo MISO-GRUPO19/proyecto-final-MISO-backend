@@ -18,7 +18,7 @@ class GetProducts:
                     Products.category
                 )
                 .outerjoin(Batches, Products.id == Batches.product_id)
-                .group_by(Products.name, Products.barcode, Products.price)
+                .group_by(Products.name, Products.barcode, Products.price, Products.category)
                 .all()
             )
 
