@@ -88,3 +88,16 @@ def test_execute_error(mock_db_session):
     assert len(result) == 1
     assert "error" in result[0]
     assert result[0]["error"] == "Failed to retrieve orders"
+
+@patch("orders_management.src.queries.get_order_by_client.db_session")
+def test_execute_error(mock_db_session):
+    mock_db_session.query.side_effect = Exception("DB Falla")
+    token = "mock-token"
+    client_id = str(uuid4())
+    query = GetOrderByClient(token, client_id)
+    result = query.execute()
+    assert isinstance(result, list)
+    assert len(result) == 1
+    assert "error" in result[0]
+    assert result[0]["error"] == "Failed to retrieve orders"
+

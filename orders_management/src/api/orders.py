@@ -2,6 +2,7 @@ from flask import request, jsonify, Blueprint, Response
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..commands.create_orders import CreateOrders
 from ..queries.get_order_by_client import GetOrderByClient
+from ..queries.get_order_by_id import GetOrderById
 from uuid import UUID
 
 orders = Blueprint('orders', __name__)
@@ -46,7 +47,19 @@ def get_orders(client_id):
         token = token_beare.replace('Bearer ', '')
         result = GetOrderByClient(token, client_id).execute()
         return jsonify(result), 200
+
+@orders.route('/orders/order/<order_id>', methods=['GET'])
+@jwt_required()
+def get_order(order_id):
+    token_beare = request.headers.get('Authorization')
     
+    if token_beare is None:
+        token = ""
+    else:
+        token = token_beare.replace('Bearer ', '')
+        result = GetOrderById(token, order_id).execute()
+        return jsonify(result), 200
+
 @orders.route('/orders/ping', methods=['GET'])
 def ping():
     return jsonify({'message': 'pong'}), 200
