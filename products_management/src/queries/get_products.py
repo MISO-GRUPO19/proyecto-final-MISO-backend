@@ -14,7 +14,8 @@ class GetProducts:
                     Products.name,
                     Products.barcode,
                     func.coalesce(func.sum(Batches.quantityAvailable), 0).label('stock'),
-                    Products.price
+                    Products.price,
+                    Products.category
                 )
                 .outerjoin(Batches, Products.id == Batches.product_id)
                 .group_by(Products.name, Products.barcode, Products.price)
@@ -27,7 +28,8 @@ class GetProducts:
                     'name': p.name,
                     'barcode': p.barcode,
                     'stock': int(p.stock),
-                    'price': float(p.price)
+                    'price': float(p.price),
+                    'category': p.category
                 })
 
             return products_list
