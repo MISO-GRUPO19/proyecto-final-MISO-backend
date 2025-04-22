@@ -8,8 +8,8 @@ class TestGetProducts(unittest.TestCase):
     @patch('products_management.src.queries.get_products.db_session')
     def test_execute_returns_correct_products(self, mock_db_session):
         mock_db_session.query().outerjoin().group_by().all.return_value = [
-            SimpleNamespace(name="Producto A", barcode="123ABC", stock=10, price=5.5),
-            SimpleNamespace(name="Producto B", barcode="456DEF", stock=0, price=7.25),
+            SimpleNamespace(name="Producto A", barcode="123ABC", stock=10, price=5.5, category="Electronics"),
+            SimpleNamespace(name="Producto B", barcode="456DEF", stock=0, price=7.25, category="Groceries"),
         ]
 
         service = GetProducts(token="dummy-token")
