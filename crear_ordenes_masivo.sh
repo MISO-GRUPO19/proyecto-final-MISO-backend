@@ -1,14 +1,14 @@
 #!/bin/bash
 
-ENDPOINT="http://127.0.0.1:8080/orders"
-TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTI4MTQzMiwianRpIjoiNTVhOGM2NTUtMTQwMi00NzMyLWIxMTItMjExODZhNzNiYWE4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImEzZjQ4YWE3LWY2OGUtNDkyMy04ZTQ3LTBkNDJlN2QwMjNlYiIsIm5iZiI6MTc0NTI4MTQzMiwiY3NyZiI6IjVjN2RmMzYzLTNlMzAtNGRiNS1iZDUzLTIzNzMxZjY2MTVjMCIsImV4cCI6MTc0NTI4MjMzMn0.e98ZUh62gnjhe2Gq1SVXejZ2EVoRgQAWsfo-BfsrGO8"
+ENDPOINT="https://nginx-service-230506421700.us-central1.run.app/orders"
+TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTM0NjUzMSwianRpIjoiMzQ5ZGY0Y2UtYjY5OC00OGQ4LWI4OWQtNWU3ZDUzOTkxNDViIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ijg4MWNlMDE5LTBiMTYtNDI3YS04ZjY4LTcwZjRhYTY1Y2M3YiIsIm5iZiI6MTc0NTM0NjUzMSwiY3NyZiI6ImZlZjY4N2Y5LTc3OTAtNGY5OC04OWRhLTk5MDkzYTUyODNiNiIsImV4cCI6MTc0NTM0NzQzMX0.51RGrnBICrN__EZxiWdMVm2pKBm8KY-obIL7GyoeRH0"
 
 HEADERS=(-H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json")
 
 declare -a BODIES=(
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-01T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 23.5,
@@ -22,8 +22,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-02T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 12.4,
@@ -35,8 +35,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-03T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 27.9,
@@ -50,8 +50,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-04T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 20.1,
@@ -64,8 +64,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-05T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 14.1,
@@ -77,8 +77,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-06T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 35.5,
@@ -92,8 +92,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-07T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 12.2,
@@ -106,8 +106,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-08T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 38.9,
@@ -121,8 +121,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-09T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 24.9,
@@ -135,8 +135,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-10T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 33.6,
@@ -150,8 +150,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-11T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 13.5,
@@ -163,8 +163,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-12T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 15.8,
@@ -177,8 +177,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-13T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 27.5,
@@ -192,8 +192,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-14T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 31.0,
@@ -205,8 +205,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-15T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 28.1,
@@ -219,8 +219,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-16T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 18.0,
@@ -232,8 +232,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-17T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 23.8,
@@ -247,8 +247,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-18T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 16.1,
@@ -260,8 +260,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-19T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 36.7,
@@ -275,8 +275,8 @@ declare -a BODIES=(
   ]
 }'
 '{
-  "client_id": "2fb64f4a-ddd0-4bcc-b867-f837f4f7546a",
-  "seller_id": "5bfb7cc6-5526-4252-a649-67d1fbc81fbe",
+  "client_id": "ed6eb6eb-482d-4614-9449-7cfa31bdeb32",
+  "seller_id": "51904a29-290e-41b2-9791-25e6f41d171e",
   "date": "2023-10-20T00:00:00",
   "provider_id": "697d7c97-ac98-4179-a89d-57fe3d1c7c3a",
   "total": 27.9,
