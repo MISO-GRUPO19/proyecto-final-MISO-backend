@@ -11,10 +11,7 @@ import uuid
 
 
 ALLOWED_COUNTRIES = [
-    "Argentina", "Bolivia", "Brazil", "Canada", "Chile", "Colombia", "Costa Rica",
-    "Cuba", "Dominican Republic", "Ecuador", "El Salvador", "Guatemala", "Haiti",
-    "Honduras", "Jamaica", "Mexico", "Nicaragua", "Panama", "Paraguay", "Peru",
-    "United States", "Uruguay", "Venezuela"
+    "Argentina", "Chile", "Brasil", "Ecuador", "Colombia"
 ]
 class CreateSellers(BaseCommand):
     def __init__(self, data):
