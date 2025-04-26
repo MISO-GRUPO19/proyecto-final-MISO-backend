@@ -18,5 +18,5 @@ pandas
 openpyxl
 google-cloud-pubsub
 unittest2
-urllib3==1.26.15
+urllib3==1.26.19
 flask-cors

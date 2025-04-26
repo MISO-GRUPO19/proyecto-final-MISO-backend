@@ -1,8 +1,8 @@
 from google.cloud import pubsub_v1
 import json
-import uuid
 import os
-from models.products import Products, Batch
+from models.products import Products 
+from models.batches import Batches
 from models.database import db_session
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'pubsub/proyecto-final-451719-1806c6f593e4.json'
@@ -32,7 +32,7 @@ def callback(message):
         db_session.flush()
 
         for product, row in zip(products, valid_products):
-            batch = Batch(
+            batch = Batches(
                 batch=row['batch'],
                 best_before=row['best_before'],
                 quantity=row['quantity'],

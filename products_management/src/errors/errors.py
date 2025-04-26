@@ -18,6 +18,17 @@ class InvalidFileFormat(ApiError):
 class ValidationError(ApiError):
     code = 400
     description = "Error de validación"
+class NotFound(ApiError):
+    code = 404
+    description = "No se encontró el producto"
+
+class ProductNotFound(ApiError):
+    code = 404
+    description = "ProductNotFound"
+    
+class ProductInsufficientStock(ApiError):
+    code = 422
+    description = "ProductInsufficientStock"
 
 # Mensajes de error específicos
 ERROR_MESSAGES = {
@@ -33,5 +44,6 @@ ERROR_MESSAGES = {
     "invalid_product_name": "Nombre del producto inválido.",
     "invalid_weight_price_quantity": "Peso, precio o cantidad no son válidos.",
     "invalid_category": "Categoría inválida",
-    "invalid_provider": "Proveedor inválido."
+    "invalid_provider": "Proveedor inválido.",
+    "not_found": "El producto no existe"
 }
