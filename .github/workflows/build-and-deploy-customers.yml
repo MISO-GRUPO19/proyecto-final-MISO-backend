@@ -44,21 +44,21 @@ jobs:
           echo "IP privada: $PRIVATE_IP"
           echo "db_ip=$PRIVATE_IP" >> $GITHUB_OUTPUT
 
-      - name: Update ./customers-management/src/.env.development
+      - name: Update ./customers_management/src/.env.development
         run: |
           echo "Current directory: $(pwd)"
           ls -la
-          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./customers-management/src/.env.development
+          sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./customers_management/src/.env.development
 
       - name: Build and Push Docker Image Customers
         run: |
-          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers-management-image:latest ./customers-management
-          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers-management-image:latest
+          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers_management-image:latest ./customers_management
+          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers_management-image:latest
 
       - name: Deploy to Cloud Run customers
         run: |
           gcloud run deploy customers-management-service \
-            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers-management-image:latest \
+            --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/customers_management-image:latest \
             --region=us-central1 \
             --platform=managed \
             --allow-unauthenticated \

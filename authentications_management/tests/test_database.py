@@ -1,9 +1,9 @@
-import pytest
-from unittest import mock
-from authentications_management.src.models.database import init_db, db_session, base
-from authentications_management.src.models.users import Users, Role
+from unittest.mock import patch
+from authentications_management.src.models.database import init_db
 
-def test_init_db(monkeypatch):
-    monkeypatch.setattr(base.metadata, 'create_all', mock.Mock())
+@patch('authentications_management.src.models.database.db_session')
+@patch('authentications_management.src.models.database.base.metadata.create_all')
+def test_init_db(mock_create_all, mock_db_session):
     init_db()
-    assert True
+    mock_create_all.assert_called_once()
+    mock_db_session.commit.assert_called_once()

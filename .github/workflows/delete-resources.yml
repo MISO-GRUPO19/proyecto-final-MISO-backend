@@ -42,11 +42,11 @@ jobs:
       - name: Delete Docker Images in Parallel
         run: |
           IMAGES=(
-            "orders-management-image"
+            "orders_management-image"
             "products_management-image"
             "authentications_management-image"
             "manufacturers_management-image"
-            "customers-management-image"
+            "customers_management-image"
             "ai-services-image"
             "nginx-image"
           )
