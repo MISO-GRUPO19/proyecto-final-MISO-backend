@@ -97,7 +97,10 @@ class CreateSellers(BaseCommand):
                 goal = self.create_fake_goal(seller)
                 self.create_fake_goal_products(goal)
 
-            return {'message': 'Seller has been created successfully'}
+            return {
+                'id': f"{seller.id}",
+                'message': 'Seller has been created successfully'
+                }
     
     def check_identification(self, identification: str):
         if len(identification) < 6 or len(identification) > 20:
