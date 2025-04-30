@@ -1,12 +1,13 @@
 from dotenv import load_dotenv
-from flask import Flask, jsonify
+from flask import Flask, jsonify, g
 from flask_jwt_extended import JWTManager
 from .api.users import users
 from .errors.errors import ApiError
 import os
-from .models.database import init_db, db_session
+from .models.database import init_db, db_session, engine
 import uptrace
 from flask_cors import CORS
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 # Inicializar Uptrace
 uptrace.configure_opentelemetry(
@@ -30,6 +31,10 @@ app.register_blueprint(users)
 
 init_db()
 
+@app.before_request
+def before_request():
+    g.db_session = scoped_session(sessionmaker(bind=engine))
+    
 @app.errorhandler(ApiError)
 def handle_exception(error):
     response = {

@@ -230,6 +230,11 @@ def main():
                 user_data["phoneNumber"] = "3" + user_data["phoneNumber"][1:]
             user_data["firstName"] = re.sub(r'[^a-zA-Z\s]', '', user_data["firstName"])
             user_data["lastName"] = re.sub(r'[^a-zA-Z\s]', '', user_data["lastName"])
+            
+            if len(user_data["firstName"]) < 3:
+                user_data["firstName"] = f"User-{user_data['firstName']}"
+            if len(user_data["lastName"]) < 3:
+                user_data["lastName"] = f"User-{user_data['lastName']}"
 
             create_user(urls, token, user_data["email"], user_data["password"])
             client_id = create_customer(urls, token, user_data)
