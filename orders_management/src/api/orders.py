@@ -3,7 +3,9 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..commands.create_orders import CreateOrders
 from ..queries.get_order_by_client import GetOrderByClient
 from ..queries.get_order_by_id import GetOrderById
+from ..commands.update_orders import UpdateStateOrder
 from uuid import UUID
+from ..errors.errors import InvalidData
 
 orders = Blueprint('orders', __name__)
 
@@ -32,9 +34,12 @@ def create_sale():
         token = ""
     else:
         token = token_beare.replace('Bearer ', '')
-             
-    result = CreateOrders(token, client_id, seller_id, data['date'], provider_id, data['total'], data['type'], route_id, data['products']).execute()
-    return jsonify(result), 201
+         
+    try:    
+        result = CreateOrders(token, client_id, seller_id, data['date'], provider_id, data['total'], data['type'], route_id, data['products']).execute()
+        return jsonify(result), 201
+    except InvalidData as e:
+        return jsonify({"error": e.description}), 400
 
 @orders.route('/orders/<client_id>', methods=['GET'])
 @jwt_required()
@@ -44,9 +49,14 @@ def get_orders(client_id):
     if token_beare is None:
         token = ""
     else:
-        token = token_beare.replace('Bearer ', '')
-        result = GetOrderByClient(token, client_id).execute()
-        return jsonify(result), 200
+        try:
+            token = token_beare.replace('Bearer ', '')
+            result = GetOrderByClient(token, client_id).execute()
+            return jsonify(result), 200
+        except InvalidData as e:
+            return jsonify({"error": e.description}), 400
+        except Exception as e:
+            return jsonify({"error": f"An unexpected error occurred: {e}"}), 500
 
 @orders.route('/orders/order/<order_id>', methods=['GET'])
 @jwt_required()
@@ -58,8 +68,28 @@ def get_order(order_id):
     else:
         token = token_beare.replace('Bearer ', '')
         result = GetOrderById(token, order_id).execute()
+        
+    if not result:
+        return jsonify({"error": "Order not found"}), 404
+    else:
         return jsonify(result), 200
 
+@orders.route('/orders/<order_id>/status', methods=['PUT'])
+@jwt_required()
+def update_order_status(order_id):
+    token_beare = request.headers.get('Authorization')    
+    try:
+        if token_beare is None:
+            token = ""
+        else:
+            token = token_beare.replace('Bearer ', '')
+            result = UpdateStateOrder(token, order_id, request.json['state']).execute()
+            return jsonify(result), 200
+    except InvalidData as e:
+        return jsonify({"error": e.description}), 400
+    except Exception as e:
+        return jsonify({"error": f"An unexpected error occurred: {e}"}), 500
+    
 @orders.route('/orders/ping', methods=['GET'])
 def ping():
     return jsonify({'message': 'pong'}), 200
