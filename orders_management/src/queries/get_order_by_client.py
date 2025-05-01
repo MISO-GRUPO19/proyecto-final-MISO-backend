@@ -25,14 +25,15 @@ class GetOrderByClient:
     @contextmanager
     def _db_session(self):
         """Manejo seguro de sesiones de base de datos"""
+        session = db_session()
         try:
-            yield db_session
-            db_session.commit()
+            yield session
+            session.commit()
         except Exception:
-            db_session.rollback()
+            session.rollback()
             raise
         finally:
-            db_session.close()
+            session.close()
 
     @lru_cache(maxsize=100)
     def _get_product_info(self, barcode: str) -> Optional[Dict[str, Any]]:
@@ -69,8 +70,9 @@ class GetOrderByClient:
             'timestamp': status.timestamp.isoformat()
         } for status in sorted(order.status_history, key=lambda s: s.timestamp)]
 
-        # Información del vendedor
-        seller_info = self._get_seller_info(str(order.seller_id)) or {}
+        if order.seller_id is not None:
+            # Información del vendedor
+            seller_info = self._get_seller_info(str(order.seller_id)) or {}
         
         return {
             'id': str(order.id),
@@ -84,7 +86,7 @@ class GetOrderByClient:
                 'address': seller_info.get('address'),
                 'telephone': seller_info.get('telephone'),
                 'email': seller_info.get('email')
-            },
+            } if order.seller_id is not None else None,
             'date_order': order.date_order.isoformat(),
             'provider_id': str(order.provider_id),
             'total': order.total,
@@ -98,11 +100,10 @@ class GetOrderByClient:
     def execute(self) -> List[Dict[str, Any]]:
         """Obtiene todas las órdenes de un cliente"""
         try:
-            with self._db_session():
-                orders = db_session.query(Orders)\
+            with self._db_session() as session:
+                orders = session.query(Orders)\
                     .filter(Orders.client_id == self.client_id)\
                     .options(
-                        # Carga eager de relaciones para evitar N+1
                         joinedload(Orders.product_items),
                         joinedload(Orders.status_history)
                     )\

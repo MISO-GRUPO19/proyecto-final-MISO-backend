@@ -40,7 +40,7 @@ class CreateOrders(BaseCommand):
         
 
     def execute(self):
-        if not all([self.client_id, self.seller_id, self.date, self.provider_id, self.total, self.order_type, self.route_id, self.products]):
+        if not all([self.client_id, self.date, self.total, self.order_type, self.products]):
             raise InvalidData
         
         self.validateProducts()
@@ -76,7 +76,7 @@ class CreateOrders(BaseCommand):
                 db_session.add(product_order)
             
             db_session.commit()
-            return {'message': 'Sale created successfully'}
+            return {'message': 'Sale created successfully', 'id': order.id}
         
         except Exception as e:
             db_session.rollback()

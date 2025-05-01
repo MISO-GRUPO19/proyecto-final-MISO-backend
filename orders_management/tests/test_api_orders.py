@@ -39,7 +39,7 @@ def test_create_sale_success(mock_execute, mock_requests_get, client, auth_heade
         "date": fake.date(),
         "provider_id": str(uuid4()),
         "total": round(fake.pyfloat(left_digits=3, right_digits=2, positive=True), 2),
-        "type": "online",
+        "type": "CLIENTE",
         "route_id": str(uuid4()),
         "products": [{
             "barcode": fake.ean13(),
@@ -87,7 +87,7 @@ def test_get_orders_success(mock_execute, client, auth_headers):
         'date_order': fake.iso8601(),
         'provider_id': str(uuid4()),
         'total': fake.pyfloat(left_digits=3, right_digits=2),
-        'type': 'online',
+        'type': 'CLIENTE',
         'state': 'pending',
         'route_id': str(uuid4()),
         'status_history': []
