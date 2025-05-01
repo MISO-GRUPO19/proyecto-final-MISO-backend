@@ -159,14 +159,34 @@ def create_product(urls, token, manufacturer_id):
         return payload
     else:
         raise Exception(f"❌ Error al crear producto: {response.status_code} - {response.text}")
+    
 
+def update_order_status(base_url, token, order_id, new_state):
+    """Actualiza el estado de una orden usando el endpoint PUT /orders/{id}/status"""
+    headers = {"Authorization": f"Bearer {token}"}
+    url = f"{base_url}/orders/{order_id}/status"
+    payload = {"state": new_state}
+    
+    try:
+        response = requests.put(url, json=payload, headers=headers)
+        if response.status_code == 200:
+            log(f"✅ Estado de orden {order_id} actualizado a {new_state}")
+            return True
+        else:
+            log(f"⚠️ Error al actualizar orden {order_id} a {new_state}: {response.status_code} - {response.text}")
+            return False
+    except Exception as e:
+        log(f"⚠️ Excepción al actualizar orden {order_id}: {str(e)}")
+        return False
 
 def create_order(urls, token, client_id, products, seller_ids):
+    """Crea una nueva orden y simula su flujo de estado"""
     headers = {"Authorization": f"Bearer {token}"}
     total = sum(p["price"] * p["quantity"] for p in products)
+    
     payload = {
         "client_id": client_id,
-        "seller_id": random.choice(seller_ids),  # <- Elegir un seller aleatorio
+        "seller_id": random.choice(seller_ids),
         "date": datetime.now().isoformat(),
         "provider_id": PROVIDER_ID,
         "total": round(total, 2),
@@ -174,13 +194,55 @@ def create_order(urls, token, client_id, products, seller_ids):
         "route_id": ROUTE_ID,
         "products": [{"barcode": p["barcode"], "quantity": p["quantity"]} for p in products]
     }
-    response = requests.post(urls["create_order"], json=payload, headers=headers)
-    if response.status_code == 201:
-        log(f"✅ Orden creada para cliente {client_id} con total {total}.")
-    else:
-        raise Exception(f"❌ Error al crear orden: {response.status_code} - {response.text}")
-
-
+    
+    try:
+        # Crear la orden
+        response = requests.post(urls["create_order"], json=payload, headers=headers)
+        response.raise_for_status()
+        order_data = response.json()
+        log(f"Respuesta de crear orden: {order_data}")
+        order_id = order_data["id"]
+        log(f"✅ Orden {order_id} creada para cliente {client_id} | Total: ${total:.2f}")
+        
+        # Obtener la URL base (removiendo el path /orders)
+        base_url = urls["create_order"].split('/orders')[0]
+        
+        # Simular flujo de estados con probabilidades
+        time.sleep(1)  # Espera antes de cambiar el estado
+        
+        # Distribución de probabilidad:
+        # - 20% Completado (PENDIENTE → ENPORCESO → ENTREGADO)
+        # - 70% En proceso (PENDIENTE → ENPORCESO)
+        # - 10% Cancelado (PENDIENTE → CANCELADO)
+        status_flow = random.choices(
+            ["completed", "processing", "canceled"],
+            weights=[0.20, 0.70, 0.10],
+            k=1
+        )[0]
+        
+        if status_flow == "completed":
+            # Flujo completo
+            if update_order_status(base_url, token, order_id, "ENPORCESO"):
+                time.sleep(1)
+                update_order_status(base_url, token, order_id, "ENTREGADO")
+                
+        elif status_flow == "processing":
+            # Solo pasa a ENPORCESO
+            update_order_status(base_url, token, order_id, "ENPORCESO")
+            
+        elif status_flow == "canceled":
+            # Se cancela
+            update_order_status(base_url, token, order_id, "CANCELADO")
+            
+        return order_id
+        
+    except requests.exceptions.RequestException as e:
+        error_msg = f"❌ Error al crear orden: {str(e)}"
+        if hasattr(e, 'response') and e.response:
+            error_msg += f" | Response: {e.response.text}"
+        log(error_msg)
+        raise Exception(error_msg)
+    
 def main():
     parser = argparse.ArgumentParser(description="Generador de datos de prueba.")
     parser.add_argument("--users", type=int, default=5)
@@ -267,6 +329,8 @@ def main():
 
         # Crear productos
         for manufacturer_id in manufacturer_ids:
+            log(f"🌟 Creando productos para fabricante {manufacturer_id}")
+            log(f"Fabricante: {args.products_per_manufacturer}")
             for _ in range(args.products_per_manufacturer):
                 product = create_product(urls, token, manufacturer_id)
                 summary["products"].append(product)
