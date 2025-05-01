@@ -98,16 +98,20 @@ class TestGetOrderById:
     def test_db_session_context_manager(self, mock_db_session):
         service = GetOrderById(fake.uuid4(), fake.uuid4())
         
+        mock_session_instance = MagicMock()
+        mock_db_session.return_value = mock_session_instance
+        
         with service._db_session() as session:
-            assert session == mock_db_session
+            mock_db_session.assert_called_once()
+            assert session is mock_session_instance
         
         error_msg = fake.sentence()
-        mock_db_session.commit.side_effect = Exception(error_msg)
+        mock_session_instance.commit.side_effect = Exception(error_msg)
         with pytest.raises(Exception):
             with service._db_session():
                 pass
-        mock_db_session.rollback.assert_called_once()
-        mock_db_session.close.assert_called()
+        mock_session_instance.rollback.assert_called_once()
+        mock_session_instance.close.assert_called()
 
     def test_get_product_info_success(self, mock_requests, sample_product_info):
         mock_session = MagicMock()
@@ -182,46 +186,55 @@ class TestGetOrderById:
         assert len(result['status_history']) == len(sample_order.status_history)
 
     def test_execute_success(self, mock_db_session, mock_requests, sample_order, sample_product_info, sample_seller_info):
-        mock_query = MagicMock(spec=Query)
+        mock_session_instance = MagicMock()
+        mock_db_session.return_value = mock_session_instance
+        
+        mock_query = MagicMock()
         mock_query.filter.return_value = mock_query
         mock_query.options.return_value = mock_query
         mock_query.all.return_value = [sample_order]
-        mock_db_session.query.return_value = mock_query
+        mock_session_instance.query.return_value = mock_query
         
-        mock_session = MagicMock()
+        mock_requests_session = MagicMock()
         product_response = MagicMock()
         product_response.json.return_value = sample_product_info
-        product_response.raise_for_status.return_value = None
         seller_response = MagicMock()
         seller_response.json.return_value = sample_seller_info
-        seller_response.raise_for_status.return_value = None
         
-        mock_session.get.side_effect = [product_response] * len(sample_order.product_items) + [seller_response]
-        mock_requests.return_value = mock_session
+        mock_requests_session.get.side_effect = [product_response] * len(sample_order.product_items) + [seller_response]
+        mock_requests.return_value = mock_requests_session
         
-        order_id = fake.uuid4()
+        order_id = str(sample_order.id)
         service = GetOrderById(fake.uuid4(), order_id)
         result = service.execute()
         
         assert len(result) == 1
-        assert result[0]['id'] == str(sample_order.id)
-        mock_db_session.commit.assert_called()
-        mock_db_session.close.assert_called()
+        assert result[0]['id'] == order_id
+        mock_session_instance.commit.assert_called_once()
+        mock_session_instance.close.assert_called_once()
+        
         assert mock_query.filter.call_count == 1
+        filter_args = mock_query.filter.call_args[0]
+        assert len(filter_args) == 1
+        
 
     def test_execute_db_error(self, mock_db_session):
-        error_msg = fake.sentence()
-        mock_db_session.query.side_effect = Exception(error_msg)
+        mock_session_instance = MagicMock()
+        mock_db_session.return_value = mock_session_instance
+        
+        error_msg = "Error de base de datos"
+        mock_session_instance.query.side_effect = Exception(error_msg)
         
         service = GetOrderById(fake.uuid4(), fake.uuid4())
         result = service.execute()
         
+        assert isinstance(result, list)
         assert len(result) == 1
         assert 'error' in result[0]
         assert 'details' in result[0]
         assert error_msg in result[0]['details']
-        mock_db_session.rollback.assert_called()
-        mock_db_session.close.assert_called()
+        mock_session_instance.rollback.assert_called_once()
+        mock_session_instance.close.assert_called_once()
 
     def test_lru_cache_behavior(self, mock_requests, sample_product_info):
         mock_session = MagicMock()

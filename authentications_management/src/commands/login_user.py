@@ -22,14 +22,16 @@ class LoginUserCommand:
         
         if user.role.value == 3:
             isCustomer = False
+            customer_id = user.id
             customer = Customers.query.filter_by(email=self.email).first()
             if customer:
                 isCustomer = True
+                customer_id = customer.id                
             return {
                 'access_token': access_token,
                 'refresh_token': refresh_token,
                 'user': {
-                    'id': customer.id,
+                    'id': customer_id,
                     'email': user.email,
                     'role': user.role.value if hasattr(user, 'role') else 'customer'
                 },

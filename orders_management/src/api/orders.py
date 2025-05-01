@@ -12,7 +12,7 @@ orders = Blueprint('orders', __name__)
 def create_sale():
     data = request.get_json()
     
-    fields = ['client_id', 'seller_id', 'date', 'provider_id', 'total', 'type', 'route_id', 'products']
+    fields = ['client_id', 'date', 'total', 'type', 'products']
     
     for field in fields:
         if field not in data:
@@ -20,9 +20,9 @@ def create_sale():
 
     try:
         client_id = UUID(data['client_id'])
-        seller_id = UUID(data['seller_id'])
-        provider_id = UUID(str(data['provider_id']))
-        route_id = UUID(str(data['route_id']))
+        seller_id = UUID(data.get('seller_id')) if data.get('seller_id') else None
+        provider_id = UUID(data.get('provider_id')) if data.get('provider_id') else None
+        route_id = UUID(data.get('route_id')) if data.get('route_id') else None
     except (ValueError, TypeError) as e:
         return jsonify({"error": f"Invalid UUID format: {e}"}), 400
     
