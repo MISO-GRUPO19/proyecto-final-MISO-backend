@@ -211,24 +211,24 @@ def create_order(urls, token, client_id, products, seller_ids):
         time.sleep(1)  # Espera antes de cambiar el estado
         
         # Distribución de probabilidad:
-        # - 60% Completado (PENDIENTE → ENPROCESO → ENTREGADO)
-        # - 25% En proceso (PENDIENTE → ENPROCESO)
-        # - 15% Cancelado (PENDIENTE → CANCELADO)
+        # - 20% Completado (PENDIENTE → ENPORCESO → ENTREGADO)
+        # - 70% En proceso (PENDIENTE → ENPORCESO)
+        # - 10% Cancelado (PENDIENTE → CANCELADO)
         status_flow = random.choices(
             ["completed", "processing", "canceled"],
-            weights=[0.60, 0.25, 0.15],
+            weights=[0.20, 0.70, 0.10],
             k=1
         )[0]
         
         if status_flow == "completed":
             # Flujo completo
-            if update_order_status(base_url, token, order_id, "ENPROCESO"):
+            if update_order_status(base_url, token, order_id, "ENPORCESO"):
                 time.sleep(1)
                 update_order_status(base_url, token, order_id, "ENTREGADO")
                 
         elif status_flow == "processing":
-            # Solo pasa a ENPROCESO
-            update_order_status(base_url, token, order_id, "ENPROCESO")
+            # Solo pasa a ENPORCESO
+            update_order_status(base_url, token, order_id, "ENPORCESO")
             
         elif status_flow == "canceled":
             # Se cancela
@@ -329,6 +329,8 @@ def main():
 
         # Crear productos
         for manufacturer_id in manufacturer_ids:
+            log(f"🌟 Creando productos para fabricante {manufacturer_id}")
+            log(f"Fabricante: {args.products_per_manufacturer}")
             for _ in range(args.products_per_manufacturer):
                 product = create_product(urls, token, manufacturer_id)
                 summary["products"].append(product)
