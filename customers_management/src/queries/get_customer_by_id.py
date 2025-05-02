@@ -21,6 +21,7 @@ class GetCustomerById:
                     'address': customer.address,
                     'email': customer.email,
                     'phoneNumber': customer.phoneNumber,
+                    'id': customer.id,
                     'stores': [
                         {
                             'store_name': store.store_name,

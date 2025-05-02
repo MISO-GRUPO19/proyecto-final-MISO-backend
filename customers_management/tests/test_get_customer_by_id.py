@@ -25,6 +25,7 @@ def test_get_customer_by_id_execute_success(mock_customers, mock_db_session):
     mock_customer.email = fake.email()
     mock_customer.phoneNumber = fake.phone_number()
     mock_customer.stores = [mock_store_1, mock_store_2]
+    mock_customer.id = 1
 
     # Simulación de sesión
     mock_session = MagicMock()
@@ -45,6 +46,7 @@ def test_get_customer_by_id_execute_success(mock_customers, mock_db_session):
             'address': mock_customer.address,
             'email': mock_customer.email,
             'phoneNumber': mock_customer.phoneNumber,
+            'id': mock_customer.id,
             'stores': [
                 {
                     'store_name': mock_store_1.store_name,

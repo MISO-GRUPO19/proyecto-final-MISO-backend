@@ -24,6 +24,7 @@ def test_get_customers_execute_success(mock_customers, mock_db_session):
     mock_customer.email = fake.email()
     mock_customer.phoneNumber = fake.phone_number()
     mock_customer.stores = [mock_store_1, mock_store_2]
+    mock_customer.id = 1
 
     mock_session = MagicMock()
     mock_session.query.return_value.all.return_value = [mock_customer]
@@ -41,6 +42,7 @@ def test_get_customers_execute_success(mock_customers, mock_db_session):
             'address': mock_customer.address,
             'email': mock_customer.email,
             'phoneNumber': mock_customer.phoneNumber,
+            'id': mock_customer.id,
             'stores': [
                 {
                     'store_name': mock_store_1.store_name,
