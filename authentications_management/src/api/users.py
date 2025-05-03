@@ -7,7 +7,7 @@ from ..commands.create_sellers import CreateSellers
 from ..errors.errors import *
 from ..queries.get_seller_by_id import GetSellersById
 from ..queries.get_seller_sales_by_id import GetSellerSalesById
-
+from ..queries.get_sellers import GetSellers
 users = Blueprint('users', __name__)
 
 @users.route('/users', methods=['POST'])
@@ -102,6 +102,13 @@ def get_seller_sales(seller_id):
         return jsonify({"error": e.description}), 404
     except Exception as e:
         return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
+
+@users.route('/users/sellers', methods=['GET'])
+@jwt_required()
+def get_sellers():
+    auth_token = request.headers.get("Authorization", "").replace("Bearer ", "")
+    result = GetSellers(auth_token).execute()
+    return jsonify(result), 200
 
 @users.route('/users/ping', methods=['GET'])
 def ping():
