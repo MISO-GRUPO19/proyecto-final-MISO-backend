@@ -27,25 +27,30 @@ class CreateOrders(BaseCommand):
         self.total = total
         self.order_type = order_type
         self.route_id = route_id
-        self.products = products
-    
-    def validateProducts(self):
-        for p in self.products:
-            headers = {"Authorization": f"Bearer {self.token}"}
-            response: Response = requests.get(f'{PRODUCTS}/products/{p["barcode"]}?quantity={p["quantity"]}', headers=headers)
-            
-            if response.status_code != 200:
-                raise InvalidData            
-                        
-        
+        self.products = products        
 
     def execute(self):
         if not all([self.client_id, self.date, self.total, self.order_type, self.products]):
             raise InvalidData
         
-        self.validateProducts()
-        
         try:
+            for p in self.products:
+                headers = {"Authorization": f"Bearer {self.token}"}
+                response: Response = requests.get(f'{PRODUCTS}/products/{p["barcode"]}?quantity={p["quantity"]}', headers=headers)
+                
+                if response.status_code != 200:
+                    raise InvalidData   
+
+            for p in self.products:
+                headers = {"Authorization": f"Bearer {self.token}"}
+                url = f"{PRODUCTS}/products/{p['barcode']}?quantity={p['quantity']}"
+
+                response: Response = requests.put(url, headers=headers, json=p)
+                
+                if response.status_code != 200:
+                    raise InvalidData   
+                
+                
             order = Orders(
                 client_id=self.client_id,
                 seller_id=self.seller_id,
