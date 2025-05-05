@@ -3,8 +3,9 @@ from ..models.database import db_session
 from sqlalchemy import func
 from ..models.products import Products
 from ..models.batches import Batches
-from ..errors.errors import InvalidData
+from ..errors.errors import InvalidData, ProductInsufficientStock, ProductNotFound
 from .base_command import BaseCommand
+from flask import jsonify
 
 class UpdateStockProducts(BaseCommand):
     def __init__(self, barcode, quantity):
@@ -25,7 +26,7 @@ class UpdateStockProducts(BaseCommand):
                 )
 
                 if not products:
-                    raise InvalidData("No se encontraron productos con ese código de barras")
+                    raise ProductNotFound
 
                 product_ids = [p.id for p in products]
 
@@ -41,7 +42,7 @@ class UpdateStockProducts(BaseCommand):
 
                 cantidad_solicitada = self.quantity
                 if total_stock < cantidad_solicitada:
-                    raise InvalidData(f"No hay suficiente stock disponible. Disponible: {total_stock}")
+                    raise ProductInsufficientStock
 
                 # Reducir cantidad usando lotes FIFO (más próximos a vencer primero)
                 cantidad_restante = cantidad_solicitada
@@ -70,7 +71,10 @@ class UpdateStockProducts(BaseCommand):
                     "remaining_stock": total_stock - cantidad_solicitada
                 }
 
-        
+        except ProductNotFound:
+            return jsonify({"error": "ProductNotFound"}), 404
+        except ProductInsufficientStock:
+            return jsonify({"error": "ProductInsufficientStock"}), 400
         except Exception as e:
-            session.rollback()
-            raise InvalidData(f"Error al actualizar el producto: {str(e)}")
+            logging.error(f"Error interno: {str(e)}")
+            return jsonify({"error": "Internal server error"}), 500

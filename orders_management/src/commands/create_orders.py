@@ -1,5 +1,5 @@
 from .base_command import BaseCommand
-from ..errors.errors import InvalidData
+from ..errors.errors import InvalidData, ProductInsufficientStock
 from ..models.orders import Orders
 from ..models.productOrder import ProductOrder
 from ..models.database import db_session
@@ -9,10 +9,12 @@ import os
 from dotenv import load_dotenv 
 from requests import Response
 import requests
+import logging
 
 load_dotenv()
 
 load_dotenv('../.env.development')
+logging.basicConfig(level=logging.DEBUG)
 
 PRODUCTS = os.getenv("PRODUCTS")
 
@@ -39,7 +41,18 @@ class CreateOrders(BaseCommand):
                 response: Response = requests.get(f'{PRODUCTS}/products/{p["barcode"]}?quantity={p["quantity"]}', headers=headers)
                 
                 if response.status_code != 200:
-                    raise InvalidData   
+                    try:
+                        logging.info(f"Error en la respuesta: {response.status_code}")
+                        logging.info(f"Detalles del error: {response.text}")
+                        error_details = response.json()
+                        if "error" in error_details and error_details["error"] == "ProductInsufficientStock":
+                            raise ProductInsufficientStock
+                        else:
+                            raise InvalidData
+                    except ValueError:
+                        raise InvalidData
+                
+                logging.info(f"Respuesta de la API: {response.status_code}")
 
             for p in self.products:
                 headers = {"Authorization": f"Bearer {self.token}"}
@@ -48,7 +61,16 @@ class CreateOrders(BaseCommand):
                 response: Response = requests.put(url, headers=headers, json=p)
                 
                 if response.status_code != 200:
-                    raise InvalidData   
+                    try:
+                        logging.info(f"Error en la respuesta: {response.status_code}")
+                        logging.info(f"Detalles del error: {response.text}")
+                        error_details = response.json()
+                        if "error" in error_details and error_details["error"] == "ProductInsufficientStock":
+                            raise ProductInsufficientStock
+                        else:
+                            raise InvalidData
+                    except ValueError:
+                        raise InvalidData   
                 
                 
             order = Orders(

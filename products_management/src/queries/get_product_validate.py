@@ -8,7 +8,7 @@ from ..errors.errors import *
 class GetProductValidate:
     def __init__(self, barcode, quantity, token):
         self.barcode = barcode
-        self.quantity = quantity
+        self.quantity = int(quantity) 
         self.token = token
 
     def execute(self):
@@ -27,10 +27,10 @@ class GetProductValidate:
             )
 
             if not product:
-                return ProductNotFound
+                raise ProductNotFound
             
-            if product[0].stock <= self.quantity:
-                return ProductInsufficientStock
+            if product[0].stock < self.quantity:
+                raise ProductInsufficientStock
             
             return jsonify({
                 'product_name': product[0].name,
@@ -39,5 +39,10 @@ class GetProductValidate:
                 'product_price': product[0].price
             }), 200
 
+
+        except ProductNotFound:
+            return jsonify({"error": "ProductNotFound"}), 404
+        except ProductInsufficientStock:
+            return jsonify({"error": "ProductInsufficientStock"}), 400
         except Exception as e:
-            return {'error': str(e)}
+            return jsonify({"error": "Internal server error"}), 500
