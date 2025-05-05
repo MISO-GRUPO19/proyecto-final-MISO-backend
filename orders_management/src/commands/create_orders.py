@@ -1,3 +1,4 @@
+from flask import jsonify
 from .base_command import BaseCommand
 from ..errors.errors import InvalidData, ProductInsufficientStock
 from ..models.orders import Orders
@@ -46,11 +47,13 @@ class CreateOrders(BaseCommand):
                         logging.info(f"Detalles del error: {response.text}")
                         error_details = response.json()
                         if "error" in error_details and error_details["error"] == "ProductInsufficientStock":
-                            raise ProductInsufficientStock
+                            return jsonify({"error": "ProductInsufficientStock", "barcode": p['barcode']}), 400
+                        elif "error" in error_details and error_details["error"] == "ProductNotFound":
+                            return jsonify({"error": "ProductNotFound", "barcode": p['barcode']}), 404
                         else:
-                            raise InvalidData
+                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
                     except ValueError:
-                        raise InvalidData
+                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
                 
                 logging.info(f"Respuesta de la API: {response.status_code}")
 
@@ -66,11 +69,13 @@ class CreateOrders(BaseCommand):
                         logging.info(f"Detalles del error: {response.text}")
                         error_details = response.json()
                         if "error" in error_details and error_details["error"] == "ProductInsufficientStock":
-                            raise ProductInsufficientStock
+                            return jsonify({"error": "ProductInsufficientStock", "barcode": p['barcode']}), 400
+                        elif "error" in error_details and error_details["error"] == "ProductNotFound":
+                            return jsonify({"error": "ProductNotFound", "barcode": p['barcode']}), 404
                         else:
-                            raise InvalidData
+                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
                     except ValueError:
-                        raise InvalidData   
+                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
                 
                 
             order = Orders(
@@ -103,7 +108,7 @@ class CreateOrders(BaseCommand):
                 db_session.add(product_order)
             
             db_session.commit()
-            return {'message': 'Sale created successfully', 'id': order.id}
+            return jsonify({'message': 'Sale created successfully', 'id': order.id}, 201)
         
         except Exception as e:
             db_session.rollback()

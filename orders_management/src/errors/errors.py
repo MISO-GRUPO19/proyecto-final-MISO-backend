@@ -9,3 +9,7 @@ class InvalidData(ApiError):
 class ProductInsufficientStock(ApiError):
     code = 422
     description = "ProductInsufficientStock"
+    
+class ProductNotFound(ApiError):
+    code = 404
+    description = "ProductNotFound"

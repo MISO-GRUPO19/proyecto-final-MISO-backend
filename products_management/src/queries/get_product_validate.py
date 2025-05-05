@@ -41,8 +41,8 @@ class GetProductValidate:
 
 
         except ProductNotFound:
-            return jsonify({"error": "ProductNotFound"}), 404
+            return jsonify({"error": "ProductNotFound", "barcode": self.barcode}), 404
         except ProductInsufficientStock:
-            return jsonify({"error": "ProductInsufficientStock"}), 400
+            return jsonify({"error": "ProductInsufficientStock", "barcode": self.barcode}), 400
         except Exception as e:
             return jsonify({"error": "Internal server error"}), 500
