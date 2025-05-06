@@ -75,6 +75,19 @@ jobs:
           echo "Waiting for Cloud SQL instance to be ready..."
           gcloud sql instances describe postgres --format="value(state)" | grep -q "RUNNABLE"
 
+      - name: Configure PostgreSQL Flags (Timeout + PgBouncer)
+        run: |
+          gcloud sql instances patch postgres \
+            --database-flags=idle_in_transaction_session_timeout=60000 \
+            --project=proyecto-final-451719
+
+          gcloud sql instances patch postgres \
+            --database-flags=cloudsql.enable_pgaudit=on \
+            --project=proyecto-final-451719
+
+          echo "Waiting for changes to apply..."
+          sleep 30  # Pequeña pausa para asegurar la aplicación
+          
       - name: Create Databases in Parallel
         run: |
           set -e  # Habilitar fallo inmediato si hay errores
