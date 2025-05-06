@@ -201,19 +201,21 @@ def create_order(urls, token, client_id, products, seller_ids):
         response.raise_for_status()
         order_data = response.json()
         log(f"Respuesta de crear orden: {order_data}")
-        order_id = order_data["id"]
+        
+        # Manejar tanto lista como diccionario en la respuesta
+        if isinstance(order_data, list) and len(order_data) > 0 and isinstance(order_data[0], dict):
+            order_id = order_data[0]["id"]  # Acceso para formato [dict, status]
+        elif isinstance(order_data, dict):
+            order_id = order_data["id"]  # Acceso para formato directo dict
+        else:
+            raise ValueError(f"Formato de respuesta inesperado: {order_data}")
+            
         log(f"✅ Orden {order_id} creada para cliente {client_id} | Total: ${total:.2f}")
         
-        # Obtener la URL base (removiendo el path /orders)
+        # Resto del código para manejar estados...
         base_url = urls["create_order"].split('/orders')[0]
         
-        # Simular flujo de estados con probabilidades
-        time.sleep(1)  # Espera antes de cambiar el estado
-        
-        # Distribución de probabilidad:
-        # - 20% Completado (PENDIENTE → ENPORCESO → ENTREGADO)
-        # - 70% En proceso (PENDIENTE → ENPORCESO)
-        # - 10% Cancelado (PENDIENTE → CANCELADO)
+        # Simular flujo de estados...
         status_flow = random.choices(
             ["completed", "processing", "canceled"],
             weights=[0.20, 0.70, 0.10],
@@ -221,17 +223,12 @@ def create_order(urls, token, client_id, products, seller_ids):
         )[0]
         
         if status_flow == "completed":
-            # Flujo completo
             if update_order_status(base_url, token, order_id, "ENPORCESO"):
                 time.sleep(1)
                 update_order_status(base_url, token, order_id, "ENTREGADO")
-                
         elif status_flow == "processing":
-            # Solo pasa a ENPORCESO
             update_order_status(base_url, token, order_id, "ENPORCESO")
-            
         elif status_flow == "canceled":
-            # Se cancela
             update_order_status(base_url, token, order_id, "CANCELADO")
             
         return order_id
