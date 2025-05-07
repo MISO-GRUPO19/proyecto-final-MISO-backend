@@ -104,7 +104,7 @@ class CreateCustomer(BaseCommand):
         'Authorization': f'Bearer {self.token}'
         }
         payload = {
-            'customer_id': f'{str(customer.id)}'
+            'customer_email': f'{customer.email}'
         }
         response = requests.put(url, headers=headers, json=payload)
         if response.status_code != 200:

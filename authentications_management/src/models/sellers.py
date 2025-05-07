@@ -20,7 +20,7 @@ class Sellers(Model, base):
     address = Column(String, nullable=False)
     telephone = Column(String, nullable=False)
     email = Column(String, nullable=False)
-    assigned_customers = Column(ARRAY(UUID(as_uuid=True)), nullable=True, default=[])  
+    assigned_customers = Column(ARRAY(String), nullable=True, default=[])  
 
     goals = relationship('Goals', back_populates='seller', cascade='all, delete-orphan')
 

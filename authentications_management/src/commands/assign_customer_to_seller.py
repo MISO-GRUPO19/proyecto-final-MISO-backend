@@ -5,7 +5,6 @@ from flask import jsonify
 import re
 import random
 from datetime import datetime
-import uuid
 from ..models.database import db_session  
 
 class AssignCustomerToSeller(BaseCommand):
@@ -15,18 +14,14 @@ class AssignCustomerToSeller(BaseCommand):
 
     def execute(self):
         # Validate input
-        if not self.data.get('customer_id'):
-            raise InvalidData("Customer ID is required")
+        if not self.data.get('customer_email'):
+            raise InvalidData("Customer email is required")
 
-        try:
-            # Convert string UUID to UUID object
-            customer_id = uuid.UUID(self.data['customer_id'])
-            seller_id_uuid = uuid.UUID(self.seller_id)
-        except (ValueError, AttributeError):
-            raise InvalidData("Invalid UUID format")
+        customer_email = self.data['customer_email']  
+        seller_id_str = self.seller_id  
 
-        # Get seller with proper UUID conversion
-        seller = db_session.query(Sellers).filter(Sellers.id == seller_id_uuid).first()
+        # Get seller by seller_id
+        seller = db_session.query(Sellers).filter(Sellers.id == seller_id_str).first()
         if not seller:
             raise SellerNotFound("Seller not found")
 
@@ -34,15 +29,16 @@ class AssignCustomerToSeller(BaseCommand):
         if seller.assigned_customers is None:
             seller.assigned_customers = []
 
-        # Append new customer ID
-        seller.assigned_customers = seller.assigned_customers + [customer_id]
+        # Append new customer ID if not already present
+        if customer_email not in seller.assigned_customers:
+            seller.assigned_customers = seller.assigned_customers + [customer_email]
 
         try:
             db_session.commit()
             return {
                 'message': 'Customer has been successfully assigned to Seller',
-                'seller_id': str(seller.id),
-                'customer_id': str(customer_id)
+                'seller_id': seller.id,
+                'customer_email': customer_email
             }
         except Exception as e:
             db_session.rollback()
