@@ -1,14 +1,34 @@
 from marshmallow import Schema, fields
 from flask_sqlalchemy import SQLAlchemy
-from  sqlalchemy  import  Column, String, Integer, DateTime, CheckConstraint, Enum, Float, ForeignKey, UniqueConstraint, ARRAY
+from  sqlalchemy  import  Column, String, Integer, DateTime, CheckConstraint, Enum, Float, ForeignKey, UniqueConstraint, ARRAY, Text
 from .model  import  Model
 from .database import base
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from enum import Enum
 from sqlalchemy.orm import relationship
+from sqlalchemy import TypeDecorator
+import uuid
+import json
 
 db = SQLAlchemy()
+
+class ArrayOfUUID(TypeDecorator):
+    impl = Text
+    
+    def process_bind_param(self, value, dialect):
+        if dialect.name == 'postgresql':
+            return value
+        if value is not None:
+            return json.dumps([str(v) for v in value])
+        return value
+    
+    def process_result_value(self, value, dialect):
+        if dialect.name == 'postgresql':
+            return value
+        if value is not None:
+            return [uuid.UUID(v) for v in json.loads(value)]
+        return value
 
 class Sellers(Model, base):
     __tablename__ = 'sellers'
