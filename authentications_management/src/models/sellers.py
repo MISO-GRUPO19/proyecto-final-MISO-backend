@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields
 from flask_sqlalchemy import SQLAlchemy
-from  sqlalchemy  import  Column, String, Integer, DateTime, CheckConstraint, Enum, Float, ForeignKey, UniqueConstraint
+from  sqlalchemy  import  Column, String, Integer, DateTime, CheckConstraint, Enum, Float, ForeignKey, UniqueConstraint, ARRAY
 from .model  import  Model
 from .database import base
 from sqlalchemy.dialects.postgresql import UUID
@@ -20,16 +20,18 @@ class Sellers(Model, base):
     address = Column(String, nullable=False)
     telephone = Column(String, nullable=False)
     email = Column(String, nullable=False)
+    assigned_customers = Column(ARRAY(UUID(as_uuid=True)), nullable=True, default=[])  
 
     goals = relationship('Goals', back_populates='seller', cascade='all, delete-orphan')
 
-    def __init__(self, name, identification, country, address, telephone, email):
+    def __init__(self, name, identification, country, address, telephone, email, assigned_customers=None):
         self.name = name
         self.identification = identification
         self.country = country
         self.address = address
         self.telephone = telephone
         self.email = email
+        self.assigned_customers = assigned_customers  
 
 class Goals(Model, base):
     __tablename__ = "goals"

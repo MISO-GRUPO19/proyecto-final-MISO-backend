@@ -6,15 +6,18 @@ from ..errors.errors import InvalidAddressCustomer, InvalidData, InvalidNameCust
 from ..models.customers import Customers
 from ..models.database import db_session
 import os
+import random
 
 load_dotenv()
 
 load_dotenv('../.env.development')
 
 CUSTOMERS = os.getenv("CUSTOMERS")
+AUTH = os.getenv("AUTHENTICATIONS")
 class CreateCustomer(BaseCommand):
-    def __init__(self, data):
+    def __init__(self, data, token):
         self.data = data
+        self.token = token
 
     def execute(self):
         required_fields = ['firstName', 'lastName', 'country', 'address', 'phoneNumber', 'email']
@@ -42,21 +45,23 @@ class CreateCustomer(BaseCommand):
             raise UserAlreadyExists
 
         try:
+            seller_id = self.assign_random_seller()
             customer = Customers(
                 firstName=self.data['firstName'],
                 lastName=self.data['lastName'],
                 country=self.data['country'],
                 address=self.data['address'],
                 phoneNumber=self.data['phoneNumber'],
-                email=self.data['email']
+                email=self.data['email'],
+                seller_assigned=seller_id
             )
             
             db_session.add(customer)
             db_session.commit()
-
+            
             # Llamar al microservicio de clientes para sincronizar
             self.sync_with_customers_service(customer)
-
+            self.update_seller_information(customer)
             return {'message': 'Customer created successfully', 'customer_id': customer.id}
         except Exception as e:
             db_session.rollback()
@@ -64,7 +69,7 @@ class CreateCustomer(BaseCommand):
         finally:
             db_session.close()
 
-    def sync_with_customers_service(self, customer):
+    def sync_with_customers_service(self, customer: Customers):
         url = f'{CUSTOMERS}/customers/sync'
         payload = {
             'id': str(customer.id),
@@ -73,8 +78,37 @@ class CreateCustomer(BaseCommand):
             'phoneNumber': customer.phoneNumber,
             'address': customer.address,
             'country': customer.country,
-            'email': customer.email
+            'email': customer.email,
+            'seller_id': str(customer.seller_assigned)
         }
         response = requests.post(url, json=payload)
         if response.status_code != 200:
             raise Exception(f"Failed to sync with customers service: {response.text}")
+
+    def assign_random_seller(self):
+        url = f'{AUTH}/users/sellers'
+        headers = {
+        'Authorization': f'Bearer {self.token}'
+        }
+        response = requests.get(url, headers=headers)  
+        if response.status_code != 200:
+            raise Exception(f"Error al traer los vendedores {response.text}")
+        sellers = response.json()
+        if sellers:
+            assigned_seller = random.choice(sellers)
+            return assigned_seller['id']
+    
+    def update_seller_information(self, customer: Customers):
+        url = f'{AUTH}/users/sellers/{customer.seller_assigned}/customers'
+        headers = {
+        'Authorization': f'Bearer {self.token}'
+        }
+        payload = {
+            'customer_id': f'{str(customer.id)}'
+        }
+        response = requests.put(url, headers=headers, json=payload)
+        if response.status_code != 200:
+            raise Exception(f"Error al agregar cliente al vendedor {response.text}")
+        
+        
+    
