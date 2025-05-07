@@ -8,6 +8,7 @@ class SyncCustomer:
         self.data = data
 
     def execute(self):
+        session = db_session()
         try:
             customer = Customers(
                 id=self.data['id'],
@@ -20,7 +21,7 @@ class SyncCustomer:
                 created_at=datetime.datetime.utcnow(),
                 updated_at=datetime.datetime.utcnow()
             )
-            db_session.add(customer)
+            session.add(customer)
             
             store = Stores(
                 customer_id=self.data['id'],
@@ -29,9 +30,11 @@ class SyncCustomer:
                 created_at=datetime.datetime.utcnow(),
                 updated_at=datetime.datetime.utcnow()
             )
-            db_session.add(store)
-            db_session.commit()
+            session.add(store)
+            session.commit()
             return {'message': 'Customer synced successfully'}
         except Exception as e:
-            db_session.rollback()
+            session.rollback()
             return {'error': str(e)}
+        finally:
+            session.remove()
