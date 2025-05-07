@@ -1,6 +1,6 @@
 import datetime
 from unittest import TestCase
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, call
 from faker import Faker
 from customers_management.src.commands.sync_customers import SyncCustomer
 
@@ -19,32 +19,45 @@ class TestSyncCustomer(TestCase):
             'phoneNumber': fake.phone_number(),
             'address': fake.address(),
             'country': fake.country(),
-            'email': fake.email()
+            'email': fake.email(),
+            'seller_id': fake.uuid4()  # Added seller_id which was missing
         }
     
-        mock_customer = MagicMock()
-        mock_customer.id = data['id']
-        mock_customer.firstName = data['firstName']
-        mock_customer.lastName = data['lastName']
-        mock_customer.phoneNumber = data['phoneNumber']
-        mock_customer.address = data['address']
-        mock_customer.country = data['country']
-        mock_customer.email = data['email']
-        mock_customer.created_at = datetime.datetime.utcnow()
-        mock_customer.updated_at = datetime.datetime.utcnow()
-    
+        # Setup mock customer query to return None (customer doesn't exist)
         mock_customers.query.filter_by.return_value.first.return_value = None
-    
+        
+        # Create a fresh MagicMock for the customer instance
+        mock_new_customer = MagicMock()
+        mock_customers.return_value = mock_new_customer
+        
+        # Setup the db_session mock
         mock_db_session.add = MagicMock()
-    
+        mock_db_session.commit = MagicMock()
+        
         sync_customer = SyncCustomer(data)
         response = sync_customer.execute()
-    
+        
+        # Verify the customer was created with correct data
+        mock_customers.assert_called_once_with(
+            id=data['id'],
+            firstName=data['firstName'],
+            lastName=data['lastName'],
+            phoneNumber=data['phoneNumber'],
+            address=data['address'],
+            country=data['country'],
+            email=data['email'],
+            seller_assigned=data['seller_id']
+        )
+        
+        # Verify database operations
+        mock_db_session.add.assert_called_once_with(mock_new_customer)
         mock_db_session.commit.assert_called_once()
+        
         assert response == {'message': 'Customer synced successfully'}
 
+    @patch('customers_management.src.commands.sync_customers.Customers')
     @patch('customers_management.src.commands.sync_customers.db_session')
-    def test_sync_customer_exception(self, mock_db_session):
+    def test_sync_customer_exception(self, mock_db_session, mock_customers):
         data = {
             'id': fake.uuid4(),
             'firstName': fake.first_name(),
@@ -52,13 +65,19 @@ class TestSyncCustomer(TestCase):
             'phoneNumber': fake.phone_number(),
             'address': fake.address(),
             'country': fake.country(),
-            'email': fake.email()
+            'email': fake.email(),
+            'seller_id': fake.uuid4()  # Added seller_id
         }
-    
-        mock_db_session.add.side_effect = Exception("Database error")
-    
+        
+        # Setup mock to raise exception on commit
+        mock_db_session.commit.side_effect = Exception("Database error")
+        mock_db_session.rollback = MagicMock()
+        
         sync_customer = SyncCustomer(data)
         response = sync_customer.execute()
-    
+        
+        # Verify rollback was called
         mock_db_session.rollback.assert_called_once()
-        assert response == {'error': 'Database error'}
+        
+        # Verify error response format
+        self.assertEqual(response, {'error': 'Database error'})
