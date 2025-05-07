@@ -10,7 +10,7 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
-        <intProp name="ThreadGroup.num_threads">400</intProp>
+        <intProp name="ThreadGroup.num_threads">1000</intProp>
         <intProp name="ThreadGroup.ramp_time">60</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -21,9 +21,8 @@
       </ThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request">
-          <stringProp name="HTTPSampler.domain">127.0.0.1</stringProp>
-          <stringProp name="HTTPSampler.port">8080</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.domain">nginx-service-230506421700.us-central1.run.app</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/orders</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -34,14 +33,14 @@
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
-  &quot;client_id&quot;: &quot;48c43d6c-832f-4873-b7be-73fb35c5909c&quot;,&#xd;
+  &quot;client_id&quot;: &quot;b320ec2c-60cb-46b7-a5c7-b6a26a2056e1&quot;,&#xd;
   &quot;date&quot;: &quot;2024-03-01T17:45:00&quot;,&#xd;
   &quot;total&quot;: 6.9,&#xd;
   &quot;type&quot;: &quot;CLIENTE&quot;,&#xd;
   &quot;products&quot;: [&#xd;
-    { &quot;barcode&quot;: &quot;8909550053769&quot;, &quot;quantity&quot;: 1 },&#xd;
-    { &quot;barcode&quot;: &quot;7974234781970&quot;, &quot;quantity&quot;: 1 },&#xd;
-    { &quot;barcode&quot;: &quot;0983432637726&quot;, &quot;quantity&quot;: 1 }&#xd;
+    { &quot;barcode&quot;: &quot;7702011333333&quot;, &quot;quantity&quot;: 1 },&#xd;
+    { &quot;barcode&quot;: &quot;7702012000001&quot;, &quot;quantity&quot;: 1 },&#xd;
+    { &quot;barcode&quot;: &quot;7702011444444&quot;, &quot;quantity&quot;: 1 }&#xd;
   ]&#xd;
 }&#xd;
 </stringProp>
@@ -92,7 +91,7 @@
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">Authorization</stringProp>
-              <stringProp name="Header.value">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NjU4MTM4NiwianRpIjoiYzdhZTdhNTAtMDI4My00M2YxLTk2ZWQtNzM4NTM4YTkzMmVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImI1ZTIyZGY3LWUwYzEtNGMzOS05MzQ4LTdlZGI5MjRiYjVmMCIsIm5iZiI6MTc0NjU4MTM4NiwiY3NyZiI6IjIyZDA2Y2Q5LTRkNzctNDhkZS1hYzNhLTgyMzQzYWM2NTU1MyIsImV4cCI6MTc0NzE4NjE4Nn0.2dP8qRBGMADNWrWJrdX0ngXqFRod1nIOn72qi2y-m1E</stringProp>
+              <stringProp name="Header.value">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NjY0NjQ0NSwianRpIjoiMDI0OTM4MTItMzM2NC00ZjhjLWIyMmUtMGNhYzdiZTUyOTk4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY4NDcxOGE4LThiZTYtNDUyZC1iMTM1LTViMzJkNTA1N2JiMCIsIm5iZiI6MTc0NjY0NjQ0NSwiY3NyZiI6ImM1NWFhZDk5LTBmMGEtNDVkMS1hZDgzLTJiOTI5NDIyN2Q3ZiIsImV4cCI6MTc0NzI1MTI0NX0.ocfCnABrlWevkd9BBJrOtCWAuaErM5nlmzsv6WJxWm4</stringProp>
             </elementProp>
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">Content-Type</stringProp>
@@ -138,7 +137,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph">
+        <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>

@@ -1,4 +1,5 @@
 from flask import jsonify
+from sqlalchemy.orm import joinedload
 from ..models.customers import Customers
 from ..models.database import db_session
 
@@ -10,7 +11,7 @@ class GetCustomers:
         try:
             with db_session() as session:
                 customers = session.query(Customers).options(
-                    db_session.joinedload(Customers.stores)
+                    joinedload(Customers.stores)
                 ).all()
                 
                 if not customers:
@@ -37,4 +38,4 @@ class GetCustomers:
                 return jsonify(customers_data), 200
                 
         except Exception as e:
-            return jsonify({"error": "Internal server error"}), 500
+            return jsonify({"error": "Internal server error", "details": str(e)}), 500
