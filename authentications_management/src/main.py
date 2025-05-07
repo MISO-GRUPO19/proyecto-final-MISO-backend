@@ -30,10 +30,6 @@ app.config["DEBUG"] = True
 app.register_blueprint(users)
 
 init_db()
-
-@app.before_request
-def before_request():
-    g.db_session = scoped_session(sessionmaker(bind=engine))
     
 @app.errorhandler(ApiError)
 def handle_exception(error):
