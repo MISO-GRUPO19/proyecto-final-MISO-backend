@@ -37,4 +37,4 @@ class SyncCustomer:
             session.rollback()
             return {'error': str(e)}
         finally:
-            session.remove()
+            session.close()

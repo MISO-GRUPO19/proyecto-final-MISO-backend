@@ -6,8 +6,8 @@ from faker import Faker
 fake = Faker()
 
 @patch('customers_management.src.queries.get_customers.db_session')
-@patch('customers_management.src.queries.get_customers.Customers')
-def test_get_customers_execute_success(mock_customers, mock_db_session):
+def test_get_customers_execute_success(mock_db_session):
+    # Mock de stores
     mock_store_1 = MagicMock()
     mock_store_1.store_name = fake.company()
     mock_store_1.address = fake.address()
@@ -16,6 +16,7 @@ def test_get_customers_execute_success(mock_customers, mock_db_session):
     mock_store_2.store_name = fake.company()
     mock_store_2.address = fake.address()
 
+    # Mock del customer
     mock_customer = MagicMock()
     mock_customer.firstName = fake.first_name()
     mock_customer.lastName = fake.last_name()
@@ -26,8 +27,16 @@ def test_get_customers_execute_success(mock_customers, mock_db_session):
     mock_customer.stores = [mock_store_1, mock_store_2]
     mock_customer.id = 1
 
+    # Simulación de sesión con joinedload
     mock_session = MagicMock()
-    mock_session.query.return_value.all.return_value = [mock_customer]
+    
+    # Configuración para simular el joinedload
+    mock_query = MagicMock()
+    mock_options = MagicMock()
+    mock_options.all.return_value = [mock_customer]
+    mock_query.options.return_value = mock_options
+    mock_session.query.return_value = mock_query
+    
     mock_db_session.return_value.__enter__.return_value = mock_session
 
     from customers_management.src.queries.get_customers import GetCustomers
