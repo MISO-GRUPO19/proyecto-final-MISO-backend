@@ -116,12 +116,6 @@ def get_seller_sales(seller_id):
     except Exception as e:
         return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
 
-@users.route('/users/sellers', methods=['GET'])
-@jwt_required()
-def get_sellers():
-    auth_token = request.headers.get("Authorization", "").replace("Bearer ", "")
-    result = GetSellers(auth_token).execute()
-    return jsonify(result), 200
 @users.route('/users/sellers/<seller_id>/customers', methods=['PUT'])
 @jwt_required()
 def assign_customer_to_seller(seller_id):
