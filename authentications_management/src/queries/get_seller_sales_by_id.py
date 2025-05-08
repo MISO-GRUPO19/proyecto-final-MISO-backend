@@ -1,3 +1,4 @@
+'''
 from ..errors.errors import *
 from ..models.sellers import Sellers, GoalProduct, Goals
 from ..models.database import db_session
@@ -69,4 +70,4 @@ class GetSellerSalesById():
 
 
 
-    
+'''

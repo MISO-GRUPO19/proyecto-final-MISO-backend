@@ -8,7 +8,7 @@ from ..commands.update_orders import UpdateStateOrder
 from ..commands.generate_seller_visits import GenerateSellerVisits
 from uuid import UUID
 from ..errors.errors import InvalidData, ProductInsufficientStock, ProductNotFound
-
+from ..commands.create_seller_goals import CreateSellerGoals
 orders = Blueprint('orders', __name__)
 
 @orders.route('/orders', methods=['POST'])
@@ -97,6 +97,15 @@ def generate_seller_visits(seller_id):
     try:
         result = GenerateSellerVisits(seller_id).execute()
         return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"error": f"An unexpected error occurred: {e}"}), 500
+
+@orders.route('/orders/goals', methods=['POST'])
+def create_goal_sales():
+    data = request.get_json()
+    try:
+        result = CreateSellerGoals(data).execute()
+        return jsonify(result), 201
     except Exception as e:
         return jsonify({"error": f"An unexpected error occurred: {e}"}), 500    
 

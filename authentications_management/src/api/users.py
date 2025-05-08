@@ -6,7 +6,7 @@ from flask_jwt_extended import jwt_required
 from ..commands.create_sellers import CreateSellers
 from ..errors.errors import *
 from ..queries.get_seller_by_id import GetSellersById
-from ..queries.get_seller_sales_by_id import GetSellerSalesById
+#from ..queries.get_seller_sales_by_id import GetSellerSalesById
 from ..queries.get_sellers import GetSellers
 from ..commands.assign_customer_to_seller import AssignCustomerToSeller
 users = Blueprint('users', __name__)
