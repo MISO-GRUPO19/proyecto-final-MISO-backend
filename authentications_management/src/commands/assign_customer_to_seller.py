@@ -1,11 +1,7 @@
 from .base_command import BaseCommand
-from ..errors.errors import *
+from ..errors.errors import InvalidData, SellerNotFound
 from ..models.sellers import Sellers
-from flask import jsonify
-import re
-import random
-from datetime import datetime
-from ..models.database import db_session  
+from ..models.database import db_session
 
 class AssignCustomerToSeller(BaseCommand):
     def __init__(self, data, seller_id):
@@ -17,11 +13,10 @@ class AssignCustomerToSeller(BaseCommand):
         if not self.data.get('customer_email'):
             raise InvalidData("Customer email is required")
 
-        customer_email = self.data['customer_email']  
-        seller_id_str = self.seller_id  
-
-        # Get seller by seller_id
-        seller = db_session.query(Sellers).filter_by(Sellers.id == seller_id_str).first()
+        customer_email = self.data['customer_email']
+        
+        # Get seller by seller_id using filter_by as expected by tests
+        seller = db_session.query(Sellers).filter_by(id=self.seller_id).first()
         if not seller:
             raise SellerNotFound("Seller not found")
 
@@ -29,15 +24,22 @@ class AssignCustomerToSeller(BaseCommand):
         if seller.assigned_customers is None:
             seller.assigned_customers = []
 
-        # Append new customer ID if not already present
-        if customer_email not in seller.assigned_customers:
-            seller.assigned_customers = seller.assigned_customers + [customer_email]
+        # Check if customer already exists
+        if customer_email in seller.assigned_customers:
+            return {
+                'message': 'Customer already assigned to seller',
+                'seller_id': str(seller.id),
+                'customer_email': customer_email
+            }
+
+        # Append new customer email
+        seller.assigned_customers.append(customer_email)
 
         try:
             db_session.commit()
             return {
                 'message': 'Customer has been successfully assigned to Seller',
-                'seller_id': seller.id,
+                'seller_id': str(seller.id),
                 'customer_email': customer_email
             }
         except Exception as e:
