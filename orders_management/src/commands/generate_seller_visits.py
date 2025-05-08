@@ -1,7 +1,7 @@
 from flask import jsonify
 from .base_command import BaseCommand
 from ..errors.errors import InvalidData, ProductInsufficientStock
-from ..models.visits import Visits
+from ..models.visits import Visits, VisitStatus
 from ..models.productOrder import ProductOrder
 from ..models.database import db_session
 from datetime import datetime
@@ -41,7 +41,8 @@ class GenerateSellerVisits(BaseCommand):
                 visit_address=info['address'],
                 customer_name=f"{info['firstName']} {info['lastName']}",
                 customer_phonenumber=info['phoneNumber'],
-                store_name=f"{info['firstName']} {info['lastName']} Supermercado"
+                store_name=f"{info['firstName']} {info['lastName']} Supermercado",
+                visit_status=VisitStatus.NO_VISITADO
             )
             db_session.add(visit)
             db_session.commit()
@@ -55,7 +56,8 @@ class GenerateSellerVisits(BaseCommand):
                     "customer_name": each.customer_name,
                     "customer_phonenumber": each.customer_phonenumber,
                     "store_name": each.store_name,
-                    "visit_date": each.visit_date
+                    "visit_date": each.visit_date,
+                    "visit_status": each.visit_status.value
                 } for each in visits
             ]
         }

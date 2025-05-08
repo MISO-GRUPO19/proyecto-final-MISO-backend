@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 from datetime import datetime, timedelta
 from orders_management.src.commands.generate_seller_visits import GenerateSellerVisits
-from orders_management.src.models.visits import Visits
+from orders_management.src.models.visits import Visits, VisitStatus
 
 class TestGenerateSellerVisits(unittest.TestCase):
 
@@ -63,6 +63,8 @@ class TestGenerateSellerVisits(unittest.TestCase):
         self.assertEqual(len(result["visits_info"]), 2)
         self.assertEqual(result["visits_info"][0]["customer_name"], "John Doe")
         self.assertEqual(result["visits_info"][1]["customer_name"], "Jane Smith")
+        self.assertEqual(result["visits_info"][0]["visit_status"], VisitStatus.NO_VISITADO.value)
+        self.assertEqual(result["visits_info"][1]["visit_status"], VisitStatus.NO_VISITADO.value)
 
     @patch("orders_management.src.commands.generate_seller_visits.requests.get")
     def test_get_seller_info_failure(self, mock_get):
@@ -93,4 +95,3 @@ class TestGenerateSellerVisits(unittest.TestCase):
 
         # Assertions
         self.assertIn("Customer not found", str(context.exception))
-
