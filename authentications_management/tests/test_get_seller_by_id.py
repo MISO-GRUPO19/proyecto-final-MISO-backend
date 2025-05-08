@@ -9,7 +9,6 @@ class TestGetSellersById(unittest.TestCase):
     def setUp(self):
         self.fake_id = uuid4()
         self.fake_seller = Sellers(
-            id=self.fake_id,
             name="John Doe",
             identification="ID123456",
             country="USA",
