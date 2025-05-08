@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch, MagicMock
+from flask import jsonify
 from customers_management.src.queries.get_customer_by_email import GetCustomerByEmail
 from customers_management.src.models.customers import Customers
-from customers_management.src.errors.errors import CustomerNotFound
 
 class TestGetCustomerByEmail(unittest.TestCase):
 
@@ -21,38 +21,40 @@ class TestGetCustomerByEmail(unittest.TestCase):
         )
 
         # Mock query result
-        mock_db_session.query.return_value.filter_by.return_value.first.return_value = mock_customer
+        mock_db_session.query.return_value.filter.return_value.all.return_value = [mock_customer]
 
         # Execute query
         get_customer = GetCustomerByEmail("john.doe@example.com")
-        result = get_customer.execute()
+        response, status_code = get_customer.execute()
 
         # Assertions
-        expected_result = {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "firstName": "John",
-            "lastName": "Doe",
-            "email": "john.doe@example.com",
-            "phoneNumber": "555-1234",
-            "address": "123 Main St",
-            "country": "USA",
-            "seller_assigned": "seller_1"
-        }
-        self.assertEqual(result, expected_result)
+        expected_result = [
+            {
+                "id": "123e4567-e89b-12d3-a456-426614174000",
+                "firstName": "John",
+                "lastName": "Doe",
+                "email": "john.doe@example.com",
+                "phoneNumber": "555-1234",
+                "address": "123 Main St",
+                "country": "USA",
+                "stores": [],
+            }
+        ]
+        self.assertEqual(status_code, 200)
+        self.assertEqual(response.json, expected_result)
 
     @patch('customers_management.src.queries.get_customer_by_email.db_session')
     def test_get_customer_by_email_not_found(self, mock_db_session):
         # Mock query result to return None
-        mock_db_session.query.return_value.filter_by.return_value.first.return_value = None
+        mock_db_session.query.return_value.filter.return_value.all.return_value = []
 
         # Execute query
         get_customer = GetCustomerByEmail("nonexistent@example.com")
-
-        with self.assertRaises(CustomerNotFound) as context:
-            get_customer.execute()
+        response, status_code = get_customer.execute()
 
         # Assertions
-        self.assertEqual(str(context.exception), "Customer with email nonexistent@example.com not found")
+        self.assertEqual(status_code, 404)
+        self.assertEqual(response.json, {"error": "Customer not found"})
 
     @patch('customers_management.src.queries.get_customer_by_email.db_session')
     def test_get_customer_by_email_database_error(self, mock_db_session):
@@ -66,4 +68,4 @@ class TestGetCustomerByEmail(unittest.TestCase):
             get_customer.execute()
 
         # Assertions
-        self.assertEqual(str(context.exception), "Error fetching customer: Database error")
+        self.assertEqual(str(context.exception), "Database error")
