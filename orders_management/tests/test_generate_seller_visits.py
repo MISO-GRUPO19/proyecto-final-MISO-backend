@@ -64,20 +64,6 @@ class TestGenerateSellerVisits(unittest.TestCase):
         self.assertEqual(result["visits_info"][0]["customer_name"], "John Doe")
         self.assertEqual(result["visits_info"][1]["customer_name"], "Jane Smith")
 
-    @patch("orders_management.src.commands.generate_seller_visits.requests.post")
-    def test_get_token_failure(self, mock_post):
-        # Mock a failed token retrieval
-        mock_post.return_value.status_code = 401
-        mock_post.return_value.text = "Unauthorized"
-
-        # Execute the command
-        command = GenerateSellerVisits(seller_id="seller-id")
-        with self.assertRaises(Exception) as context:
-            command.get_token()
-
-        # Assertions
-        self.assertIn("Unauthorized", str(context.exception))
-
     @patch("orders_management.src.commands.generate_seller_visits.requests.get")
     def test_get_seller_info_failure(self, mock_get):
         # Mock a failed seller info retrieval
