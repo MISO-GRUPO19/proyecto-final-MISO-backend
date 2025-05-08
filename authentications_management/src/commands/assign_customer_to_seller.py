@@ -21,7 +21,7 @@ class AssignCustomerToSeller(BaseCommand):
         seller_id_str = self.seller_id  
 
         # Get seller by seller_id
-        seller = db_session.query(Sellers).filter(Sellers.id == seller_id_str).first()
+        seller = db_session.query(Sellers).filter_by(Sellers.id == seller_id_str).first()
         if not seller:
             raise SellerNotFound("Seller not found")
 

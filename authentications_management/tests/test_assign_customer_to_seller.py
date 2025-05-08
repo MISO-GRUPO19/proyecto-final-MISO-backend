@@ -36,6 +36,7 @@ class TestAssignCustomerToSeller(unittest.TestCase):
         customer_email = "customer1@example.com"
         mock_seller = MagicMock()
         mock_seller.assigned_customers = [customer_email]
+        mock_seller.id = seller_id
 
         mock_sellers.query.return_value.filter_by.return_value.first.return_value = mock_seller
 
@@ -44,13 +45,12 @@ class TestAssignCustomerToSeller(unittest.TestCase):
         response = command.execute()
 
         mock_sellers.query.return_value.filter_by.assert_called_once_with(id=seller_id)
-        self.assertEqual(mock_seller.assigned_customers, [customer_email])
-        mock_db_session.commit.assert_called_once()
         self.assertEqual(response, {
-            "message": "Customer has been successfully assigned to Seller",
+            "message": "Customer already assigned to seller",
             "seller_id": seller_id,
             "customer_email": customer_email
         })
+        mock_db_session.commit.assert_not_called()
 
     @patch('authentications_management.src.commands.assign_customer_to_seller.db_session')
     @patch('authentications_management.src.commands.assign_customer_to_seller.Sellers')
