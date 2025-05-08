@@ -29,7 +29,7 @@ def test_get_customer_by_id_execute_success(mock_customers, mock_db_session):
 
     # Simulación de sesión
     mock_session = MagicMock()
-    mock_session.query.return_value.filter.return_value.all.return_value = [mock_customer]
+    mock_session.query.return_value.filter.return_value.first.return_value = mock_customer  # Cambiado a first()
     mock_db_session.return_value.__enter__.return_value = mock_session
 
     # Import y ejecución
@@ -38,33 +38,32 @@ def test_get_customer_by_id_execute_success(mock_customers, mock_db_session):
 
     # Validaciones
     assert status_code == 200
-    assert response.get_json() == [
-        {
-            'firstName': mock_customer.firstName,
-            'lastName': mock_customer.lastName,
-            'country': mock_customer.country,
-            'address': mock_customer.address,
-            'email': mock_customer.email,
-            'phoneNumber': mock_customer.phoneNumber,
-            'id': mock_customer.id,
-            'stores': [
-                {
-                    'store_name': mock_store_1.store_name,
-                    'store_address': mock_store_1.address
-                },
-                {
-                    'store_name': mock_store_2.store_name,
-                    'store_address': mock_store_2.address
-                }
-            ]
-        }
-    ]
+    assert response.get_json() == {
+        'firstName': mock_customer.firstName,
+        'lastName': mock_customer.lastName,
+        'country': mock_customer.country,
+        'address': mock_customer.address,
+        'email': mock_customer.email,
+        'phoneNumber': mock_customer.phoneNumber,
+        'id': mock_customer.id,
+        'stores': [
+            {
+                'store_name': mock_store_1.store_name,
+                'store_address': mock_store_1.address
+            },
+            {
+                'store_name': mock_store_2.store_name,
+                'store_address': mock_store_2.address
+            }
+        ]
+    }
+
 
 @patch('customers_management.src.queries.get_customer_by_id.db_session')
 @patch('customers_management.src.queries.get_customer_by_id.Customers')
-def test_get_customer_by_id_not_found(mock_customers, mock_db_session):
+def test_get_customer_by_id_not_found(mock_customers, mock_db_session):  # Nombre corregido
     mock_session = MagicMock()
-    mock_session.query.return_value.filter.return_value.all.return_value = []
+    mock_session.query.return_value.filter.return_value.first.return_value = None  # Devuelve None para "no encontrado"
     mock_db_session.return_value.__enter__.return_value = mock_session
 
     from customers_management.src.queries.get_customer_by_id import GetCustomerById

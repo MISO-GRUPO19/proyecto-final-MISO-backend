@@ -36,3 +36,5 @@ class GetProducts:
 
         except Exception as e:
             return {'error': str(e)}
+        finally:
+            db_session.remove()

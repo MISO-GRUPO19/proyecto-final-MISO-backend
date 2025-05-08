@@ -161,4 +161,4 @@ class CreateProducts(BaseCommand):
             db_session.rollback()
             return {'error': f'{e}Ocurrió un error al guardar el producto. Inténtelo de nuevo.'}
         finally:
-            db_session.close()
+            db_session.remove()

@@ -62,7 +62,7 @@ class CreateCustomer(BaseCommand):
             db_session.rollback()
             raise e
         finally:
-            db_session.close()
+            db_session.remove()
 
     def sync_with_customers_service(self, customer):
         url = f'{CUSTOMERS}/customers/sync'
