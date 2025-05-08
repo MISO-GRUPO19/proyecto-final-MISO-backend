@@ -20,6 +20,7 @@ class TestGetSellersById(unittest.TestCase):
                 {"email": "customer2@example.com"}
             ]
         )
+        self.fake_seller.id = self.fake_id
 
     @patch("authentications_management.src.queries.get_seller_by_id.db_session")
     def test_execute_returns_seller_data(self, mock_db_session):
