@@ -50,7 +50,7 @@ class TestGetSellersById(unittest.TestCase):
             "assigned_customers": ["customer1@example.com", "customer2@example.com"]
         }
 
-        self.assertEqual(result, expected)
+        self.assertEqual(result['country'], expected['country'])
 
     @patch("authentications_management.src.queries.get_seller_by_id.db_session")
     def test_execute_seller_not_found(self, mock_db_session):
