@@ -18,7 +18,7 @@ class TestGetSellersById(unittest.TestCase):
             assigned_customers=["customer1@example.com", "customer2@example.com"]
         )
 
-    @patch("app.endpoints.get_seller_by_id.db_session")
+    @patch("authentications_management.src.queries.get_seller_by_id.db_session")
     def test_execute_returns_seller_data(self, mock_db_session):
         mock_session = MagicMock()
         mock_query = mock_session.return_value.query.return_value
@@ -48,7 +48,7 @@ class TestGetSellersById(unittest.TestCase):
 
         self.assertEqual(result, expected)
 
-    @patch("app.endpoints.get_seller_by_id.db_session")
+    @patch("authentications_management.src.queries.get_seller_by_id.db_session")
     def test_execute_seller_not_found(self, mock_db_session):
         mock_session = MagicMock()
         mock_query = mock_session.return_value.query.return_value
