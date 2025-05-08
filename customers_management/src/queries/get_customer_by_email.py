@@ -26,7 +26,13 @@ class GetCustomerByEmail:
                         'phoneNumber': customer.phoneNumber,
                         'address': customer.address,
                         'country': customer.country,
-                        'stores': []
+                        'stores': [
+                            {
+                                'store_name': store.store_name,
+                                'store_address': store.address
+
+                            } for store in customer.stores
+                        ]
                     }
                     result.append(customer_data)
                 

@@ -33,7 +33,7 @@ class AssignCustomerToSeller(BaseCommand):
             }
 
         # Append new customer email
-        seller.assigned_customers.append(customer_email)
+        seller.assigned_customers = seller.assigned_customers + [customer_email]
 
         try:
             db_session.commit()
