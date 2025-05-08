@@ -17,8 +17,16 @@ class Visits(Model, base):
     seller_id = Column(String, nullable=False)
     customer_id = Column(String, nullable=False)
     visit_date = Column(DateTime, nullable=False)
+    visit_address = Column(String, nullable=False)
+    customer_name = Column(String, nullable=False)
+    customer_phonenumber = Column(String, nullable=False)
+    store_name = Column(String, nullable=False)
 
-    def __init__(self, seller_id, customer_id, visit_date):
+    def __init__(self, seller_id, customer_id, visit_date, visit_address,customer_name, customer_phonenumber, store_name):
         self.seller_id = seller_id
         self.customer_id = customer_id
         self.visit_date = visit_date
+        self.visit_address = visit_address
+        self.customer_name = customer_name
+        self.customer_phonenumber = customer_phonenumber
+        self.store_name = store_name
