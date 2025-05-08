@@ -43,9 +43,13 @@ class CreateManufacturers(BaseCommand):
         db_session.add(manufacturers)
 
         db_session.commit()
+        manufacturer_id = str(manufacturers.id)
         db_session.close()
 
-        return {'message': 'manufacturers created successfully'}
+        return {
+            'id': manufacturer_id,
+            'message': 'manufacturers created successfully'
+            }
 
     def check_name(self, name: str):
         if len(name) < 3 or len(name) > 100:

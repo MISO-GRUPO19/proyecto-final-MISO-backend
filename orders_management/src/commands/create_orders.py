@@ -1,5 +1,6 @@
+from flask import jsonify
 from .base_command import BaseCommand
-from ..errors.errors import InvalidData
+from ..errors.errors import InvalidData, ProductInsufficientStock
 from ..models.orders import Orders
 from ..models.productOrder import ProductOrder
 from ..models.database import db_session
@@ -9,10 +10,12 @@ import os
 from dotenv import load_dotenv 
 from requests import Response
 import requests
+import logging
 
 load_dotenv()
 
 load_dotenv('../.env.development')
+logging.basicConfig(level=logging.DEBUG)
 
 PRODUCTS = os.getenv("PRODUCTS")
 
@@ -27,25 +30,54 @@ class CreateOrders(BaseCommand):
         self.total = total
         self.order_type = order_type
         self.route_id = route_id
-        self.products = products
-    
-    def validateProducts(self):
-        for p in self.products:
-            headers = {"Authorization": f"Bearer {self.token}"}
-            response: Response = requests.get(f'{PRODUCTS}/products/{p["barcode"]}?quantity={p["quantity"]}', headers=headers)
-            
-            if response.status_code != 200:
-                raise InvalidData            
-                        
-        
+        self.products = products        
 
     def execute(self):
         if not all([self.client_id, self.date, self.total, self.order_type, self.products]):
             raise InvalidData
         
-        self.validateProducts()
-        
         try:
+            for p in self.products:
+                headers = {"Authorization": f"Bearer {self.token}"}
+                response: Response = requests.get(f'{PRODUCTS}/products/{p["barcode"]}?quantity={p["quantity"]}', headers=headers)
+                
+                if response.status_code != 200:
+                    try:
+                        logging.info(f"Error en la respuesta: {response.status_code}")
+                        logging.info(f"Detalles del error: {response.text}")
+                        error_details = response.json()
+                        if "error" in error_details and error_details["error"] == "ProductInsufficientStock":
+                            return jsonify({"error": "ProductInsufficientStock", "barcode": p['barcode']}), 400
+                        elif "error" in error_details and error_details["error"] == "ProductNotFound":
+                            return jsonify({"error": "ProductNotFound", "barcode": p['barcode']}), 404
+                        else:
+                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
+                    except ValueError:
+                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
+                
+                logging.info(f"Respuesta de la API: {response.status_code}")
+
+            for p in self.products:
+                headers = {"Authorization": f"Bearer {self.token}"}
+                url = f"{PRODUCTS}/products/{p['barcode']}?quantity={p['quantity']}"
+
+                response: Response = requests.put(url, headers=headers, json=p)
+                
+                if response.status_code != 200:
+                    try:
+                        logging.info(f"Error en la respuesta: {response.status_code}")
+                        logging.info(f"Detalles del error: {response.text}")
+                        error_details = response.json()
+                        if "error" in error_details and error_details["error"] == "ProductInsufficientStock":
+                            return jsonify({"error": "ProductInsufficientStock", "barcode": p['barcode']}), 400
+                        elif "error" in error_details and error_details["error"] == "ProductNotFound":
+                            return jsonify({"error": "ProductNotFound", "barcode": p['barcode']}), 404
+                        else:
+                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
+                    except ValueError:
+                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
+                
+                
             order = Orders(
                 client_id=self.client_id,
                 seller_id=self.seller_id,
@@ -76,7 +108,7 @@ class CreateOrders(BaseCommand):
                 db_session.add(product_order)
             
             db_session.commit()
-            return {'message': 'Sale created successfully', 'id': order.id}
+            return jsonify({'message': 'Sale created successfully', 'id': order.id}, 201)
         
         except Exception as e:
             db_session.rollback()
