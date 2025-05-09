@@ -18,7 +18,7 @@ class TestGetSellerByIdentification(unittest.TestCase):
         result = query.execute()
 
         # Assertions
-        self.assertEqual(result["seller_id"], "90cf05da-e547-49eb-8b25-d28b36ebd7f2")
+        self.assertEqual(result["id"], "90cf05da-e547-49eb-8b25-d28b36ebd7f2")
         mock_db_session.query.assert_called_once()
 
     @patch("authentications_management.src.queries.get_seller_by_identification.db_session")
@@ -33,7 +33,7 @@ class TestGetSellerByIdentification(unittest.TestCase):
         result = query.execute()
 
         # Assertions
-        self.assertEqual(result["seller_id"], "4e18782e-8a4f-4770-9c27-50fcc3187409")
+        self.assertEqual(result["id"], "4e18782e-8a4f-4770-9c27-50fcc3187409")
         mock_db_session.query.assert_called_once()
 
     @patch("authentications_management.src.queries.get_seller_by_identification.db_session")
