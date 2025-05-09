@@ -1,9 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
+from types import SimpleNamespace
 from orders_management.src.queries.get_seller_sales_by_id import GetSellerSalesById
-from orders_management.src.models.goals import Goals, GoalProduct
-from orders_management.src.models.orders import Orders
-from orders_management.src.models.productOrder import ProductOrder
 from orders_management.src.errors.errors import GoalNotFound
 
 class TestGetSellerSalesById(unittest.TestCase):
@@ -31,9 +29,10 @@ class TestGetSellerSalesById(unittest.TestCase):
         ]
 
         # Mock the goals query
-        mock_goal = MagicMock()
-        mock_goal.id = "goal-id-1"
-        mock_goal.sales_expectation = 1000
+        mock_goal = SimpleNamespace(
+            id="goal-id-1",
+            sales_expectation=1000
+        )
         mock_db_session.query.return_value.filter.return_value.all.return_value = [mock_goal]
 
         # Mock the GoalProduct query
@@ -56,16 +55,16 @@ class TestGetSellerSalesById(unittest.TestCase):
         self.assertEqual(result["total_sales"], 500.0)
         self.assertEqual(result["monthly_summary"][0]["goals_achieved"], 50.0)
 
-        @patch.dict("os.environ", {"AUTH": "http://mock-auth-service"})
-        @patch("orders_management.src.queries.get_seller_sales_by_id.db_session")
-        def test_execute_with_no_goals(self, mock_db_session):
-            # Mock no goals found
-            mock_db_session.query.return_value.filter.return_value.all.return_value = []
+    @patch.dict("os.environ", {"AUTH": "http://mock-auth-service"})
+    @patch("orders_management.src.queries.get_seller_sales_by_id.db_session")
+    def test_execute_with_no_goals(self, mock_db_session):
+        # Mock no goals found
+        mock_db_session.query.return_value.filter.return_value.all.return_value = []
 
-            # Execute the query and expect GoalNotFound
-            query = GetSellerSalesById("123456789")
-            with self.assertRaises(GoalNotFound):
-                query.execute()
+        # Execute the query and expect GoalNotFound
+        query = GetSellerSalesById("123456789")
+        with self.assertRaises(GoalNotFound):
+            query.execute()
 
     @patch.dict("os.environ", {"AUTH": "http://mock-auth-service"})
     @patch("orders_management.src.queries.get_seller_sales_by_id.db_session")
