@@ -39,17 +39,24 @@ class GetSellerSalesById():
             total_seller_sales = 0
             monthly_sales = 0
             monthly_expecation = 0
+            sales = 0
+            barcodes = []
             for goal in goals:    
                 product_goal: GoalProduct = db_session.query(GoalProduct).filter(GoalProduct.goal_id == goal.id).first()
-                product_price = self.get_product_price(product_goal.product_barcode)
-                product_total_quantity = self.get_total_quantity_by_barcode(seller_id, datetime.now().month, datetime.now().year, product_goal.product_barcode)
+                monthly_expecation += product_goal.sales_expectation
+                date = product_goal.date.strftime("%m-%Y")
+                barcodes.append(product_goal.product_barcode)
+
+            unique_barcodes = list(set(barcodes))
+            ''' Sales calculation '''
+            for barcode in unique_barcodes:
+                product_price = self.get_product_price(barcode)
+                product_total_quantity = self.get_total_quantity_by_barcode(seller_id, datetime.now().month, datetime.now().year, barcode)
                 sales = round(product_price * product_total_quantity, 2) if product_total_quantity > 0 else 0
                 total_seller_sales += sales
                 monthly_sales += sales
-                monthly_expecation += product_goal.sales_expectation
-                date = product_goal.date.strftime("%m-%Y")
-                goals_achieved = round((monthly_sales / monthly_expecation) * 100, 2) if monthly_expecation > 0 else 0
-
+            
+            goals_achieved = round((monthly_sales / monthly_expecation) * 100, 2) if monthly_expecation > 0 else 0
             monthly_summary.append({
                     "date": date,  
                     "total_sales": round(monthly_sales,2),
