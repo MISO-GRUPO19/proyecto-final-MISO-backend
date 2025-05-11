@@ -10,3 +10,5 @@ requests
 flask-sqlalchemy
 pytest
 uptrace
+google-cloud-storage
+google-cloud-pubsub

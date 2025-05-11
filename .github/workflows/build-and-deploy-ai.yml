@@ -52,8 +52,13 @@ jobs:
 
       - name: Build and Push Docker Image AI
         run: |
-          docker build -t us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image:latest ./ai-services
-          docker push us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image:latest
+
+          docker buildx build \
+            --build-arg GOOGLE_CREDENTIALS_BASE64=${{ secrets.GOOGLE_CREDENTIALS_BASE64 }} \
+            --tag us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-service-image:latest \
+            --platform=linux/amd64 \
+            --push \
+            ./ai-services
 
       - name: Deploy to Cloud Run AI
         run: |
