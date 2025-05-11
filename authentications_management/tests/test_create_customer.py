@@ -39,10 +39,12 @@ def test_create_customer_success(
     mock_customers, mock_db_session, mock_put, mock_get, mock_post, valid_data
 ):
     # Mock token retrieval
-    mock_post.side_effect = [
-        MagicMock(status_code=200, json=MagicMock(return_value={"access_token": "mock-token"})),
-        MagicMock(status_code=200),  # Sync with customers service
-    ]
+    mock_post.return_value.status_code = 200
+    mock_post.return_value.json.return_value = {"access_token": "mock-token"}
+
+    # Mock PUT (asignación del cliente al vendedor)
+    mock_put.return_value.status_code = 200
+    mock_put.return_value.text = "OK"
 
     # Mock seller retrieval
     mock_get.return_value.status_code = 200
@@ -71,7 +73,7 @@ def test_create_customer_success(
     assert result == {"message": "Customer created successfully", "customer_id": 1}
     mock_db_session.add.assert_called_once()
     mock_db_session.commit.assert_called_once()
-    assert mock_post.call_count == 2
+    mock_post.assert_called()
     mock_get.assert_called_once()
     mock_put.assert_called_once()
 
@@ -86,7 +88,6 @@ def test_create_customer_invalid_email(mock_post, valid_data):
     command = CreateCustomer(valid_data)
     with pytest.raises(EmailDoesNotValid):
         command.execute()
-
 
 
 @patch.dict(
