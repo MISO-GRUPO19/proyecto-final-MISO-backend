@@ -62,7 +62,7 @@ jobs:
 
           docker buildx build \
             --build-arg GOOGLE_CREDENTIALS_BASE64=${{ secrets.GOOGLE_CREDENTIALS_BASE64 }} \
-            --tag us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-service-image:latest \
+            --tag us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image:latest \
             --platform=linux/amd64 \
             --push \
             ./ai_services
