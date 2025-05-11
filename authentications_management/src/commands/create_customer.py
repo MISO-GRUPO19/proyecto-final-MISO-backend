@@ -15,11 +15,12 @@ load_dotenv('../.env.development')
 CUSTOMERS = os.getenv("CUSTOMERS")
 AUTH = os.getenv("AUTHENTICATIONS")
 class CreateCustomer(BaseCommand):
-    def __init__(self, data, token):
+    def __init__(self, data):
         self.data = data
-        self.token = token
+        
 
     def execute(self):
+        self.get_token()
         required_fields = ['firstName', 'lastName', 'country', 'address', 'phoneNumber', 'email']
         for field in required_fields:
             if field not in self.data or not self.data[field]:
@@ -84,6 +85,16 @@ class CreateCustomer(BaseCommand):
         response = requests.post(url, json=payload)
         if response.status_code != 200:
             raise Exception(f"Failed to sync with customers service: {response.text}")
+
+    def get_token(self):
+        url = f'{AUTH}/users/login'
+        payload = {
+            "email": "admin@ccp.com",
+            "password": "Admin123-"
+        }
+        response = requests.post(url, json=payload)
+        response_json = response.json()
+        self.token = response_json['access_token']
 
     def assign_random_seller(self):
         url = f'{AUTH}/users/sellers'

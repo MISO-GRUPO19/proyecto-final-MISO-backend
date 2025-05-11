@@ -22,15 +22,13 @@ def create_users():
     return jsonify(result), 201
 
 @users.route('/users/customers', methods=['POST'])
-@jwt_required()
 def create_customers():
     data = request.get_json()
-    auth_token = request.headers.get("Authorization", "").replace("Bearer ", "")
     if not data or 'firstName' not in data or 'lastName' not in data or 'country' not in data or 'address' not in data or 'phoneNumber' not in data or 'email' not in data:
         return jsonify({'error': 'Invalid data provided'}), 400
 
     try:
-        result = CreateCustomer(data, auth_token).execute()
+        result = CreateCustomer(data).execute()
         return jsonify(result), 201
     except InvalidData as e:
         return jsonify({'error': e.description}), 400
