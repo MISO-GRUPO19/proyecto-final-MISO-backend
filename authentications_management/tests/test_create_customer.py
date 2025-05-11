@@ -80,21 +80,26 @@ def test_create_customer_success(
     os.environ,
     {"CUSTOMERS": "http://mocked-customers", "AUTHENTICATIONS": "http://mocked-auth"},
 )
-def test_create_customer_invalid_email(valid_data):
-    valid_data["email"] = "invalid-email"  # Invalid email format
+@patch("authentications_management.src.commands.create_customer.requests.post")
+def test_create_customer_invalid_email(mock_post, valid_data):
+    valid_data["email"] = "invalid-email"
     command = CreateCustomer(valid_data)
     with pytest.raises(EmailDoesNotValid):
         command.execute()
+
 
 
 @patch.dict(
     os.environ,
     {"CUSTOMERS": "http://mocked-customers", "AUTHENTICATIONS": "http://mocked-auth"},
 )
+@patch("authentications_management.src.commands.create_customer.requests.post")
 @patch("authentications_management.src.commands.create_customer.Customers")
-def test_create_customer_user_already_exists(mock_customers, valid_data):
-    # Mock existing customer
+def test_create_customer_user_already_exists(mock_customers, mock_post, valid_data):
     mock_customers.query.filter_by.return_value.first.return_value = MagicMock()
+
+    mock_post.return_value.status_code = 200
+    mock_post.return_value.json.return_value = {"access_token": "mock-token"}
 
     command = CreateCustomer(valid_data)
     with pytest.raises(UserAlreadyExists):
@@ -105,8 +110,9 @@ def test_create_customer_user_already_exists(mock_customers, valid_data):
     os.environ,
     {"CUSTOMERS": "http://mocked-customers", "AUTHENTICATIONS": "http://mocked-auth"},
 )
-def test_create_customer_missing_required_field(valid_data):
-    del valid_data["firstName"]  # Remove a required field
+@patch("authentications_management.src.commands.create_customer.requests.post")
+def test_create_customer_missing_required_field(mock_post, valid_data):
+    del valid_data["firstName"]
     command = CreateCustomer(valid_data)
     with pytest.raises(InvalidData):
         command.execute()
