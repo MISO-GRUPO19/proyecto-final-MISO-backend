@@ -69,7 +69,7 @@ jobs:
  
       - name: Deploy to Cloud Run AI
         run: |
-          gcloud run deploy ai_services \
+          gcloud run deploy ai-services \
             --image=us-central1-docker.pkg.dev/proyecto-final-451719/proyecto/ai-services-image:latest \
             --region=us-central1 \
             --platform=managed \
