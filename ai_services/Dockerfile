@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-WORKDIR /ai-services
+WORKDIR /ai_services
 
 COPY src/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -25,7 +25,7 @@ RUN if [ ! -z "$GOOGLE_CREDENTIALS_BASE64" ]; then \
 ENV FLASK_APP=main.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-WORKDIR /ai-services/src
+WORKDIR /ai_services/src
 
 EXPOSE 5006
 
