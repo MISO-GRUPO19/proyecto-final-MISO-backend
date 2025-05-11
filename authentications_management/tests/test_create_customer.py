@@ -4,6 +4,7 @@ from authentications_management.src.commands.create_customer import CreateCustom
 from authentications_management.src.errors.errors import InvalidAddressCustomer, InvalidData, InvalidTelephoneCustomer, UserAlreadyExists, EmailDoesNotValid
 import os
 
+
 @pytest.fixture
 def valid_data():
     return {
@@ -18,7 +19,10 @@ def valid_data():
 @pytest.fixture
 def mock_token():
     return "mock-auth-token"
-
+@patch.dict(os.environ, {
+    "CUSTOMERS": "http://mocked-customers",
+    "AUTHENTICATIONS": "http://mocked-auth"
+})
 @patch('authentications_management.src.commands.create_customer.Customers')
 def test_create_customer_invalid_data(mock_customers, valid_data, mock_token):
     valid_data['email'] = ''  # Invalid email
@@ -26,6 +30,10 @@ def test_create_customer_invalid_data(mock_customers, valid_data, mock_token):
     with pytest.raises(InvalidData):
         command.execute()
 
+@patch.dict(os.environ, {
+    "CUSTOMERS": "http://mocked-customers",
+    "AUTHENTICATIONS": "http://mocked-auth"
+})
 @patch('authentications_management.src.commands.create_customer.Customers')
 def test_create_customer_db_error(mock_customers, valid_data, mock_token):
     mock_customers.query.filter_by.return_value.first.return_value = None
@@ -70,35 +78,51 @@ def test_create_customer_success(mock_customers, mock_db_session, mock_put, mock
     assert result == {'message': 'Customer created successfully', 'customer_id': 1}
     mock_db_session.add.assert_called_once()
     mock_db_session.commit.assert_called_once()
+    assert mock_post.call_count == 2 
     mock_post.assert_called_once()
     mock_get.assert_called_once()
     mock_put.assert_called_once()
-
+@patch.dict(os.environ, {
+    "CUSTOMERS": "http://mocked-customers",
+    "AUTHENTICATIONS": "http://mocked-auth"
+})
 @pytest.mark.parametrize("missing_field", ['firstName', 'lastName', 'country', 'address', 'phoneNumber', 'email'])
 def test_missing_required_field(valid_data, missing_field, mock_token):
     del valid_data[missing_field]
     command = CreateCustomer(valid_data)
     with pytest.raises(InvalidData):
         command.execute()
-
+@patch.dict(os.environ, {
+    "CUSTOMERS": "http://mocked-customers",
+    "AUTHENTICATIONS": "http://mocked-auth"
+})
 def test_invalid_address(valid_data, mock_token):
     valid_data['address'] = '@@!!'
     command = CreateCustomer(valid_data)
     with pytest.raises(InvalidAddressCustomer):
         command.execute()
-
+@patch.dict(os.environ, {
+    "CUSTOMERS": "http://mocked-customers",
+    "AUTHENTICATIONS": "http://mocked-auth"
+})
 def test_invalid_phone(valid_data, mock_token):
     valid_data['phoneNumber'] = '123456'
     command = CreateCustomer(valid_data)
     with pytest.raises(InvalidTelephoneCustomer):
         command.execute()
-
+@patch.dict(os.environ, {
+    "CUSTOMERS": "http://mocked-customers",
+    "AUTHENTICATIONS": "http://mocked-auth"
+})
 def test_invalid_email(valid_data, mock_token):
     valid_data['email'] = 'invalid_email'
     command = CreateCustomer(valid_data)
     with pytest.raises(EmailDoesNotValid):
         command.execute()
-
+@patch.dict(os.environ, {
+    "CUSTOMERS": "http://mocked-customers",
+    "AUTHENTICATIONS": "http://mocked-auth"
+})
 @patch('authentications_management.src.commands.create_customer.Customers')
 def test_user_already_exists(mock_customers, valid_data, mock_token):
     mock_customers.query.filter_by.return_value.first.return_value = True
