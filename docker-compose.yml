@@ -215,7 +215,7 @@ services:
   ai_service:
     container_name: ai-services
     build:
-      context: ./ai-services
+      context: ./ai_services
       dockerfile: Dockerfile
     image: ai_service:1.0
     environment:
