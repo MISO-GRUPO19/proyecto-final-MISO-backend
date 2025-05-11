@@ -7,8 +7,9 @@ from ..queries.get_order_by_id import GetOrderById
 from ..commands.update_orders import UpdateStateOrder
 from ..commands.generate_seller_visits import GenerateSellerVisits
 from uuid import UUID
-from ..errors.errors import InvalidData, ProductInsufficientStock, ProductNotFound
-
+from ..errors.errors import InvalidData, ProductInsufficientStock, ProductNotFound, GoalNotFound
+from ..commands.create_seller_goals import CreateSellerGoals
+from ..queries.get_seller_sales_by_id import GetSellerSalesById
 orders = Blueprint('orders', __name__)
 
 @orders.route('/orders', methods=['POST'])
@@ -98,7 +99,27 @@ def generate_seller_visits(seller_id):
         result = GenerateSellerVisits(seller_id).execute()
         return jsonify(result), 200
     except Exception as e:
+        return jsonify({"error": f"An unexpected error occurred: {e}"}), 500
+
+@orders.route('/orders/goals', methods=['POST'])
+def create_goal_sales():
+    data = request.get_json()
+    try:
+        result = CreateSellerGoals(data).execute()
+        return jsonify(result), 201
+    except Exception as e:
         return jsonify({"error": f"An unexpected error occurred: {e}"}), 500    
+
+@orders.route('/orders/sellers/<seller_id>/sales', methods=['GET'])
+@jwt_required()
+def get_seller_sales(seller_id):
+    try:
+        result = GetSellerSalesById(seller_id).execute()
+        return jsonify(result), 200
+    except GoalNotFound as e:
+        return jsonify({"error": e.description}), 404
+    except Exception as e:
+        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
 
 @orders.route('/orders/ping', methods=['GET'])
 def ping():

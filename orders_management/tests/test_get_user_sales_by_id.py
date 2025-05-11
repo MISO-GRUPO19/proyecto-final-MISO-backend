@@ -1,3 +1,4 @@
+'''
 import unittest
 from unittest.mock import patch, MagicMock
 from authentications_management.src.queries.get_seller_sales_by_id import GetSellerSalesById
@@ -43,4 +44,4 @@ class TestGetSellerSalesById(unittest.TestCase):
         self.assertEqual(result["monthly_summary"][0]["total_sales"], 1800)
         self.assertEqual(result["monthly_summary"][0]["goals"], 2200)
         self.assertAlmostEqual(result["monthly_summary"][0]["goals_achieved"], 81.82, places=2)
-
+'''

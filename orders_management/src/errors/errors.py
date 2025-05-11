@@ -13,3 +13,7 @@ class ProductInsufficientStock(ApiError):
 class ProductNotFound(ApiError):
     code = 404
     description = "ProductNotFound"
+
+class GoalNotFound(ApiError):
+    code = 404
+    description = "Goal not found"
