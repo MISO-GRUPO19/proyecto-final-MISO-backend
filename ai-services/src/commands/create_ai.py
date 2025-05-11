@@ -23,6 +23,6 @@ class CreateAI(BaseCommand):
         db_session.add(ai)
 
         db_session.commit()
-        db_session.close()
+        db_session.remove()
 
         return {'message': 'Customer created successfully'}

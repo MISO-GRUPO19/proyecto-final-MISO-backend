@@ -107,4 +107,4 @@ class CreateMassiveProducts(BaseCommand):
             db_session.rollback()
             raise e
         finally:
-            db_session.close()
+            db_session.remove()

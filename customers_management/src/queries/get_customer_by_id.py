@@ -7,14 +7,14 @@ class GetCustomerById:
         self.customer_id = customer_id
 
     def execute(self):
-        with db_session() as session:
-            customers = session.query(Customers).filter(Customers.id == self.customer_id).all()
-            if not customers:
-                return jsonify({"error": "Customer not found"}), 404
-            
-            result = []
-            for customer in customers:
-                result.append({
+        try:
+            with db_session() as session:
+                customer = session.query(Customers).filter(Customers.id == self.customer_id).first()
+                
+                if not customer:
+                    return jsonify({"error": "Customer not found"}), 404
+                
+                response_data = {
                     'firstName': customer.firstName,
                     'lastName': customer.lastName,
                     'country': customer.country,
@@ -28,5 +28,9 @@ class GetCustomerById:
                             'store_address': store.address
                         } for store in customer.stores
                     ]
-                })
-            return jsonify(result), 200
+                }
+                
+                return jsonify(response_data), 200
+                
+        except Exception as e:
+            return jsonify({"error": "Internal server error"}), 500

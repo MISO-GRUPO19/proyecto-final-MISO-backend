@@ -44,7 +44,7 @@ class CreateManufacturers(BaseCommand):
 
         db_session.commit()
         manufacturer_id = str(manufacturers.id)
-        db_session.close()
+        db_session.remove()
 
         return {
             'id': manufacturer_id,
