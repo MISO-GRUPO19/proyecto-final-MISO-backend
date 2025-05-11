@@ -18,6 +18,7 @@ class SyncCustomer:
                 address=self.data['address'],
                 country=self.data['country'],
                 email=self.data['email'],
+                seller_assigned=self.data['seller_id'],
                 created_at=datetime.datetime.utcnow(),
                 updated_at=datetime.datetime.utcnow()
             )

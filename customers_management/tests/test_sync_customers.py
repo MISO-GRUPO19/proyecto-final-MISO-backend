@@ -1,12 +1,13 @@
 import datetime
 from unittest import TestCase
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, call, ANY
 from faker import Faker
 from customers_management.src.commands.sync_customers import SyncCustomer
 
 fake = Faker()
 
 class TestSyncCustomer(TestCase):
+
 
     @patch('customers_management.src.commands.sync_customers.Customers')
     @patch('customers_management.src.commands.sync_customers.Stores')
@@ -19,7 +20,8 @@ class TestSyncCustomer(TestCase):
             'phoneNumber': fake.phone_number(),
             'address': fake.address(),
             'country': fake.country(),
-            'email': fake.email()
+            'email': fake.email(),
+            'seller_id': fake.uuid4()
         }
 
         # Configurar mocks
@@ -34,8 +36,9 @@ class TestSyncCustomer(TestCase):
         self.assertEqual(response, {'message': 'Customer synced successfully'})
         mock_session.commit.assert_called_once()
 
+    @patch('customers_management.src.commands.sync_customers.Customers')
     @patch('customers_management.src.commands.sync_customers.db_session')
-    def test_sync_customer_exception(self, mock_db_session):
+    def test_sync_customer_exception(self, mock_db_session, mock_customers):
         data = {
             'id': fake.uuid4(),
             'firstName': fake.first_name(),
@@ -43,7 +46,8 @@ class TestSyncCustomer(TestCase):
             'phoneNumber': fake.phone_number(),
             'address': fake.address(),
             'country': fake.country(),
-            'email': fake.email()
+            'email': fake.email(),
+            'seller_id': fake.uuid4()  
         }
 
         # Configurar mock para excepción
