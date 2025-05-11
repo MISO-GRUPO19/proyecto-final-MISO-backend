@@ -45,6 +45,12 @@ def get_products():
     result = GetProducts(auth_token).execute()
     return jsonify(result), 200
 
+@products.route('/products/info/<barcode>', methods=['GET'])
+@jwt_required()
+def get_product_info_by_barcode(barcode):
+    auth_token = request.headers.get("Authorization", "").replace("Bearer ", "")
+    return GetById(barcode, auth_token).execute()
+
 @products.route('/products/<barcode>', methods=['GET'])
 @jwt_required()
 def get_product_by_barcode(barcode):
