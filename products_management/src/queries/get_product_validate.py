@@ -39,10 +39,11 @@ class GetProductValidate:
                 'product_price': product[0].price
             }), 200
 
-
         except ProductNotFound:
             return jsonify({"error": "ProductNotFound", "barcode": self.barcode}), 404
         except ProductInsufficientStock:
             return jsonify({"error": "ProductInsufficientStock", "barcode": self.barcode}), 400
         except Exception as e:
             return jsonify({"error": "Internal server error"}), 500
+        finally:
+            db_session.remove()

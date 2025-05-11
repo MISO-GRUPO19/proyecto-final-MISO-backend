@@ -39,80 +39,71 @@ class CreateOrders(BaseCommand):
         try:
             for p in self.products:
                 headers = {"Authorization": f"Bearer {self.token}"}
-                response: Response = requests.get(f'{PRODUCTS}/products/{p["barcode"]}?quantity={p["quantity"]}', headers=headers)
+                response = requests.get(f'{PRODUCTS}/products/{p["barcode"]}?quantity={p["quantity"]}', headers=headers)
                 
                 if response.status_code != 200:
                     try:
-                        logging.info(f"Error en la respuesta: {response.status_code}")
-                        logging.info(f"Detalles del error: {response.text}")
                         error_details = response.json()
-                        if "error" in error_details and error_details["error"] == "ProductInsufficientStock":
+                        if error_details.get("error") == "ProductInsufficientStock":
                             return jsonify({"error": "ProductInsufficientStock", "barcode": p['barcode']}), 400
-                        elif "error" in error_details and error_details["error"] == "ProductNotFound":
+                        elif error_details.get("error") == "ProductNotFound":
                             return jsonify({"error": "ProductNotFound", "barcode": p['barcode']}), 404
-                        else:
-                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
                     except ValueError:
-                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
-                
-                logging.info(f"Respuesta de la API: {response.status_code}")
+                        return jsonify({"error": "InvalidData", "barcode": p['barcode']}), 400
 
             for p in self.products:
                 headers = {"Authorization": f"Bearer {self.token}"}
                 url = f"{PRODUCTS}/products/{p['barcode']}?quantity={p['quantity']}"
-
-                response: Response = requests.put(url, headers=headers, json=p)
+                
+                response = requests.put(url, headers=headers, json=p)
                 
                 if response.status_code != 200:
                     try:
-                        logging.info(f"Error en la respuesta: {response.status_code}")
-                        logging.info(f"Detalles del error: {response.text}")
                         error_details = response.json()
-                        if "error" in error_details and error_details["error"] == "ProductInsufficientStock":
+                        if error_details.get("error") == "ProductInsufficientStock":
                             return jsonify({"error": "ProductInsufficientStock", "barcode": p['barcode']}), 400
-                        elif "error" in error_details and error_details["error"] == "ProductNotFound":
+                        elif error_details.get("error") == "ProductNotFound":
                             return jsonify({"error": "ProductNotFound", "barcode": p['barcode']}), 404
-                        else:
-                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
                     except ValueError:
-                            return jsonify({"error": "IvalidData", "barcode":  p['barcode']}), 400
+                        return jsonify({"error": "InvalidData", "barcode": p['barcode']}), 400
                 
-                
-            order = Orders(
-                client_id=self.client_id,
-                seller_id=self.seller_id,
-                date_order=datetime.fromisoformat(self.date),
-                provider_id=self.provider_id,
-                total=self.total,
-                type=self.order_type,
-                state='PENDIENTE',
-                route_id=self.route_id
-            )
-            
-            db_session.add(order)
-            db_session.flush()
-
-            initial_status = OrderStatusHistory(
-                order_id=order.id,
-                state=order.state,
-                timestamp=datetime.utcnow()
-            )
-            db_session.add(initial_status)
-            
-            for p in self.products:
-                product_order = ProductOrder(
-                    product_barcode=p['barcode'],
-                    order_id=order.id,
-                    quantity=p['quantity']
+            try:
+                order = Orders(
+                    client_id=self.client_id,
+                    seller_id=self.seller_id,
+                    date_order=datetime.fromisoformat(self.date),
+                    provider_id=self.provider_id,
+                    total=self.total,
+                    type=self.order_type,
+                    state='PENDIENTE',
+                    route_id=self.route_id
                 )
-                db_session.add(product_order)
+                
+                db_session.add(order)
+                db_session.flush()
+
+                initial_status = OrderStatusHistory(
+                    order_id=order.id,
+                    state=order.state,
+                    timestamp=datetime.utcnow()
+                )
+                db_session.add(initial_status)
+                
+                for p in self.products:
+                    product_order = ProductOrder(
+                        product_barcode=p['barcode'],
+                        order_id=order.id,
+                        quantity=p['quantity']
+                    )
+                    db_session.add(product_order)
+                
+                db_session.commit()
+                return jsonify({'message': 'Sale created successfully', 'id': order.id}), 201
             
-            db_session.commit()
-            return jsonify({'message': 'Sale created successfully', 'id': order.id}, 201)
-        
-        except Exception as e:
-            db_session.rollback()
-            raise e
+            except Exception as e:
+                db_session.rollback()
+                logging.error(f"Error creating order: {str(e)}")
+                raise
         
         finally:
-            db_session.close()
+            db_session.remove()

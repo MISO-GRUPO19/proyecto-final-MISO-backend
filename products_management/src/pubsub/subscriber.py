@@ -48,7 +48,7 @@ def callback(message):
         db_session.rollback()
         print(f'Error: {e}')
     finally:
-        db_session.close()
+        db_session.remove()
     
     message.ack()
 
