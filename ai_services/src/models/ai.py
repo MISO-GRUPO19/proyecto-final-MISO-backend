@@ -7,7 +7,7 @@ from .database import base
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
-db = SQLAlchemy()
+db = SQLAlchemy() 
 
 class AI(Model, base):
     __tablename__ = 'ai'

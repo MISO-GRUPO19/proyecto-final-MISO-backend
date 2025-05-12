@@ -215,7 +215,7 @@ services:
   ai_service:
     container_name: ai-services
     build:
-      context: ./ai-services
+      context: ./ai_services
       dockerfile: Dockerfile
     image: ai_service:1.0
     environment:
@@ -224,6 +224,7 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_NAME: ai
+      GOOGLE_APPLICATION_CREDENTIALS: ./pubsub/proyecto-final-451719-1806c6f593e4.json
     depends_on:
       database_customers:
         condition: service_healthy
