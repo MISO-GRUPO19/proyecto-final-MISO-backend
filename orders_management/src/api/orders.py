@@ -1,15 +1,16 @@
 from flask import request, jsonify, Blueprint, Response
 from flask_jwt_extended import jwt_required, get_jwt_identity
-
 from ..commands.create_orders import CreateOrders
 from ..queries.get_order_by_client import GetOrderByClient
 from ..queries.get_order_by_id import GetOrderById
 from ..commands.update_orders import UpdateStateOrder
 from ..commands.generate_seller_visits import GenerateSellerVisits
 from uuid import UUID
+from ..commands.update_visit import UpdateVisit
 from ..errors.errors import InvalidData, ProductInsufficientStock, ProductNotFound, GoalNotFound
 from ..commands.create_seller_goals import CreateSellerGoals
 from ..queries.get_seller_sales_by_id import GetSellerSalesById
+
 orders = Blueprint('orders', __name__)
 
 @orders.route('/orders', methods=['POST'])
@@ -109,6 +110,24 @@ def create_goal_sales():
         return jsonify(result), 201
     except Exception as e:
         return jsonify({"error": f"An unexpected error occurred: {e}"}), 500    
+    
+@orders.route('/orders/visit/<visit_id>', methods=['PUT'])
+@jwt_required()
+def update_visit(visit_id):
+    token_beare = request.headers.get('Authorization')
+    
+    if token_beare is None:
+        token = ""
+    else:
+        token = token_beare.replace('Bearer ', '')
+        try:
+            result = UpdateVisit(token, visit_id, request.json['state']).execute()
+            return jsonify(result), 200
+        except InvalidData as e:
+            return jsonify({"error": e.description}), 400
+        except Exception as e:
+            return jsonify({"error": f"An unexpected error occurred: {e}"}), 500
+              
 
 @orders.route('/orders/sellers/<seller_id>/sales', methods=['GET'])
 @jwt_required()
