@@ -9,3 +9,7 @@ class InvalidData(ApiError):
 class PasswordMismatch(ApiError):
     code = 400
     description = "Password mismatch"
+
+class InvalidDate(ApiError):
+    code = 400
+    description = "Invalid Date"
