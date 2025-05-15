@@ -3,12 +3,11 @@ from unittest.mock import patch, MagicMock
 from ai_services.src.commands.create_routes import CreatRoute
 from ai_services.src.errors.errors import InvalidDate, InvalidData
 from datetime import datetime, date
-import json
 
 @pytest.fixture
 def mock_data():
     return {
-        "date": "17-05-2025"
+        "date": "17/05/2025"  # Changed to match expected format
     }
 
 @pytest.fixture
@@ -21,19 +20,19 @@ def test_validate_date_success(mock_data, mock_token):
     
     # Patch datetime.now() to return a specific date
     with patch('ai_services.src.commands.create_routes.datetime') as mock_datetime:
-        # Configure the mock to return May 1, 2025 when now() is called
         mock_datetime.now.return_value = datetime(2025, 5, 1)
-        # Configure strptime to work normally
         mock_datetime.strptime.side_effect = datetime.strptime
         
-        command.validate_date("17-05-2025")  # Should not raise exception
+        # Test with correct format that matches implementation
+        command.validate_date("17/05/2025")  # Should not raise exception
 
 def test_validate_date_invalid_format(mock_data, mock_token):
     """Test that invalid date formats raise InvalidDate"""
     command = CreatRoute(mock_data, mock_token)
     
     with pytest.raises(InvalidDate, match="The provided date format is invalid"):
-        command.validate_date("invalid-date-format")
+        # Test with clearly invalid format
+        command.validate_date("not-a-date")
 
 def test_validate_date_past_date(mock_data, mock_token):
     """Test that past dates raise InvalidDate"""
@@ -44,8 +43,12 @@ def test_validate_date_past_date(mock_data, mock_token):
         mock_datetime.now.return_value = datetime(2025, 5, 20)
         mock_datetime.strptime.side_effect = datetime.strptime
         
-        with pytest.raises(InvalidDate, match="cannot be in the past"):
-            command.validate_date("17-05-2025")  # Date is before "today"
+        # Test with past date (May 17 vs May 20 "today")
+        with pytest.raises(InvalidDate) as exc_info:
+            command.validate_date("17/05/2025")
+        
+        # Verify the correct error message
+        assert "cannot be in the past" in str(exc_info.value)
 
 def test_execute_empty_date(mock_token):
     """Test that empty date raises InvalidData"""
