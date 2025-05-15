@@ -1,93 +1,66 @@
 import pytest
 from unittest.mock import patch, MagicMock
-from ai_services.src.commands.create_routes import CreatRoute
-from ai_services.src.models.routes import Routes
-from ai_services.src.errors.errors import InvalidData, InvalidDate
-from datetime import datetime
+from orders_management.src.queries.get_orders_by_date import GetOrdersByDate
+from datetime import datetime, date
 
 @pytest.fixture
-def mock_data():
-    return {
-        "date": "17-05-2025"
-    }
-
-@pytest.fixture
-def mock_token():
-    return "mock-token"
+def mock_date():
+    return "17-05-2025"
 
 @pytest.fixture
 def mock_orders():
     return [
-        {
-            "client_id": "123e4567-e89b-12d3-a456-426614174000",
-            "order_code": "ORCL12345678"
-        },
-        {
-            "client_id": "123e4567-e89b-12d3-a456-426614174001",
-            "order_code": "ORCL87654321"
-        }
+        MagicMock(id="123e4567-e89b-12d3-a456-426614174000", code="ORCL12345678", client_id="456e7890-e12b-34d5-a678-426614174111"),
+        MagicMock(id="123e4567-e89b-12d3-a456-426614174001", code="ORCL87654321", client_id="456e7890-e12b-34d5-a678-426614174112")
     ]
 
-@pytest.fixture
-def mock_customer():
-    return {
-        "firstName": "John",
-        "lastName": "Doe",
-        "address": "123 Main St"
-    }
+@patch("orders_management.src.queries.get_orders_by_date.db_session")
+@patch("orders_management.src.queries.get_orders_by_date.Orders")
+def test_execute(mock_orders_model, mock_db_session, mock_date, mock_orders):
+    # Mock the query result
+    mock_query = MagicMock()
+    mock_query.filter.return_value.all.return_value = mock_orders
+    mock_db_session.query.return_value = mock_query
 
-@patch("ai_services.src.commands.create_routes.db_session")
-@patch("ai_services.src.commands.create_routes.requests.get")
-def test_execute(mock_requests_get, mock_db_session, mock_data, mock_token, mock_orders, mock_customer):
-    # Mock the API responses
-    mock_requests_get.side_effect = [
-        MagicMock(status_code=200, json=MagicMock(return_value=mock_orders)),  # get_orders_by_date
-        MagicMock(status_code=200, json=MagicMock(return_value=mock_customer)),  # get_customer_info (1st call)
-        MagicMock(status_code=200, json=MagicMock(return_value=mock_customer))   # get_customer_info (2nd call)
-    ]
-
-    # Mock the database session
-    mock_db_session.add = MagicMock()
-    mock_db_session.commit = MagicMock()
-
-    # Create the command and execute it
-    command = CreatRoute(mock_data, mock_token)
-    result = command.execute()
+    # Create the GetOrdersByDate instance and execute
+    query = GetOrdersByDate(mock_date)
+    result = query.execute()
 
     # Assertions
     assert len(result) == 2
+    assert result[0]["order_id"] == "123e4567-e89b-12d3-a456-426614174000"
     assert result[0]["order_code"] == "ORCL12345678"
+    assert result[0]["client_id"] == "456e7890-e12b-34d5-a678-426614174111"
+    assert result[1]["order_id"] == "123e4567-e89b-12d3-a456-426614174001"
     assert result[1]["order_code"] == "ORCL87654321"
-    assert mock_db_session.add.called
-    assert mock_db_session.commit.called
+    assert result[1]["client_id"] == "456e7890-e12b-34d5-a678-426614174112"
 
-@patch("ai_services.src.commands.create_routes.datetime")
-def test_validate_date(mock_datetime, mock_data, mock_token):
-    # Mock today's date
-    mock_datetime.now.return_value = datetime(2025, 5, 16)
+    # Ensure the query was called with the correct filter
+    mock_query.filter.assert_called_once()
 
-    # Create the command and validate the date
-    command = CreatRoute(mock_data, mock_token)
-    command.validate_date(mock_data["date"])  # Should not raise an exception
+@patch("orders_management.src.queries.get_orders_by_date.db_session")
+def test_execute_with_no_orders(mock_db_session, mock_date):
+    # Mock the query result to return no orders
+    mock_query = MagicMock()
+    mock_query.filter.return_value.all.return_value = []
+    mock_db_session.query.return_value = mock_query
 
-def test_invalid_date_format(mock_data, mock_token):
-    # Provide an invalid date format
-    mock_data["date"] = "17/05/2025"  # Wrong format
+    # Create the GetOrdersByDate instance and execute
+    query = GetOrdersByDate(mock_date)
+    result = query.execute()
 
-    # Create the command and validate the date
-    command = CreatRoute(mock_data, mock_token)
-    with pytest.raises(InvalidDate):
-        command.validate_date(mock_data["date"])
+    # Assertions
+    assert len(result) == 0  # No orders should be returned
 
-def test_past_date(mock_data, mock_token):
-    # Provide a past date
-    mock_data["date"] = "15-05-2025"
+@patch("orders_management.src.queries.get_orders_by_date.db_session")
+def test_execute_with_exception(mock_db_session, mock_date):
+    # Mock the query to raise an exception
+    mock_db_session.query.side_effect = Exception("Database error")
 
-    # Mock today's date
-    with patch("ai_services.src.commands.create_routes.datetime") as mock_datetime:
-        mock_datetime.now.return_value = datetime(2025, 5, 16)
+    # Create the GetOrdersByDate instance and execute
+    query = GetOrdersByDate(mock_date)
+    result = query.execute()
 
-        # Create the command and validate the date
-        command = CreatRoute(mock_data, mock_token)
-        with pytest.raises(InvalidDate):
-            command.validate_date(mock_data["date"])
+    # Assertions
+    assert "error" in result
+    assert result["error"] == "Database error"
