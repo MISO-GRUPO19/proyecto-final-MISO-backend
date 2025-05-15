@@ -10,6 +10,7 @@ from ..commands.update_visit import UpdateVisit
 from ..errors.errors import InvalidData, ProductInsufficientStock, ProductNotFound, GoalNotFound
 from ..commands.create_seller_goals import CreateSellerGoals
 from ..queries.get_seller_sales_by_id import GetSellerSalesById
+from ..queries.get_orders_by_date import GetOrdersByDate
 
 orders = Blueprint('orders', __name__)
 
@@ -139,6 +140,15 @@ def get_seller_sales(seller_id):
         return jsonify({"error": e.description}), 404
     except Exception as e:
         return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
+
+@orders.route('/orders/date/<date>', methods=['GET'])
+@jwt_required()
+def get_orders_by_date(date):
+    try:
+        result = GetOrdersByDate(date).execute()
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"error": f"An unexpected error occurred: {e}"}), 500 
 
 @orders.route('/orders/ping', methods=['GET'])
 def ping():
