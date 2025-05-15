@@ -15,6 +15,44 @@ def mock_data():
 def mock_token():
     return "mock-token"
 
+def test_validate_date_success(mock_data, mock_token):
+    """Test that valid future dates pass validation"""
+    command = CreatRoute(mock_data, mock_token)
+    
+    # Patch datetime.now() to return a specific date
+    with patch('ai_services.src.commands.create_routes.datetime') as mock_datetime:
+        # Configure the mock to return May 1, 2025 when now() is called
+        mock_datetime.now.return_value = datetime(2025, 5, 1)
+        # Configure strptime to work normally
+        mock_datetime.strptime.side_effect = datetime.strptime
+        
+        command.validate_date("17-05-2025")  # Should not raise exception
+
+def test_validate_date_invalid_format(mock_data, mock_token):
+    """Test that invalid date formats raise InvalidDate"""
+    command = CreatRoute(mock_data, mock_token)
+    
+    with pytest.raises(InvalidDate, match="The provided date format is invalid"):
+        command.validate_date("invalid-date-format")
+
+def test_validate_date_past_date(mock_data, mock_token):
+    """Test that past dates raise InvalidDate"""
+    command = CreatRoute(mock_data, mock_token)
+    
+    # Patch datetime.now() to return May 20, 2025
+    with patch('ai_services.src.commands.create_routes.datetime') as mock_datetime:
+        mock_datetime.now.return_value = datetime(2025, 5, 20)
+        mock_datetime.strptime.side_effect = datetime.strptime
+        
+        with pytest.raises(InvalidDate, match="cannot be in the past"):
+            command.validate_date("17-05-2025")  # Date is before "today"
+
+def test_execute_empty_date(mock_token):
+    """Test that empty date raises InvalidData"""
+    with pytest.raises(InvalidData):
+        command = CreatRoute({"date": ""}, mock_token)
+        command.execute()
+
 @pytest.fixture
 def mock_orders_response():
     return [
@@ -30,37 +68,10 @@ def mock_customer_response():
         "address": "123 Main St"
     }
 
-def test_validate_date_success(mock_data, mock_token):
-    # Test with valid future date
-    command = CreatRoute(mock_data, mock_token)
-    
-    # Mock datetime.now() to return a fixed date
-    with patch('ai_services.src.commands.create_routes.datetime') as mock_datetime:
-        mock_datetime.now.return_value = MagicMock(date=MagicMock(return_value=date(2025, 5, 1)))
-        command.validate_date("17-05-2025")  # Should not raise exception
-
-def test_validate_date_invalid_format(mock_data, mock_token):
-    command = CreatRoute(mock_data, mock_token)
-    
-    with pytest.raises(InvalidDate, match="The provided date format is invalid"):
-        command.validate_date("17/05/2025")  # Wrong format
-
-def test_validate_date_past_date(mock_data, mock_token):
-    command = CreatRoute(mock_data, mock_token)
-    
-    with patch('ai_services.src.commands.create_routes.datetime') as mock_datetime:
-        mock_datetime.now.return_value = MagicMock(date=MagicMock(return_value=date(2025, 5, 20)))
-        with pytest.raises(InvalidDate, match="cannot be in the past"):
-            command.validate_date("17-05-2025")  # Date is before "today"
-
-def test_execute_empty_date(mock_token):
-    with pytest.raises(InvalidData):
-        command = CreatRoute({"date": ""}, mock_token)
-        command.execute()
-
 @patch('ai_services.src.commands.create_routes.requests.get')
 @patch('ai_services.src.commands.create_routes.db_session')
 def test_execute_success(mock_db, mock_get, mock_data, mock_token, mock_orders_response, mock_customer_response):
+    """Test successful execution flow"""
     # Setup mock responses
     mock_get.side_effect = [
         MagicMock(status_code=200, json=MagicMock(return_value=mock_orders_response)),
@@ -80,6 +91,7 @@ def test_execute_success(mock_db, mock_get, mock_data, mock_token, mock_orders_r
 
 @patch('ai_services.src.commands.create_routes.requests.get')
 def test_get_orders_failure(mock_get, mock_data, mock_token):
+    """Test order API failure case"""
     mock_get.return_value = MagicMock(status_code=400, text="Error message")
     
     command = CreatRoute(mock_data, mock_token)
@@ -88,6 +100,7 @@ def test_get_orders_failure(mock_get, mock_data, mock_token):
 
 @patch('ai_services.src.commands.create_routes.requests.get')
 def test_get_customer_failure(mock_get, mock_data, mock_token):
+    """Test customer API failure case"""
     mock_get.return_value = MagicMock(status_code=400, text="Error message")
     
     command = CreatRoute(mock_data, mock_token)
