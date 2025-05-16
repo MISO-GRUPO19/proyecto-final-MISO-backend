@@ -5,16 +5,12 @@ from ..errors.errors import InvalidData, InvalidDate
 from flask_jwt_extended import jwt_required
 ai = Blueprint('ai', __name__)
 
-@ai.route('/ai', methods=['POST'])
-def upload_video():
+@ai.route('/ai/<visit_id>', methods=['POST'])
+def upload_video(visit_id):
     if 'video' not in request.files:
         return jsonify({"error": "No se encontró archivo de video"}), 400
 
     video = request.files['video']
-    visit_id = request.form.get('visitId')
-
-    if not visit_id:
-        return jsonify({"error": "Falta el visitId"}), 400
 
     response = ProcessVideo(video, visit_id).execute()
     return jsonify(response), 202
