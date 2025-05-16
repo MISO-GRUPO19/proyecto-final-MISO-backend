@@ -12,6 +12,7 @@ from requests import Response
 import requests
 from datetime import datetime, timedelta
 import random
+from sqlalchemy import extract
 
 
 load_dotenv()
@@ -28,25 +29,34 @@ class GenerateSellerVisits(BaseCommand):
         seller_json = self.get_seller_info()
         assigned_customers = seller_json['assigned_customers']
         visits = []
+        tomorrow = datetime.now() + timedelta(days=1)
+        random_hour = random.randint(8, 18)  
+        random_minute = random.randint(0, 59)  
+        visit_date = tomorrow.replace(hour=random_hour, minute=random_minute, second=0, microsecond=0)
         for customer in assigned_customers:
-            tomorrow = datetime.now() + timedelta(days=1)
-            random_hour = random.randint(8, 18)  
-            random_minute = random.randint(0, 59)  
-            visit_date = tomorrow.replace(hour=random_hour, minute=random_minute, second=0, microsecond=0) 
             info = self.get_customer_info(customer)[0]
-            visit = Visits(
-                seller_id=self.seller_id,
-                customer_id=info['id'],
-                visit_date=visit_date,
-                visit_address=info['address'],
-                customer_name=f"{info['firstName']} {info['lastName']}",
-                customer_phonenumber=info['phoneNumber'],
-                store_name=f"{info['firstName']} {info['lastName']} Supermercado",
-                visit_status=VisitStatus.NO_VISITADO
-            )
-            db_session.add(visit)
-            db_session.commit()
-            visits.append(visit)
+            existing_visit = db_session.query(Visits).filter(
+                Visits.seller_id == self.seller_id,
+                Visits.customer_id == info['id'],
+                extract('year', Visits.visit_date) == visit_date.year,
+                extract('month', Visits.visit_date) == visit_date.month
+            ).first()
+            if existing_visit is None:
+                visit = Visits(
+                    seller_id=self.seller_id,
+                    customer_id=info['id'],
+                    visit_date=visit_date,
+                    visit_address=info['address'],
+                    customer_name=f"{info['firstName']} {info['lastName']}",
+                    customer_phonenumber=info['phoneNumber'],
+                    store_name=f"{info['firstName']} {info['lastName']} Supermercado",
+                    visit_status=VisitStatus.NO_VISITADO
+                )
+                db_session.add(visit)
+                db_session.commit()
+                visits.append(visit)
+            else:
+                visits.append(existing_visit)
         result = {
             "seller_id": self.seller_id,
             "visits_info": [
