@@ -71,7 +71,7 @@ class TestCreateManufacturers(unittest.TestCase):
     def test_create_manufacturer_invalid_country(self):
         data = {
                 "name": "Fabricante a",
-                "country": "Albania",
+                "country": "Albaniax",
                 "contact": "Pepito Perez",
                 "telephone": "574949494",
                 "email": "test@test.com"
