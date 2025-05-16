@@ -18,34 +18,31 @@ class TestGenerateSellerVisits(unittest.TestCase):
         mock_get.side_effect = [
             MagicMock(
                 json=MagicMock(return_value={
-                    "assigned_customers": ["customer1@example.com", "customer2@example.com"]
+                    "assigned_customers": ["customer1@example.com", "customer2@example.com"],
+                    "id": "seller-id"
                 }),
                 status_code=200
             ),
             MagicMock(
-                json=MagicMock(return_value=[
-                    {
-                        "id": "customer1-id",
-                        "firstName": "John",
-                        "lastName": "Doe",
-                        "phoneNumber": "123456789",
-                        "address": "123 Main St",
-                        "stores": []
-                    }
-                ]),
+                json=MagicMock(return_value=[{
+                    "id": "customer1-id",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "phoneNumber": "123456789",
+                    "address": "123 Main St",
+                    "stores": []
+                }]),
                 status_code=200
             ),
             MagicMock(
-                json=MagicMock(return_value=[
-                    {
-                        "id": "customer2-id",
-                        "firstName": "Jane",
-                        "lastName": "Smith",
-                        "phoneNumber": "987654321",
-                        "address": "456 Elm St",
-                        "stores": []
-                    }
-                ]),
+                json=MagicMock(return_value=[{
+                    "id": "customer2-id",
+                    "firstName": "Jane",
+                    "lastName": "Smith",
+                    "phoneNumber": "987654321",
+                    "address": "456 Elm St",
+                    "stores": []
+                }]),
                 status_code=200
             )
         ]
@@ -64,11 +61,12 @@ class TestGenerateSellerVisits(unittest.TestCase):
         result = command.execute()
 
         # Assertions
-        self.assertEqual(len(result), 2)
-        self.assertEqual(result[0].customer_name, "John Doe")
-        self.assertEqual(result[1].customer_name, "Jane Smith")
-        self.assertEqual(result[0].visit_status, VisitStatus.NO_VISITADO)
-        self.assertEqual(result[1].visit_status, VisitStatus.NO_VISITADO)
+        self.assertEqual(result["seller_id"], "seller-id")
+        self.assertEqual(len(result["visits_info"]), 2)
+        self.assertEqual(result["visits_info"][0]["customer_name"], "John Doe")
+        self.assertEqual(result["visits_info"][1]["customer_name"], "Jane Smith")
+        self.assertEqual(result["visits_info"][0]["visit_status"], "NO_VISITADO")
+        self.assertEqual(result["visits_info"][1]["visit_status"], "NO_VISITADO")
         self.assertEqual(mock_db_session.add.call_count, 2)
         self.assertEqual(mock_db_session.commit.call_count, 2)
 
@@ -84,44 +82,47 @@ class TestGenerateSellerVisits(unittest.TestCase):
         mock_get.side_effect = [
             MagicMock(
                 json=MagicMock(return_value={
-                    "assigned_customers": ["customer1@example.com", "customer2@example.com"]
+                    "assigned_customers": ["customer1@example.com", "customer2@example.com"],
+                    "id": "seller-id"
                 }),
                 status_code=200
             ),
             MagicMock(
-                json=MagicMock(return_value=[
-                    {
-                        "id": "customer1-id",
-                        "firstName": "John",
-                        "lastName": "Doe",
-                        "phoneNumber": "123456789",
-                        "address": "123 Main St",
-                        "stores": []
-                    }
-                ]),
+                json=MagicMock(return_value=[{
+                    "id": "customer1-id",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "phoneNumber": "123456789",
+                    "address": "123 Main St",
+                    "stores": []
+                }]),
                 status_code=200
             ),
             MagicMock(
-                json=MagicMock(return_value=[
-                    {
-                        "id": "customer2-id",
-                        "firstName": "Jane",
-                        "lastName": "Smith",
-                        "phoneNumber": "987654321",
-                        "address": "456 Elm St",
-                        "stores": []
-                    }
-                ]),
+                json=MagicMock(return_value=[{
+                    "id": "customer2-id",
+                    "firstName": "Jane",
+                    "lastName": "Smith",
+                    "phoneNumber": "987654321",
+                    "address": "456 Elm St",
+                    "stores": []
+                }]),
                 status_code=200
             )
         ]
 
-        # Mock the database query to simulate:
-        # - First customer: existing visit
-        # - Second customer: no existing visit
+        # Mock an existing visit for the first customer
         mock_existing_visit = MagicMock(spec=Visits)
+        mock_existing_visit.id = "existing-visit-id"
+        mock_existing_visit.visit_address = "123 Main St"
+        mock_existing_visit.customer_name = "John Doe"
+        mock_existing_visit.customer_phonenumber = "123456789"
+        mock_existing_visit.store_name = "John Doe Supermercado"
+        mock_existing_visit.visit_date = datetime.now() + timedelta(days=1)
+        mock_existing_visit.visit_status = VisitStatus.NO_VISITADO
+
+        # Mock the database query to return existing visit for first customer, None for second
         mock_query = MagicMock()
-        # Use side_effect to return existing for first, None for second
         mock_query.filter.return_value.first.side_effect = [mock_existing_visit, None]
         mock_db_session.query.return_value = mock_query
 
@@ -134,10 +135,11 @@ class TestGenerateSellerVisits(unittest.TestCase):
         result = command.execute()
 
         # Assertions
-        self.assertEqual(len(result), 2)
-        self.assertIs(result[0], mock_existing_visit)
-        self.assertEqual(result[1].customer_name, "Jane Smith")
-        mock_db_session.add.assert_called_once()
+        self.assertEqual(result["seller_id"], "seller-id")
+        self.assertEqual(len(result["visits_info"]), 2)
+        self.assertEqual(result["visits_info"][0]["visit_id"], "existing-visit-id")
+        self.assertEqual(result["visits_info"][1]["customer_name"], "Jane Smith")
+        mock_db_session.add.assert_called_once()  # Only called for the new visit
         mock_db_session.commit.assert_called_once()
 
     @patch("orders_management.src.commands.generate_seller_visits.requests.get")
