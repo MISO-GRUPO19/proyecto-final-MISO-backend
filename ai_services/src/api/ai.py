@@ -22,8 +22,10 @@ def upload_video():
 @ai.route('/ai/result/<video_id>', methods=['GET'])
 def get_video_result(video_id):
     result = GetVideoResult(video_id).execute()
-    return jsonify(result), 200
 
+    if "error" in result:
+        return jsonify(result), 404
+    return jsonify(result), 200
 
 @ai.route('/ai/routes', methods=['POST'])
 @jwt_required()
