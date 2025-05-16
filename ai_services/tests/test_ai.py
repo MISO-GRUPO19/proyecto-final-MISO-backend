@@ -17,18 +17,10 @@ class TestAiRoutes(unittest.TestCase):
         self.assertEqual(response.get_json(), {'message': 'pong'})
 
     def test_upload_video_missing_file(self):
-        response = self.client.post('/ai', data={})
+        response = self.client.post('/ai/some-visit-id', data={})
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.get_json(), {"error": "No se encontró archivo de video"})
 
-    def test_upload_video_missing_visit_id(self):
-        fake_file = (io.BytesIO(b"fake content"), 'test.mp4')
-        data = {
-            'video': fake_file
-        }
-        response = self.client.post('/ai', data=data, content_type='multipart/form-data')
-        self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.get_json(), {"error": "Falta el visitId"})
 
     @patch('ai_services.src.api.ai.ProcessVideo')
     def test_upload_video_success(self, mock_process):
@@ -39,10 +31,9 @@ class TestAiRoutes(unittest.TestCase):
 
         fake_file = (io.BytesIO(b"fake content"), 'test.mp4')
         data = {
-            'video': fake_file,
-            'visitId': 'some-uuid'
+            'video': fake_file
         }
-        response = self.client.post('/ai', data=data, content_type='multipart/form-data')
+        response = self.client.post('/ai/some-visit-id', data=data, content_type='multipart/form-data')
         self.assertEqual(response.status_code, 202)
         self.assertEqual(response.get_json(), {
             "video_id": "123",
