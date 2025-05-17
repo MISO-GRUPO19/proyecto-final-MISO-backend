@@ -37,7 +37,7 @@ jobs:
             echo "Creating Cloud SQL instance..."
             gcloud sql instances create postgres \
               --database-version=POSTGRES_16 \
-              --tier=db-perf-optimized-N-2 \
+              --tier=db-perf-optimized-N-16 \
               --region=us-central1 \
               --root-password=postgres \
               --storage-size=10GB \
