@@ -49,6 +49,9 @@ jobs:
           echo "Current directory: $(pwd)"
           ls -la
           sed -i "s/DB_HOST=localhost/DB_HOST=${{ steps.get_ip.outputs.db_ip }}/g" ./ai_services/src/.env.development
+          sed -i "s|CUSTOMERS=http://customers_service:5005/|CUSTOMERS=https://customers-management-service-ez3ou7gfza-uc.a.run.app|g" ./ai_services/src/.env.development
+          sed -i "s|ORDERS=http://orders_service:5001/|ORDERS=https://orders-management-service-ez3ou7gfza-uc.a.run.app|g" ./ai_services/src/.env.development
+
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
