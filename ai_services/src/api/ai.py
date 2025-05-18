@@ -10,7 +10,7 @@ ai = Blueprint('ai', __name__)
 @ai.route('/ai/<visit_id>', methods=['POST'])
 def upload_video(visit_id):
 
-    video = request.files['video']
+    video = request.files.get['video']
 
     if not video or video.filename == '':
         size_in_mb = 5
