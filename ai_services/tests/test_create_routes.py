@@ -6,8 +6,12 @@ from datetime import datetime, date
 
 @pytest.fixture
 def mock_data():
+    today = datetime.now()
+    day = today.day
+    month = today.month
+    year = today.year
     return {
-        "date": "17/05/2025"  # Changed to match expected format
+        "date": f"{day}/{month}/{year}"  # Changed to match expected format
     }
 
 @pytest.fixture
@@ -15,6 +19,10 @@ def mock_token():
     return "mock-token"
 
 def test_validate_date_success(mock_data, mock_token):
+    today = datetime.now()
+    day = today.day
+    month = today.month
+    year = today.year
     """Test that valid future dates pass validation"""
     command = CreatRoute(mock_data, mock_token)
     
@@ -24,7 +32,7 @@ def test_validate_date_success(mock_data, mock_token):
         mock_datetime.strptime.side_effect = datetime.strptime
         
         # Test with correct format that matches implementation
-        command.validate_date("17/05/2025")  # Should not raise exception
+        command.validate_date(f"{day}/{month}/{year}")  # Should not raise exception
 
 def test_validate_date_invalid_format(mock_data, mock_token):
     """Test that invalid date formats raise InvalidDate"""
@@ -35,6 +43,10 @@ def test_validate_date_invalid_format(mock_data, mock_token):
         command.validate_date("not-a-date")
 
 def test_validate_date_past_date(mock_data, mock_token):
+    today = datetime.now()
+    day = today.day
+    month = today.month
+    year = today.year
     """Test that past dates raise InvalidDate"""
     command = CreatRoute(mock_data, mock_token)
     
@@ -45,7 +57,7 @@ def test_validate_date_past_date(mock_data, mock_token):
         
         # Test with past date (May 17 vs May 20 "today")
         with pytest.raises(InvalidDate) as exc_info:
-            command.validate_date("17/05/2025")
+            command.validate_date(f"{day}/{month}/{year}")
         
         # Verify the correct error message
         assert "cannot be in the past" in str(exc_info.value)
