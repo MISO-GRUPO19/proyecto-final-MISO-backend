@@ -6,6 +6,7 @@ from models.batches import Batches
 from models.database import db_session
 import random
 
+
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'pubsub/proyecto-final-451719-1806c6f593e4.json'
 WAREHOUSE_NAMES = ["Bodega A1", "Bodega A2", "Bodega A3", "Bodega A4", "Bodega A5"]
 WAREHOUSE_ADDRESSES = [
