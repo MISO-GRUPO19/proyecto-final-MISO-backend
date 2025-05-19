@@ -156,3 +156,33 @@ jobs:
           name: coverage-report-orders
           path: htmlcov/
         
+       
+  test_and_coverage_ai:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ai_services/src/requirements.txt
+          pip install pytest pytest-cov
+
+      - name: Run tests with coverage
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          pytest ai_services/tests --cov=ai_services/src --cov-report=html
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-ai
+          path: htmlcov/

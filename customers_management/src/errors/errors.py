@@ -9,3 +9,7 @@ class InvalidData(ApiError):
 class PasswordMismatch(ApiError):
     code = 400
     description = "Password mismatch"
+
+class CustomerNotFound(ApiError):
+    code = 404
+    description = 'Customer was not found'

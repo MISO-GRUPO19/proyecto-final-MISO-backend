@@ -4,7 +4,7 @@ from flask_jwt_extended import JWTManager
 from .api.products import products
 from .errors.errors import ApiError
 import os
-from .models.database import init_db
+from .models.database import init_db, db_session
 import uptrace
 from flask_cors import CORS
 
@@ -35,6 +35,10 @@ def handle_exception(error):
       #"version": os.environ["VERSION"]
     }
     return jsonify(response), error.code
+
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=APP_PORT)

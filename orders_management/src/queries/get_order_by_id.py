@@ -25,14 +25,16 @@ class GetOrderById:
     @contextmanager
     def _db_session(self):
         """Manejo seguro de sesiones de base de datos"""
+        session = db_session()
+
         try:
-            yield db_session
-            db_session.commit()
+            yield session
+            session.commit()
         except Exception:
-            db_session.rollback()
+            session.rollback()
             raise
         finally:
-            db_session.close()
+            session.close()
 
     @lru_cache(maxsize=100)
     def _get_product_info(self, barcode: str) -> Optional[Dict[str, Any]]:
@@ -98,11 +100,10 @@ class GetOrderById:
     def execute(self) -> List[Dict[str, Any]]:
         """Obtiene todas las órdenes de un cliente"""
         try:
-            with self._db_session():
-                orders = db_session.query(Orders)\
+            with self._db_session() as session:
+                orders = session.query(Orders)\
                     .filter(Orders.id == self.order_id)\
                     .options(
-                        # Carga eager de relaciones para evitar N+1
                         joinedload(Orders.product_items),
                         joinedload(Orders.status_history)
                     )\

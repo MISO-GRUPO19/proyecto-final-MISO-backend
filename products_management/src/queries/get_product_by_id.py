@@ -13,7 +13,8 @@ from contextlib import contextmanager
 from typing import Optional, Dict, List, Any, Union
 import logging
 
-# Carga las variables de entorno una sola vez
+from sqlalchemy.orm import Session
+
 load_dotenv('../.env.development')
 logging.basicConfig(level=logging.DEBUG)
 
@@ -26,15 +27,14 @@ class GetById(BaseCommand):
     @contextmanager
     def session_scope(self):
         """Proporciona un ámbito transaccional alrededor de una serie de operaciones."""
-        session = db_session()
+        session: Session = db_session()
         try:
             yield session
-            session.commit()
         except Exception:
             session.rollback()
             raise
         finally:
-            session.close()
+            db_session.remove()
 
     def __init__(self, identificator: str, token: str):
         self.identificator = identificator
@@ -65,7 +65,7 @@ class GetById(BaseCommand):
     def _get_product(self, session) -> Optional[Products]:
         """Intenta obtener el producto por barcode o nombre."""
         try:
-            numerical_id = int(self.identificator)
+            int(self.identificator)
             return session.query(Products).filter(
                 Products.barcode == self.identificator
             ).first()

@@ -38,7 +38,8 @@ class GetSellersById:
                     "country": seller.country,
                     "address": seller.address,
                     "telephone": seller.telephone,
-                    "email": seller.email
+                    "email": seller.email,
+                    "assigned_customers": seller.assigned_customers or []
                 }
 
         except ValueError as e:
