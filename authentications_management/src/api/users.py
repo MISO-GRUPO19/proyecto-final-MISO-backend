@@ -6,8 +6,9 @@ from flask_jwt_extended import jwt_required
 from ..commands.create_sellers import CreateSellers
 from ..errors.errors import *
 from ..queries.get_seller_by_id import GetSellersById
-from ..queries.get_seller_sales_by_id import GetSellerSalesById
-
+from ..queries.get_seller_by_identification import GetSellerByIdentification
+from ..queries.get_sellers import GetSellers
+from ..commands.assign_customer_to_seller import AssignCustomerToSeller
 users = Blueprint('users', __name__)
 
 @users.route('/users', methods=['POST'])
@@ -23,7 +24,6 @@ def create_users():
 @users.route('/users/customers', methods=['POST'])
 def create_customers():
     data = request.get_json()
-
     if not data or 'firstName' not in data or 'lastName' not in data or 'country' not in data or 'address' not in data or 'phoneNumber' not in data or 'email' not in data:
         return jsonify({'error': 'Invalid data provided'}), 400
 
@@ -81,7 +81,18 @@ def create_seller():
     except InvalidEmail as e:
         return jsonify({"error": e.description}), 400
 
-@users.route('/users/sellers/<seller_id>', methods=['GET'])
+@users.route('/users/sellers', methods=['GET'])
+@jwt_required()
+def get_sellers():
+    try:
+        result = GetSellers().execute()
+        return jsonify(result), 200
+    except SellerNotFound as e:
+        return jsonify({"error": e.description}), 404
+    except Exception as e:
+        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
+
+@users.route('/users/sellers/<uuid:seller_id>', methods=['GET'])
 @jwt_required()
 def get_seller(seller_id):
     try:
@@ -92,14 +103,21 @@ def get_seller(seller_id):
     except Exception as e:
         return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
 
-@users.route('/users/sellers/<seller_id>/sales', methods=['GET'])
-@jwt_required()
-def get_seller_sales(seller_id):
+@users.route('/users/sellers/<string:seller_id>', methods=['GET'])
+def get_seller_by_identification(seller_id):
     try:
-        result = GetSellerSalesById(seller_id).execute()
+        result = GetSellerByIdentification(seller_id).execute()
         return jsonify(result), 200
-    except SellerNotFound as e:
-        return jsonify({"error": e.description}), 404
+    except Exception as e:
+        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
+
+@users.route('/users/sellers/<seller_id>/customers', methods=['PUT'])
+@jwt_required()
+def assign_customer_to_seller(seller_id):
+    data = request.get_json()
+    try:
+        result = AssignCustomerToSeller(data, seller_id).execute()
+        return jsonify(result), 200
     except Exception as e:
         return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
 

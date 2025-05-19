@@ -34,7 +34,7 @@ def callback(message):
         print(f'Error al procesar el mensaje: {e}')
         message.nack()  # Indicar que el mensaje no fue procesado correctamente
     finally:
-        db_session.close()
+        db_session.remove()
 
 def subscribe(subscription_name):
     subscriber = pubsub_v1.SubscriberClient()

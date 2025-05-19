@@ -93,7 +93,7 @@ class TestCreateSellers(unittest.TestCase):
         data = {
                 "identification": "1223467",
                 "name": "seller one",
-                "country": "Albania",
+                "country": "Albaniax",
                 "address": "Calle 1 # 1 -1",
                 "telephone": "574949494",
                 "email": "test@test.com"

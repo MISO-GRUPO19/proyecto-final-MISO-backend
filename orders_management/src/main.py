@@ -4,7 +4,7 @@ from flask_jwt_extended import JWTManager
 from .api.orders import orders
 from .errors.errors import ApiError
 import os
-from .models.database import init_db
+from .models.database import init_db, db_session
 import uptrace
 from flask_cors import CORS
 
@@ -18,11 +18,10 @@ uptrace.configure_opentelemetry(
 load_dotenv('./.env.development')
 APP_PORT = int(os.getenv("APP_PORT", default=5000))
 
-
 app = Flask(__name__)
 CORS(app)
 
-app.config["JWT_SECRET_KEY"] = "qwerty"  # Debe ser la misma clave secreta usada en el servicio de autenticación
+app.config["JWT_SECRET_KEY"] = "qwerty"
 jwt = JWTManager(app)
 
 app.register_blueprint(orders)
@@ -32,10 +31,14 @@ init_db()
 @app.errorhandler(ApiError)
 def handle_exception(error):
     response = {
-      "mssg": error.description,
-      #"version": os.environ["VERSION"]
+        "mssg": error.description,
+        # "version": os.environ["VERSION"]
     }
     return jsonify(response), error.code
+
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=APP_PORT)

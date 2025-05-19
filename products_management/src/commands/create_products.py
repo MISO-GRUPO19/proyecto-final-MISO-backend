@@ -153,9 +153,12 @@ class CreateProducts(BaseCommand):
                 db_session.add(batch)
 
             self.create_product_warehouse(product)
-            return {'message': 'Producto creado exitosamente'}
+            return {
+                'id': str(product.id),
+                'message': 'Producto creado exitosamente'
+                }
         except Exception as e:
             db_session.rollback()
             return {'error': f'{e}Ocurrió un error al guardar el producto. Inténtelo de nuevo.'}
         finally:
-            db_session.close()
+            db_session.remove()

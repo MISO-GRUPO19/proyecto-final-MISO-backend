@@ -10,3 +10,12 @@ requests
 flask-sqlalchemy
 pytest
 uptrace
+google-cloud-storage
+google-cloud-pubsub
+urllib3==1.26.19
+flask_jwt_extended
+flask_testing
+pytest-cov
+pytest-flask
+pandas
+openpyxl

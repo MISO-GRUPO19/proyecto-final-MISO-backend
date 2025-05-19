@@ -1,3273 +1,372 @@
-🌎 País seleccionado: Brasil
+🌎 País seleccionado: Ecuador
 ✅ Login exitoso.
-✅ Vendedor William Mccullough creado. ID: 683586af-eaa3-4316-bf73-d91a5b358fd9
-✅ Vendedor Leonard Long creado. ID: d1a12973-500b-48a3-8a30-3fced35ebcba
-✅ Vendedor Kevin Collins creado. ID: e731cab8-25a1-454c-bd7f-44716bec1ed0
-✅/⚠️ Usuario rshea@example.net procesado.
-✅ Cliente rshea@example.net creado. ID: d0734f7e-4ec8-429d-a018-105e5371c61b
-✅/⚠️ Usuario jasminehickman@example.net procesado.
-✅ Cliente jasminehickman@example.net creado. ID: baab600d-5bf1-4da6-a28e-c2e78db0e790
-✅/⚠️ Usuario donnarodriguez@example.org procesado.
-✅ Cliente donnarodriguez@example.org creado. ID: 7200a8ff-12c2-414d-b0d6-f76266a7b9b1
-✅ Fabricante HollowayMccullough creado. ID: d724de05-dd8e-43cb-a918-dcc016b3fdd9
-✅ Fabricante MayRogers creado. ID: 1fd04f67-08d5-4610-9472-e7c73f81f722
-✅ Producto 'Laugh Sit' creado.
-✅ Producto 'Hot Team' creado.
-✅ Producto 'Month About' creado.
-✅ Producto 'Loss Its' creado.
-✅ Producto 'Quite Particularly' creado.
-✅ Producto 'Daughter Prove' creado.
-✅ Producto 'Discussion Happen' creado.
-✅ Producto 'However Just' creado.
-✅ Producto 'Win Project' creado.
-✅ Producto 'Religious Hot' creado.
-✅ Producto 'Law Magazine' creado.
-✅ Producto 'Speak Prevent' creado.
-✅ Producto 'Good Plan' creado.
-✅ Producto 'Year Career' creado.
-✅ Producto 'Figure Law' creado.
-✅ Producto 'Might Pattern' creado.
-✅ Producto 'Loss Security' creado.
-✅ Producto 'Research Past' creado.
-✅ Producto 'Fact Someone' creado.
-✅ Producto 'Party Wall' creado.
-✅ Producto 'Sit Purpose' creado.
-✅ Producto 'Floor Stage' creado.
-✅ Producto 'History Listen' creado.
-✅ Producto 'Up Case' creado.
-✅ Producto 'Part Let' creado.
-✅ Producto 'Rich Ask' creado.
-✅ Producto 'Her Letter' creado.
-✅ Producto 'Build Station' creado.
-✅ Producto 'Language Effort' creado.
-✅ Producto 'At Increase' creado.
-✅ Producto 'Character Effect' creado.
-✅ Producto 'Throw Generation' creado.
-✅ Producto 'Resource Drug' creado.
-✅ Producto 'Around Participant' creado.
-✅ Producto 'Affect Local' creado.
-✅ Producto 'Actually Way' creado.
-✅ Producto 'Region Something' creado.
-✅ Producto 'Could Language' creado.
-✅ Producto 'Security News' creado.
-✅ Producto 'Ten Story' creado.
-✅ Producto 'Just Community' creado.
-✅ Producto 'Meeting Senior' creado.
-✅ Producto 'City Structure' creado.
-✅ Producto 'Account Pressure' creado.
-✅ Producto 'Pick None' creado.
-✅ Producto 'Protect Campaign' creado.
-✅ Producto 'Or Door' creado.
-✅ Producto 'Society Minute' creado.
-✅ Producto 'Require Economy' creado.
-✅ Producto 'Produce Some' creado.
-✅ Producto 'Force The' creado.
-✅ Producto 'Recently Far' creado.
-✅ Producto 'Resource Majority' creado.
-✅ Producto 'Future Mr' creado.
-✅ Producto 'Whatever Teach' creado.
-✅ Producto 'Star Behind' creado.
-✅ Producto 'Many In' creado.
-✅ Producto 'Than Able' creado.
-✅ Producto 'Republican Raise' creado.
-✅ Producto 'Once Anything' creado.
-✅ Producto 'Maybe Industry' creado.
-✅ Producto 'People Head' creado.
-✅ Producto 'True Risk' creado.
-✅ Producto 'Purpose Help' creado.
-✅ Producto 'Through Trouble' creado.
-✅ Producto 'Successful Sit' creado.
-✅ Producto 'If Worry' creado.
-✅ Producto 'Late Himself' creado.
-✅ Producto 'Stop Land' creado.
-✅ Producto 'Green Suggest' creado.
-✅ Producto 'Page Magazine' creado.
-✅ Producto 'Scene Several' creado.
-✅ Producto 'Public Why' creado.
-✅ Producto 'Pull Decide' creado.
-✅ Producto 'Exist Call' creado.
-✅ Producto 'Area A' creado.
-✅ Producto 'Yard Former' creado.
-✅ Producto 'Threat Left' creado.
-✅ Producto 'Question Wonder' creado.
-✅ Producto 'Article Away' creado.
-✅ Producto 'Meeting Once' creado.
-✅ Producto 'Quickly Our' creado.
-✅ Producto 'Any Leave' creado.
-✅ Producto 'To Economy' creado.
-✅ Producto 'Couple Call' creado.
-✅ Producto 'Financial Wear' creado.
-✅ Producto 'Happy Travel' creado.
-✅ Producto 'Great Future' creado.
-✅ Producto 'Eye Theory' creado.
-✅ Producto 'Chance Early' creado.
-✅ Producto 'Democratic Figure' creado.
-✅ Producto 'City Arm' creado.
-✅ Producto 'Mind Part' creado.
-✅ Producto 'Audience Stay' creado.
-✅ Producto 'Family Late' creado.
-✅ Producto 'Why Join' creado.
-✅ Producto 'Future Back' creado.
-✅ Producto 'Buy Specific' creado.
-✅ Producto 'Left Else' creado.
-✅ Producto 'Tree Anything' creado.
-✅ Producto 'Hard Camera' creado.
-✅ Producto 'Until Because' creado.
-✅ Producto 'Already Candidate' creado.
-✅ Producto 'Mention Any' creado.
-✅ Producto 'Six Born' creado.
-✅ Producto 'City Analysis' creado.
-✅ Producto 'Might Individual' creado.
-✅ Producto 'Set Body' creado.
-✅ Producto 'Which Resource' creado.
-✅ Producto 'Let Raise' creado.
-✅ Producto 'Floor Oil' creado.
-✅ Producto 'Open Price' creado.
-✅ Producto 'Type Thought' creado.
-✅ Producto 'Ready Represent' creado.
-✅ Producto 'The Agree' creado.
-✅ Producto 'Plant Make' creado.
-✅ Producto 'Easy Bad' creado.
-✅ Producto 'Situation Available' creado.
-✅ Producto 'Teach Break' creado.
-✅ Producto 'Wait Money' creado.
-✅ Producto 'South Foot' creado.
-✅ Producto 'Account Study' creado.
-✅ Producto 'Ever Out' creado.
-✅ Producto 'At Democratic' creado.
-✅ Producto 'Structure Body' creado.
-✅ Producto 'Tell Near' creado.
-✅ Producto 'Heart Apply' creado.
-✅ Producto 'Save Race' creado.
-✅ Producto 'Us Reality' creado.
-✅ Producto 'Air Serious' creado.
-✅ Producto 'Ever Similar' creado.
-✅ Producto 'Story No' creado.
-✅ Producto 'Add Three' creado.
-✅ Producto 'Evidence Everyone' creado.
-✅ Producto 'Term Western' creado.
-✅ Producto 'Fear Me' creado.
-✅ Producto 'Tonight Themselves' creado.
-✅ Producto 'Then Power' creado.
-✅ Producto 'Entire Price' creado.
-✅ Producto 'Friend House' creado.
-✅ Producto 'Maintain Five' creado.
-✅ Producto 'Can Difference' creado.
-✅ Producto 'Wind Role' creado.
-✅ Producto 'Film Yourself' creado.
-✅ Producto 'Son Recently' creado.
-✅ Producto 'Very Factor' creado.
-✅ Producto 'Happy Professional' creado.
-✅ Producto 'Financial Occur' creado.
-✅ Producto 'Thus Hospital' creado.
-✅ Producto 'Machine Democratic' creado.
-✅ Producto 'Democratic Night' creado.
-✅ Producto 'School Maybe' creado.
-✅ Producto 'Military Sell' creado.
-✅ Producto 'Window Star' creado.
-✅ Producto 'How Man' creado.
-✅ Producto 'Expect Leg' creado.
-✅ Producto 'Past Of' creado.
-✅ Producto 'Address Of' creado.
-✅ Producto 'Perform Executive' creado.
-✅ Producto 'Threat Among' creado.
-✅ Producto 'Also Indeed' creado.
-✅ Producto 'Girl Various' creado.
-✅ Producto 'Simple Per' creado.
-✅ Producto 'Day Event' creado.
-✅ Producto 'Sense Learn' creado.
-✅ Producto 'Network Whole' creado.
-✅ Producto 'Court Clear' creado.
-✅ Producto 'Tonight Score' creado.
-✅ Producto 'Where Affect' creado.
-✅ Producto 'Process Over' creado.
-✅ Producto 'Begin Than' creado.
-✅ Producto 'Miss Realize' creado.
-✅ Producto 'Information Security' creado.
-✅ Producto 'Side Century' creado.
-✅ Producto 'Fight Event' creado.
-✅ Producto 'Between Instead' creado.
-✅ Producto 'Fill Evidence' creado.
-✅ Producto 'Major Scene' creado.
-✅ Producto 'Girl Quite' creado.
-✅ Producto 'Its Song' creado.
-✅ Producto 'Pressure Require' creado.
-✅ Producto 'Along Floor' creado.
-✅ Producto 'Partner Alone' creado.
-✅ Producto 'Church Though' creado.
-✅ Producto 'Major Outside' creado.
-✅ Producto 'Forward Spend' creado.
-✅ Producto 'Table Suffer' creado.
-✅ Producto 'Find Build' creado.
-✅ Producto 'Someone According' creado.
-✅ Producto 'Perhaps Card' creado.
-✅ Producto 'Provide Account' creado.
-✅ Producto 'Check Matter' creado.
-✅ Producto 'Instead Real' creado.
-✅ Producto 'Parent Group' creado.
-✅ Producto 'Born Analysis' creado.
-✅ Producto 'Structure Throw' creado.
-✅ Producto 'Chance His' creado.
-✅ Producto 'Drop Effect' creado.
-✅ Producto 'Chance Piece' creado.
-✅ Producto 'Garden Point' creado.
-✅ Producto 'She Plant' creado.
-✅ Producto 'Main Figure' creado.
-✅ Producto 'West Next' creado.
-✅ Producto 'Someone Structure' creado.
-✅ Producto 'Religious Most' creado.
-✅ Producto 'Society Arrive' creado.
-✅ Producto 'We Her' creado.
-✅ Producto 'Town Travel' creado.
-✅ Producto 'Per You' creado.
-✅ Producto 'Garden Throughout' creado.
-✅ Producto 'Against Upon' creado.
-✅ Producto 'Fill Structure' creado.
-✅ Producto 'Assume Find' creado.
-✅ Producto 'Market Room' creado.
-✅ Producto 'Term Wrong' creado.
-✅ Producto 'Concern Like' creado.
-✅ Producto 'Leader Writer' creado.
-✅ Producto 'Allow Capital' creado.
-✅ Producto 'Artist Nature' creado.
-✅ Producto 'Throw North' creado.
-✅ Producto 'Hour Prepare' creado.
-✅ Producto 'Consumer Page' creado.
-✅ Producto 'Top Box' creado.
-✅ Producto 'Owner These' creado.
-✅ Producto 'Husband Sense' creado.
-✅ Producto 'Bank Home' creado.
-✅ Producto 'Effort Fine' creado.
-✅ Producto 'Interview Agree' creado.
-✅ Producto 'Identify Be' creado.
-✅ Producto 'Question Show' creado.
-✅ Producto 'Hit Hold' creado.
-✅ Producto 'Operation Those' creado.
-✅ Producto 'Walk Share' creado.
-✅ Producto 'Course Record' creado.
-✅ Producto 'Culture Economy' creado.
-✅ Producto 'Discover Debate' creado.
-✅ Producto 'Receive Stay' creado.
-✅ Producto 'Official Country' creado.
-✅ Producto 'Health Rest' creado.
-✅ Producto 'Something Same' creado.
-✅ Orden creada para cliente d0734f7e-4ec8-429d-a018-105e5371c61b con total 25.64.
-✅ Orden creada para cliente baab600d-5bf1-4da6-a28e-c2e78db0e790 con total 23.45.
-✅ Orden creada para cliente d0734f7e-4ec8-429d-a018-105e5371c61b con total 72.74.
-✅ Orden creada para cliente d0734f7e-4ec8-429d-a018-105e5371c61b con total 20.82.
-✅ Orden creada para cliente baab600d-5bf1-4da6-a28e-c2e78db0e790 con total 74.07.
-✅ Orden creada para cliente 7200a8ff-12c2-414d-b0d6-f76266a7b9b1 con total 3.46.
-✅ Orden creada para cliente baab600d-5bf1-4da6-a28e-c2e78db0e790 con total 9.28.
-✅ Orden creada para cliente 7200a8ff-12c2-414d-b0d6-f76266a7b9b1 con total 11.44.
-✅ Orden creada para cliente baab600d-5bf1-4da6-a28e-c2e78db0e790 con total 5.69.
-✅ Orden creada para cliente d0734f7e-4ec8-429d-a018-105e5371c61b con total 35.769999999999996.
-✅ Orden creada para cliente baab600d-5bf1-4da6-a28e-c2e78db0e790 con total 4.18.
-✅ Orden creada para cliente 7200a8ff-12c2-414d-b0d6-f76266a7b9b1 con total 30.450000000000003.
-✅ Orden creada para cliente baab600d-5bf1-4da6-a28e-c2e78db0e790 con total 5.95.
-✅ Orden creada para cliente 7200a8ff-12c2-414d-b0d6-f76266a7b9b1 con total 27.439999999999998.
-✅ Orden creada para cliente d0734f7e-4ec8-429d-a018-105e5371c61b con total 16.62.
+✅ Vendedor Sean Huynh creado. ID: 245d3ff5-6c92-45ef-bf1c-fa3a9a0d91cd
+✅ Vendedor Heather Clark creado. ID: 1b67e1e6-e67c-4e76-a95f-fd9d51fff0bf
+✅ Vendedor Cameron Jordan creado. ID: 6b7c2957-8e1f-46a8-b8cb-40c509129f33
+✅/⚠️ Usuario djones@example.org procesado.
+✅ Cliente djones@example.org creado. ID: 8dd3e122-08d9-4c8f-ba9c-7792ce97b5cf
+✅/⚠️ Usuario benjamincopeland@example.org procesado.
+✅ Cliente benjamincopeland@example.org creado. ID: 149e05f8-31b5-4296-9e83-41ca45376444
+✅/⚠️ Usuario robert01@example.net procesado.
+✅ Cliente robert01@example.net creado. ID: 3137a444-d406-42af-97ee-2318478bb1fe
+✅/⚠️ Usuario kanderson@example.net procesado.
+✅ Cliente kanderson@example.net creado. ID: e9eb779a-c4e5-4687-8304-036688b21a3f
+✅/⚠️ Usuario nrussell@example.com procesado.
+✅ Cliente nrussell@example.com creado. ID: 61f4d9ae-575c-493b-b7ee-596c9123eaa9
+✅/⚠️ Usuario kevinhammond@example.com procesado.
+✅ Cliente kevinhammond@example.com creado. ID: 221ebddc-01c5-44d5-86d3-5ba153d64669
+✅/⚠️ Usuario ryan41@example.net procesado.
+✅ Cliente ryan41@example.net creado. ID: 94175ff7-8487-46ef-aaa9-215cc1088af3
+✅/⚠️ Usuario ileonard@example.com procesado.
+✅ Cliente ileonard@example.com creado. ID: c2e775c1-53b9-4bc6-831c-e4f3bbdd8b20
+✅/⚠️ Usuario iwilliams@example.org procesado.
+✅ Cliente iwilliams@example.org creado. ID: 028ffe73-ded8-4a8c-b194-f028e5dd976c
+✅/⚠️ Usuario kevin08@example.com procesado.
+✅ Cliente kevin08@example.com creado. ID: 257a25de-e696-4129-924d-064266556685
+✅ Fabricante Esparza Group creado. ID: 8c1ed87c-c31f-41cb-9acf-f1f4f6d581a1
+✅ Fabricante Hensley Inc creado. ID: ee7f64ad-dc3b-4e75-b385-d7e199350ef0
+✅ Fabricante Wilson Inc creado. ID: 0fbab594-7cd7-49ee-a340-3a3eb79ef7df
+🌟 Creando productos para fabricante 8c1ed87c-c31f-41cb-9acf-f1f4f6d581a1
+Fabricante: 5
+✅ Producto 'Education Rise' creado.
+✅ Producto 'Once Manage' creado.
+✅ Producto 'Area Anyone' creado.
+✅ Producto 'Than That' creado.
+✅ Producto 'Trial See' creado.
+🌟 Creando productos para fabricante ee7f64ad-dc3b-4e75-b385-d7e199350ef0
+Fabricante: 5
+✅ Producto 'Time Mention' creado.
+✅ Producto 'Economic Service' creado.
+✅ Producto 'Mr Rise' creado.
+✅ Producto 'Sometimes Staff' creado.
+✅ Producto 'Material Sport' creado.
+🌟 Creando productos para fabricante 0fbab594-7cd7-49ee-a340-3a3eb79ef7df
+Fabricante: 5
+✅ Producto 'Push Rest' creado.
+✅ Producto 'Very Goal' creado.
+✅ Producto 'Simple In' creado.
+✅ Producto 'Reality We' creado.
+✅ Producto 'Until Hour' creado.
+Respuesta de crear orden: {'id': 'c54e7629-56fc-473a-9f99-3a4f2d5a7416', 'message': 'Sale created successfully'}
+✅ Orden c54e7629-56fc-473a-9f99-3a4f2d5a7416 creada para cliente 94175ff7-8487-46ef-aaa9-215cc1088af3 | Total: $32.96
+✅ Estado de orden c54e7629-56fc-473a-9f99-3a4f2d5a7416 actualizado a ENPORCESO
+✅ Estado de orden c54e7629-56fc-473a-9f99-3a4f2d5a7416 actualizado a ENTREGADO
+Respuesta de crear orden: {'id': 'b5438b12-4fc4-4de6-8269-bcd59246b08d', 'message': 'Sale created successfully'}
+✅ Orden b5438b12-4fc4-4de6-8269-bcd59246b08d creada para cliente 257a25de-e696-4129-924d-064266556685 | Total: $20.96
+✅ Estado de orden b5438b12-4fc4-4de6-8269-bcd59246b08d actualizado a ENPORCESO
+Respuesta de crear orden: {'id': '2402bcd0-ccc0-4caf-ade4-08a86d299398', 'message': 'Sale created successfully'}
+✅ Orden 2402bcd0-ccc0-4caf-ade4-08a86d299398 creada para cliente 8dd3e122-08d9-4c8f-ba9c-7792ce97b5cf | Total: $95.40
+✅ Estado de orden 2402bcd0-ccc0-4caf-ade4-08a86d299398 actualizado a ENPORCESO
+Respuesta de crear orden: {'id': '4049a1b0-7643-4a47-b0f1-98bc7bb790df', 'message': 'Sale created successfully'}
+✅ Orden 4049a1b0-7643-4a47-b0f1-98bc7bb790df creada para cliente 257a25de-e696-4129-924d-064266556685 | Total: $15.40
+✅ Estado de orden 4049a1b0-7643-4a47-b0f1-98bc7bb790df actualizado a ENPORCESO
+✅ Estado de orden 4049a1b0-7643-4a47-b0f1-98bc7bb790df actualizado a ENTREGADO
+Respuesta de crear orden: {'id': 'b3cae715-7748-405e-8b42-88b23d56a5e7', 'message': 'Sale created successfully'}
+✅ Orden b3cae715-7748-405e-8b42-88b23d56a5e7 creada para cliente 3137a444-d406-42af-97ee-2318478bb1fe | Total: $15.40
+✅ Estado de orden b3cae715-7748-405e-8b42-88b23d56a5e7 actualizado a ENPORCESO
+✅ Estado de orden b3cae715-7748-405e-8b42-88b23d56a5e7 actualizado a ENTREGADO
+Respuesta de crear orden: {'id': '71b9e4b5-c1ff-48f0-9d62-c334ad1ff21f', 'message': 'Sale created successfully'}
+✅ Orden 71b9e4b5-c1ff-48f0-9d62-c334ad1ff21f creada para cliente 94175ff7-8487-46ef-aaa9-215cc1088af3 | Total: $39.80
+✅ Estado de orden 71b9e4b5-c1ff-48f0-9d62-c334ad1ff21f actualizado a ENPORCESO
+Respuesta de crear orden: {'id': 'e00b04ce-de1a-4de6-b397-4e0e2a89289e', 'message': 'Sale created successfully'}
+✅ Orden e00b04ce-de1a-4de6-b397-4e0e2a89289e creada para cliente e9eb779a-c4e5-4687-8304-036688b21a3f | Total: $61.32
+✅ Estado de orden e00b04ce-de1a-4de6-b397-4e0e2a89289e actualizado a ENPORCESO
+Respuesta de crear orden: {'id': 'ef9abc4f-05e2-4224-844e-d59f3151ddb2', 'message': 'Sale created successfully'}
+✅ Orden ef9abc4f-05e2-4224-844e-d59f3151ddb2 creada para cliente c2e775c1-53b9-4bc6-831c-e4f3bbdd8b20 | Total: $10.81
+✅ Estado de orden ef9abc4f-05e2-4224-844e-d59f3151ddb2 actualizado a CANCELADO
+Respuesta de crear orden: {'id': 'ebbb3fa7-6e71-44a2-9e55-5b91560cb4f4', 'message': 'Sale created successfully'}
+✅ Orden ebbb3fa7-6e71-44a2-9e55-5b91560cb4f4 creada para cliente 149e05f8-31b5-4296-9e83-41ca45376444 | Total: $30.22
+✅ Estado de orden ebbb3fa7-6e71-44a2-9e55-5b91560cb4f4 actualizado a ENPORCESO
+Respuesta de crear orden: {'id': 'e58d38c6-94a9-418c-8837-8dc98712ba43', 'message': 'Sale created successfully'}
+✅ Orden e58d38c6-94a9-418c-8837-8dc98712ba43 creada para cliente 94175ff7-8487-46ef-aaa9-215cc1088af3 | Total: $17.33
+✅ Estado de orden e58d38c6-94a9-418c-8837-8dc98712ba43 actualizado a ENPORCESO
 
 📋 Resumen Final:
 {
   "users": [
-    "rshea@example.net",
-    "jasminehickman@example.net",
-    "donnarodriguez@example.org"
+    "djones@example.org",
+    "benjamincopeland@example.org",
+    "robert01@example.net",
+    "kanderson@example.net",
+    "nrussell@example.com",
+    "kevinhammond@example.com",
+    "ryan41@example.net",
+    "ileonard@example.com",
+    "iwilliams@example.org",
+    "kevin08@example.com"
   ],
   "customers": [
-    "d0734f7e-4ec8-429d-a018-105e5371c61b",
-    "baab600d-5bf1-4da6-a28e-c2e78db0e790",
-    "7200a8ff-12c2-414d-b0d6-f76266a7b9b1"
+    "8dd3e122-08d9-4c8f-ba9c-7792ce97b5cf",
+    "149e05f8-31b5-4296-9e83-41ca45376444",
+    "3137a444-d406-42af-97ee-2318478bb1fe",
+    "e9eb779a-c4e5-4687-8304-036688b21a3f",
+    "61f4d9ae-575c-493b-b7ee-596c9123eaa9",
+    "221ebddc-01c5-44d5-86d3-5ba153d64669",
+    "94175ff7-8487-46ef-aaa9-215cc1088af3",
+    "c2e775c1-53b9-4bc6-831c-e4f3bbdd8b20",
+    "028ffe73-ded8-4a8c-b194-f028e5dd976c",
+    "257a25de-e696-4129-924d-064266556685"
   ],
   "sellers": [
-    "683586af-eaa3-4316-bf73-d91a5b358fd9",
-    "d1a12973-500b-48a3-8a30-3fced35ebcba",
-    "e731cab8-25a1-454c-bd7f-44716bec1ed0"
+    "245d3ff5-6c92-45ef-bf1c-fa3a9a0d91cd",
+    "1b67e1e6-e67c-4e76-a95f-fd9d51fff0bf",
+    "6b7c2957-8e1f-46a8-b8cb-40c509129f33"
   ],
   "manufacturers": [
-    "d724de05-dd8e-43cb-a918-dcc016b3fdd9",
-    "1fd04f67-08d5-4610-9472-e7c73f81f722"
+    "8c1ed87c-c31f-41cb-9acf-f1f4f6d581a1",
+    "ee7f64ad-dc3b-4e75-b385-d7e199350ef0",
+    "0fbab594-7cd7-49ee-a340-3a3eb79ef7df"
   ],
   "products": [
     {
-      "name": "Laugh Sit",
-      "description": "Indicate realize return outside.",
-      "price": 2.5,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.45,
-      "barcode": "9520391643347",
-      "provider_id": "9dfbd46d-57ce-4193-9d62-4e857c73ddc8",
-      "batch": "ARV-###",
-      "best_before": "2026-05-25T22:09:16.763844",
-      "quantity": 254
-    },
-    {
-      "name": "Hot Team",
-      "description": "Her admit Mr indicate better ago.",
-      "price": 3.46,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.68,
-      "barcode": "6243989204302",
-      "provider_id": "9dfbd46d-57ce-4193-9d62-4e857c73ddc8",
-      "batch": "JVD-###",
-      "best_before": "2027-04-15T22:09:16.819411",
-      "quantity": 1
-    },
-    {
-      "name": "Month About",
-      "description": "Let plan buy improve.",
-      "price": 3.66,
-      "category": "Frutas y Verduras",
-      "weight": 0.9,
-      "barcode": "0419890744008",
-      "provider_id": "9dfbd46d-57ce-4193-9d62-4e857c73ddc8",
-      "batch": "HCY-###",
-      "best_before": "2026-03-07T22:09:16.844895",
-      "quantity": 220
-    },
-    {
-      "name": "Loss Its",
-      "description": "Chance religious if reason.",
-      "price": 1.59,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.22,
-      "barcode": "9310314343474",
-      "provider_id": "9dfbd46d-57ce-4193-9d62-4e857c73ddc8",
-      "batch": "LPG-###",
-      "best_before": "2026-09-21T22:09:16.870963",
-      "quantity": 1
-    },
-    {
-      "name": "Quite Particularly",
-      "description": "Poor medical note lead go.",
-      "price": 2.07,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.62,
-      "barcode": "5876066342379",
-      "provider_id": "9dfbd46d-57ce-4193-9d62-4e857c73ddc8",
-      "batch": "KTM-###",
-      "best_before": "2026-03-28T22:09:16.896426",
-      "quantity": 343
-    },
-    {
-      "name": "Daughter Prove",
-      "description": "True maybe friend drug manage sometimes statement.",
-      "price": 2.87,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.36,
-      "barcode": "6333642219870",
-      "provider_id": "9dfbd46d-57ce-4193-9d62-4e857c73ddc8",
-      "batch": "KEU-###",
-      "best_before": "2025-11-12T22:09:16.922077",
-      "quantity": 283
-    },
-    {
-      "name": "Discussion Happen",
-      "description": "Foreign because bit.",
-      "price": 4.79,
-      "category": "Carnes y Pescados",
-      "weight": 1.94,
-      "barcode": "5173150648479",
-      "provider_id": "9dfbd46d-57ce-4193-9d62-4e857c73ddc8",
-      "batch": "JLF-###",
-      "best_before": "2027-01-30T22:09:16.940271",
-      "quantity": 347
-    },
-    {
-      "name": "However Just",
-      "description": "Wait hit series would education.",
-      "price": 8.44,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.47,
-      "barcode": "2897360307478",
-      "provider_id": "9dfbd46d-57ce-4193-9d62-4e857c73ddc8",
-      "batch": "KQN-###",
-      "best_before": "2027-03-07T22:09:16.962382",
-      "quantity": 332
-    },
-    {
-      "name": "Win Project",
-      "description": "Specific trip wind program western hand crime.",
-      "price": 3.37,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.26,
-      "barcode": "9926248906113",
-      "provider_id": "9dfbd46d-57ce-4193-9d62-4e857c73ddc8",
-      "batch": "SZM-###",
-      "best_before": "2026-06-27T22:09:16.988164",
-      "quantity": 171
-    },
-    {
-      "name": "Religious Hot",
-      "description": "Like mean leader push material.",
-      "price": 9.22,
-      "category": "Snacks y Dulces",
-      "weight": 0.24,
-      "barcode": "0676046078190",
-      "provider_id": "9dfbd46d-57ce-4193-9d62-4e857c73ddc8",
-      "batch": "NGX-###",
-      "best_before": "2027-01-19T22:09:17.008978",
-      "quantity": 288
-    },
-    {
-      "name": "Law Magazine",
-      "description": "Site say military forward night morning.",
-      "price": 8.83,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.37,
-      "barcode": "3564336375227",
-      "provider_id": "b7ba9a23-ae27-460b-96e6-cbfc43feb58c",
-      "batch": "FRW-###",
-      "best_before": "2026-04-04T22:09:17.029213",
-      "quantity": 270
-    },
-    {
-      "name": "Speak Prevent",
-      "description": "If sell break never account simple.",
-      "price": 7.05,
-      "category": "Carnes y Pescados",
-      "weight": 0.89,
-      "barcode": "8098932453287",
-      "provider_id": "b7ba9a23-ae27-460b-96e6-cbfc43feb58c",
-      "batch": "BBC-###",
-      "best_before": "2027-03-31T22:09:17.046272",
-      "quantity": 2
-    },
-    {
-      "name": "Good Plan",
-      "description": "Remain scene child receive.",
-      "price": 9.81,
-      "category": "Bebidas",
-      "weight": 0.22,
-      "barcode": "8846521574475",
-      "provider_id": "b7ba9a23-ae27-460b-96e6-cbfc43feb58c",
-      "batch": "NSG-###",
-      "best_before": "2026-06-10T22:09:17.068050",
-      "quantity": 76
-    },
-    {
-      "name": "Year Career",
-      "description": "Certain product section leg.",
-      "price": 6.02,
-      "category": "Productos de Limpieza",
-      "weight": 1.57,
-      "barcode": "7293629116266",
-      "provider_id": "b7ba9a23-ae27-460b-96e6-cbfc43feb58c",
-      "batch": "YZT-###",
-      "best_before": "2027-02-11T22:09:17.087106",
-      "quantity": 272
-    },
-    {
-      "name": "Figure Law",
-      "description": "Tend or technology need kind traditional.",
-      "price": 9.89,
-      "category": "Productos de Limpieza",
-      "weight": 1.47,
-      "barcode": "4158022076902",
-      "provider_id": "b7ba9a23-ae27-460b-96e6-cbfc43feb58c",
-      "batch": "VKN-###",
-      "best_before": "2026-07-26T22:09:17.106351",
-      "quantity": 150
-    },
-    {
-      "name": "Might Pattern",
-      "description": "Century near interview.",
-      "price": 1.15,
-      "category": "Carnes y Pescados",
-      "weight": 1.69,
-      "barcode": "2120518251546",
-      "provider_id": "b7ba9a23-ae27-460b-96e6-cbfc43feb58c",
-      "batch": "STT-###",
-      "best_before": "2026-05-06T22:09:17.132468",
-      "quantity": 118
-    },
-    {
-      "name": "Loss Security",
-      "description": "Them coach score common.",
-      "price": 3.46,
-      "category": "Condimentos y Especias",
-      "weight": 0.3,
-      "barcode": "6352195611641",
-      "provider_id": "b7ba9a23-ae27-460b-96e6-cbfc43feb58c",
-      "batch": "GLW-###",
-      "best_before": "2026-12-27T22:09:17.153573",
-      "quantity": 88
-    },
-    {
-      "name": "Research Past",
-      "description": "Hour when agency music.",
-      "price": 1.97,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.7,
-      "barcode": "2317480043990",
-      "provider_id": "b7ba9a23-ae27-460b-96e6-cbfc43feb58c",
-      "batch": "DMB-###",
-      "best_before": "2026-06-23T22:09:17.181705",
-      "quantity": 255
-    },
-    {
-      "name": "Fact Someone",
-      "description": "President owner while nor from note.",
-      "price": 1.53,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.84,
-      "barcode": "5002125955079",
-      "provider_id": "b7ba9a23-ae27-460b-96e6-cbfc43feb58c",
-      "batch": "FFZ-###",
-      "best_before": "2026-09-10T22:09:17.201490",
-      "quantity": 346
-    },
-    {
-      "name": "Party Wall",
-      "description": "Sing anything answer.",
-      "price": 5.54,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.8,
-      "barcode": "8584057929856",
-      "provider_id": "b7ba9a23-ae27-460b-96e6-cbfc43feb58c",
-      "batch": "CAU-###",
-      "best_before": "2026-07-03T22:09:17.219086",
-      "quantity": 3
-    },
-    {
-      "name": "Sit Purpose",
-      "description": "Test south once reduce politics kitchen manage.",
-      "price": 6.48,
-      "category": "Carnes y Pescados",
-      "weight": 0.88,
-      "barcode": "6476792511330",
-      "provider_id": "ce763771-5e1e-492c-be58-de41b251d2b6",
-      "batch": "LYN-###",
-      "best_before": "2027-03-14T22:09:17.235537",
-      "quantity": 58
-    },
-    {
-      "name": "Floor Stage",
-      "description": "Right expect indeed nature laugh official.",
-      "price": 8.63,
-      "category": "Frutas y Verduras",
-      "weight": 1.78,
-      "barcode": "0119965626603",
-      "provider_id": "ce763771-5e1e-492c-be58-de41b251d2b6",
-      "batch": "YKU-###",
-      "best_before": "2027-03-14T22:09:17.252718",
-      "quantity": 436
-    },
-    {
-      "name": "History Listen",
-      "description": "Place cut speak.",
-      "price": 1.11,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.89,
-      "barcode": "1056617281751",
-      "provider_id": "ce763771-5e1e-492c-be58-de41b251d2b6",
-      "batch": "UWY-###",
-      "best_before": "2026-01-26T22:09:17.271709",
-      "quantity": 114
-    },
-    {
-      "name": "Up Case",
-      "description": "Seem anything forget hospital subject.",
-      "price": 6.83,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.98,
-      "barcode": "2548517511605",
-      "provider_id": "ce763771-5e1e-492c-be58-de41b251d2b6",
-      "batch": "QGS-###",
-      "best_before": "2027-03-27T22:09:17.295965",
-      "quantity": 192
-    },
-    {
-      "name": "Part Let",
-      "description": "Hair reveal positive position song.",
-      "price": 2.36,
-      "category": "Despensa",
-      "weight": 1.31,
-      "barcode": "1056746195004",
-      "provider_id": "ce763771-5e1e-492c-be58-de41b251d2b6",
-      "batch": "LPM-###",
-      "best_before": "2025-11-05T22:09:17.319243",
-      "quantity": 494
-    },
-    {
-      "name": "Rich Ask",
-      "description": "Eye hundred everybody seek another mission water.",
-      "price": 4.75,
-      "category": "Bebidas",
-      "weight": 1.59,
-      "barcode": "9345425955056",
-      "provider_id": "ce763771-5e1e-492c-be58-de41b251d2b6",
-      "batch": "JTI-###",
-      "best_before": "2027-04-14T22:09:17.338719",
-      "quantity": 5
-    },
-    {
-      "name": "Her Letter",
-      "description": "Take gun follow public gas pay.",
-      "price": 3.38,
-      "category": "Despensa",
-      "weight": 0.97,
-      "barcode": "7703659086731",
-      "provider_id": "ce763771-5e1e-492c-be58-de41b251d2b6",
-      "batch": "BSE-###",
-      "best_before": "2027-01-29T22:09:17.361332",
-      "quantity": 300
-    },
-    {
-      "name": "Build Station",
-      "description": "Relate billion late remember guy nothing hundred tough.",
-      "price": 4.98,
-      "category": "Frutas y Verduras",
-      "weight": 1.7,
-      "barcode": "9910984167341",
-      "provider_id": "ce763771-5e1e-492c-be58-de41b251d2b6",
-      "batch": "YSL-###",
-      "best_before": "2027-04-17T22:09:17.379633",
-      "quantity": 303
-    },
-    {
-      "name": "Language Effort",
-      "description": "Film hear address budget country.",
-      "price": 1.25,
-      "category": "Bebidas",
-      "weight": 0.49,
-      "barcode": "5048893742206",
-      "provider_id": "ce763771-5e1e-492c-be58-de41b251d2b6",
-      "batch": "RXL-###",
-      "best_before": "2026-05-27T22:09:17.405058",
-      "quantity": 435
-    },
-    {
-      "name": "At Increase",
-      "description": "These clear mean section run treat away.",
-      "price": 3.17,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.26,
-      "barcode": "5639571009003",
-      "provider_id": "ce763771-5e1e-492c-be58-de41b251d2b6",
-      "batch": "QTG-###",
-      "best_before": "2026-05-02T22:09:17.423236",
-      "quantity": 136
-    },
-    {
-      "name": "Character Effect",
-      "description": "From ten page in color decade.",
-      "price": 4.58,
-      "category": "Carnes y Pescados",
-      "weight": 0.31,
-      "barcode": "1256999046195",
-      "provider_id": "5b124c56-5678-48ea-98da-69bde2eddda2",
-      "batch": "PPW-###",
-      "best_before": "2026-02-14T22:09:17.443319",
-      "quantity": 104
-    },
-    {
-      "name": "Throw Generation",
-      "description": "Management society they call final or night since.",
-      "price": 7.52,
-      "category": "Bebidas",
-      "weight": 0.69,
-      "barcode": "4751348306250",
-      "provider_id": "5b124c56-5678-48ea-98da-69bde2eddda2",
-      "batch": "RNU-###",
-      "best_before": "2026-02-08T22:09:17.458583",
-      "quantity": 87
-    },
-    {
-      "name": "Resource Drug",
-      "description": "Majority identify mother manager purpose include.",
-      "price": 1.39,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.74,
-      "barcode": "9904470767160",
-      "provider_id": "5b124c56-5678-48ea-98da-69bde2eddda2",
-      "batch": "YHC-###",
-      "best_before": "2026-06-30T22:09:17.474627",
-      "quantity": 63
-    },
-    {
-      "name": "Around Participant",
-      "description": "Analysis smile current scene red cultural everything.",
-      "price": 6.95,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.68,
-      "barcode": "3176513481227",
-      "provider_id": "5b124c56-5678-48ea-98da-69bde2eddda2",
-      "batch": "CQW-###",
-      "best_before": "2026-01-13T22:09:17.492343",
-      "quantity": 369
-    },
-    {
-      "name": "Affect Local",
-      "description": "Police walk imagine say economic ability child life.",
-      "price": 4.62,
-      "category": "Snacks y Dulces",
-      "weight": 1.68,
-      "barcode": "1081246827162",
-      "provider_id": "5b124c56-5678-48ea-98da-69bde2eddda2",
-      "batch": "VHM-###",
-      "best_before": "2026-05-04T22:09:17.512204",
-      "quantity": 54
-    },
-    {
-      "name": "Actually Way",
-      "description": "Majority camera state late site laugh back rich.",
-      "price": 2.76,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.16,
-      "barcode": "9143601692531",
-      "provider_id": "5b124c56-5678-48ea-98da-69bde2eddda2",
-      "batch": "BMW-###",
-      "best_before": "2026-11-03T22:09:17.576931",
-      "quantity": 469
-    },
-    {
-      "name": "Region Something",
-      "description": "Reason campaign take often.",
-      "price": 4.29,
-      "category": "Despensa",
-      "weight": 1.07,
-      "barcode": "4480469298181",
-      "provider_id": "5b124c56-5678-48ea-98da-69bde2eddda2",
-      "batch": "TNL-###",
-      "best_before": "2026-04-04T22:09:17.693110",
-      "quantity": 282
-    },
-    {
-      "name": "Could Language",
-      "description": "Citizen leg argue grow voice cold shoulder.",
-      "price": 6.42,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.84,
-      "barcode": "1649260190114",
-      "provider_id": "5b124c56-5678-48ea-98da-69bde2eddda2",
-      "batch": "UIC-###",
-      "best_before": "2027-04-08T22:09:17.841215",
-      "quantity": 482
-    },
-    {
-      "name": "Security News",
-      "description": "Benefit within suggest whether better war model.",
-      "price": 5.22,
-      "category": "Frutas y Verduras",
-      "weight": 0.69,
-      "barcode": "6490543955648",
-      "provider_id": "5b124c56-5678-48ea-98da-69bde2eddda2",
-      "batch": "GZT-###",
-      "best_before": "2026-02-05T22:09:17.857229",
-      "quantity": 165
-    },
-    {
-      "name": "Ten Story",
-      "description": "Tend land fact speech on easy anything.",
-      "price": 2.55,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.42,
-      "barcode": "1905080909719",
-      "provider_id": "5b124c56-5678-48ea-98da-69bde2eddda2",
-      "batch": "ESO-###",
-      "best_before": "2026-01-25T22:09:17.873288",
-      "quantity": 361
-    },
-    {
-      "name": "Just Community",
-      "description": "Easy stand everything hold war compare Mr.",
-      "price": 8.78,
-      "category": "Frutas y Verduras",
-      "weight": 1.47,
-      "barcode": "4317087785345",
-      "provider_id": "0cbf2538-e097-4322-9ec6-3b869f21b4c6",
-      "batch": "OIS-###",
-      "best_before": "2026-04-19T22:09:17.890675",
-      "quantity": 446
-    },
-    {
-      "name": "Meeting Senior",
-      "description": "Something kind themselves not may young.",
-      "price": 1.93,
-      "category": "Condimentos y Especias",
-      "weight": 1.66,
-      "barcode": "7652592770491",
-      "provider_id": "0cbf2538-e097-4322-9ec6-3b869f21b4c6",
-      "batch": "SBG-###",
-      "best_before": "2026-01-20T22:09:17.906203",
-      "quantity": 283
-    },
-    {
-      "name": "City Structure",
-      "description": "Establish together national us bring safe.",
-      "price": 4.47,
-      "category": "Condimentos y Especias",
-      "weight": 1.92,
-      "barcode": "9682546938156",
-      "provider_id": "0cbf2538-e097-4322-9ec6-3b869f21b4c6",
-      "batch": "NFH-###",
-      "best_before": "2026-06-13T22:09:17.924390",
-      "quantity": 118
-    },
-    {
-      "name": "Account Pressure",
-      "description": "Poor better protect feeling buy.",
-      "price": 7.76,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.32,
-      "barcode": "8849995102236",
-      "provider_id": "0cbf2538-e097-4322-9ec6-3b869f21b4c6",
-      "batch": "JKZ-###",
-      "best_before": "2027-02-17T22:09:17.941844",
-      "quantity": 78
-    },
-    {
-      "name": "Pick None",
-      "description": "Force part system sister community now car other.",
-      "price": 9.66,
-      "category": "Productos de Limpieza",
-      "weight": 1.0,
-      "barcode": "6452594214433",
-      "provider_id": "0cbf2538-e097-4322-9ec6-3b869f21b4c6",
-      "batch": "ZTD-###",
-      "best_before": "2027-04-10T22:09:17.961027",
-      "quantity": 384
-    },
-    {
-      "name": "Protect Campaign",
-      "description": "Nation but its carry within perform teacher.",
-      "price": 5.85,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.25,
-      "barcode": "8233040855831",
-      "provider_id": "0cbf2538-e097-4322-9ec6-3b869f21b4c6",
-      "batch": "SXN-###",
-      "best_before": "2026-07-29T22:09:17.984509",
-      "quantity": 4
-    },
-    {
-      "name": "Or Door",
-      "description": "Term however your that left find.",
-      "price": 3.2,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.33,
-      "barcode": "0050556877946",
-      "provider_id": "0cbf2538-e097-4322-9ec6-3b869f21b4c6",
-      "batch": "ILC-###",
-      "best_before": "2026-03-14T22:09:18.048095",
-      "quantity": 428
-    },
-    {
-      "name": "Society Minute",
-      "description": "Really doctor half offer Republican much.",
-      "price": 3.51,
-      "category": "Frutas y Verduras",
-      "weight": 1.45,
-      "barcode": "4760225383673",
-      "provider_id": "0cbf2538-e097-4322-9ec6-3b869f21b4c6",
-      "batch": "XZK-###",
-      "best_before": "2027-02-15T22:09:18.116423",
-      "quantity": 423
-    },
-    {
-      "name": "Require Economy",
-      "description": "Usually arrive American specific able move.",
-      "price": 9.04,
-      "category": "Bebidas",
-      "weight": 0.22,
-      "barcode": "5251538483192",
-      "provider_id": "0cbf2538-e097-4322-9ec6-3b869f21b4c6",
-      "batch": "SJD-###",
-      "best_before": "2027-04-12T22:09:18.131313",
-      "quantity": 3
-    },
-    {
-      "name": "Produce Some",
-      "description": "Write however building fund sing direction center.",
-      "price": 6.27,
-      "category": "Bebidas",
-      "weight": 0.47,
-      "barcode": "1869116218933",
-      "provider_id": "0cbf2538-e097-4322-9ec6-3b869f21b4c6",
-      "batch": "NBO-###",
-      "best_before": "2026-07-21T22:09:18.150597",
-      "quantity": 207
-    },
-    {
-      "name": "Force The",
-      "description": "Recognize member use less inside significant.",
-      "price": 9.71,
-      "category": "Snacks y Dulces",
-      "weight": 0.56,
-      "barcode": "7407871352598",
-      "provider_id": "57b1a0d1-7fed-456c-b05e-22e5f9911635",
-      "batch": "ONH-###",
-      "best_before": "2026-12-25T22:09:18.172377",
-      "quantity": 436
-    },
-    {
-      "name": "Recently Far",
-      "description": "Modern artist better find expect able degree.",
-      "price": 9.05,
-      "category": "Frutas y Verduras",
-      "weight": 1.86,
-      "barcode": "2644222240806",
-      "provider_id": "57b1a0d1-7fed-456c-b05e-22e5f9911635",
-      "batch": "NPC-###",
-      "best_before": "2026-05-17T22:09:18.198271",
-      "quantity": 54
-    },
-    {
-      "name": "Resource Majority",
-      "description": "Cut true man tax nor.",
-      "price": 7.9,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.48,
-      "barcode": "0220155282179",
-      "provider_id": "57b1a0d1-7fed-456c-b05e-22e5f9911635",
-      "batch": "JKD-###",
-      "best_before": "2026-01-08T22:09:18.216092",
-      "quantity": 184
-    },
-    {
-      "name": "Future Mr",
-      "description": "It home any whole.",
-      "price": 5.69,
-      "category": "Condimentos y Especias",
-      "weight": 0.47,
-      "barcode": "2907790382348",
-      "provider_id": "57b1a0d1-7fed-456c-b05e-22e5f9911635",
-      "batch": "JXA-###",
-      "best_before": "2025-11-17T22:09:18.241071",
-      "quantity": 1
-    },
-    {
-      "name": "Whatever Teach",
-      "description": "Two standard wish should clearly suggest.",
-      "price": 7.48,
-      "category": "Snacks y Dulces",
-      "weight": 0.79,
-      "barcode": "4506106672289",
-      "provider_id": "57b1a0d1-7fed-456c-b05e-22e5f9911635",
-      "batch": "TWI-###",
-      "best_before": "2026-05-26T22:09:18.260518",
-      "quantity": 201
-    },
-    {
-      "name": "Star Behind",
-      "description": "Move future feel however job start city investment.",
-      "price": 6.8,
-      "category": "Condimentos y Especias",
-      "weight": 1.68,
-      "barcode": "8462489433809",
-      "provider_id": "57b1a0d1-7fed-456c-b05e-22e5f9911635",
-      "batch": "NXE-###",
-      "best_before": "2027-03-30T22:09:18.282363",
-      "quantity": 111
-    },
-    {
-      "name": "Many In",
-      "description": "People enter management nothing way radio.",
-      "price": 2.83,
-      "category": "Condimentos y Especias",
-      "weight": 1.36,
-      "barcode": "1172256049788",
-      "provider_id": "57b1a0d1-7fed-456c-b05e-22e5f9911635",
-      "batch": "ENA-###",
-      "best_before": "2027-01-01T22:09:18.332995",
-      "quantity": 225
-    },
-    {
-      "name": "Than Able",
-      "description": "Rich song standard peace station national door.",
-      "price": 1.68,
-      "category": "Condimentos y Especias",
-      "weight": 0.71,
-      "barcode": "2309333273012",
-      "provider_id": "57b1a0d1-7fed-456c-b05e-22e5f9911635",
-      "batch": "CQY-###",
-      "best_before": "2027-02-04T22:09:18.361034",
-      "quantity": 376
-    },
-    {
-      "name": "Republican Raise",
-      "description": "Yeah send choice reflect.",
-      "price": 9.63,
-      "category": "Productos de Limpieza",
-      "weight": 1.38,
-      "barcode": "3496396422415",
-      "provider_id": "57b1a0d1-7fed-456c-b05e-22e5f9911635",
-      "batch": "URC-###",
-      "best_before": "2026-05-27T22:09:18.391951",
-      "quantity": 444
-    },
-    {
-      "name": "Once Anything",
-      "description": "Stage yeah drive personal avoid activity a.",
-      "price": 7.66,
-      "category": "Carnes y Pescados",
-      "weight": 1.78,
-      "barcode": "6154825822973",
-      "provider_id": "57b1a0d1-7fed-456c-b05e-22e5f9911635",
-      "batch": "MWW-###",
-      "best_before": "2026-05-12T22:09:18.419749",
-      "quantity": 226
-    },
-    {
-      "name": "Maybe Industry",
-      "description": "Community little personal interest future without out.",
-      "price": 2.44,
-      "category": "Frutas y Verduras",
-      "weight": 1.79,
-      "barcode": "9597500938427",
-      "provider_id": "91301c75-1dbe-46f9-8984-1469c6d584b6",
-      "batch": "MUE-###",
-      "best_before": "2026-09-20T22:09:18.450087",
-      "quantity": 123
-    },
-    {
-      "name": "People Head",
-      "description": "Red father lead interest just thought particularly rich.",
-      "price": 2.18,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.68,
-      "barcode": "1343881178994",
-      "provider_id": "91301c75-1dbe-46f9-8984-1469c6d584b6",
-      "batch": "OJU-###",
-      "best_before": "2027-03-11T22:09:18.472611",
-      "quantity": 2
-    },
-    {
-      "name": "True Risk",
-      "description": "Foot bed worker without still middle.",
-      "price": 4.18,
-      "category": "Condimentos y Especias",
-      "weight": 0.23,
-      "barcode": "4055057396800",
-      "provider_id": "91301c75-1dbe-46f9-8984-1469c6d584b6",
-      "batch": "KTL-###",
-      "best_before": "2026-03-11T22:09:18.497400",
-      "quantity": 1
-    },
-    {
-      "name": "Purpose Help",
-      "description": "People yard mouth without get home perhaps.",
-      "price": 2.15,
-      "category": "Condimentos y Especias",
-      "weight": 1.9,
-      "barcode": "1072774868987",
-      "provider_id": "91301c75-1dbe-46f9-8984-1469c6d584b6",
-      "batch": "AXC-###",
-      "best_before": "2026-07-12T22:09:18.517664",
-      "quantity": 437
-    },
-    {
-      "name": "Through Trouble",
-      "description": "Hold box maybe entire response newspaper.",
-      "price": 6.02,
-      "category": "Despensa",
-      "weight": 0.4,
-      "barcode": "6908498645014",
-      "provider_id": "91301c75-1dbe-46f9-8984-1469c6d584b6",
-      "batch": "SFI-###",
-      "best_before": "2026-08-06T22:09:18.537732",
-      "quantity": 308
-    },
-    {
-      "name": "Successful Sit",
-      "description": "Itself wrong term bar.",
-      "price": 9.74,
-      "category": "Frutas y Verduras",
-      "weight": 1.11,
-      "barcode": "1847371920440",
-      "provider_id": "91301c75-1dbe-46f9-8984-1469c6d584b6",
-      "batch": "QER-###",
-      "best_before": "2026-12-27T22:09:18.558533",
-      "quantity": 426
-    },
-    {
-      "name": "If Worry",
-      "description": "Eat loss ago require interest none than type.",
-      "price": 7.14,
-      "category": "Productos de Limpieza",
-      "weight": 1.85,
-      "barcode": "3373642673398",
-      "provider_id": "91301c75-1dbe-46f9-8984-1469c6d584b6",
-      "batch": "OVA-###",
-      "best_before": "2026-12-05T22:09:18.576625",
-      "quantity": 239
-    },
-    {
-      "name": "Late Himself",
-      "description": "Score up dinner common between.",
-      "price": 2.0,
-      "category": "Productos de Limpieza",
-      "weight": 1.18,
-      "barcode": "0431343943905",
-      "provider_id": "91301c75-1dbe-46f9-8984-1469c6d584b6",
-      "batch": "RZE-###",
-      "best_before": "2026-11-13T22:09:18.597499",
-      "quantity": 155
-    },
-    {
-      "name": "Stop Land",
-      "description": "Ability activity similar whether example customer treatment.",
-      "price": 9.41,
-      "category": "Despensa",
-      "weight": 0.82,
-      "barcode": "3385084925539",
-      "provider_id": "91301c75-1dbe-46f9-8984-1469c6d584b6",
-      "batch": "HUB-###",
-      "best_before": "2025-12-21T22:09:18.614082",
-      "quantity": 479
-    },
-    {
-      "name": "Green Suggest",
-      "description": "Blood dinner inside face article message story.",
-      "price": 9.24,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.45,
-      "barcode": "8647961068339",
-      "provider_id": "91301c75-1dbe-46f9-8984-1469c6d584b6",
-      "batch": "HDU-###",
-      "best_before": "2027-01-01T22:09:18.632203",
-      "quantity": 320
-    },
-    {
-      "name": "Page Magazine",
-      "description": "Shake born green prevent town show notice.",
-      "price": 1.94,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.21,
-      "barcode": "2820122863998",
-      "provider_id": "10eaf415-de41-4977-9010-d0000f89cae3",
-      "batch": "CKI-###",
-      "best_before": "2027-01-08T22:09:18.653780",
-      "quantity": 403
-    },
-    {
-      "name": "Scene Several",
-      "description": "Month finish foot half none evidence risk.",
-      "price": 1.64,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.19,
-      "barcode": "6602559716513",
-      "provider_id": "10eaf415-de41-4977-9010-d0000f89cae3",
-      "batch": "FCK-###",
-      "best_before": "2027-02-08T22:09:18.675646",
-      "quantity": 287
-    },
-    {
-      "name": "Public Why",
-      "description": "Pressure fine system say between next current.",
-      "price": 1.63,
-      "category": "Carnes y Pescados",
-      "weight": 0.57,
-      "barcode": "9337378769767",
-      "provider_id": "10eaf415-de41-4977-9010-d0000f89cae3",
-      "batch": "CNC-###",
-      "best_before": "2027-03-07T22:09:18.707239",
-      "quantity": 434
-    },
-    {
-      "name": "Pull Decide",
-      "description": "Charge son modern involve respond.",
-      "price": 5.49,
-      "category": "Bebidas",
-      "weight": 0.47,
-      "barcode": "8201273390535",
-      "provider_id": "10eaf415-de41-4977-9010-d0000f89cae3",
-      "batch": "XPL-###",
-      "best_before": "2026-08-21T22:09:18.725843",
-      "quantity": 491
-    },
-    {
-      "name": "Exist Call",
-      "description": "Street dark Republican receive again sense trial.",
-      "price": 3.68,
-      "category": "Despensa",
-      "weight": 1.1,
-      "barcode": "4277541132613",
-      "provider_id": "10eaf415-de41-4977-9010-d0000f89cae3",
-      "batch": "BRW-###",
-      "best_before": "2026-10-10T22:09:18.750929",
-      "quantity": 363
-    },
-    {
-      "name": "Area A",
-      "description": "Plan coach somebody sense voice month consumer.",
-      "price": 1.95,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 1.33,
-      "barcode": "7721063048145",
-      "provider_id": "10eaf415-de41-4977-9010-d0000f89cae3",
-      "batch": "ANS-###",
-      "best_before": "2027-03-14T22:09:18.772264",
-      "quantity": 216
-    },
-    {
-      "name": "Yard Former",
-      "description": "Amount single professional on best.",
-      "price": 7.2,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.35,
-      "barcode": "9133799649554",
-      "provider_id": "10eaf415-de41-4977-9010-d0000f89cae3",
-      "batch": "QHT-###",
-      "best_before": "2026-12-08T22:09:18.792953",
-      "quantity": 345
-    },
-    {
-      "name": "Threat Left",
-      "description": "Little mean source.",
-      "price": 6.37,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.93,
-      "barcode": "6368470730112",
-      "provider_id": "10eaf415-de41-4977-9010-d0000f89cae3",
-      "batch": "XQV-###",
-      "best_before": "2027-04-08T22:09:18.815924",
-      "quantity": 127
-    },
-    {
-      "name": "Question Wonder",
-      "description": "Scene bar business book husband.",
-      "price": 9.93,
-      "category": "Bebidas",
-      "weight": 0.39,
-      "barcode": "0454043446507",
-      "provider_id": "10eaf415-de41-4977-9010-d0000f89cae3",
-      "batch": "GTW-###",
-      "best_before": "2026-01-23T22:09:18.840507",
-      "quantity": 109
-    },
-    {
-      "name": "Article Away",
-      "description": "Education happy goal manager.",
-      "price": 1.29,
-      "category": "Frutas y Verduras",
-      "weight": 1.6,
-      "barcode": "2820700626328",
-      "provider_id": "10eaf415-de41-4977-9010-d0000f89cae3",
-      "batch": "OTI-###",
-      "best_before": "2026-12-20T22:09:18.858437",
-      "quantity": 351
-    },
-    {
-      "name": "Meeting Once",
-      "description": "Yard nor benefit wall foreign customer statement responsibility.",
-      "price": 3.03,
-      "category": "Despensa",
-      "weight": 1.6,
-      "barcode": "6126352136854",
-      "provider_id": "1a060584-7fb0-4ed8-a6ff-0adbaf6cfa64",
-      "batch": "SYU-###",
-      "best_before": "2026-08-17T22:09:18.876797",
-      "quantity": 55
-    },
-    {
-      "name": "Quickly Our",
-      "description": "Mission test mention number trial sure.",
-      "price": 5.89,
-      "category": "Frutas y Verduras",
-      "weight": 1.58,
-      "barcode": "9257500032579",
-      "provider_id": "1a060584-7fb0-4ed8-a6ff-0adbaf6cfa64",
-      "batch": "OXB-###",
-      "best_before": "2026-07-07T22:09:18.894908",
-      "quantity": 288
-    },
-    {
-      "name": "Any Leave",
-      "description": "Certain call easy second entire bar never key.",
-      "price": 3.1,
-      "category": "Carnes y Pescados",
-      "weight": 0.39,
-      "barcode": "3834549323842",
-      "provider_id": "1a060584-7fb0-4ed8-a6ff-0adbaf6cfa64",
-      "batch": "RWF-###",
-      "best_before": "2026-09-11T22:09:18.916357",
-      "quantity": 382
-    },
-    {
-      "name": "To Economy",
-      "description": "Stuff magazine else.",
-      "price": 5.09,
-      "category": "Condimentos y Especias",
-      "weight": 1.28,
-      "barcode": "1725639362594",
-      "provider_id": "1a060584-7fb0-4ed8-a6ff-0adbaf6cfa64",
-      "batch": "FQC-###",
-      "best_before": "2026-01-17T22:09:18.944289",
-      "quantity": 307
-    },
-    {
-      "name": "Couple Call",
-      "description": "Eat only power notice.",
-      "price": 8.14,
-      "category": "Despensa",
-      "weight": 0.59,
-      "barcode": "5701439465952",
-      "provider_id": "1a060584-7fb0-4ed8-a6ff-0adbaf6cfa64",
-      "batch": "JVQ-###",
-      "best_before": "2026-05-29T22:09:18.960570",
-      "quantity": 370
-    },
-    {
-      "name": "Financial Wear",
-      "description": "Leave radio house structure popular my recognize effect.",
-      "price": 8.39,
-      "category": "Productos de Limpieza",
-      "weight": 1.41,
-      "barcode": "1832626633763",
-      "provider_id": "1a060584-7fb0-4ed8-a6ff-0adbaf6cfa64",
-      "batch": "XIU-###",
-      "best_before": "2026-09-30T22:09:18.980373",
-      "quantity": 267
-    },
-    {
-      "name": "Happy Travel",
-      "description": "Protect south some program those wall.",
-      "price": 1.93,
-      "category": "Bebidas",
-      "weight": 1.16,
-      "barcode": "7437150632905",
-      "provider_id": "1a060584-7fb0-4ed8-a6ff-0adbaf6cfa64",
-      "batch": "TYT-###",
-      "best_before": "2026-06-13T22:09:19.002283",
-      "quantity": 270
-    },
-    {
-      "name": "Great Future",
-      "description": "Any approach above fall relationship forget Mr.",
-      "price": 7.0,
-      "category": "Bebidas",
-      "weight": 0.83,
-      "barcode": "5791091988043",
-      "provider_id": "1a060584-7fb0-4ed8-a6ff-0adbaf6cfa64",
-      "batch": "FXP-###",
-      "best_before": "2026-07-10T22:09:19.019064",
-      "quantity": 173
-    },
-    {
-      "name": "Eye Theory",
-      "description": "After itself free usually reason eye.",
+      "name": "Education Rise",
+      "description": "Alone behavior seem PM.",
       "price": 5.79,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.06,
-      "barcode": "8964692247636",
-      "provider_id": "1a060584-7fb0-4ed8-a6ff-0adbaf6cfa64",
-      "batch": "OXC-###",
-      "best_before": "2026-09-01T22:09:19.035617",
-      "quantity": 376
-    },
-    {
-      "name": "Chance Early",
-      "description": "Worker picture month operation.",
-      "price": 2.11,
-      "category": "Despensa",
-      "weight": 0.74,
-      "barcode": "9697971497956",
-      "provider_id": "1a060584-7fb0-4ed8-a6ff-0adbaf6cfa64",
-      "batch": "LNH-###",
-      "best_before": "2026-12-22T22:09:19.057588",
-      "quantity": 340
-    },
-    {
-      "name": "Democratic Figure",
-      "description": "Wind per significant report hospital respond land.",
-      "price": 6.09,
       "category": "Condimentos y Especias",
       "weight": 1.08,
-      "barcode": "4830650470290",
-      "provider_id": "9578332d-5d4b-48e2-a7a1-9c7045ad999e",
-      "batch": "GVO-###",
-      "best_before": "2025-11-17T22:09:19.080846",
-      "quantity": 352
+      "barcode": "7157336993230",
+      "provider_id": "8c1ed87c-c31f-41cb-9acf-f1f4f6d581a1",
+      "batch": "LIW-###",
+      "best_before": "2026-08-07T16:17:44.861309",
+      "quantity": 3
     },
     {
-      "name": "City Arm",
-      "description": "West data realize forward director add present.",
-      "price": 9.33,
-      "category": "Productos de Limpieza",
-      "weight": 0.39,
-      "barcode": "3727994101809",
-      "provider_id": "9578332d-5d4b-48e2-a7a1-9c7045ad999e",
-      "batch": "EQE-###",
-      "best_before": "2026-10-23T22:09:19.106220",
-      "quantity": 491
+      "name": "Once Manage",
+      "description": "Sing machine think morning begin anyone.",
+      "price": 1.72,
+      "category": "Despensa",
+      "weight": 1.66,
+      "barcode": "4284785970888",
+      "provider_id": "8c1ed87c-c31f-41cb-9acf-f1f4f6d581a1",
+      "batch": "OQS-###",
+      "best_before": "2026-12-30T16:17:44.952031",
+      "quantity": 221
     },
     {
-      "name": "Mind Part",
-      "description": "Soon pay necessary race allow clearly.",
-      "price": 6.54,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 1.96,
-      "barcode": "9035529081095",
-      "provider_id": "9578332d-5d4b-48e2-a7a1-9c7045ad999e",
-      "batch": "STV-###",
-      "best_before": "2027-02-16T22:09:19.124444",
-      "quantity": 441
-    },
-    {
-      "name": "Audience Stay",
-      "description": "Doctor computer professor.",
-      "price": 8.65,
+      "name": "Area Anyone",
+      "description": "Section station say soon.",
+      "price": 8.24,
       "category": "Snacks y Dulces",
-      "weight": 1.22,
-      "barcode": "6906354489901",
-      "provider_id": "9578332d-5d4b-48e2-a7a1-9c7045ad999e",
-      "batch": "QCV-###",
-      "best_before": "2025-11-17T22:09:19.143417",
+      "weight": 1.29,
+      "barcode": "6787749863724",
+      "provider_id": "8c1ed87c-c31f-41cb-9acf-f1f4f6d581a1",
+      "batch": "ZGC-###",
+      "best_before": "2026-05-27T16:17:44.965822",
       "quantity": 1
     },
     {
-      "name": "Family Late",
-      "description": "Marriage central low somebody.",
-      "price": 9.75,
-      "category": "Productos de Limpieza",
-      "weight": 0.81,
-      "barcode": "3881052545667",
-      "provider_id": "9578332d-5d4b-48e2-a7a1-9c7045ad999e",
-      "batch": "KOM-###",
-      "best_before": "2026-03-26T22:09:19.162767",
-      "quantity": 124
+      "name": "Than That",
+      "description": "Allow turn the.",
+      "price": 2.72,
+      "category": "Despensa",
+      "weight": 1.03,
+      "barcode": "0539825451259",
+      "provider_id": "8c1ed87c-c31f-41cb-9acf-f1f4f6d581a1",
+      "batch": "HYU-###",
+      "best_before": "2026-07-05T16:17:44.979175",
+      "quantity": 5
     },
     {
-      "name": "Why Join",
-      "description": "Natural treat above where wind wear statement.",
-      "price": 5.5,
-      "category": "Condimentos y Especias",
+      "name": "Trial See",
+      "description": "Relationship make some nearly.",
+      "price": 5.24,
+      "category": "Bebidas",
       "weight": 1.65,
-      "barcode": "6056286532418",
-      "provider_id": "9578332d-5d4b-48e2-a7a1-9c7045ad999e",
-      "batch": "VVX-###",
-      "best_before": "2026-07-24T22:09:19.184710",
-      "quantity": 334
+      "barcode": "2306245091420",
+      "provider_id": "8c1ed87c-c31f-41cb-9acf-f1f4f6d581a1",
+      "batch": "BSU-###",
+      "best_before": "2026-05-05T16:17:44.992431",
+      "quantity": 1
     },
     {
-      "name": "Future Back",
-      "description": "Doctor performance man call.",
-      "price": 6.23,
-      "category": "Frutas y Verduras",
-      "weight": 0.45,
-      "barcode": "9452480464468",
-      "provider_id": "9578332d-5d4b-48e2-a7a1-9c7045ad999e",
-      "batch": "FML-###",
-      "best_before": "2026-03-26T22:09:19.206544",
-      "quantity": 244
-    },
-    {
-      "name": "Buy Specific",
-      "description": "Money traditional sometimes gas including.",
-      "price": 3.34,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 1.62,
-      "barcode": "5673039808210",
-      "provider_id": "9578332d-5d4b-48e2-a7a1-9c7045ad999e",
-      "batch": "HUN-###",
-      "best_before": "2025-11-30T22:09:19.227244",
-      "quantity": 359
-    },
-    {
-      "name": "Left Else",
-      "description": "Hard subject pressure.",
-      "price": 6.94,
-      "category": "Condimentos y Especias",
-      "weight": 1.93,
-      "barcode": "2757152519246",
-      "provider_id": "9578332d-5d4b-48e2-a7a1-9c7045ad999e",
-      "batch": "EMU-###",
-      "best_before": "2026-04-14T22:09:19.250802",
+      "name": "Time Mention",
+      "description": "Ten peace sort call from.",
+      "price": 2.03,
+      "category": "Panader\u00eda y Reposter\u00eda",
+      "weight": 1.49,
+      "barcode": "3287105803805",
+      "provider_id": "ee7f64ad-dc3b-4e75-b385-d7e199350ef0",
+      "batch": "MCM-###",
+      "best_before": "2026-03-11T16:17:45.006681",
       "quantity": 3
     },
     {
-      "name": "Tree Anything",
-      "description": "Television others prove issue yet.",
-      "price": 7.8,
-      "category": "Despensa",
-      "weight": 0.95,
-      "barcode": "8712643446719",
-      "provider_id": "9578332d-5d4b-48e2-a7a1-9c7045ad999e",
-      "batch": "MEO-###",
-      "best_before": "2027-01-17T22:09:19.271909",
-      "quantity": 372
-    },
-    {
-      "name": "Hard Camera",
-      "description": "Reflect animal want deep serve.",
-      "price": 1.24,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.61,
-      "barcode": "9478934193944",
-      "provider_id": "7f1a9a12-3a7e-4996-a7a6-9cc65595305d",
-      "batch": "XKP-###",
-      "best_before": "2026-06-21T22:09:19.293111",
-      "quantity": 125
-    },
-    {
-      "name": "Until Because",
-      "description": "Nation weight old election himself campaign sport.",
-      "price": 8.54,
-      "category": "Condimentos y Especias",
-      "weight": 1.56,
-      "barcode": "1377604944269",
-      "provider_id": "7f1a9a12-3a7e-4996-a7a6-9cc65595305d",
-      "batch": "MXP-###",
-      "best_before": "2026-11-08T22:09:19.445974",
-      "quantity": 364
-    },
-    {
-      "name": "Already Candidate",
-      "description": "Be realize treat.",
-      "price": 8.17,
-      "category": "Productos de Limpieza",
-      "weight": 0.98,
-      "barcode": "8192944156331",
-      "provider_id": "7f1a9a12-3a7e-4996-a7a6-9cc65595305d",
-      "batch": "IEV-###",
-      "best_before": "2026-05-02T22:09:19.474823",
-      "quantity": 251
-    },
-    {
-      "name": "Mention Any",
-      "description": "Art body street population run day meeting.",
-      "price": 4.21,
-      "category": "Despensa",
-      "weight": 0.42,
-      "barcode": "0342042386613",
-      "provider_id": "7f1a9a12-3a7e-4996-a7a6-9cc65595305d",
-      "batch": "GPD-###",
-      "best_before": "2026-06-28T22:09:19.503179",
-      "quantity": 196
-    },
-    {
-      "name": "Six Born",
-      "description": "Activity son traditional people somebody story anyone finally.",
-      "price": 2.27,
-      "category": "Snacks y Dulces",
-      "weight": 0.76,
-      "barcode": "2579007166340",
-      "provider_id": "7f1a9a12-3a7e-4996-a7a6-9cc65595305d",
-      "batch": "TTR-###",
-      "best_before": "2026-12-27T22:09:19.549348",
-      "quantity": 122
-    },
-    {
-      "name": "City Analysis",
-      "description": "Truth possible business stuff stay we.",
-      "price": 5.62,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.17,
-      "barcode": "3472598781246",
-      "provider_id": "7f1a9a12-3a7e-4996-a7a6-9cc65595305d",
-      "batch": "UCO-###",
-      "best_before": "2026-05-29T22:09:19.594473",
-      "quantity": 382
-    },
-    {
-      "name": "Might Individual",
-      "description": "Strategy evening tax network.",
-      "price": 8.29,
-      "category": "Carnes y Pescados",
-      "weight": 1.9,
-      "barcode": "7982363772509",
-      "provider_id": "7f1a9a12-3a7e-4996-a7a6-9cc65595305d",
-      "batch": "JAQ-###",
-      "best_before": "2026-12-18T22:09:19.614203",
-      "quantity": 180
-    },
-    {
-      "name": "Set Body",
-      "description": "Say news someone road remember say us as.",
-      "price": 3.99,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.21,
-      "barcode": "4861569797314",
-      "provider_id": "7f1a9a12-3a7e-4996-a7a6-9cc65595305d",
-      "batch": "HFG-###",
-      "best_before": "2026-11-30T22:09:19.632016",
-      "quantity": 127
-    },
-    {
-      "name": "Which Resource",
-      "description": "Nor research any game life son.",
-      "price": 8.61,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.73,
-      "barcode": "0858543318416",
-      "provider_id": "7f1a9a12-3a7e-4996-a7a6-9cc65595305d",
-      "batch": "UTH-###",
-      "best_before": "2026-07-06T22:09:19.653118",
-      "quantity": 244
-    },
-    {
-      "name": "Let Raise",
-      "description": "Middle whose design today reach different.",
-      "price": 9.52,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.89,
-      "barcode": "5758169860243",
-      "provider_id": "7f1a9a12-3a7e-4996-a7a6-9cc65595305d",
-      "batch": "FWI-###",
-      "best_before": "2025-12-21T22:09:19.677741",
-      "quantity": 459
-    },
-    {
-      "name": "Floor Oil",
-      "description": "Base player require animal president.",
-      "price": 6.78,
-      "category": "Productos de Limpieza",
-      "weight": 0.86,
-      "barcode": "5654279482439",
-      "provider_id": "62440c8d-5e77-4893-94fd-cce54119951b",
-      "batch": "OTO-###",
-      "best_before": "2026-07-20T22:09:19.711902",
-      "quantity": 220
-    },
-    {
-      "name": "Open Price",
-      "description": "Before behavior behind serve nothing anything laugh.",
+      "name": "Economic Service",
+      "description": "Fly in interview suddenly but something.",
       "price": 6.41,
-      "category": "Despensa",
-      "weight": 1.53,
-      "barcode": "5766079415897",
-      "provider_id": "62440c8d-5e77-4893-94fd-cce54119951b",
-      "batch": "SYJ-###",
-      "best_before": "2026-08-12T22:09:19.741960",
+      "category": "L\u00e1cteos y Huevos",
+      "weight": 0.32,
+      "barcode": "0259331782875",
+      "provider_id": "ee7f64ad-dc3b-4e75-b385-d7e199350ef0",
+      "batch": "KEW-###",
+      "best_before": "2026-08-18T16:17:45.017580",
       "quantity": 3
     },
     {
-      "name": "Type Thought",
-      "description": "Huge require blue face.",
-      "price": 6.78,
-      "category": "Despensa",
-      "weight": 1.06,
-      "barcode": "0006756254285",
-      "provider_id": "62440c8d-5e77-4893-94fd-cce54119951b",
-      "batch": "YXZ-###",
-      "best_before": "2026-08-13T22:09:19.762726",
-      "quantity": 3
-    },
-    {
-      "name": "Ready Represent",
-      "description": "Agency leave sing call time pretty.",
-      "price": 4.17,
-      "category": "Bebidas",
-      "weight": 1.12,
-      "barcode": "5625049742701",
-      "provider_id": "62440c8d-5e77-4893-94fd-cce54119951b",
-      "batch": "VAP-###",
-      "best_before": "2027-02-22T22:09:19.780447",
-      "quantity": 166
-    },
-    {
-      "name": "The Agree",
-      "description": "Protect and enjoy more see tree people magazine.",
-      "price": 3.1,
-      "category": "Condimentos y Especias",
-      "weight": 1.08,
-      "barcode": "6513538580141",
-      "provider_id": "62440c8d-5e77-4893-94fd-cce54119951b",
-      "batch": "BBW-###",
-      "best_before": "2026-08-07T22:09:19.836923",
-      "quantity": 409
-    },
-    {
-      "name": "Plant Make",
-      "description": "Economy country board how share mission.",
-      "price": 6.58,
+      "name": "Mr Rise",
+      "description": "Southern matter fill peace physical national million.",
+      "price": 1.95,
       "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.29,
-      "barcode": "3513902659520",
-      "provider_id": "62440c8d-5e77-4893-94fd-cce54119951b",
-      "batch": "VTA-###",
-      "best_before": "2027-03-17T22:09:19.980733",
-      "quantity": 52
-    },
-    {
-      "name": "Easy Bad",
-      "description": "Campaign if leave think set remain.",
-      "price": 7.26,
-      "category": "Despensa",
-      "weight": 1.1,
-      "barcode": "0409462607329",
-      "provider_id": "62440c8d-5e77-4893-94fd-cce54119951b",
-      "batch": "MKZ-###",
-      "best_before": "2025-11-11T22:09:20.064723",
-      "quantity": 490
-    },
-    {
-      "name": "Situation Available",
-      "description": "Live director itself suffer could wide.",
-      "price": 2.89,
-      "category": "Snacks y Dulces",
-      "weight": 1.65,
-      "barcode": "4545543608741",
-      "provider_id": "62440c8d-5e77-4893-94fd-cce54119951b",
-      "batch": "IUQ-###",
-      "best_before": "2027-03-24T22:09:20.083876",
-      "quantity": 184
-    },
-    {
-      "name": "Teach Break",
-      "description": "Artist future future.",
-      "price": 5.57,
-      "category": "Carnes y Pescados",
-      "weight": 0.77,
-      "barcode": "5452593415498",
-      "provider_id": "62440c8d-5e77-4893-94fd-cce54119951b",
-      "batch": "BWB-###",
-      "best_before": "2025-12-03T22:09:20.100361",
-      "quantity": 137
-    },
-    {
-      "name": "Wait Money",
-      "description": "Rather head set growth top serious sense.",
-      "price": 8.85,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 1.04,
-      "barcode": "5116183737642",
-      "provider_id": "62440c8d-5e77-4893-94fd-cce54119951b",
-      "batch": "WIH-###",
-      "best_before": "2027-02-12T22:09:20.118608",
-      "quantity": 405
-    },
-    {
-      "name": "South Foot",
-      "description": "Agency product music political simply.",
-      "price": 3.27,
-      "category": "Despensa",
-      "weight": 1.24,
-      "barcode": "6171928733265",
-      "provider_id": "91e224ec-4e10-47c5-a4c7-affbfba5b40b",
-      "batch": "VTM-###",
-      "best_before": "2026-05-01T22:09:20.133149",
-      "quantity": 5
-    },
-    {
-      "name": "Account Study",
-      "description": "Order different fish any security learn.",
-      "price": 1.63,
-      "category": "Frutas y Verduras",
-      "weight": 0.62,
-      "barcode": "5042455554580",
-      "provider_id": "91e224ec-4e10-47c5-a4c7-affbfba5b40b",
-      "batch": "LRP-###",
-      "best_before": "2026-10-28T22:09:20.154997",
-      "quantity": 476
-    },
-    {
-      "name": "Ever Out",
-      "description": "Little industry relate daughter attention go pick.",
-      "price": 9.68,
-      "category": "Snacks y Dulces",
-      "weight": 1.96,
-      "barcode": "0327773008270",
-      "provider_id": "91e224ec-4e10-47c5-a4c7-affbfba5b40b",
-      "batch": "EDZ-###",
-      "best_before": "2025-12-14T22:09:20.172959",
-      "quantity": 395
-    },
-    {
-      "name": "At Democratic",
-      "description": "Indeed claim this see tell.",
-      "price": 9.43,
-      "category": "Snacks y Dulces",
-      "weight": 1.71,
-      "barcode": "3976551498610",
-      "provider_id": "91e224ec-4e10-47c5-a4c7-affbfba5b40b",
-      "batch": "MOK-###",
-      "best_before": "2027-03-02T22:09:20.196491",
-      "quantity": 331
-    },
-    {
-      "name": "Structure Body",
-      "description": "Public consumer if kind make seek.",
-      "price": 4.98,
-      "category": "Despensa",
-      "weight": 1.68,
-      "barcode": "0130415710888",
-      "provider_id": "91e224ec-4e10-47c5-a4c7-affbfba5b40b",
-      "batch": "IDF-###",
-      "best_before": "2026-04-01T22:09:20.209777",
-      "quantity": 447
-    },
-    {
-      "name": "Tell Near",
-      "description": "Cup report consumer paper.",
-      "price": 7.36,
-      "category": "Despensa",
-      "weight": 0.46,
-      "barcode": "4301955071548",
-      "provider_id": "91e224ec-4e10-47c5-a4c7-affbfba5b40b",
-      "batch": "JOK-###",
-      "best_before": "2025-11-14T22:09:20.225370",
-      "quantity": 127
-    },
-    {
-      "name": "Heart Apply",
-      "description": "So check chair attack value raise painting.",
-      "price": 6.62,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.78,
-      "barcode": "4239925095044",
-      "provider_id": "91e224ec-4e10-47c5-a4c7-affbfba5b40b",
-      "batch": "ZIO-###",
-      "best_before": "2026-11-17T22:09:20.248526",
-      "quantity": 95
-    },
-    {
-      "name": "Save Race",
-      "description": "Large prepare participant laugh effect improve pull.",
-      "price": 7.13,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.97,
-      "barcode": "3320520829309",
-      "provider_id": "91e224ec-4e10-47c5-a4c7-affbfba5b40b",
-      "batch": "BXR-###",
-      "best_before": "2026-02-17T22:09:20.264341",
-      "quantity": 2
-    },
-    {
-      "name": "Us Reality",
-      "description": "Model charge others American kitchen special.",
-      "price": 4.35,
-      "category": "Frutas y Verduras",
-      "weight": 1.17,
-      "barcode": "8731625119601",
-      "provider_id": "91e224ec-4e10-47c5-a4c7-affbfba5b40b",
-      "batch": "UXN-###",
-      "best_before": "2026-10-21T22:09:20.280910",
-      "quantity": 397
-    },
-    {
-      "name": "Air Serious",
-      "description": "Should nice sister ever.",
-      "price": 8.82,
-      "category": "Frutas y Verduras",
-      "weight": 1.19,
-      "barcode": "1711653232494",
-      "provider_id": "91e224ec-4e10-47c5-a4c7-affbfba5b40b",
-      "batch": "ZIQ-###",
-      "best_before": "2027-04-11T22:09:20.298608",
-      "quantity": 484
-    },
-    {
-      "name": "Ever Similar",
-      "description": "Because son also operation than indicate later.",
-      "price": 6.13,
-      "category": "Productos de Limpieza",
-      "weight": 0.75,
-      "barcode": "9805324692778",
-      "provider_id": "233de356-6db8-4820-84f4-abea33b057f6",
-      "batch": "VRR-###",
-      "best_before": "2026-11-26T22:09:20.318736",
-      "quantity": 327
-    },
-    {
-      "name": "Story No",
-      "description": "Affect help move among.",
-      "price": 9.78,
-      "category": "Frutas y Verduras",
-      "weight": 1.17,
-      "barcode": "8483354982208",
-      "provider_id": "233de356-6db8-4820-84f4-abea33b057f6",
-      "batch": "HGW-###",
-      "best_before": "2027-03-01T22:09:20.380787",
-      "quantity": 120
-    },
-    {
-      "name": "Add Three",
-      "description": "Rise scene training least food although blood.",
-      "price": 7.68,
-      "category": "Carnes y Pescados",
-      "weight": 1.18,
-      "barcode": "1723481865454",
-      "provider_id": "233de356-6db8-4820-84f4-abea33b057f6",
-      "batch": "XTI-###",
-      "best_before": "2026-09-12T22:09:20.396348",
-      "quantity": 493
-    },
-    {
-      "name": "Evidence Everyone",
-      "description": "Design teacher scientist none amount simply.",
-      "price": 4.69,
-      "category": "Productos de Limpieza",
-      "weight": 0.37,
-      "barcode": "3289118940935",
-      "provider_id": "233de356-6db8-4820-84f4-abea33b057f6",
-      "batch": "MQP-###",
-      "best_before": "2026-05-11T22:09:20.410144",
-      "quantity": 486
-    },
-    {
-      "name": "Term Western",
-      "description": "Meeting well too walk skin toward.",
-      "price": 8.32,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.94,
-      "barcode": "9405390283773",
-      "provider_id": "233de356-6db8-4820-84f4-abea33b057f6",
-      "batch": "GHD-###",
-      "best_before": "2026-11-20T22:09:20.426042",
-      "quantity": 190
-    },
-    {
-      "name": "Fear Me",
-      "description": "Story defense provide customer.",
-      "price": 7.89,
-      "category": "Snacks y Dulces",
-      "weight": 0.69,
-      "barcode": "4561579562307",
-      "provider_id": "233de356-6db8-4820-84f4-abea33b057f6",
-      "batch": "AXP-###",
-      "best_before": "2025-11-10T22:09:20.442242",
-      "quantity": 143
-    },
-    {
-      "name": "Tonight Themselves",
-      "description": "Animal success data big see eye.",
-      "price": 8.1,
-      "category": "Snacks y Dulces",
-      "weight": 1.01,
-      "barcode": "6756804759005",
-      "provider_id": "233de356-6db8-4820-84f4-abea33b057f6",
-      "batch": "UWE-###",
-      "best_before": "2026-12-02T22:09:20.458433",
-      "quantity": 249
-    },
-    {
-      "name": "Then Power",
-      "description": "Sell many chair yet issue remain ago enough.",
-      "price": 1.28,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.95,
-      "barcode": "6202754491002",
-      "provider_id": "233de356-6db8-4820-84f4-abea33b057f6",
-      "batch": "HOQ-###",
-      "best_before": "2026-01-01T22:09:20.487832",
-      "quantity": 397
-    },
-    {
-      "name": "Entire Price",
-      "description": "Shake way support break specific skill summer.",
-      "price": 7.43,
-      "category": "Despensa",
-      "weight": 1.07,
-      "barcode": "9503666929278",
-      "provider_id": "233de356-6db8-4820-84f4-abea33b057f6",
-      "batch": "SMC-###",
-      "best_before": "2026-09-12T22:09:20.517462",
-      "quantity": 85
-    },
-    {
-      "name": "Friend House",
-      "description": "Recognize area option man computer try.",
-      "price": 2.22,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.45,
-      "barcode": "2385424397270",
-      "provider_id": "233de356-6db8-4820-84f4-abea33b057f6",
-      "batch": "GEA-###",
-      "best_before": "2025-11-15T22:09:20.538854",
-      "quantity": 417
-    },
-    {
-      "name": "Maintain Five",
-      "description": "Interesting measure bank system reason.",
-      "price": 8.44,
-      "category": "Frutas y Verduras",
-      "weight": 1.13,
-      "barcode": "8762340304072",
-      "provider_id": "b9874655-5cb4-4949-9331-28b32efa734f",
-      "batch": "OOV-###",
-      "best_before": "2025-10-30T22:09:20.561085",
-      "quantity": 362
-    },
-    {
-      "name": "Can Difference",
-      "description": "Brother black career piece role.",
-      "price": 1.65,
-      "category": "Carnes y Pescados",
-      "weight": 1.94,
-      "barcode": "6430303674976",
-      "provider_id": "b9874655-5cb4-4949-9331-28b32efa734f",
-      "batch": "TZD-###",
-      "best_before": "2026-11-05T22:09:20.582138",
-      "quantity": 480
-    },
-    {
-      "name": "Wind Role",
-      "description": "A miss reflect address do.",
-      "price": 6.84,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.69,
-      "barcode": "5222082360567",
-      "provider_id": "b9874655-5cb4-4949-9331-28b32efa734f",
-      "batch": "JQB-###",
-      "best_before": "2027-04-13T22:09:20.627294",
-      "quantity": 326
-    },
-    {
-      "name": "Film Yourself",
-      "description": "Get benefit eye strong tend main.",
-      "price": 8.74,
-      "category": "Frutas y Verduras",
-      "weight": 1.79,
-      "barcode": "1701617439427",
-      "provider_id": "b9874655-5cb4-4949-9331-28b32efa734f",
-      "batch": "CRZ-###",
-      "best_before": "2026-08-24T22:09:20.656062",
-      "quantity": 280
-    },
-    {
-      "name": "Son Recently",
-      "description": "Hospital second by movie her past win.",
-      "price": 2.42,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.95,
-      "barcode": "3709108400237",
-      "provider_id": "b9874655-5cb4-4949-9331-28b32efa734f",
-      "batch": "DLH-###",
-      "best_before": "2025-11-16T22:09:20.800198",
-      "quantity": 224
-    },
-    {
-      "name": "Very Factor",
-      "description": "Happen spend building fast.",
-      "price": 3.67,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.82,
-      "barcode": "1202293571246",
-      "provider_id": "b9874655-5cb4-4949-9331-28b32efa734f",
-      "batch": "BIH-###",
-      "best_before": "2026-11-25T22:09:20.824148",
-      "quantity": 401
-    },
-    {
-      "name": "Happy Professional",
-      "description": "Western necessary fire important ten capital kitchen land.",
-      "price": 9.19,
-      "category": "Carnes y Pescados",
-      "weight": 0.34,
-      "barcode": "9183645738208",
-      "provider_id": "b9874655-5cb4-4949-9331-28b32efa734f",
-      "batch": "TLL-###",
-      "best_before": "2025-11-29T22:09:20.844175",
-      "quantity": 395
-    },
-    {
-      "name": "Financial Occur",
-      "description": "Reason risk body now note process.",
-      "price": 3.4,
-      "category": "Productos de Limpieza",
-      "weight": 1.15,
-      "barcode": "1568005304602",
-      "provider_id": "b9874655-5cb4-4949-9331-28b32efa734f",
-      "batch": "BSK-###",
-      "best_before": "2026-05-31T22:09:20.867770",
-      "quantity": 360
-    },
-    {
-      "name": "Thus Hospital",
-      "description": "Executive list show window.",
-      "price": 4.43,
-      "category": "Carnes y Pescados",
-      "weight": 0.89,
-      "barcode": "9907251772797",
-      "provider_id": "b9874655-5cb4-4949-9331-28b32efa734f",
-      "batch": "BSJ-###",
-      "best_before": "2025-12-16T22:09:20.898153",
-      "quantity": 73
-    },
-    {
-      "name": "Machine Democratic",
-      "description": "Federal stock hospital my.",
-      "price": 3.27,
-      "category": "Carnes y Pescados",
-      "weight": 1.3,
-      "barcode": "3317425136441",
-      "provider_id": "b9874655-5cb4-4949-9331-28b32efa734f",
-      "batch": "FTG-###",
-      "best_before": "2026-07-26T22:09:20.942891",
-      "quantity": 284
-    },
-    {
-      "name": "Democratic Night",
-      "description": "By can evidence term.",
-      "price": 3.52,
-      "category": "Despensa",
-      "weight": 0.61,
-      "barcode": "5621589652982",
-      "provider_id": "d36d593b-d125-4f44-9b5a-35676948c76f",
-      "batch": "UHN-###",
-      "best_before": "2026-07-04T22:09:20.985135",
-      "quantity": 462
-    },
-    {
-      "name": "School Maybe",
-      "description": "Majority quite event market return.",
-      "price": 6.89,
-      "category": "Carnes y Pescados",
-      "weight": 0.39,
-      "barcode": "5678598544319",
-      "provider_id": "d36d593b-d125-4f44-9b5a-35676948c76f",
-      "batch": "ULI-###",
-      "best_before": "2026-08-08T22:09:21.008801",
-      "quantity": 218
-    },
-    {
-      "name": "Military Sell",
-      "description": "Car worry system wide consumer.",
-      "price": 9.19,
-      "category": "Frutas y Verduras",
-      "weight": 0.89,
-      "barcode": "1570468014509",
-      "provider_id": "d36d593b-d125-4f44-9b5a-35676948c76f",
-      "batch": "BNN-###",
-      "best_before": "2027-01-13T22:09:21.039196",
-      "quantity": 293
-    },
-    {
-      "name": "Window Star",
-      "description": "Thank carry employee identify side week career.",
-      "price": 3.85,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.42,
-      "barcode": "4969568547661",
-      "provider_id": "d36d593b-d125-4f44-9b5a-35676948c76f",
-      "batch": "YRO-###",
-      "best_before": "2026-10-27T22:09:21.088260",
-      "quantity": 105
-    },
-    {
-      "name": "How Man",
-      "description": "Probably land white truth really.",
-      "price": 9.23,
-      "category": "Despensa",
-      "weight": 0.59,
-      "barcode": "3130658688309",
-      "provider_id": "d36d593b-d125-4f44-9b5a-35676948c76f",
-      "batch": "YLL-###",
-      "best_before": "2026-10-05T22:09:21.105197",
-      "quantity": 317
-    },
-    {
-      "name": "Expect Leg",
-      "description": "Coach culture southern television.",
-      "price": 1.89,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.62,
-      "barcode": "8315626068696",
-      "provider_id": "d36d593b-d125-4f44-9b5a-35676948c76f",
-      "batch": "SPS-###",
-      "best_before": "2026-04-21T22:09:21.130335",
-      "quantity": 253
-    },
-    {
-      "name": "Past Of",
-      "description": "Until save cultural consumer.",
-      "price": 3.56,
-      "category": "Condimentos y Especias",
-      "weight": 1.9,
-      "barcode": "7995998451718",
-      "provider_id": "d36d593b-d125-4f44-9b5a-35676948c76f",
-      "batch": "ICG-###",
-      "best_before": "2026-06-14T22:09:21.153096",
-      "quantity": 413
-    },
-    {
-      "name": "Address Of",
-      "description": "How base memory treatment.",
-      "price": 9.9,
-      "category": "Carnes y Pescados",
-      "weight": 1.86,
-      "barcode": "7492716680981",
-      "provider_id": "d36d593b-d125-4f44-9b5a-35676948c76f",
-      "batch": "DTZ-###",
-      "best_before": "2026-09-30T22:09:21.175409",
-      "quantity": 135
-    },
-    {
-      "name": "Perform Executive",
-      "description": "My suggest high oil company her throughout stay.",
-      "price": 7.85,
-      "category": "Bebidas",
-      "weight": 1.33,
-      "barcode": "7186593271119",
-      "provider_id": "d36d593b-d125-4f44-9b5a-35676948c76f",
-      "batch": "RKG-###",
-      "best_before": "2025-11-10T22:09:21.201108",
-      "quantity": 5
-    },
-    {
-      "name": "Threat Among",
-      "description": "Concern civil make mission image.",
-      "price": 7.41,
-      "category": "Bebidas",
-      "weight": 0.24,
-      "barcode": "3844469744443",
-      "provider_id": "d36d593b-d125-4f44-9b5a-35676948c76f",
-      "batch": "QXR-###",
-      "best_before": "2026-08-10T22:09:21.220207",
-      "quantity": 340
-    },
-    {
-      "name": "Also Indeed",
-      "description": "Mention memory ball letter job.",
-      "price": 9.45,
-      "category": "Carnes y Pescados",
-      "weight": 1.31,
-      "barcode": "5263253221140",
-      "provider_id": "e5ba46cc-3dd8-4cd6-b257-2ae227faed28",
-      "batch": "TPH-###",
-      "best_before": "2026-01-25T22:09:21.241116",
-      "quantity": 403
-    },
-    {
-      "name": "Girl Various",
-      "description": "This television professional time firm.",
-      "price": 6.3,
-      "category": "Snacks y Dulces",
-      "weight": 1.5,
-      "barcode": "5936136157613",
-      "provider_id": "e5ba46cc-3dd8-4cd6-b257-2ae227faed28",
-      "batch": "AFM-###",
-      "best_before": "2025-12-08T22:09:21.270095",
-      "quantity": 491
-    },
-    {
-      "name": "Simple Per",
-      "description": "Back establish ok pass way customer true.",
-      "price": 5.87,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.45,
-      "barcode": "4836728318501",
-      "provider_id": "e5ba46cc-3dd8-4cd6-b257-2ae227faed28",
-      "batch": "CCW-###",
-      "best_before": "2025-11-05T22:09:21.298715",
-      "quantity": 382
-    },
-    {
-      "name": "Day Event",
-      "description": "Somebody no past ever entire worker.",
-      "price": 4.17,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.67,
-      "barcode": "3137511792975",
-      "provider_id": "e5ba46cc-3dd8-4cd6-b257-2ae227faed28",
-      "batch": "QDL-###",
-      "best_before": "2026-09-13T22:09:21.331292",
-      "quantity": 426
-    },
-    {
-      "name": "Sense Learn",
-      "description": "Performance treatment perform laugh boy take live.",
-      "price": 3.18,
-      "category": "Carnes y Pescados",
-      "weight": 1.89,
-      "barcode": "4858872103437",
-      "provider_id": "e5ba46cc-3dd8-4cd6-b257-2ae227faed28",
-      "batch": "FAT-###",
-      "best_before": "2026-01-15T22:09:21.363202",
-      "quantity": 388
-    },
-    {
-      "name": "Network Whole",
-      "description": "Film husband everybody fish police feel energy.",
-      "price": 8.77,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.68,
-      "barcode": "6831900800131",
-      "provider_id": "e5ba46cc-3dd8-4cd6-b257-2ae227faed28",
-      "batch": "KJW-###",
-      "best_before": "2026-08-29T22:09:21.394441",
-      "quantity": 366
-    },
-    {
-      "name": "Court Clear",
-      "description": "Hard with production yard partner add.",
-      "price": 3.19,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 1.69,
-      "barcode": "2230241277901",
-      "provider_id": "e5ba46cc-3dd8-4cd6-b257-2ae227faed28",
-      "batch": "FEV-###",
-      "best_before": "2025-11-21T22:09:21.431598",
-      "quantity": 472
-    },
-    {
-      "name": "Tonight Score",
-      "description": "Almost brother much test director too before.",
-      "price": 7.86,
-      "category": "Despensa",
-      "weight": 0.97,
-      "barcode": "1193448007621",
-      "provider_id": "e5ba46cc-3dd8-4cd6-b257-2ae227faed28",
-      "batch": "TWS-###",
-      "best_before": "2026-02-03T22:09:21.453635",
-      "quantity": 128
-    },
-    {
-      "name": "Where Affect",
-      "description": "Need nice point value.",
-      "price": 6.22,
-      "category": "Snacks y Dulces",
-      "weight": 1.85,
-      "barcode": "1101085584368",
-      "provider_id": "e5ba46cc-3dd8-4cd6-b257-2ae227faed28",
-      "batch": "ARM-###",
-      "best_before": "2026-12-19T22:09:21.469751",
-      "quantity": 4
-    },
-    {
-      "name": "Process Over",
-      "description": "Itself draw challenge crime.",
-      "price": 8.86,
-      "category": "Frutas y Verduras",
-      "weight": 2.0,
-      "barcode": "0692722547408",
-      "provider_id": "e5ba46cc-3dd8-4cd6-b257-2ae227faed28",
-      "batch": "MQB-###",
-      "best_before": "2026-05-11T22:09:21.494368",
-      "quantity": 117
-    },
-    {
-      "name": "Begin Than",
-      "description": "Consider safe garden today single sign.",
-      "price": 1.34,
-      "category": "Snacks y Dulces",
-      "weight": 1.61,
-      "barcode": "7868005131609",
-      "provider_id": "42197bd5-7dbd-46e3-ada8-5da3a074956f",
-      "batch": "CIQ-###",
-      "best_before": "2027-01-24T22:09:21.514976",
-      "quantity": 346
-    },
-    {
-      "name": "Miss Realize",
-      "description": "Specific light first project occur no happy edge.",
-      "price": 2.86,
-      "category": "Productos de Limpieza",
-      "weight": 1.84,
-      "barcode": "5747302924539",
-      "provider_id": "42197bd5-7dbd-46e3-ada8-5da3a074956f",
-      "batch": "YGP-###",
-      "best_before": "2026-11-20T22:09:21.537515",
-      "quantity": 4
-    },
-    {
-      "name": "Information Security",
-      "description": "What hour star financial audience production.",
-      "price": 8.6,
-      "category": "Despensa",
-      "weight": 1.65,
-      "barcode": "8377858824792",
-      "provider_id": "42197bd5-7dbd-46e3-ada8-5da3a074956f",
-      "batch": "ZWB-###",
-      "best_before": "2027-03-12T22:09:21.555639",
-      "quantity": 368
-    },
-    {
-      "name": "Side Century",
-      "description": "Cold baby give candidate appear spend many.",
-      "price": 5.42,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.43,
-      "barcode": "8615698593950",
-      "provider_id": "42197bd5-7dbd-46e3-ada8-5da3a074956f",
-      "batch": "LHM-###",
-      "best_before": "2026-01-05T22:09:21.580398",
+      "weight": 0.91,
+      "barcode": "2214431869886",
+      "provider_id": "ee7f64ad-dc3b-4e75-b385-d7e199350ef0",
+      "batch": "UGG-###",
+      "best_before": "2026-07-08T16:17:45.029911",
       "quantity": 88
     },
     {
-      "name": "Fight Event",
-      "description": "Final think feeling style future relationship carry.",
-      "price": 6.54,
-      "category": "Productos de Limpieza",
-      "weight": 1.24,
-      "barcode": "3072168262832",
-      "provider_id": "42197bd5-7dbd-46e3-ada8-5da3a074956f",
-      "batch": "DMK-###",
-      "best_before": "2026-10-26T22:09:21.600824",
-      "quantity": 397
-    },
-    {
-      "name": "Between Instead",
-      "description": "Reduce charge serious involve.",
-      "price": 9.68,
-      "category": "Snacks y Dulces",
-      "weight": 0.95,
-      "barcode": "2981713821145",
-      "provider_id": "42197bd5-7dbd-46e3-ada8-5da3a074956f",
-      "batch": "VIZ-###",
-      "best_before": "2026-06-20T22:09:21.621379",
-      "quantity": 297
-    },
-    {
-      "name": "Fill Evidence",
-      "description": "Environmental indeed system itself.",
-      "price": 2.96,
-      "category": "Frutas y Verduras",
-      "weight": 1.86,
-      "barcode": "5514985446579",
-      "provider_id": "42197bd5-7dbd-46e3-ada8-5da3a074956f",
-      "batch": "MBB-###",
-      "best_before": "2026-08-05T22:09:21.638518",
-      "quantity": 135
-    },
-    {
-      "name": "Major Scene",
-      "description": "Beat share from work site.",
-      "price": 6.16,
-      "category": "Snacks y Dulces",
-      "weight": 1.11,
-      "barcode": "1811057901689",
-      "provider_id": "42197bd5-7dbd-46e3-ada8-5da3a074956f",
-      "batch": "CNX-###",
-      "best_before": "2026-05-26T22:09:21.658785",
-      "quantity": 200
-    },
-    {
-      "name": "Girl Quite",
-      "description": "Go daughter family.",
-      "price": 4.74,
-      "category": "Frutas y Verduras",
-      "weight": 0.64,
-      "barcode": "0276951799816",
-      "provider_id": "42197bd5-7dbd-46e3-ada8-5da3a074956f",
-      "batch": "STU-###",
-      "best_before": "2026-11-25T22:09:21.772265",
-      "quantity": 372
-    },
-    {
-      "name": "Its Song",
-      "description": "Fly fast debate type look hold one.",
-      "price": 6.92,
-      "category": "Condimentos y Especias",
-      "weight": 1.41,
-      "barcode": "1476667458185",
-      "provider_id": "42197bd5-7dbd-46e3-ada8-5da3a074956f",
-      "batch": "IDN-###",
-      "best_before": "2026-09-16T22:09:21.816107",
-      "quantity": 283
-    },
-    {
-      "name": "Pressure Require",
-      "description": "Probably personal series.",
-      "price": 6.35,
-      "category": "Condimentos y Especias",
-      "weight": 0.78,
-      "barcode": "0954488993166",
-      "provider_id": "6dbe1758-5137-4969-bfd7-5cabf9cf34da",
-      "batch": "AZS-###",
-      "best_before": "2027-03-26T22:09:21.880828",
-      "quantity": 264
-    },
-    {
-      "name": "Along Floor",
-      "description": "Civil or nor let.",
-      "price": 8.7,
-      "category": "Condimentos y Especias",
-      "weight": 0.61,
-      "barcode": "1901974289141",
-      "provider_id": "6dbe1758-5137-4969-bfd7-5cabf9cf34da",
-      "batch": "CUB-###",
-      "best_before": "2026-09-26T22:09:21.921973",
-      "quantity": 323
-    },
-    {
-      "name": "Partner Alone",
-      "description": "Door season success book picture all.",
-      "price": 4.37,
-      "category": "Productos de Limpieza",
-      "weight": 1.63,
-      "barcode": "4120731429225",
-      "provider_id": "6dbe1758-5137-4969-bfd7-5cabf9cf34da",
-      "batch": "LTV-###",
-      "best_before": "2026-02-16T22:09:21.954295",
-      "quantity": 52
-    },
-    {
-      "name": "Church Though",
-      "description": "Like especially year tough.",
-      "price": 1.42,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.4,
-      "barcode": "7995493823409",
-      "provider_id": "6dbe1758-5137-4969-bfd7-5cabf9cf34da",
-      "batch": "YVC-###",
-      "best_before": "2025-12-27T22:09:22.081569",
-      "quantity": 219
-    },
-    {
-      "name": "Major Outside",
-      "description": "Particular cell provide dream option.",
-      "price": 7.67,
-      "category": "Condimentos y Especias",
-      "weight": 1.14,
-      "barcode": "2856009792679",
-      "provider_id": "6dbe1758-5137-4969-bfd7-5cabf9cf34da",
-      "batch": "BOD-###",
-      "best_before": "2026-08-25T22:09:22.187756",
-      "quantity": 249
-    },
-    {
-      "name": "Forward Spend",
-      "description": "Hit smile different American politics.",
-      "price": 8.4,
-      "category": "Frutas y Verduras",
-      "weight": 0.38,
-      "barcode": "4101380879715",
-      "provider_id": "6dbe1758-5137-4969-bfd7-5cabf9cf34da",
-      "batch": "WYS-###",
-      "best_before": "2025-12-23T22:09:22.206227",
-      "quantity": 231
-    },
-    {
-      "name": "Table Suffer",
-      "description": "Anyone your social happen whole believe.",
-      "price": 6.71,
-      "category": "Frutas y Verduras",
-      "weight": 1.02,
-      "barcode": "2354179488861",
-      "provider_id": "6dbe1758-5137-4969-bfd7-5cabf9cf34da",
-      "batch": "SYD-###",
-      "best_before": "2027-01-31T22:09:22.222403",
-      "quantity": 443
-    },
-    {
-      "name": "Find Build",
-      "description": "Foreign their learn.",
-      "price": 9.93,
-      "category": "Despensa",
-      "weight": 0.21,
-      "barcode": "9355136736240",
-      "provider_id": "6dbe1758-5137-4969-bfd7-5cabf9cf34da",
-      "batch": "FKU-###",
-      "best_before": "2026-11-23T22:09:22.238886",
-      "quantity": 488
-    },
-    {
-      "name": "Someone According",
-      "description": "Enter game as.",
-      "price": 4.1,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.62,
-      "barcode": "3121870050609",
-      "provider_id": "6dbe1758-5137-4969-bfd7-5cabf9cf34da",
-      "batch": "SDN-###",
-      "best_before": "2027-02-17T22:09:22.258811",
+      "name": "Sometimes Staff",
+      "description": "Share hundred wear green thing behind.",
+      "price": 2.33,
+      "category": "Carnes y Pescados",
+      "weight": 1.12,
+      "barcode": "8297466569253",
+      "provider_id": "ee7f64ad-dc3b-4e75-b385-d7e199350ef0",
+      "batch": "RSE-###",
+      "best_before": "2026-09-09T16:17:45.043344",
       "quantity": 171
     },
     {
-      "name": "Perhaps Card",
-      "description": "Investment ten board best major system professional.",
-      "price": 5.96,
-      "category": "Despensa",
-      "weight": 1.73,
-      "barcode": "0395233126062",
-      "provider_id": "6dbe1758-5137-4969-bfd7-5cabf9cf34da",
-      "batch": "AMF-###",
-      "best_before": "2027-02-15T22:09:22.272675",
-      "quantity": 136
-    },
-    {
-      "name": "Provide Account",
-      "description": "Kid chance defense bank find.",
-      "price": 4.36,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.8,
-      "barcode": "0805206133022",
-      "provider_id": "3cf6726a-4f7a-4ff1-931f-40f8490db645",
-      "batch": "NXA-###",
-      "best_before": "2026-04-11T22:09:22.288876",
-      "quantity": 102
-    },
-    {
-      "name": "Check Matter",
-      "description": "Explain as town employee guess.",
-      "price": 9.44,
-      "category": "Frutas y Verduras",
-      "weight": 0.65,
-      "barcode": "1943471433962",
-      "provider_id": "3cf6726a-4f7a-4ff1-931f-40f8490db645",
-      "batch": "NSS-###",
-      "best_before": "2025-11-14T22:09:22.303954",
-      "quantity": 457
-    },
-    {
-      "name": "Instead Real",
-      "description": "Chance pull impact wall day probably.",
-      "price": 4.3,
-      "category": "Despensa",
-      "weight": 0.89,
-      "barcode": "7608409333151",
-      "provider_id": "3cf6726a-4f7a-4ff1-931f-40f8490db645",
-      "batch": "BUR-###",
-      "best_before": "2026-06-25T22:09:22.320870",
-      "quantity": 157
-    },
-    {
-      "name": "Parent Group",
-      "description": "Sound toward for.",
-      "price": 2.52,
-      "category": "Frutas y Verduras",
-      "weight": 1.11,
-      "barcode": "1541183765762",
-      "provider_id": "3cf6726a-4f7a-4ff1-931f-40f8490db645",
-      "batch": "UBV-###",
-      "best_before": "2026-04-05T22:09:22.337892",
-      "quantity": 141
-    },
-    {
-      "name": "Born Analysis",
-      "description": "Matter oil laugh read.",
-      "price": 9.83,
-      "category": "Condimentos y Especias",
-      "weight": 1.05,
-      "barcode": "8623342780465",
-      "provider_id": "3cf6726a-4f7a-4ff1-931f-40f8490db645",
-      "batch": "RCW-###",
-      "best_before": "2026-10-12T22:09:22.354333",
-      "quantity": 224
-    },
-    {
-      "name": "Structure Throw",
-      "description": "Side me not itself treat eye probably.",
-      "price": 7.52,
-      "category": "Bebidas",
-      "weight": 0.43,
-      "barcode": "0199204497331",
-      "provider_id": "3cf6726a-4f7a-4ff1-931f-40f8490db645",
-      "batch": "WJP-###",
-      "best_before": "2025-12-20T22:09:22.419665",
-      "quantity": 74
-    },
-    {
-      "name": "Chance His",
-      "description": "Speak market simple address picture them.",
-      "price": 8.29,
+      "name": "Material Sport",
+      "description": "Letter nothing main evening.",
+      "price": 8.83,
       "category": "Snacks y Dulces",
-      "weight": 1.98,
-      "barcode": "9654026207298",
-      "provider_id": "3cf6726a-4f7a-4ff1-931f-40f8490db645",
-      "batch": "SMS-###",
-      "best_before": "2026-06-10T22:09:22.692768",
-      "quantity": 276
+      "weight": 1.66,
+      "barcode": "3871895290527",
+      "provider_id": "ee7f64ad-dc3b-4e75-b385-d7e199350ef0",
+      "batch": "ELF-###",
+      "best_before": "2026-09-29T16:17:45.054092",
+      "quantity": 1
     },
     {
-      "name": "Drop Effect",
-      "description": "Performance buy real peace join trouble real.",
-      "price": 2.4,
-      "category": "Carnes y Pescados",
-      "weight": 1.16,
-      "barcode": "1264244249215",
-      "provider_id": "3cf6726a-4f7a-4ff1-931f-40f8490db645",
-      "batch": "VOK-###",
-      "best_before": "2026-09-08T22:09:22.745445",
-      "quantity": 277
-    },
-    {
-      "name": "Chance Piece",
-      "description": "Fall national meet responsibility.",
-      "price": 8.81,
-      "category": "Snacks y Dulces",
-      "weight": 1.55,
-      "barcode": "4826171795882",
-      "provider_id": "3cf6726a-4f7a-4ff1-931f-40f8490db645",
-      "batch": "LIK-###",
-      "best_before": "2027-02-12T22:09:22.775516",
-      "quantity": 149
-    },
-    {
-      "name": "Garden Point",
-      "description": "Suddenly chance country quite service.",
-      "price": 7.5,
-      "category": "Carnes y Pescados",
-      "weight": 0.51,
-      "barcode": "3549753164241",
-      "provider_id": "3cf6726a-4f7a-4ff1-931f-40f8490db645",
-      "batch": "YYC-###",
-      "best_before": "2026-07-20T22:09:22.814230",
-      "quantity": 252
-    },
-    {
-      "name": "She Plant",
-      "description": "Wish quite movement health guy around need.",
-      "price": 7.14,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.88,
-      "barcode": "4994417607166",
-      "provider_id": "dcc73fe2-eb3d-495c-91dc-749e8808216d",
-      "batch": "MOH-###",
-      "best_before": "2025-12-04T22:09:22.841622",
+      "name": "Push Rest",
+      "description": "Reduce two major hospital church our course peace.",
+      "price": 2.15,
+      "category": "Panader\u00eda y Reposter\u00eda",
+      "weight": 0.86,
+      "barcode": "7288141584655",
+      "provider_id": "0fbab594-7cd7-49ee-a340-3a3eb79ef7df",
+      "batch": "JWZ-###",
+      "best_before": "2026-01-29T16:17:45.069262",
       "quantity": 422
     },
     {
-      "name": "Main Figure",
-      "description": "Act policy same history himself.",
-      "price": 5.6,
-      "category": "Frutas y Verduras",
-      "weight": 1.22,
-      "barcode": "4524510536188",
-      "provider_id": "dcc73fe2-eb3d-495c-91dc-749e8808216d",
-      "batch": "BUF-###",
-      "best_before": "2026-05-22T22:09:22.876076",
-      "quantity": 477
-    },
-    {
-      "name": "West Next",
-      "description": "Weight factor if key I simply case radio.",
-      "price": 2.61,
-      "category": "Despensa",
-      "weight": 0.32,
-      "barcode": "5544849221219",
-      "provider_id": "dcc73fe2-eb3d-495c-91dc-749e8808216d",
-      "batch": "HPC-###",
-      "best_before": "2026-08-11T22:09:22.907173",
-      "quantity": 284
-    },
-    {
-      "name": "Someone Structure",
-      "description": "Create seem knowledge brother.",
-      "price": 6.64,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 1.52,
-      "barcode": "2851119995477",
-      "provider_id": "dcc73fe2-eb3d-495c-91dc-749e8808216d",
-      "batch": "EDZ-###",
-      "best_before": "2026-06-27T22:09:22.949363",
-      "quantity": 72
-    },
-    {
-      "name": "Religious Most",
-      "description": "Ball big nothing would star.",
-      "price": 5.89,
-      "category": "Productos de Limpieza",
-      "weight": 0.92,
-      "barcode": "2052182597319",
-      "provider_id": "dcc73fe2-eb3d-495c-91dc-749e8808216d",
-      "batch": "XJW-###",
-      "best_before": "2026-07-18T22:09:22.966038",
-      "quantity": 428
-    },
-    {
-      "name": "Society Arrive",
-      "description": "Message study suffer stage.",
-      "price": 1.95,
-      "category": "Snacks y Dulces",
-      "weight": 0.62,
-      "barcode": "5093757506609",
-      "provider_id": "dcc73fe2-eb3d-495c-91dc-749e8808216d",
-      "batch": "NDZ-###",
-      "best_before": "2026-11-06T22:09:22.993192",
-      "quantity": 421
-    },
-    {
-      "name": "We Her",
-      "description": "Majority in material good employee moment however strong.",
-      "price": 2.7,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.34,
-      "barcode": "1803246331773",
-      "provider_id": "dcc73fe2-eb3d-495c-91dc-749e8808216d",
-      "batch": "GYI-###",
-      "best_before": "2027-01-23T22:09:23.024291",
-      "quantity": 228
-    },
-    {
-      "name": "Town Travel",
-      "description": "Contain chair man significant.",
-      "price": 7.93,
-      "category": "Despensa",
-      "weight": 0.64,
-      "barcode": "1989452408437",
-      "provider_id": "dcc73fe2-eb3d-495c-91dc-749e8808216d",
-      "batch": "KMS-###",
-      "best_before": "2027-02-09T22:09:23.049543",
-      "quantity": 176
-    },
-    {
-      "name": "Per You",
-      "description": "Market air technology ready fund.",
-      "price": 5.77,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 1.69,
-      "barcode": "8891582585861",
-      "provider_id": "dcc73fe2-eb3d-495c-91dc-749e8808216d",
-      "batch": "BIU-###",
-      "best_before": "2025-12-30T22:09:23.069704",
-      "quantity": 162
-    },
-    {
-      "name": "Garden Throughout",
-      "description": "Let fight heavy.",
-      "price": 4.57,
-      "category": "Condimentos y Especias",
-      "weight": 0.54,
-      "barcode": "9440351062240",
-      "provider_id": "dcc73fe2-eb3d-495c-91dc-749e8808216d",
-      "batch": "POP-###",
-      "best_before": "2026-04-24T22:09:23.111093",
-      "quantity": 491
-    },
-    {
-      "name": "Against Upon",
-      "description": "Executive natural bad.",
-      "price": 9.28,
-      "category": "Snacks y Dulces",
-      "weight": 1.55,
-      "barcode": "5138617811322",
-      "provider_id": "9eb161de-4d11-4ece-b35e-60d3916cc4ea",
-      "batch": "BLU-###",
-      "best_before": "2026-07-03T22:09:23.131528",
-      "quantity": 1
-    },
-    {
-      "name": "Fill Structure",
-      "description": "Add oil beautiful cultural really.",
-      "price": 2.23,
-      "category": "Productos de Limpieza",
-      "weight": 0.65,
-      "barcode": "9372405712262",
-      "provider_id": "9eb161de-4d11-4ece-b35e-60d3916cc4ea",
-      "batch": "KXG-###",
-      "best_before": "2026-01-19T22:09:23.147084",
-      "quantity": 461
-    },
-    {
-      "name": "Assume Find",
-      "description": "Sign stay have run know.",
-      "price": 1.56,
-      "category": "Frutas y Verduras",
-      "weight": 1.21,
-      "barcode": "1736654457028",
-      "provider_id": "9eb161de-4d11-4ece-b35e-60d3916cc4ea",
-      "batch": "FUK-###",
-      "best_before": "2026-01-04T22:09:23.169287",
-      "quantity": 165
-    },
-    {
-      "name": "Market Room",
-      "description": "Get participant require.",
-      "price": 3.98,
-      "category": "Snacks y Dulces",
-      "weight": 0.54,
-      "barcode": "5993161696937",
-      "provider_id": "9eb161de-4d11-4ece-b35e-60d3916cc4ea",
-      "batch": "TAJ-###",
-      "best_before": "2026-12-18T22:09:23.209581",
-      "quantity": 442
-    },
-    {
-      "name": "Term Wrong",
-      "description": "Form push whole its chair bag.",
-      "price": 9.59,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.37,
-      "barcode": "6866140291210",
-      "provider_id": "9eb161de-4d11-4ece-b35e-60d3916cc4ea",
-      "batch": "ACD-###",
-      "best_before": "2027-01-16T22:09:23.223239",
-      "quantity": 171
-    },
-    {
-      "name": "Concern Like",
-      "description": "Minute town wind minute treatment.",
-      "price": 9.18,
-      "category": "Frutas y Verduras",
-      "weight": 1.12,
-      "barcode": "0432337625050",
-      "provider_id": "9eb161de-4d11-4ece-b35e-60d3916cc4ea",
-      "batch": "WFN-###",
-      "best_before": "2026-11-18T22:09:23.249096",
-      "quantity": 123
-    },
-    {
-      "name": "Leader Writer",
-      "description": "Effect available seem carry age.",
-      "price": 4.51,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 1.34,
-      "barcode": "8830069420738",
-      "provider_id": "9eb161de-4d11-4ece-b35e-60d3916cc4ea",
-      "batch": "RTH-###",
-      "best_before": "2026-07-27T22:09:23.268005",
-      "quantity": 145
-    },
-    {
-      "name": "Allow Capital",
-      "description": "Behavior soldier section power try.",
-      "price": 4.95,
-      "category": "Despensa",
-      "weight": 0.74,
-      "barcode": "0349401709588",
-      "provider_id": "9eb161de-4d11-4ece-b35e-60d3916cc4ea",
-      "batch": "XPD-###",
-      "best_before": "2026-11-13T22:09:23.293118",
-      "quantity": 82
-    },
-    {
-      "name": "Artist Nature",
-      "description": "Career go energy image collection suddenly.",
-      "price": 2.2,
+      "name": "Very Goal",
+      "description": "Treat order so issue.",
+      "price": 9.95,
       "category": "Bebidas",
-      "weight": 1.38,
-      "barcode": "6145873829526",
-      "provider_id": "9eb161de-4d11-4ece-b35e-60d3916cc4ea",
-      "batch": "NCV-###",
-      "best_before": "2026-11-10T22:09:23.344651",
-      "quantity": 199
-    },
-    {
-      "name": "Throw North",
-      "description": "Several PM key weight.",
-      "price": 2.73,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.62,
-      "barcode": "7424451822746",
-      "provider_id": "9eb161de-4d11-4ece-b35e-60d3916cc4ea",
-      "batch": "OQC-###",
-      "best_before": "2026-06-02T22:09:23.415653",
-      "quantity": 395
-    },
-    {
-      "name": "Hour Prepare",
-      "description": "Affect compare remember page suggest many Democrat.",
-      "price": 2.86,
-      "category": "Frutas y Verduras",
-      "weight": 0.96,
-      "barcode": "0974897954596",
-      "provider_id": "435fe9b2-1818-46b8-8039-9345cd5196e4",
-      "batch": "ZMW-###",
-      "best_before": "2026-01-02T22:09:23.435837",
-      "quantity": 457
-    },
-    {
-      "name": "Consumer Page",
-      "description": "Energy onto that the evidence keep moment offer.",
-      "price": 2.56,
-      "category": "Carnes y Pescados",
-      "weight": 0.8,
-      "barcode": "3378368723709",
-      "provider_id": "435fe9b2-1818-46b8-8039-9345cd5196e4",
-      "batch": "QQV-###",
-      "best_before": "2026-06-16T22:09:23.455859",
-      "quantity": 1
-    },
-    {
-      "name": "Top Box",
-      "description": "Job represent dinner body.",
-      "price": 1.11,
-      "category": "Despensa",
-      "weight": 1.74,
-      "barcode": "3984906943173",
-      "provider_id": "435fe9b2-1818-46b8-8039-9345cd5196e4",
-      "batch": "BZG-###",
-      "best_before": "2027-02-24T22:09:23.476366",
-      "quantity": 400
-    },
-    {
-      "name": "Owner These",
-      "description": "Front I ok especially the article build.",
-      "price": 6.73,
-      "category": "Carnes y Pescados",
-      "weight": 0.62,
-      "barcode": "3509763881644",
-      "provider_id": "435fe9b2-1818-46b8-8039-9345cd5196e4",
-      "batch": "LZH-###",
-      "best_before": "2026-10-14T22:09:23.498054",
+      "weight": 1.07,
+      "barcode": "5014131572584",
+      "provider_id": "0fbab594-7cd7-49ee-a340-3a3eb79ef7df",
+      "batch": "LVR-###",
+      "best_before": "2027-03-31T16:17:45.080333",
       "quantity": 4
     },
     {
-      "name": "Husband Sense",
-      "description": "Whom present walk time nature yeah.",
-      "price": 2.83,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 1.17,
-      "barcode": "2417735630149",
-      "provider_id": "435fe9b2-1818-46b8-8039-9345cd5196e4",
-      "batch": "FGC-###",
-      "best_before": "2026-09-10T22:09:23.518451",
-      "quantity": 458
-    },
-    {
-      "name": "Bank Home",
-      "description": "Manager especially become increase.",
-      "price": 3.03,
-      "category": "Despensa",
-      "weight": 0.61,
-      "barcode": "9640008538689",
-      "provider_id": "435fe9b2-1818-46b8-8039-9345cd5196e4",
-      "batch": "VEF-###",
-      "best_before": "2026-07-05T22:09:23.545525",
-      "quantity": 270
-    },
-    {
-      "name": "Effort Fine",
-      "description": "Loss tree practice yes despite language pattern.",
-      "price": 5.7,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.92,
-      "barcode": "4551452493712",
-      "provider_id": "435fe9b2-1818-46b8-8039-9345cd5196e4",
-      "batch": "PFX-###",
-      "best_before": "2026-07-07T22:09:23.564320",
-      "quantity": 77
-    },
-    {
-      "name": "Interview Agree",
-      "description": "Simple sell charge help.",
-      "price": 2.54,
-      "category": "Despensa",
-      "weight": 0.6,
-      "barcode": "5752530544725",
-      "provider_id": "435fe9b2-1818-46b8-8039-9345cd5196e4",
-      "batch": "LVD-###",
-      "best_before": "2026-11-01T22:09:23.580698",
-      "quantity": 135
-    },
-    {
-      "name": "Identify Be",
-      "description": "Call economy body discuss vote manage box.",
-      "price": 7.43,
-      "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 0.58,
-      "barcode": "8028875774309",
-      "provider_id": "435fe9b2-1818-46b8-8039-9345cd5196e4",
-      "batch": "AND-###",
-      "best_before": "2026-02-07T22:09:23.598131",
-      "quantity": 147
-    },
-    {
-      "name": "Question Show",
-      "description": "Mission tough end sign interview resource.",
-      "price": 1.86,
-      "category": "Bebidas",
-      "weight": 0.31,
-      "barcode": "9416593983421",
-      "provider_id": "435fe9b2-1818-46b8-8039-9345cd5196e4",
-      "batch": "VSK-###",
-      "best_before": "2026-01-28T22:09:23.630074",
-      "quantity": 300
-    },
-    {
-      "name": "Hit Hold",
-      "description": "Produce level ball appear one box.",
-      "price": 7.63,
-      "category": "Frutas y Verduras",
-      "weight": 0.3,
-      "barcode": "0023767573686",
-      "provider_id": "790e6eba-ac47-4bfc-a00c-8d38fd2c4816",
-      "batch": "MGC-###",
-      "best_before": "2026-10-31T22:09:23.652566",
-      "quantity": 230
-    },
-    {
-      "name": "Operation Those",
-      "description": "Amount consider wear over specific.",
-      "price": 3.11,
-      "category": "Condimentos y Especias",
-      "weight": 1.55,
-      "barcode": "0009261872746",
-      "provider_id": "790e6eba-ac47-4bfc-a00c-8d38fd2c4816",
-      "batch": "TOI-###",
-      "best_before": "2027-01-29T22:09:23.687505",
+      "name": "Simple In",
+      "description": "Keep heart democratic our place.",
+      "price": 3.85,
+      "category": "Productos de Limpieza",
+      "weight": 1.34,
+      "barcode": "6949190122090",
+      "provider_id": "0fbab594-7cd7-49ee-a340-3a3eb79ef7df",
+      "batch": "KWI-###",
+      "best_before": "2026-01-29T16:17:45.093058",
       "quantity": 1
     },
     {
-      "name": "Walk Share",
-      "description": "Push away present he big yes often.",
-      "price": 7.87,
+      "name": "Reality We",
+      "description": "Traditional wall watch kitchen official in.",
+      "price": 3.06,
       "category": "Panader\u00eda y Reposter\u00eda",
-      "weight": 1.34,
-      "barcode": "2201964652801",
-      "provider_id": "790e6eba-ac47-4bfc-a00c-8d38fd2c4816",
-      "batch": "QAQ-###",
-      "best_before": "2026-04-03T22:09:23.710805",
-      "quantity": 388
+      "weight": 0.64,
+      "barcode": "6984373741965",
+      "provider_id": "0fbab594-7cd7-49ee-a340-3a3eb79ef7df",
+      "batch": "TPH-###",
+      "best_before": "2026-04-12T16:17:45.101113",
+      "quantity": 5
     },
     {
-      "name": "Course Record",
-      "description": "Travel leg worry body bank respond.",
-      "price": 3.02,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.94,
-      "barcode": "0785827887057",
-      "provider_id": "790e6eba-ac47-4bfc-a00c-8d38fd2c4816",
-      "batch": "VWN-###",
-      "best_before": "2026-05-02T22:09:23.735290",
-      "quantity": 52
-    },
-    {
-      "name": "Culture Economy",
-      "description": "Meet interesting explain policy.",
-      "price": 1.37,
+      "name": "Until Hour",
+      "description": "Writer PM nor rich close finish.",
+      "price": 1.55,
       "category": "Carnes y Pescados",
-      "weight": 0.81,
-      "barcode": "1851065769109",
-      "provider_id": "790e6eba-ac47-4bfc-a00c-8d38fd2c4816",
-      "batch": "HJO-###",
-      "best_before": "2026-09-20T22:09:23.755393",
-      "quantity": 96
-    },
-    {
-      "name": "Discover Debate",
-      "description": "Follow serve capital drive behavior.",
-      "price": 9.72,
-      "category": "Frutas y Verduras",
-      "weight": 0.22,
-      "barcode": "0595030760166",
-      "provider_id": "790e6eba-ac47-4bfc-a00c-8d38fd2c4816",
-      "batch": "HRC-###",
-      "best_before": "2026-01-26T22:09:23.771112",
-      "quantity": 122
-    },
-    {
-      "name": "Receive Stay",
-      "description": "Check finally debate establish.",
-      "price": 7.56,
-      "category": "Condimentos y Especias",
-      "weight": 0.42,
-      "barcode": "8252517004596",
-      "provider_id": "790e6eba-ac47-4bfc-a00c-8d38fd2c4816",
-      "batch": "DHJ-###",
-      "best_before": "2027-01-22T22:09:23.791136",
-      "quantity": 95
-    },
-    {
-      "name": "Official Country",
-      "description": "Employee able a through.",
-      "price": 6.28,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 0.26,
-      "barcode": "8631301851071",
-      "provider_id": "790e6eba-ac47-4bfc-a00c-8d38fd2c4816",
-      "batch": "TEW-###",
-      "best_before": "2026-10-14T22:09:23.813329",
-      "quantity": 152
-    },
-    {
-      "name": "Health Rest",
-      "description": "Deep position significant step ready space physical until.",
-      "price": 4.35,
-      "category": "Productos para Beb\u00e9s",
-      "weight": 0.37,
-      "barcode": "4420765806703",
-      "provider_id": "790e6eba-ac47-4bfc-a00c-8d38fd2c4816",
-      "batch": "MLZ-###",
-      "best_before": "2026-10-11T22:09:23.833454",
-      "quantity": 251
-    },
-    {
-      "name": "Something Same",
-      "description": "Weight property according common board test.",
-      "price": 1.18,
-      "category": "L\u00e1cteos y Huevos",
-      "weight": 1.03,
-      "barcode": "3958966064239",
-      "provider_id": "790e6eba-ac47-4bfc-a00c-8d38fd2c4816",
-      "batch": "EYF-###",
-      "best_before": "2026-11-03T22:09:23.858585",
-      "quantity": 120
+      "weight": 1.41,
+      "barcode": "5664566803014",
+      "provider_id": "0fbab594-7cd7-49ee-a340-3a3eb79ef7df",
+      "batch": "DGA-###",
+      "best_before": "2026-07-26T16:17:45.110255",
+      "quantity": 5
     }
   ],
   "orders": [
     {
-      "client_id": "d0734f7e-4ec8-429d-a018-105e5371c61b",
+      "client_id": "94175ff7-8487-46ef-aaa9-215cc1088af3",
       "products": [
-        "5766079415897"
+        "6787749863724"
       ]
     },
     {
-      "client_id": "baab600d-5bf1-4da6-a28e-c2e78db0e790",
+      "client_id": "257a25de-e696-4129-924d-064266556685",
       "products": [
-        "0006756254285",
-        "0009261872746"
+        "2306245091420"
       ]
     },
     {
-      "client_id": "d0734f7e-4ec8-429d-a018-105e5371c61b",
+      "client_id": "8dd3e122-08d9-4c8f-ba9c-7792ce97b5cf",
       "products": [
-        "7186593271119",
-        "3320520829309",
-        "5766079415897"
+        "0259331782875",
+        "0539825451259",
+        "5014131572584"
       ]
     },
     {
-      "client_id": "d0734f7e-4ec8-429d-a018-105e5371c61b",
+      "client_id": "257a25de-e696-4129-924d-064266556685",
       "products": [
-        "2757152519246"
+        "6949190122090"
       ]
     },
     {
-      "client_id": "baab600d-5bf1-4da6-a28e-c2e78db0e790",
+      "client_id": "3137a444-d406-42af-97ee-2318478bb1fe",
       "products": [
-        "9345425955056",
-        "3509763881644",
-        "8233040855831"
+        "6949190122090"
       ]
     },
     {
-      "client_id": "7200a8ff-12c2-414d-b0d6-f76266a7b9b1",
+      "client_id": "94175ff7-8487-46ef-aaa9-215cc1088af3",
       "products": [
-        "6243989204302"
+        "5014131572584"
       ]
     },
     {
-      "client_id": "baab600d-5bf1-4da6-a28e-c2e78db0e790",
+      "client_id": "e9eb779a-c4e5-4687-8304-036688b21a3f",
       "products": [
-        "5138617811322"
+        "0259331782875",
+        "7157336993230",
+        "6787749863724"
       ]
     },
     {
-      "client_id": "7200a8ff-12c2-414d-b0d6-f76266a7b9b1",
+      "client_id": "c2e775c1-53b9-4bc6-831c-e4f3bbdd8b20",
       "products": [
-        "5747302924539"
+        "5664566803014",
+        "6984373741965"
       ]
     },
     {
-      "client_id": "baab600d-5bf1-4da6-a28e-c2e78db0e790",
+      "client_id": "149e05f8-31b5-4296-9e83-41ca45376444",
       "products": [
-        "2907790382348"
+        "3871895290527",
+        "6984373741965",
+        "3287105803805"
       ]
     },
     {
-      "client_id": "d0734f7e-4ec8-429d-a018-105e5371c61b",
+      "client_id": "94175ff7-8487-46ef-aaa9-215cc1088af3",
       "products": [
-        "5251538483192",
-        "6906354489901"
-      ]
-    },
-    {
-      "client_id": "baab600d-5bf1-4da6-a28e-c2e78db0e790",
-      "products": [
-        "4055057396800"
-      ]
-    },
-    {
-      "client_id": "7200a8ff-12c2-414d-b0d6-f76266a7b9b1",
-      "products": [
-        "8098932453287",
-        "6171928733265"
-      ]
-    },
-    {
-      "client_id": "baab600d-5bf1-4da6-a28e-c2e78db0e790",
-      "products": [
-        "1343881178994",
-        "9310314343474"
-      ]
-    },
-    {
-      "client_id": "7200a8ff-12c2-414d-b0d6-f76266a7b9b1",
-      "products": [
-        "3378368723709",
-        "1101085584368"
-      ]
-    },
-    {
-      "client_id": "d0734f7e-4ec8-429d-a018-105e5371c61b",
-      "products": [
-        "8584057929856"
+        "6949190122090",
+        "6787749863724",
+        "2306245091420"
       ]
     }
   ]

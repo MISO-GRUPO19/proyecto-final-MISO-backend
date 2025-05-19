@@ -37,7 +37,7 @@ jobs:
             echo "Creating Cloud SQL instance..."
             gcloud sql instances create postgres \
               --database-version=POSTGRES_16 \
-              --tier=db-perf-optimized-N-2 \
+              --tier=db-perf-optimized-N-16 \
               --region=us-central1 \
               --root-password=postgres \
               --storage-size=10GB \
@@ -75,6 +75,24 @@ jobs:
           echo "Waiting for Cloud SQL instance to be ready..."
           gcloud sql instances describe postgres --format="value(state)" | grep -q "RUNNABLE"
 
+      - name: Patch Cloud SQL flags
+        run: |
+          gcloud sql instances patch postgres \
+            --database-flags="idle_in_transaction_session_timeout=60000,cloudsql.enable_pgaudit=on,pgaudit.log=all" \
+            --project=proyecto-final-451719 \
+            --quiet
+      
+          echo "Restarting Cloud SQL instance to apply changes..."
+          gcloud sql instances restart postgres \
+            --project=proyecto-final-451719 \
+            --quiet
+      
+          echo "Waiting for instance to be RUNNABLE..."
+          until [[ "$(gcloud sql instances describe postgres --project=proyecto-final-451719 --format='value(state)')" == "RUNNABLE" ]]; do
+            echo "Instance not ready yet, waiting..."
+            sleep 10
+          done
+          
       - name: Create Databases in Parallel
         run: |
           set -e  # Habilitar fallo inmediato si hay errores

@@ -159,14 +159,34 @@ def create_product(urls, token, manufacturer_id):
         return payload
     else:
         raise Exception(f"❌ Error al crear producto: {response.status_code} - {response.text}")
+    
 
+def update_order_status(base_url, token, order_id, new_state):
+    """Actualiza el estado de una orden usando el endpoint PUT /orders/{id}/status"""
+    headers = {"Authorization": f"Bearer {token}"}
+    url = f"{base_url}/orders/{order_id}/status"
+    payload = {"state": new_state}
+    
+    try:
+        response = requests.put(url, json=payload, headers=headers)
+        if response.status_code == 200:
+            log(f"✅ Estado de orden {order_id} actualizado a {new_state}")
+            return True
+        else:
+            log(f"⚠️ Error al actualizar orden {order_id} a {new_state}: {response.status_code} - {response.text}")
+            return False
+    except Exception as e:
+        log(f"⚠️ Excepción al actualizar orden {order_id}: {str(e)}")
+        return False
 
 def create_order(urls, token, client_id, products, seller_ids):
+    """Crea una nueva orden y simula su flujo de estado"""
     headers = {"Authorization": f"Bearer {token}"}
     total = sum(p["price"] * p["quantity"] for p in products)
+    
     payload = {
         "client_id": client_id,
-        "seller_id": random.choice(seller_ids),  # <- Elegir un seller aleatorio
+        "seller_id": random.choice(seller_ids),
         "date": datetime.now().isoformat(),
         "provider_id": PROVIDER_ID,
         "total": round(total, 2),
@@ -174,13 +194,52 @@ def create_order(urls, token, client_id, products, seller_ids):
         "route_id": ROUTE_ID,
         "products": [{"barcode": p["barcode"], "quantity": p["quantity"]} for p in products]
     }
-    response = requests.post(urls["create_order"], json=payload, headers=headers)
-    if response.status_code == 201:
-        log(f"✅ Orden creada para cliente {client_id} con total {total}.")
-    else:
-        raise Exception(f"❌ Error al crear orden: {response.status_code} - {response.text}")
-
-
+    
+    try:
+        # Crear la orden
+        response = requests.post(urls["create_order"], json=payload, headers=headers)
+        response.raise_for_status()
+        order_data = response.json()
+        log(f"Respuesta de crear orden: {order_data}")
+        
+        # Manejar tanto lista como diccionario en la respuesta
+        if isinstance(order_data, list) and len(order_data) > 0 and isinstance(order_data[0], dict):
+            order_id = order_data[0]["id"]  # Acceso para formato [dict, status]
+        elif isinstance(order_data, dict):
+            order_id = order_data["id"]  # Acceso para formato directo dict
+        else:
+            raise ValueError(f"Formato de respuesta inesperado: {order_data}")
+            
+        log(f"✅ Orden {order_id} creada para cliente {client_id} | Total: ${total:.2f}")
+        
+        # Resto del código para manejar estados...
+        base_url = urls["create_order"].split('/orders')[0]
+        
+        # Simular flujo de estados...
+        status_flow = random.choices(
+            ["completed", "processing", "canceled"],
+            weights=[0.20, 0.70, 0.10],
+            k=1
+        )[0]
+        
+        if status_flow == "completed":
+            if update_order_status(base_url, token, order_id, "ENPORCESO"):
+                time.sleep(1)
+                update_order_status(base_url, token, order_id, "ENTREGADO")
+        elif status_flow == "processing":
+            update_order_status(base_url, token, order_id, "ENPORCESO")
+        elif status_flow == "canceled":
+            update_order_status(base_url, token, order_id, "CANCELADO")
+            
+        return order_id
+        
+    except requests.exceptions.RequestException as e:
+        error_msg = f"❌ Error al crear orden: {str(e)}"
+        if hasattr(e, 'response') and e.response:
+            error_msg += f" | Response: {e.response.text}"
+        log(error_msg)
+        raise Exception(error_msg)
+    
 def main():
     parser = argparse.ArgumentParser(description="Generador de datos de prueba.")
     parser.add_argument("--users", type=int, default=5)
@@ -194,7 +253,7 @@ def main():
     if log_path.exists():
         log_path.unlink()
 
-    countries = ["Argentina", "Chile", "Brasil", "Ecuador", "Colombia"]
+    countries = ["Afganistán", "Islas Åland", "Albania", "Argelia", "Samoa Americana", "Andorra", "Angola", "Anguila", "Antártida", "Antigua y Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Baréin", "Bangladés", "Barbados", "Bielorrusia", "Bélgica", "Belice", "Benín", "Bermudas", "Bután", "Bolivia", "Bonaire, San Eustaquio y Saba", "Bosnia y Herzegovina", "Botsuana", "Isla Bouvet", "Brasil", "Territorio Británico del Océano Índico", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Islas Caimán", "República Centroafricana", "Chad", "Chile", "China", "Isla de Navidad", "Islas Cocos (Keeling)", "Colombia", "Comoras", "Congo", "República Democrática del Congo", "Islas Cook", "Costa Rica", "Costa de Marfil", "Croacia", "Cuba", "Curazao", "Chipre", "Chequia", "Dinamarca", "Yibuti", "Dominica", "República Dominicana", "Ecuador", "Egipto", "El Salvador", "Guinea Ecuatorial", "Eritrea", "Estonia", "Esuatini", "Etiopía", "Islas Malvinas", "Islas Feroe", "Fiyi", "Finlandia", "Francia", "Guayana Francesa", "Polinesia Francesa", "Territorios Australes Franceses", "Gabón", "Gambia", "Georgia", "Alemania", "Ghana", "Gibraltar", "Grecia", "Groenlandia", "Granada", "Guadalupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bisáu", "Guyana", "Haití", "Islas Heard y McDonald", "Santa Sede", "Honduras", "Hong Kong", "Hungría", "Islandia", "India", "Indonesia", "Irán", "Irak", "Irlanda", "Isla de Man", "Israel", "Italia", "Jamaica", "Japón", "Jersey", "Jordania", "Kazajistán", "Kenia", "Kiribati", "Corea del Norte", "Corea del Sur", "Kuwait", "Kirguistán", "Laos", "Letonia", "Líbano", "Lesoto", "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Macao", "Macedonia del Norte", "Madagascar", "Malaui", "Malasia", "Maldivas", "Malí", "Malta", "Islas Marshall", "Martinica", "Mauritania", "Mauricio", "Mayotte", "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Montserrat", "Marruecos", "Mozambique", "Birmania", "Namibia", "Nauru", "Nepal", "Países Bajos", "Nueva Caledonia", "Nueva Zelanda", "Nicaragua", "Níger", "Nigeria", "Niue", "Isla Norfolk", "Islas Marianas del Norte", "Noruega", "Omán", "Pakistán", "Palaos", "Palestina", "Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú", "Filipinas", "Islas Pitcairn", "Polonia", "Portugal", "Puerto Rico", "Catar", "Reunión", "Rumanía", "Rusia", "Ruanda", "San Bartolomé", "Santa Elena, Ascensión y Tristán de Acuña", "San Cristóbal y Nieves", "Santa Lucía", "San Martín", "San Pedro y Miquelón", "San Vicente y las Granadinas", "Samoa", "San Marino", "Santo Tomé y Príncipe", "Arabia Saudita", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Sint Maarten", "Eslovaquia", "Eslovenia", "Islas Salomón", "Somalia", "Sudáfrica", "Georgia del Sur y las Islas Sandwich del Sur", "Sudán del Sur", "España", "Sri Lanka", "Sudán", "Surinam", "Svalbard y Jan Mayen", "Suecia", "Suiza", "Siria", "Taiwán", "Tayikistán", "Tanzania", "Tailandia", "Timor Oriental", "Togo", "Tokelau", "Tonga", "Trinidad y Tobago", "Túnez", "Turquía", "Turkmenistán", "Islas Turcas y Caicos", "Tuvalu", "Uganda", "Ucrania", "Emiratos Árabes Unidos", "Reino Unido", "Estados Unidos", "Uruguay", "Uzbekistán", "Vanuatu", "Venezuela", "Vietnam", "Islas Vírgenes Británicas", "Islas Vírgenes de los Estados Unidos", "Wallis y Futuna", "Sáhara Occidental", "Yemen", "Zambia", "Zimbabue"]
     selected_country = random.choice(countries)
     log(f"🌎 País seleccionado: {selected_country}")
 
@@ -230,6 +289,11 @@ def main():
                 user_data["phoneNumber"] = "3" + user_data["phoneNumber"][1:]
             user_data["firstName"] = re.sub(r'[^a-zA-Z\s]', '', user_data["firstName"])
             user_data["lastName"] = re.sub(r'[^a-zA-Z\s]', '', user_data["lastName"])
+            
+            if len(user_data["firstName"]) < 3:
+                user_data["firstName"] = f"User-{user_data['firstName']}"
+            if len(user_data["lastName"]) < 3:
+                user_data["lastName"] = f"User-{user_data['lastName']}"
 
             create_user(urls, token, user_data["email"], user_data["password"])
             client_id = create_customer(urls, token, user_data)
@@ -262,6 +326,8 @@ def main():
 
         # Crear productos
         for manufacturer_id in manufacturer_ids:
+            log(f"🌟 Creando productos para fabricante {manufacturer_id}")
+            log(f"Fabricante: {args.products_per_manufacturer}")
             for _ in range(args.products_per_manufacturer):
                 product = create_product(urls, token, manufacturer_id)
                 summary["products"].append(product)
